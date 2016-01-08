@@ -5,6 +5,8 @@
 
 #pragma mark const
 
+FOUNDATION_EXTERN NSString *const NestSDKAccessTokenDidChangeNotification;
+
 #pragma mark enum
 
 #pragma mark typedef

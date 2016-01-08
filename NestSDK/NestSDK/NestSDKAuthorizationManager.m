@@ -127,6 +127,11 @@ static NSString *const kNestAccessTokenURLFormat = @"https://api.%@/oauth2/acces
     [viewController presentViewController:_authorizationViewController animated:YES completion:nil];
 }
 
+- (void)unauthorize {
+
+}
+
+
 #pragma mark IBAction
 
 #pragma mark Protocol @protocol-name

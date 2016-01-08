@@ -5,6 +5,11 @@
 
 #pragma mark const
 
+NSString *const NestSDKAccessTokenDidChangeNotification = @"NestSDK.NestSDKAccessToken.NestSDKAccessTokenDidChangeNotification";
+
+NSString *const NestSDKAccessTokenChangeNewKey = @"NestSDKAccessToken";
+NSString *const NestSDKAccessTokenChangeOldKey = @"NestSDKAccessTokenOld";
+
 static NSString *const kExpirationDateKey = @"expirationDateKey";
 static NSString *const kTokenStringKey = @"tokenStringKey";
 
@@ -74,9 +79,17 @@ static NestSDKAccessToken *g_currentAccessToken;
 }
 
 + (void)setCurrentAccessToken:(NestSDKAccessToken *)token {
+    NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
+    userInfo[NestSDKAccessTokenChangeNewKey] = token;
+    userInfo[NestSDKAccessTokenChangeOldKey] = g_currentAccessToken;
+
     g_currentAccessToken = token;
 
     [[[NestSDKAccessTokenCache alloc] init] cacheAccessToken:token];
+
+    [[NSNotificationCenter defaultCenter] postNotificationName:NestSDKAccessTokenDidChangeNotification
+                                                        object:[self class]
+                                                      userInfo:userInfo];
 }
 
 #pragma mark IBAction

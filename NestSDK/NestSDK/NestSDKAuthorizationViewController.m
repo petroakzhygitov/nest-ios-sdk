@@ -54,18 +54,7 @@ static const int kNavigationBarHeight = 64;
     [self.webView setBackgroundColor:[UIColor nestBlue]];
     [self.webView setDelegate:self];
     [self.view addSubview:self.webView];
-
-//    self.webView = [[WKWebView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-//    [self.webView setBackgroundColor:[UIColor nestBlue]];
-//    [self.webView addObserver:self forKeyPath:@"URL" options:NSKeyValueObservingOptionNew context:nil];
-//    [self.view addSubview:self.webView];
 }
-
-//- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-//    if (object == self.webView && [keyPath isEqualToString:@"URL"]) {
-//        NSLog(@"URL Changed to: %@", self.webView.URL.absoluteString);
-//    }
-//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];

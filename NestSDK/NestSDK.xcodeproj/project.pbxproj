@@ -36,8 +36,10 @@
 		91DC3D851C3F123C00A61B61 /* NestSDKThermostatsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 91DC3D691C3F123C00A61B61 /* NestSDKThermostatsManager.m */; };
 		91DC3D861C3F123C00A61B61 /* UIColor+NestBlue.h in Headers */ = {isa = PBXBuildFile; fileRef = 91DC3D6A1C3F123C00A61B61 /* UIColor+NestBlue.h */; };
 		91DC3D871C3F123C00A61B61 /* UIColor+NestBlue.m in Sources */ = {isa = PBXBuildFile; fileRef = 91DC3D6B1C3F123C00A61B61 /* UIColor+NestBlue.m */; };
+		D7C024BCF1130AD17F628700 /* NestSDKUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D7C02B32A358CA9D25F58D54 /* NestSDKUtils.m */; };
 		D7C027C2C86F428022036E5C /* NestSDKConnectWithNestButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D7C02BEA8EBF18A68122BB3A /* NestSDKConnectWithNestButton.m */; };
 		D7C02C3242EB2D928CC97A76 /* NestSDKConnectWithNestButton.h in Headers */ = {isa = PBXBuildFile; fileRef = D7C02E18DA784D90ECA1FB79 /* NestSDKConnectWithNestButton.h */; };
+		D7C02CFC18A08830A3CF0D06 /* NestSDKUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = D7C02144FD1AA40E0A0682C1 /* NestSDKUtils.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,6 +90,8 @@
 		91DC3D6A1C3F123C00A61B61 /* UIColor+NestBlue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+NestBlue.h"; sourceTree = "<group>"; };
 		91DC3D6B1C3F123C00A61B61 /* UIColor+NestBlue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+NestBlue.m"; sourceTree = "<group>"; };
 		C762624D651493BA06CD5592 /* Pods-NestSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NestSDK.release.xcconfig"; path = "Pods/Target Support Files/Pods-NestSDK/Pods-NestSDK.release.xcconfig"; sourceTree = "<group>"; };
+		D7C02144FD1AA40E0A0682C1 /* NestSDKUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NestSDKUtils.h; sourceTree = "<group>"; };
+		D7C02B32A358CA9D25F58D54 /* NestSDKUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NestSDKUtils.m; sourceTree = "<group>"; };
 		D7C02BEA8EBF18A68122BB3A /* NestSDKConnectWithNestButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NestSDKConnectWithNestButton.m; sourceTree = "<group>"; };
 		D7C02E18DA784D90ECA1FB79 /* NestSDKConnectWithNestButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NestSDKConnectWithNestButton.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -167,6 +171,8 @@
 				91DC3D3B1C3F103100A61B61 /* Info.plist */,
 				D7C02BEA8EBF18A68122BB3A /* NestSDKConnectWithNestButton.m */,
 				D7C02E18DA784D90ECA1FB79 /* NestSDKConnectWithNestButton.h */,
+				D7C02B32A358CA9D25F58D54 /* NestSDKUtils.m */,
+				D7C02144FD1AA40E0A0682C1 /* NestSDKUtils.h */,
 			);
 			path = NestSDK;
 			sourceTree = "<group>";
@@ -217,6 +223,7 @@
 				91DC3D781C3F123C00A61B61 /* NestSDKFirebaseManager.h in Headers */,
 				91DC3D721C3F123C00A61B61 /* NestSDKAuthorizationManager.h in Headers */,
 				D7C02C3242EB2D928CC97A76 /* NestSDKConnectWithNestButton.h in Headers */,
+				D7C02CFC18A08830A3CF0D06 /* NestSDKUtils.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -366,6 +373,7 @@
 				91DC3D771C3F123C00A61B61 /* NestSDKAuthorizationViewController.m in Sources */,
 				91DC3D811C3F123C00A61B61 /* NestSDKStructuresManager.m in Sources */,
 				D7C027C2C86F428022036E5C /* NestSDKConnectWithNestButton.m in Sources */,
+				D7C024BCF1130AD17F628700 /* NestSDKUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -24,4 +24,6 @@ typedef void (^NestSDKAuthorizationManagerAuthorizationHandler)(NestSDKAuthoriza
 - (void)authorizeWithNestAccountFromViewController:(UIViewController *)viewController
                                            handler:(NestSDKAuthorizationManagerAuthorizationHandler)handler;
 
+- (void)unauthorize;
+
 @end

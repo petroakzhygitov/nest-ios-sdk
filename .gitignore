@@ -1,4 +1,7 @@
 NestSDK/.idea
+NestSDK/Pods
+NestSDK/Podfile.lock
+NestSDK/NestSDK.xcworkspace
 NestSDKDemo/.idea
 NestSDKDemo/Pods
 NestSDKDemo/Podfile.lock

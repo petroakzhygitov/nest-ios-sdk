@@ -106,7 +106,7 @@ static NSString *const kNestAccessTokenURLFormat = @"https://api.%@/oauth2/acces
 - (void)p_finishAuthorizationWithAuthorizationResult:(NestSDKAuthorizationManagerAuthorizationResult *)authorizationResult error:(NSError *)error {
     if (!OSAtomicCompareAndSwapInt(YES, NO, &_authorizing)) return;
 
-    if (_handler) _handler(authorizationResult, error);
+    _handler(authorizationResult, error);
     [_authorizationViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -118,6 +118,7 @@ static NSString *const kNestAccessTokenURLFormat = @"https://api.%@/oauth2/acces
 
 - (void)authorizeWithNestAccountFromViewController:(UIViewController *)viewController
                                            handler:(NestSDKAuthorizationManagerAuthorizationHandler)handler {
+    if (!handler) return;
 
     if (!OSAtomicCompareAndSwapInt(NO, YES, &_authorizing)) return;
 

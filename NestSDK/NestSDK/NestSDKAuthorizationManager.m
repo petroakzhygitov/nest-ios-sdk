@@ -7,9 +7,10 @@
 
 #pragma mark const
 
+static NSString *const kNestOAuthDomainString = @"home.nest.com";
+
 static NSString *const kNestClientIDKey = @"NestClientID";
 static NSString *const kNestClientSecretKey = @"NestClientSecret";
-static NSString *const kNestCurrentAPIDomainKey = @"NestCurrentAPIDomain";
 static NSString *const kNestStateKey = @"NestState";
 static NSString *const kNestRedirectURLKey = @"NestRedirectURL";
 
@@ -41,10 +42,6 @@ static NSString *const kNestAccessTokenURLFormat = @"https://api.%@/oauth2/acces
     return [[NSBundle mainBundle] objectForInfoDictionaryKey:kNestClientSecretKey];
 }
 
-- (NSString *)p_currentAPIDomain {
-    return [[NSBundle mainBundle] objectForInfoDictionaryKey:kNestCurrentAPIDomainKey];
-}
-
 - (NSString *)p_state {
     return [[NSBundle mainBundle] objectForInfoDictionaryKey:kNestStateKey];
 }
@@ -55,12 +52,12 @@ static NSString *const kNestAccessTokenURLFormat = @"https://api.%@/oauth2/acces
 }
 
 - (NSURL *)p_authorizationURL {
-    NSString *urlString = [NSString stringWithFormat:kNestAuthorizationURLFormat, [self p_currentAPIDomain], [self p_clientID], [self p_state]];
+    NSString *urlString = [NSString stringWithFormat:kNestAuthorizationURLFormat, kNestOAuthDomainString, [self p_clientID], [self p_state]];
     return [NSURL URLWithString:urlString];
 }
 
 - (NSURL *)p_accessTokenURLWithAuthorizationCode:(NSString *)authorizationCode {
-    NSString *urlString = [NSString stringWithFormat:kNestAccessTokenURLFormat, [self p_currentAPIDomain], authorizationCode, [self p_clientID], [self p_clientSecret]];
+    NSString *urlString = [NSString stringWithFormat:kNestAccessTokenURLFormat, kNestOAuthDomainString, authorizationCode, [self p_clientID], [self p_clientSecret]];
     return [NSURL URLWithString:urlString];
 }
 

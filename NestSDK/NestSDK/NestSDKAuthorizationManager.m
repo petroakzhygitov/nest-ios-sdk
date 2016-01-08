@@ -108,8 +108,6 @@ static NSString *const kNestAccessTokenURLFormat = @"https://api.%@/oauth2/acces
 
     if (_handler) _handler(authorizationResult, error);
     [_authorizationViewController dismissViewControllerAnimated:YES completion:nil];
-
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 }
 
 #pragma mark Notification selectors
@@ -122,8 +120,6 @@ static NSString *const kNestAccessTokenURLFormat = @"https://api.%@/oauth2/acces
                                            handler:(NestSDKAuthorizationManagerAuthorizationHandler)handler {
 
     if (!OSAtomicCompareAndSwapInt(NO, YES, &_authorizing)) return;
-
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 
     _handler = [handler copy];
     _authorizationViewController = [[NestSDKAuthorizationViewController alloc] initWithAuthorizationURL:[self p_authorizationURL]

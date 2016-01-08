@@ -1,7 +1,7 @@
 #import "NestSDKThermostatsManager.h"
 #import "NestSDKThermostat.h"
-#import "FDataSnapshot.h"
 #import "NestSDKFirebaseManager.h"
+#import <Firebase/Firebase.h>
 
 #pragma mark macros
 

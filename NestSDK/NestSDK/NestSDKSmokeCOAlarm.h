@@ -1,5 +1,5 @@
 #import <Foundation/Foundation.h>
-#import "JSONModel.h"
+#import <JSONModel/JSONModel.h>
 
 #pragma mark macros
 

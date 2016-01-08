@@ -43,5 +43,13 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NestClientID</key>
+	<string></string>
+	<key>NestClientSecret</key>
+	<string></string>
+	</key>NestRedirectURL</key>
+	<string>example.com</string>
+	<key>NestState</key>
+	<string>someState</string>
 </dict>
 </plist>

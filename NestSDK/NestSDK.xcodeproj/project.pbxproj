@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		00B9243FB3CFB457A2534296 /* Pods_NestSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30AAD321FF309F8F4689C2CA /* Pods_NestSDK.framework */; };
 		91DC3D3A1C3F103100A61B61 /* NestSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 91DC3D391C3F103100A61B61 /* NestSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		91DC3D411C3F103100A61B61 /* NestSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91DC3D361C3F103100A61B61 /* NestSDK.framework */; };
 		91DC3D461C3F103100A61B61 /* NestSDKTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 91DC3D451C3F103100A61B61 /* NestSDKTests.m */; };
@@ -50,6 +51,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		02C655B5125A926464F0CC2B /* Pods-NestSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NestSDK.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NestSDK/Pods-NestSDK.debug.xcconfig"; sourceTree = "<group>"; };
+		30AAD321FF309F8F4689C2CA /* Pods_NestSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NestSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		91DC3D361C3F103100A61B61 /* NestSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NestSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		91DC3D391C3F103100A61B61 /* NestSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NestSDK.h; sourceTree = "<group>"; };
 		91DC3D3B1C3F103100A61B61 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -84,6 +87,7 @@
 		91DC3D691C3F123C00A61B61 /* NestSDKThermostatsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NestSDKThermostatsManager.m; sourceTree = "<group>"; };
 		91DC3D6A1C3F123C00A61B61 /* UIColor+NestBlue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+NestBlue.h"; sourceTree = "<group>"; };
 		91DC3D6B1C3F123C00A61B61 /* UIColor+NestBlue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+NestBlue.m"; sourceTree = "<group>"; };
+		C762624D651493BA06CD5592 /* Pods-NestSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NestSDK.release.xcconfig"; path = "Pods/Target Support Files/Pods-NestSDK/Pods-NestSDK.release.xcconfig"; sourceTree = "<group>"; };
 		D7C02BEA8EBF18A68122BB3A /* NestSDKConnectWithNestButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NestSDKConnectWithNestButton.m; sourceTree = "<group>"; };
 		D7C02E18DA784D90ECA1FB79 /* NestSDKConnectWithNestButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NestSDKConnectWithNestButton.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -93,6 +97,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00B9243FB3CFB457A2534296 /* Pods_NestSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -113,6 +118,8 @@
 				91DC3D381C3F103100A61B61 /* NestSDK */,
 				91DC3D441C3F103100A61B61 /* NestSDKTests */,
 				91DC3D371C3F103100A61B61 /* Products */,
+				A074B7245120D05E54F2A0AC /* Pods */,
+				F5DE649E55DF1E6760E16007 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -173,6 +180,23 @@
 			path = NestSDKTests;
 			sourceTree = "<group>";
 		};
+		A074B7245120D05E54F2A0AC /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				02C655B5125A926464F0CC2B /* Pods-NestSDK.debug.xcconfig */,
+				C762624D651493BA06CD5592 /* Pods-NestSDK.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		F5DE649E55DF1E6760E16007 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				30AAD321FF309F8F4689C2CA /* Pods_NestSDK.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -203,10 +227,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 91DC3D4A1C3F103100A61B61 /* Build configuration list for PBXNativeTarget "NestSDK" */;
 			buildPhases = (
+				F87A1B6EF635CEC8A9616979 /* Check Pods Manifest.lock */,
 				91DC3D311C3F103100A61B61 /* Sources */,
 				91DC3D321C3F103100A61B61 /* Frameworks */,
 				91DC3D331C3F103100A61B61 /* Headers */,
 				91DC3D341C3F103100A61B61 /* Resources */,
+				327DBD7C2C72C5CBFCDA1330 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -286,6 +312,39 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		327DBD7C2C72C5CBFCDA1330 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NestSDK/Pods-NestSDK-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F87A1B6EF635CEC8A9616979 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		91DC3D311C3F103100A61B61 /* Sources */ = {
@@ -419,11 +478,16 @@
 		};
 		91DC3D4B1C3F103100A61B61 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 02C655B5125A926464F0CC2B /* Pods-NestSDK.debug.xcconfig */;
 			buildSettings = {
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/**",
+					"$(PROJECT_DIR)/Frameworks",
+				);
 				INFOPLIST_FILE = NestSDK/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -436,11 +500,16 @@
 		};
 		91DC3D4C1C3F103100A61B61 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C762624D651493BA06CD5592 /* Pods-NestSDK.release.xcconfig */;
 			buildSettings = {
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/**",
+					"$(PROJECT_DIR)/Frameworks",
+				);
 				INFOPLIST_FILE = NestSDK/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

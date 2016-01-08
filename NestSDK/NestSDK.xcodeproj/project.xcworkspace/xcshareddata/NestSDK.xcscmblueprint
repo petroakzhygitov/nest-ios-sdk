@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "6D5D05A7B79BB3FB9E6F2889681F05906B2FD41A",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "6D5D05A7B79BB3FB9E6F2889681F05906B2FD41A" : 0,
+    "2454A7C0A4BC2A09472718EB55354F320600B245" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "2D6BB76E-D41B-42C4-ADC0-F281470B2CEB",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "6D5D05A7B79BB3FB9E6F2889681F05906B2FD41A" : "NestSDK\/",
+    "2454A7C0A4BC2A09472718EB55354F320600B245" : "..\/..\/iOS\/JSONModel"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "NestSDK",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "NestSDK\/NestSDK.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/icanzilb\/JSONModel.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "2454A7C0A4BC2A09472718EB55354F320600B245"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/petroakzhygitov\/NestSDK.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "6D5D05A7B79BB3FB9E6F2889681F05906B2FD41A"
+    }
+  ]
+}

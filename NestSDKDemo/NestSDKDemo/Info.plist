@@ -47,8 +47,8 @@
 	<string></string>
 	<key>NestClientSecret</key>
 	<string></string>
-	</key>NestRedirectURL</key>
-	<string>example.com</string>
+	<key>NestRedirectURL</key>
+	<string>https://example.com</string>
 	<key>NestState</key>
 	<string>someState</string>
 </dict>

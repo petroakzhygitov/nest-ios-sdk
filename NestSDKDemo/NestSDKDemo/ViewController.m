@@ -8,6 +8,7 @@
 
 #import <NestSDK/NestSDKAuthorizationManager.h>
 #import <NestSDK/NestSDKAuthorizationManagerAuthorizationResult.h>
+#import <NestSDK/NestSDKConnectWithNestButton.h>
 #import "ViewController.h"
 
 @interface ViewController ()
@@ -20,18 +21,18 @@
     [super viewDidLoad];
 
     // Connect with Nest using NestSDKConnectWithNestButton
-//    [self createConnectWithNestButton];
+    [self createConnectWithNestButton];
 
     // Connect with Nest using your custom button
-    [self createCustomConnectWithNestButton];
+//    [self createCustomConnectWithNestButton];
 }
 
 - (void)createConnectWithNestButton {
-//    NestSDKConnectWithNestButton *connectWithNestButton = [[NestSDKConnectWithNestButton alloc] init];
-//    // Optional: Place the button in the center of your view.
-//    connectWithNestButton.center = self.view.center;
-//
-//    [self.view addSubview:connectWithNestButton];
+    NestSDKConnectWithNestButton *connectWithNestButton = [[NestSDKConnectWithNestButton alloc] init];
+    // Optional: Place the button in the center of your view.
+    connectWithNestButton.center = self.view.center;
+
+    [self.view addSubview:connectWithNestButton];
 }
 
 - (void)createCustomConnectWithNestButton {

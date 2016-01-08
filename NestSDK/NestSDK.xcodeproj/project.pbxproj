@@ -10,17 +10,14 @@
 		91DC3D3A1C3F103100A61B61 /* NestSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 91DC3D391C3F103100A61B61 /* NestSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		91DC3D411C3F103100A61B61 /* NestSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91DC3D361C3F103100A61B61 /* NestSDK.framework */; };
 		91DC3D461C3F103100A61B61 /* NestSDKTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 91DC3D451C3F103100A61B61 /* NestSDKTests.m */; };
-		91DC3D6C1C3F123C00A61B61 /* NestSDKAccessToken.h in Headers */ = {isa = PBXBuildFile; fileRef = 91DC3D501C3F123C00A61B61 /* NestSDKAccessToken.h */; };
 		91DC3D6D1C3F123C00A61B61 /* NestSDKAccessToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 91DC3D511C3F123C00A61B61 /* NestSDKAccessToken.m */; };
 		91DC3D6E1C3F123C00A61B61 /* NestSDKAccessTokenCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 91DC3D521C3F123C00A61B61 /* NestSDKAccessTokenCache.h */; };
 		91DC3D6F1C3F123C00A61B61 /* NestSDKAccessTokenCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 91DC3D531C3F123C00A61B61 /* NestSDKAccessTokenCache.m */; };
-		91DC3D701C3F123C00A61B61 /* NestSDKApplicationDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 91DC3D541C3F123C00A61B61 /* NestSDKApplicationDelegate.h */; };
 		91DC3D711C3F123C00A61B61 /* NestSDKApplicationDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 91DC3D551C3F123C00A61B61 /* NestSDKApplicationDelegate.m */; };
 		91DC3D721C3F123C00A61B61 /* NestSDKAuthorizationManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 91DC3D561C3F123C00A61B61 /* NestSDKAuthorizationManager.h */; };
 		91DC3D731C3F123C00A61B61 /* NestSDKAuthorizationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 91DC3D571C3F123C00A61B61 /* NestSDKAuthorizationManager.m */; };
 		91DC3D741C3F123C00A61B61 /* NestSDKAuthorizationManagerAuthorizationResult.h in Headers */ = {isa = PBXBuildFile; fileRef = 91DC3D581C3F123C00A61B61 /* NestSDKAuthorizationManagerAuthorizationResult.h */; };
 		91DC3D751C3F123C00A61B61 /* NestSDKAuthorizationManagerAuthorizationResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 91DC3D591C3F123C00A61B61 /* NestSDKAuthorizationManagerAuthorizationResult.m */; };
-		91DC3D761C3F123C00A61B61 /* NestSDKAuthorizationViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 91DC3D5A1C3F123C00A61B61 /* NestSDKAuthorizationViewController.h */; };
 		91DC3D771C3F123C00A61B61 /* NestSDKAuthorizationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91DC3D5B1C3F123C00A61B61 /* NestSDKAuthorizationViewController.m */; };
 		91DC3D781C3F123C00A61B61 /* NestSDKFirebaseManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 91DC3D5C1C3F123C00A61B61 /* NestSDKFirebaseManager.h */; };
 		91DC3D791C3F123C00A61B61 /* NestSDKFirebaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 91DC3D5D1C3F123C00A61B61 /* NestSDKFirebaseManager.m */; };
@@ -38,6 +35,8 @@
 		91DC3D851C3F123C00A61B61 /* NestSDKThermostatsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 91DC3D691C3F123C00A61B61 /* NestSDKThermostatsManager.m */; };
 		91DC3D861C3F123C00A61B61 /* UIColor+NestBlue.h in Headers */ = {isa = PBXBuildFile; fileRef = 91DC3D6A1C3F123C00A61B61 /* UIColor+NestBlue.h */; };
 		91DC3D871C3F123C00A61B61 /* UIColor+NestBlue.m in Sources */ = {isa = PBXBuildFile; fileRef = 91DC3D6B1C3F123C00A61B61 /* UIColor+NestBlue.m */; };
+		D7C027C2C86F428022036E5C /* NestSDKConnectWithNestButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D7C02BEA8EBF18A68122BB3A /* NestSDKConnectWithNestButton.m */; };
+		D7C02C3242EB2D928CC97A76 /* NestSDKConnectWithNestButton.h in Headers */ = {isa = PBXBuildFile; fileRef = D7C02E18DA784D90ECA1FB79 /* NestSDKConnectWithNestButton.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +84,8 @@
 		91DC3D691C3F123C00A61B61 /* NestSDKThermostatsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NestSDKThermostatsManager.m; sourceTree = "<group>"; };
 		91DC3D6A1C3F123C00A61B61 /* UIColor+NestBlue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+NestBlue.h"; sourceTree = "<group>"; };
 		91DC3D6B1C3F123C00A61B61 /* UIColor+NestBlue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+NestBlue.m"; sourceTree = "<group>"; };
+		D7C02BEA8EBF18A68122BB3A /* NestSDKConnectWithNestButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NestSDKConnectWithNestButton.m; sourceTree = "<group>"; };
+		D7C02E18DA784D90ECA1FB79 /* NestSDKConnectWithNestButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NestSDKConnectWithNestButton.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,6 +158,8 @@
 				91DC3D6B1C3F123C00A61B61 /* UIColor+NestBlue.m */,
 				91DC3D391C3F103100A61B61 /* NestSDK.h */,
 				91DC3D3B1C3F103100A61B61 /* Info.plist */,
+				D7C02BEA8EBF18A68122BB3A /* NestSDKConnectWithNestButton.m */,
+				D7C02E18DA784D90ECA1FB79 /* NestSDKConnectWithNestButton.h */,
 			);
 			path = NestSDK;
 			sourceTree = "<group>";
@@ -178,20 +181,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				91DC3D741C3F123C00A61B61 /* NestSDKAuthorizationManagerAuthorizationResult.h in Headers */,
-				91DC3D761C3F123C00A61B61 /* NestSDKAuthorizationViewController.h in Headers */,
 				91DC3D841C3F123C00A61B61 /* NestSDKThermostatsManager.h in Headers */,
 				91DC3D7A1C3F123C00A61B61 /* NestSDKRESTService.h in Headers */,
 				91DC3D7C1C3F123C00A61B61 /* NestSDKSmokeCOAlarm.h in Headers */,
 				91DC3D6E1C3F123C00A61B61 /* NestSDKAccessTokenCache.h in Headers */,
-				91DC3D701C3F123C00A61B61 /* NestSDKApplicationDelegate.h in Headers */,
 				91DC3D3A1C3F103100A61B61 /* NestSDK.h in Headers */,
 				91DC3D801C3F123C00A61B61 /* NestSDKStructuresManager.h in Headers */,
 				91DC3D861C3F123C00A61B61 /* UIColor+NestBlue.h in Headers */,
 				91DC3D7E1C3F123C00A61B61 /* NestSDKStructure.h in Headers */,
 				91DC3D821C3F123C00A61B61 /* NestSDKThermostat.h in Headers */,
-				91DC3D6C1C3F123C00A61B61 /* NestSDKAccessToken.h in Headers */,
 				91DC3D781C3F123C00A61B61 /* NestSDKFirebaseManager.h in Headers */,
 				91DC3D721C3F123C00A61B61 /* NestSDKAuthorizationManager.h in Headers */,
+				D7C02C3242EB2D928CC97A76 /* NestSDKConnectWithNestButton.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -305,6 +306,7 @@
 				91DC3D871C3F123C00A61B61 /* UIColor+NestBlue.m in Sources */,
 				91DC3D771C3F123C00A61B61 /* NestSDKAuthorizationViewController.m in Sources */,
 				91DC3D811C3F123C00A61B61 /* NestSDKStructuresManager.m in Sources */,
+				D7C027C2C86F428022036E5C /* NestSDKConnectWithNestButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -425,6 +427,7 @@
 				INFOPLIST_FILE = NestSDK/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = NestSDK;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -441,6 +444,7 @@
 				INFOPLIST_FILE = NestSDK/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = NestSDK;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -486,6 +490,7 @@
 				91DC3D4C1C3F103100A61B61 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		91DC3D4D1C3F103100A61B61 /* Build configuration list for PBXNativeTarget "NestSDKTests" */ = {
 			isa = XCConfigurationList;
@@ -494,6 +499,7 @@
 				91DC3D4F1C3F103100A61B61 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

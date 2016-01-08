@@ -14,6 +14,8 @@
 #define AMPERSAND @"&"
 #define EMPTY_STRING @""
 
+static const int kNavigationBarHeight = 64;
+
 @implementation NestSDKAuthorizationViewController
 
 - (instancetype)initWithAuthorizationURL:(NSURL *)authorizationURL
@@ -38,7 +40,7 @@
     [self.view setBackgroundColor:[UIColor whiteColor]];
 
     // Add a navbar to the top
-    UINavigationBar *navBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, 320, 64)];
+    UINavigationBar *navBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, kNavigationBarHeight)];
     [self.view addSubview:navBar];
 
     // Add some items to the navigation bar
@@ -48,7 +50,7 @@
     [navBar pushNavigationItem:navItem animated:YES];
 
     // Add a uiwebview to take up the entire view (beneath the nav bar)
-    self.webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 64, 320, self.view.frame.size.height - 64)];
+    self.webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, kNavigationBarHeight, self.view.frame.size.width, self.view.frame.size.height - kNavigationBarHeight)];
     [self.webView setBackgroundColor:[UIColor nestBlue]];
     [self.webView setDelegate:self];
     [self.view addSubview:self.webView];

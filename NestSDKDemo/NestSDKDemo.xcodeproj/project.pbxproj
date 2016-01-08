@@ -142,6 +142,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 91DC3DB31C3F12E700A61B61 /* Build configuration list for PBXNativeTarget "NestSDKDemo" */;
 			buildPhases = (
+				912DE0431C3FBCCF000D7B0C /* ShellScript */,
 				04583760AA5C47848936C869 /* Check Pods Manifest.lock */,
 				91DC3D8D1C3F12E700A61B61 /* Sources */,
 				91DC3D8E1C3F12E700A61B61 /* Frameworks */,
@@ -278,6 +279,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NestSDKDemo/Pods-NestSDKDemo-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		912DE0431C3FBCCF000D7B0C /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "pod update NestSDK";
 		};
 /* End PBXShellScriptBuildPhase section */
 

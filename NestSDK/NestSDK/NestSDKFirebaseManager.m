@@ -17,6 +17,8 @@
 #import "NestSDKFirebaseManager.h"
 #import "NestSDKAccessToken.h"
 
+static NSString *const kNestAPIEndpointURLString = @"https://developer-api.nest.com/";
+
 @interface NestSDKFirebaseManager ()
 
 @property(nonatomic, strong) NSMutableDictionary *subscribedURLs;
@@ -47,7 +49,7 @@
     if (self = [super init]) {
         self.subscribedURLs = [[NSMutableDictionary alloc] init];
         self.fireBi = [[NSMutableDictionary alloc] init];
-        self.rootFirebase = [[Firebase alloc] initWithUrl:@"https://developer-api.nest.com/"];
+        self.rootFirebase = [[Firebase alloc] initWithUrl:kNestAPIEndpointURLString];
 
         // DEPRECATED
 
@@ -55,12 +57,27 @@
 //            NSLog(@"completed!");
 //        } withCancelBlock:nil];
 
-        [self.rootFirebase authWithCustomToken:[NestSDKAccessToken currentAccessToken].tokenString
-                           withCompletionBlock:^(NSError *error, FAuthData *authData) {
-                           }];
+        if ([NestSDKAccessToken currentAccessToken]) {
+            [self authenticateWithAccessToken:[NestSDKAccessToken currentAccessToken]];
+        }
+
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(_accessTokenDidChangeNotification:)
+                                                     name:NestSDKAccessTokenDidChangeNotification
+                                                   object:nil];
     }
 
     return self;
+}
+
+- (void)authenticateWithAccessToken:(NestSDKAccessToken *)accessToken {
+    NSLog(@"Authenticating...");
+
+    [self.rootFirebase authWithCustomToken:accessToken.tokenString
+                       withCompletionBlock:^(NSError *error, FAuthData *authData) {
+                           NSLog(@"Auth data: %@", authData);
+                           NSLog(@"Error: %@", error);
+                       }];
 }
 
 /**
@@ -105,6 +122,12 @@
             }
         }                     withLocalEvents:NO];
     }
+}
+
+- (void)_accessTokenDidChangeNotification:(NSNotification *)notification {
+    NestSDKAccessToken *accessToken = notification.userInfo[NestSDKAccessTokenChangeNewKey];
+
+    [self authenticateWithAccessToken:accessToken];
 }
 
 @end

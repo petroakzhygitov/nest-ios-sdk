@@ -14,7 +14,12 @@
  *  limitations under the License.
  */
 
+#import <Foundation/Foundation.h>
 #import <Firebase/Firebase.h>
+
+#define NestSDKObserverHandleUndefined   -1
+
+typedef NSInteger NestSDKObserverHandle;
 
 typedef void (^ SubscriptionBlock)(FDataSnapshot *snapshot);
 

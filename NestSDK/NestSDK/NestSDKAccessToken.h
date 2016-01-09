@@ -7,6 +7,9 @@
 
 FOUNDATION_EXTERN NSString *const NestSDKAccessTokenDidChangeNotification;
 
+FOUNDATION_EXTERN NSString *const NestSDKAccessTokenChangeNewKey;
+FOUNDATION_EXTERN NSString *const NestSDKAccessTokenChangeOldKey;
+
 #pragma mark enum
 
 #pragma mark typedef

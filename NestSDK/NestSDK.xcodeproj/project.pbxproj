@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		00B9243FB3CFB457A2534296 /* Pods_NestSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30AAD321FF309F8F4689C2CA /* Pods_NestSDK.framework */; };
 		91DC3D3A1C3F103100A61B61 /* NestSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 91DC3D391C3F103100A61B61 /* NestSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		91DC3D411C3F103100A61B61 /* NestSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91DC3D361C3F103100A61B61 /* NestSDK.framework */; };
 		91DC3D461C3F103100A61B61 /* NestSDKTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 91DC3D451C3F103100A61B61 /* NestSDKTests.m */; };
@@ -32,14 +31,17 @@
 		91DC3D811C3F123C00A61B61 /* NestSDKStructuresManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 91DC3D651C3F123C00A61B61 /* NestSDKStructuresManager.m */; };
 		91DC3D821C3F123C00A61B61 /* NestSDKThermostat.h in Headers */ = {isa = PBXBuildFile; fileRef = 91DC3D661C3F123C00A61B61 /* NestSDKThermostat.h */; };
 		91DC3D831C3F123C00A61B61 /* NestSDKThermostat.m in Sources */ = {isa = PBXBuildFile; fileRef = 91DC3D671C3F123C00A61B61 /* NestSDKThermostat.m */; };
-		91DC3D841C3F123C00A61B61 /* NestSDKThermostatsManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 91DC3D681C3F123C00A61B61 /* NestSDKThermostatsManager.h */; };
-		91DC3D851C3F123C00A61B61 /* NestSDKThermostatsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 91DC3D691C3F123C00A61B61 /* NestSDKThermostatsManager.m */; };
 		91DC3D861C3F123C00A61B61 /* UIColor+NestBlue.h in Headers */ = {isa = PBXBuildFile; fileRef = 91DC3D6A1C3F123C00A61B61 /* UIColor+NestBlue.h */; };
 		91DC3D871C3F123C00A61B61 /* UIColor+NestBlue.m in Sources */ = {isa = PBXBuildFile; fileRef = 91DC3D6B1C3F123C00A61B61 /* UIColor+NestBlue.m */; };
+		994A46EB54FD53AA7CE1EDEF /* libPods-NestSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5091C3934F818825EFCA5F61 /* libPods-NestSDK.a */; };
+		D7C024A5886A7A33D0B53D69 /* NestSDKCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = D7C029BB2C1CA7CB3CF8B9B7 /* NestSDKCamera.m */; };
 		D7C024BCF1130AD17F628700 /* NestSDKUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D7C02B32A358CA9D25F58D54 /* NestSDKUtils.m */; };
+		D7C0275195650DBF2A7F11DD /* NestSDKCamera.h in Headers */ = {isa = PBXBuildFile; fileRef = D7C02672F4F55DD3AAA532E9 /* NestSDKCamera.h */; };
 		D7C027C2C86F428022036E5C /* NestSDKConnectWithNestButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D7C02BEA8EBF18A68122BB3A /* NestSDKConnectWithNestButton.m */; };
+		D7C028EF07CCDA110577E276 /* NestSDKDevicesManager.h in Headers */ = {isa = PBXBuildFile; fileRef = D7C02285C727B2FD873C60E3 /* NestSDKDevicesManager.h */; };
 		D7C02C3242EB2D928CC97A76 /* NestSDKConnectWithNestButton.h in Headers */ = {isa = PBXBuildFile; fileRef = D7C02E18DA784D90ECA1FB79 /* NestSDKConnectWithNestButton.h */; };
 		D7C02CFC18A08830A3CF0D06 /* NestSDKUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = D7C02144FD1AA40E0A0682C1 /* NestSDKUtils.h */; };
+		D7C02F0D1BAFEA0D12A1C737 /* NestSDKDevicesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D7C029C094EABEE142278517 /* NestSDKDevicesManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,8 +55,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		02C655B5125A926464F0CC2B /* Pods-NestSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NestSDK.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NestSDK/Pods-NestSDK.debug.xcconfig"; sourceTree = "<group>"; };
-		30AAD321FF309F8F4689C2CA /* Pods_NestSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NestSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1A6F820208666CB0CCA13237 /* Pods-NestSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NestSDK.release.xcconfig"; path = "Pods/Target Support Files/Pods-NestSDK/Pods-NestSDK.release.xcconfig"; sourceTree = "<group>"; };
+		48C09388F598ADF046C53C82 /* Pods-NestSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NestSDK.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NestSDK/Pods-NestSDK.debug.xcconfig"; sourceTree = "<group>"; };
+		5091C3934F818825EFCA5F61 /* libPods-NestSDK.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-NestSDK.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		91DC3D361C3F103100A61B61 /* NestSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NestSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		91DC3D391C3F103100A61B61 /* NestSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NestSDK.h; sourceTree = "<group>"; };
 		91DC3D3B1C3F103100A61B61 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -85,12 +88,13 @@
 		91DC3D651C3F123C00A61B61 /* NestSDKStructuresManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NestSDKStructuresManager.m; sourceTree = "<group>"; };
 		91DC3D661C3F123C00A61B61 /* NestSDKThermostat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NestSDKThermostat.h; sourceTree = "<group>"; };
 		91DC3D671C3F123C00A61B61 /* NestSDKThermostat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NestSDKThermostat.m; sourceTree = "<group>"; };
-		91DC3D681C3F123C00A61B61 /* NestSDKThermostatsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NestSDKThermostatsManager.h; sourceTree = "<group>"; };
-		91DC3D691C3F123C00A61B61 /* NestSDKThermostatsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NestSDKThermostatsManager.m; sourceTree = "<group>"; };
 		91DC3D6A1C3F123C00A61B61 /* UIColor+NestBlue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+NestBlue.h"; sourceTree = "<group>"; };
 		91DC3D6B1C3F123C00A61B61 /* UIColor+NestBlue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+NestBlue.m"; sourceTree = "<group>"; };
-		C762624D651493BA06CD5592 /* Pods-NestSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NestSDK.release.xcconfig"; path = "Pods/Target Support Files/Pods-NestSDK/Pods-NestSDK.release.xcconfig"; sourceTree = "<group>"; };
 		D7C02144FD1AA40E0A0682C1 /* NestSDKUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NestSDKUtils.h; sourceTree = "<group>"; };
+		D7C02285C727B2FD873C60E3 /* NestSDKDevicesManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NestSDKDevicesManager.h; sourceTree = "<group>"; };
+		D7C02672F4F55DD3AAA532E9 /* NestSDKCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NestSDKCamera.h; sourceTree = "<group>"; };
+		D7C029BB2C1CA7CB3CF8B9B7 /* NestSDKCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NestSDKCamera.m; sourceTree = "<group>"; };
+		D7C029C094EABEE142278517 /* NestSDKDevicesManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NestSDKDevicesManager.m; sourceTree = "<group>"; };
 		D7C02B32A358CA9D25F58D54 /* NestSDKUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NestSDKUtils.m; sourceTree = "<group>"; };
 		D7C02BEA8EBF18A68122BB3A /* NestSDKConnectWithNestButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NestSDKConnectWithNestButton.m; sourceTree = "<group>"; };
 		D7C02E18DA784D90ECA1FB79 /* NestSDKConnectWithNestButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NestSDKConnectWithNestButton.h; sourceTree = "<group>"; };
@@ -101,7 +105,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00B9243FB3CFB457A2534296 /* Pods_NestSDK.framework in Frameworks */,
+				994A46EB54FD53AA7CE1EDEF /* libPods-NestSDK.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -116,14 +120,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3EE72BF9BE30128ED593087A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				48C09388F598ADF046C53C82 /* Pods-NestSDK.debug.xcconfig */,
+				1A6F820208666CB0CCA13237 /* Pods-NestSDK.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		7BBC4CBCDA2B8794182D252A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5091C3934F818825EFCA5F61 /* libPods-NestSDK.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		91DC3D2C1C3F103100A61B61 = {
 			isa = PBXGroup;
 			children = (
 				91DC3D381C3F103100A61B61 /* NestSDK */,
 				91DC3D441C3F103100A61B61 /* NestSDKTests */,
 				91DC3D371C3F103100A61B61 /* Products */,
-				A074B7245120D05E54F2A0AC /* Pods */,
-				F5DE649E55DF1E6760E16007 /* Frameworks */,
+				3EE72BF9BE30128ED593087A /* Pods */,
+				7BBC4CBCDA2B8794182D252A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -163,8 +184,6 @@
 				91DC3D651C3F123C00A61B61 /* NestSDKStructuresManager.m */,
 				91DC3D661C3F123C00A61B61 /* NestSDKThermostat.h */,
 				91DC3D671C3F123C00A61B61 /* NestSDKThermostat.m */,
-				91DC3D681C3F123C00A61B61 /* NestSDKThermostatsManager.h */,
-				91DC3D691C3F123C00A61B61 /* NestSDKThermostatsManager.m */,
 				91DC3D6A1C3F123C00A61B61 /* UIColor+NestBlue.h */,
 				91DC3D6B1C3F123C00A61B61 /* UIColor+NestBlue.m */,
 				91DC3D391C3F103100A61B61 /* NestSDK.h */,
@@ -173,6 +192,10 @@
 				D7C02E18DA784D90ECA1FB79 /* NestSDKConnectWithNestButton.h */,
 				D7C02B32A358CA9D25F58D54 /* NestSDKUtils.m */,
 				D7C02144FD1AA40E0A0682C1 /* NestSDKUtils.h */,
+				D7C029C094EABEE142278517 /* NestSDKDevicesManager.m */,
+				D7C02285C727B2FD873C60E3 /* NestSDKDevicesManager.h */,
+				D7C029BB2C1CA7CB3CF8B9B7 /* NestSDKCamera.m */,
+				D7C02672F4F55DD3AAA532E9 /* NestSDKCamera.h */,
 			);
 			path = NestSDK;
 			sourceTree = "<group>";
@@ -186,23 +209,6 @@
 			path = NestSDKTests;
 			sourceTree = "<group>";
 		};
-		A074B7245120D05E54F2A0AC /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				02C655B5125A926464F0CC2B /* Pods-NestSDK.debug.xcconfig */,
-				C762624D651493BA06CD5592 /* Pods-NestSDK.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
-		F5DE649E55DF1E6760E16007 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				30AAD321FF309F8F4689C2CA /* Pods_NestSDK.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -211,7 +217,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				91DC3D741C3F123C00A61B61 /* NestSDKAuthorizationManagerAuthorizationResult.h in Headers */,
-				91DC3D841C3F123C00A61B61 /* NestSDKThermostatsManager.h in Headers */,
 				91DC3D7A1C3F123C00A61B61 /* NestSDKRESTService.h in Headers */,
 				91DC3D7C1C3F123C00A61B61 /* NestSDKSmokeCOAlarm.h in Headers */,
 				91DC3D6E1C3F123C00A61B61 /* NestSDKAccessTokenCache.h in Headers */,
@@ -224,6 +229,8 @@
 				91DC3D721C3F123C00A61B61 /* NestSDKAuthorizationManager.h in Headers */,
 				D7C02C3242EB2D928CC97A76 /* NestSDKConnectWithNestButton.h in Headers */,
 				D7C02CFC18A08830A3CF0D06 /* NestSDKUtils.h in Headers */,
+				D7C028EF07CCDA110577E276 /* NestSDKDevicesManager.h in Headers */,
+				D7C0275195650DBF2A7F11DD /* NestSDKCamera.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -234,12 +241,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 91DC3D4A1C3F103100A61B61 /* Build configuration list for PBXNativeTarget "NestSDK" */;
 			buildPhases = (
-				F87A1B6EF635CEC8A9616979 /* Check Pods Manifest.lock */,
+				E315FDC93A3A7A4E77A272BA /* Check Pods Manifest.lock */,
 				91DC3D311C3F103100A61B61 /* Sources */,
 				91DC3D321C3F103100A61B61 /* Frameworks */,
 				91DC3D331C3F103100A61B61 /* Headers */,
 				91DC3D341C3F103100A61B61 /* Resources */,
-				327DBD7C2C72C5CBFCDA1330 /* Copy Pods Resources */,
+				0D960A49EC149CD11C5250E0 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -321,7 +328,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		327DBD7C2C72C5CBFCDA1330 /* Copy Pods Resources */ = {
+		0D960A49EC149CD11C5250E0 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -336,7 +343,7 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NestSDK/Pods-NestSDK-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F87A1B6EF635CEC8A9616979 /* Check Pods Manifest.lock */ = {
+		E315FDC93A3A7A4E77A272BA /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -362,7 +369,6 @@
 				91DC3D791C3F123C00A61B61 /* NestSDKFirebaseManager.m in Sources */,
 				91DC3D7D1C3F123C00A61B61 /* NestSDKSmokeCOAlarm.m in Sources */,
 				91DC3D751C3F123C00A61B61 /* NestSDKAuthorizationManagerAuthorizationResult.m in Sources */,
-				91DC3D851C3F123C00A61B61 /* NestSDKThermostatsManager.m in Sources */,
 				91DC3D7B1C3F123C00A61B61 /* NestSDKRESTService.m in Sources */,
 				91DC3D831C3F123C00A61B61 /* NestSDKThermostat.m in Sources */,
 				91DC3D731C3F123C00A61B61 /* NestSDKAuthorizationManager.m in Sources */,
@@ -374,6 +380,8 @@
 				91DC3D811C3F123C00A61B61 /* NestSDKStructuresManager.m in Sources */,
 				D7C027C2C86F428022036E5C /* NestSDKConnectWithNestButton.m in Sources */,
 				D7C024BCF1130AD17F628700 /* NestSDKUtils.m in Sources */,
+				D7C02F0D1BAFEA0D12A1C737 /* NestSDKDevicesManager.m in Sources */,
+				D7C024A5886A7A33D0B53D69 /* NestSDKCamera.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -486,15 +494,16 @@
 		};
 		91DC3D4B1C3F103100A61B61 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 02C655B5125A926464F0CC2B /* Pods-NestSDK.debug.xcconfig */;
+			baseConfigurationReference = 48C09388F598ADF046C53C82 /* Pods-NestSDK.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(PROJECT_DIR)/**",
-					"$(PROJECT_DIR)/Frameworks",
+					"$(inherited)/**",
+					"\"${PODS_ROOT}/Headers/Public/Firebase\"",
 				);
 				INFOPLIST_FILE = NestSDK/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -508,15 +517,16 @@
 		};
 		91DC3D4C1C3F103100A61B61 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C762624D651493BA06CD5592 /* Pods-NestSDK.release.xcconfig */;
+			baseConfigurationReference = 1A6F820208666CB0CCA13237 /* Pods-NestSDK.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(PROJECT_DIR)/**",
-					"$(PROJECT_DIR)/Frameworks",
+					"$(inherited)/**",
+					"\"${PODS_ROOT}/Headers/Public/Firebase\"",
 				);
 				INFOPLIST_FILE = NestSDK/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";

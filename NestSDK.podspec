@@ -25,8 +25,7 @@ Pod::Spec.new do |s|
 
   # s.frameworks = 'UIKit', 'MapKit'
   
-  # s.dependency 'Firebase', '1.2.3'
-  s.dependency 'Firebase', '>= 2.5.0'
+  s.dependency 'Firebase', '1.2.3'
   s.dependency 'JSONModel'
   s.dependency 'SSKeychain'
   

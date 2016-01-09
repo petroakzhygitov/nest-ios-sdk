@@ -15,7 +15,7 @@
 
 @end
 
-@interface NestSDKStructure : JSONModel
+@interface NestSDKStructure : JSONModel <NestSDKStructure>
 #pragma mark Properties
 
 @property(nonatomic, copy) NSString <Optional> *structure_id;

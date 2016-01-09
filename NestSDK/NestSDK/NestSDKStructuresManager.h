@@ -1,4 +1,5 @@
 #import <Foundation/Foundation.h>
+#import "NestSDKFirebaseManager.h"
 
 @protocol NestSDKStructure;
 
@@ -20,6 +21,12 @@ typedef void (^NestSDKStructuresManagerStructuresUpdateBlock)(NSArray <NestSDKSt
 
 #pragma mark Methods
 
-- (void)observeStructuresWithUpdateBlock:(NestSDKStructuresManagerStructuresUpdateBlock)block;
+- (void)structuresWithBlock:(NestSDKStructuresManagerStructuresUpdateBlock)block;
+//- (void)setStructures:WithBlock:();
+
+- (NestSDKObserverHandle)observeStructuresWithBlock:(NestSDKStructuresManagerStructuresUpdateBlock)block;
+- (void)removeObserverWithObserveHandle:(NestSDKObserverHandle)handle;
+
+- (void)removeAllObservers;
 
 @end

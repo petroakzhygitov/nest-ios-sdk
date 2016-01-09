@@ -1,11 +1,12 @@
-#import <Firebase/FDataSnapshot.h>
+#import <Firebase/Firebase.h>
 #import "NestSDKStructuresManager.h"
-#import "NestSDKFirebaseManager.h"
 #import "NestSDKStructure.h"
 
 #pragma mark macros
 
 #pragma mark const
+
+static NSString *const kStructuresURLPath = @"structures/";
 
 #pragma mark enum
 
@@ -25,10 +26,10 @@
 
 #pragma mark Public
 
-- (void)observeStructuresWithUpdateBlock:(NestSDKStructuresManagerStructuresUpdateBlock)block {
-    if (!block) return;
+- (NestSDKObserverHandle)observeStructuresWithBlock:(NestSDKStructuresManagerStructuresUpdateBlock)block {
+    if (!block) return NestSDKObserverHandleUndefined;
 
-    [[NestSDKFirebaseManager sharedManager] addSubscriptionToURL:@"structures/" withBlock:^(FDataSnapshot *snapshot) {
+    [[NestSDKFirebaseManager sharedManager] addSubscriptionToURL:kStructuresURLPath withBlock:^(FDataSnapshot *snapshot) {
         NSMutableArray <NestSDKStructure> *structuresArray = (NSMutableArray <NestSDKStructure> *) [[NSMutableArray alloc] initWithCapacity:snapshot.childrenCount];
 
         for (FDataSnapshot *child in snapshot.children) {
@@ -40,8 +41,10 @@
             [structuresArray addObject:structure];
         }
 
-        block([structuresArray copy]);
+        block(structuresArray);
     }];
+
+    return 0;
 }
 
 #pragma mark IBAction

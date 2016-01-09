@@ -21,7 +21,16 @@
 #import <UIKit/UIKit.h>
 
 #import "NestSDKApplicationDelegate.h"
+#import "NestSDKAuthorizationManager.h"
+#import "NestSDKAuthorizationManagerAuthorizationResult.h"
+#import "NestSDKConnectWithNestButton.h"
 #import "NestSDKAccessToken.h"
+#import "NestSDKStructuresManager.h"
+#import "NestSDKDevicesManager.h"
+#import "NestSDKStructure.h"
+#import "NestSDKThermostat.h"
+#import "NestSDKSmokeCOAlarm.h"
+#import "NestSDKCamera.h"
 
 #define NESTSDK_VERSION_STRING @"0.1.0"
 

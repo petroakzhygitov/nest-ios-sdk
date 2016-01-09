@@ -13,8 +13,12 @@
 #pragma mark typedef
 
 #pragma mark Protocol
+@protocol NestSDKThermostat <NSObject>
 
-@interface NestSDKThermostat : JSONModel
+@end
+
+
+@interface NestSDKThermostat : JSONModel <NestSDKThermostat>
 #pragma mark Properties
 
 @property(nonatomic, copy) NSString <Optional> *device_id;

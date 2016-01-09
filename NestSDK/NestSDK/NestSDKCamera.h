@@ -10,12 +10,12 @@
 #pragma mark typedef
 
 #pragma mark Protocol
-@protocol NestSDKSmokeCoAlarm <NSObject>
+
+@protocol NestSDKCamera <NSObject>
 
 @end
 
-
-@interface NestSDKSmokeCOAlarm : JSONModel <NestSDKSmokeCoAlarm>
+@interface NestSDKCamera : JSONModel <NestSDKCamera>
 #pragma mark Properties
 
 #pragma mark Methods

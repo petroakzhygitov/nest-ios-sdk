@@ -1,4 +1,4 @@
-#import "NestSDKSmokeCOAlarm.h"
+#import "NestSDKCamera.h"
 
 #pragma mark macros
 
@@ -9,7 +9,7 @@
 #pragma mark typedef
 
 
-@implementation NestSDKSmokeCOAlarm {
+@implementation NestSDKCamera {
 #pragma mark Instance variables
 }
 

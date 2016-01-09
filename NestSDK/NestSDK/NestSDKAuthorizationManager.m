@@ -128,7 +128,7 @@ static NSString *const kNestAccessTokenURLFormat = @"https://api.%@/oauth2/acces
 }
 
 - (void)unauthorize {
-
+    [NestSDKAccessToken setCurrentAccessToken:nil];
 }
 
 

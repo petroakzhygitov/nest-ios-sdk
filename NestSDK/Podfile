@@ -1,8 +1,7 @@
 source 'https://github.com/CocoaPods/Specs.git'
-use_frameworks!
 
-target 'NestSDK', :exclusive => true do
-  pod "Firebase"
-  pod "JSONModel"
-  pod "SSKeychain"
+target 'NestSDK' do
+  pod 'Firebase', '1.2.3'
+  pod 'JSONModel'
+  pod 'SSKeychain'
 end

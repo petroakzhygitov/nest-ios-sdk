@@ -8,9 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
-//@property (weak, nonatomic) IBOutlet NestSDKConnectWithNestButton *connectWithNestButton;
+@interface ViewController : UIViewController <NestSDKConnectWithNestButtonDelegate, NestSDKConnectWithNestButtonDelegate>
+@property (weak, nonatomic) IBOutlet UITextView *nestInfoTextView;
 
 @end
 

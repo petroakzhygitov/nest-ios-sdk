@@ -22,27 +22,7 @@
 #import "NestSDKAccessToken.h"
 #import "NestSDKAccessTokenCache.h"
 
-#pragma mark macros
-
-#pragma mark const
-
-#pragma mark enum
-
-#pragma mark typedef
-
-
-@implementation NestSDKApplicationDelegate {
-#pragma mark Instance variables
-}
-
-#pragma mark Initializer
-
-#pragma mark Private
-
-#pragma mark Notification selectors
-
-#pragma mark Override
-
+@implementation NestSDKApplicationDelegate
 #pragma mark Public
 
 + (instancetype)sharedInstance {
@@ -75,11 +55,5 @@
 
     return NO;
 }
-
-#pragma mark IBAction
-
-#pragma mark Protocol @protocol-name
-
-#pragma mark Delegate @delegate-name
 
 @end

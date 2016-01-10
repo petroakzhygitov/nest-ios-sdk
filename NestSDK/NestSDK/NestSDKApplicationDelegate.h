@@ -21,23 +21,11 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIApplication.h>
 
-#pragma mark macros
-
-#pragma mark const
-
-#pragma mark enum
-
-#pragma mark typedef
-
-#pragma mark Protocol
-
 /**
  * NestSDKApplicationDelegate is main connection point with Nest SDK.
  * It is designed to be able process the results from Nest authorization dialogs (native app or Safari) in the future.
  */
 @interface NestSDKApplicationDelegate : NSObject
-#pragma mark Properties
-
 #pragma mark Methods
 
 /**

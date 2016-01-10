@@ -34,6 +34,7 @@ you can retrieve and modify information on their behalf.
 
 **NB:** Connect with Nest **supports Web-based Authorization** only. **PIN-based Authorization** is **not supported**.
 
+====================================
 ####Setup steps:
 
 1. General Nest product Setup
@@ -45,7 +46,6 @@ you can retrieve and modify information on their behalf.
 - Custom Connect With Nest Button
 
 ====================================
-
 ####1. General Nest product Setup
 
 - Create your Nest developers account at [https://home.nest.com] (https://home.nest.com/login/?style=default&next=%2Faccounts%2Fsaml2%2Fidp%2Fcomplete%3FSAMLRequest%3DPHNhbWxwOkF1dGhuUmVxdWVzdCBBc3NlcnRpb25Db25zdW1lclNlcnZpY2VVUkw9J2h0dHBzOi8vZGV2ZWxvcGVyLm5lc3QuY29tL2F1dGgvc2FtbC9zZXNzaW9ucycgRGVzdGluYXRpb249J2h0dHBzOi8vaG9tZS5uZXN0LmNvbS9hY2NvdW50cy9zYW1sMi9pZHAvcG9zdD9zdHlsZT1kZWZhdWx0JyBJRD0nXzJjNzBjYjQwLTk5YmYtMDEzMy05NmM1LTIyMDAwYjIyMDZiMCcgSXNQYXNzaXZlPSdmYWxzZScgSXNzdWVJbnN0YW50PScyMDE2LTAxLTEwVDExOjU2OjU3WicgVmVyc2lvbj0nMi4wJyB4bWxuczpzYW1sPSd1cm46b2FzaXM6bmFtZXM6dGM6U0FNTDoyLjA6YXNzZXJ0aW9uJyB4bWxuczpzYW1scD0ndXJuOm9hc2lzOm5hbWVzOnRjOlNBTUw6Mi4wOnByb3RvY29sJz48c2FtbDpJc3N1ZXI%252BaHR0cHM6Ly9kZXZlbG9wZXIubmVzdC5jb208L3NhbWw6SXNzdWVyPjxzYW1scDpOYW1lSURQb2xpY3kgQWxsb3dDcmVhdGU9J3RydWUnIEZvcm1hdD0ncm46b2FzaXM6bmFtZXM6dGM6U0FNTDoyLjA6cHJvdG9jb2wnLz48L3NhbWxwOkF1dGhuUmVxdWVzdD4%253D#/sign-up)
@@ -56,6 +56,7 @@ you can retrieve and modify information on their behalf.
 
 - Use your product `Product ID`, `Product Secret` and `Redirect URI` for the iOS project setup.
 
+====================================
 ####2. General iOS project Setup
 
 - Add NestSDK to your project (see Installation)
@@ -94,6 +95,7 @@ Conenct your `AppDelegate` to the `NestSDKApplicationDelegate`. In your `AppDele
 }
 ```
 
+====================================
 ####3. Add Connect With Nest Button Code
 
 To add a `Connect with Nest` button to your app add the following code snippet to a view controller.
@@ -120,6 +122,7 @@ To add a `Connect with Nest` button to your app add the following code snippet t
 @end
 ```
 
+====================================
 ####Optional: Custom Connect With Nest Button
 
 Instead of using the predefined `Connect with Nest` button (explained in 3. Add Connect With Nest Button Code) you may want to design a custom layout and behavior. In the following code example we invoke the authorization dialog using the authorization manager class (`NestSDKAuthorizationManager`) and a custom button (`UIButton`). You can use any other custom user interface or event handling to invoke the login dialog.

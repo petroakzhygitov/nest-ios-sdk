@@ -58,7 +58,7 @@ static NSString *const kNestAPIEndpointURLString = @"https://developer-api.nest.
 //        } withCancelBlock:nil];
 
         if ([NestSDKAccessToken currentAccessToken]) {
-            [self authenticateWithAccessToken:[NestSDKAccessToken currentAccessToken]];
+            [self _authenticateWithAccessToken:[NestSDKAccessToken currentAccessToken]];
         }
 
         [[NSNotificationCenter defaultCenter] addObserver:self
@@ -70,7 +70,7 @@ static NSString *const kNestAPIEndpointURLString = @"https://developer-api.nest.
     return self;
 }
 
-- (void)authenticateWithAccessToken:(NestSDKAccessToken *)accessToken {
+- (void)_authenticateWithAccessToken:(NestSDKAccessToken *)accessToken {
     NSLog(@"Authenticating...");
 
     [self.rootFirebase authWithCustomToken:accessToken.tokenString
@@ -78,6 +78,10 @@ static NSString *const kNestAPIEndpointURLString = @"https://developer-api.nest.
                            NSLog(@"Auth data: %@", authData);
                            NSLog(@"Error: %@", error);
                        }];
+}
+
+- (void)_unauthenticate {
+    [self.rootFirebase unauth];
 }
 
 /**
@@ -125,9 +129,12 @@ static NSString *const kNestAPIEndpointURLString = @"https://developer-api.nest.
 }
 
 - (void)_accessTokenDidChangeNotification:(NSNotification *)notification {
-    NestSDKAccessToken *accessToken = notification.userInfo[NestSDKAccessTokenChangeNewKey];
+    [self _unauthenticate];
 
-    [self authenticateWithAccessToken:accessToken];
+    NestSDKAccessToken *accessToken = notification.userInfo[NestSDKAccessTokenChangeNewKey];
+    if (accessToken) {
+        [self _authenticateWithAccessToken:accessToken];
+    }
 }
 
 @end

@@ -17,18 +17,22 @@
 #import <NestSDK/NestSDKCamera.h>
 #import <NestSDK/NestSDKThermostat.h>
 #import "ViewController.h"
-#import <Firebase/Firebase.h>
 
-@implementation ViewController {
-    NestSDKStructuresManager *_structuresManager;
-    NestSDKDevicesManager *_devicesManager;
-}
+@interface ViewController ()
+
+@property(nonatomic) NestSDKStructuresManager *structuresManager;
+@property(nonatomic) NestSDKDevicesManager *devicesManager;
+
+@end
+
+
+@implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
 
     // Connect with Nest using NestSDKConnectWithNestButton
-    [self createConnectWithNestButton];
+    self.connectWithNestButton.delegate = self;
 
     // Connect with Nest using your custom button
 //    [self createCustomConnectWithNestButton];
@@ -48,14 +52,6 @@
     [self removeObservers];
 }
 
-
-- (void)createConnectWithNestButton {
-    NestSDKConnectWithNestButton *connectWithNestButton = [[NestSDKConnectWithNestButton alloc] init];
-    connectWithNestButton.delegate = self;
-    connectWithNestButton.center = self.view.center;
-
-    [self.view addSubview:connectWithNestButton];
-}
 
 - (void)createCustomConnectWithNestButton {
     // Add a custom login button to your app
@@ -77,11 +73,11 @@
 
 - (void)observeStructures {
     // Init managers
-    _structuresManager = [[NestSDKStructuresManager alloc] init];
-    _devicesManager = [[NestSDKDevicesManager alloc] init];
+    self.structuresManager = [[NestSDKStructuresManager alloc] init];
+    self.devicesManager = [[NestSDKDevicesManager alloc] init];
 
     // Start observing structures changes
-    [_structuresManager observeStructuresWithBlock:^(NSArray <NestSDKStructure> *structuresArray) {
+    [self.structuresManager observeStructuresWithBlock:^(NSArray <NestSDKStructure> *structuresArray) {
         [self logMessage:@"Structures updated!"];
 
         // Structure may change while observing, so remove all current device observers and then set all new ones
@@ -89,7 +85,7 @@
 
         // Cycle through all structures and set observers for all devices
         for (NestSDKStructure *structure in structuresArray) {
-            [self logMessage:[NSString stringWithFormat:@"Found structure: %@!\n", structure.name]];
+            [self logMessage:[NSString stringWithFormat:@"Found structure: %@!", structure.name]];
 
             [self observeThermostatsWithinStructure:structure];
             [self observeSmokeCOAlarmsWithinStructure:structure];
@@ -99,37 +95,53 @@
 }
 
 - (void)removeStructuresObservers {
-    [_structuresManager removeAllObservers];
+    [self.structuresManager removeAllObservers];
 }
 
 - (void)observeThermostatsWithinStructure:(NestSDKStructure *)structure {
     for (NSString *thermostatId in structure.thermostats) {
-        [_devicesManager observeThermostatWithId:thermostatId block:^(NestSDKThermostat *thermostat) {
-            [self logMessage:[NSString stringWithFormat:@"Thermostat %@ updated! Current temperature in C: %.1f\n",
-                                                        thermostat.name, thermostat.ambient_temperature_c]];
+        [self.devicesManager observeThermostatWithId:thermostatId block:^(NestSDKThermostat *thermostat, NSError *error) {
+            if (error) {
+                [self logMessage:[NSString stringWithFormat:@"Error observing thermostat: %@", error]];
+
+            } else {
+                [self logMessage:[NSString stringWithFormat:@"Thermostat %@ updated! Current temperature in C: %.1f",
+                                                            thermostat.name, thermostat.ambient_temperature_c]];
+            }
         }];
     }
 }
 
 - (void)observeSmokeCOAlarmsWithinStructure:(NestSDKStructure *)structure {
     for (NSString *smokeCOAlarmId in structure.smoke_co_alarms) {
-        [_devicesManager observeSmokeCOAlarmWithId:smokeCOAlarmId block:^(NestSDKSmokeCOAlarm *smokeCOAlarm) {
-//            [self logMessage:[NSString stringWithFormat:@"Thermostat %@ updated! Current temperature in C: %.1f\n",
-//                                                        smokeCOAlarm.name, thermostat.ambient_temperature_c];
+        [self.devicesManager observeSmokeCOAlarmWithId:smokeCOAlarmId block:^(NestSDKSmokeCOAlarm *smokeCOAlarm, NSError *error) {
+            if (error) {
+                [self logMessage:[NSString stringWithFormat:@"Error observing smokeCOAlarm: %@", error]];
+
+            } else {
+                [self logMessage:[NSString stringWithFormat:@"smokeCOAlarm %@ updated! Current state: %@",
+                                                            smokeCOAlarm.name, smokeCOAlarm.co_alarm_state]];
+            }
         }];
     }
 }
 
 - (void)observeCamerasWithinStructure:(NestSDKStructure *)structure {
     for (NSString *cameraId in structure.cameras) {
-        [_devicesManager observeCameraWithId:cameraId block:^(NestSDKCamera *camera) {
+        [self.devicesManager observeCameraWithId:cameraId block:^(NestSDKCamera *camera, NSError *error) {
+            if (error) {
+                [self logMessage:[NSString stringWithFormat:@"Error observing camera: %@", error]];
 
+            } else {
+                [self logMessage:[NSString stringWithFormat:@"Camera %@ updated! Streaming state: %@",
+                                                            camera.name, camera.is_streaming ? @"YES" : @"NO"]];
+            }
         }];
     }
 }
 
 - (void)removeDevicesObservers {
-    [_devicesManager removeAllObservers];
+    [self.devicesManager removeAllObservers];
 }
 
 - (void)removeObservers {

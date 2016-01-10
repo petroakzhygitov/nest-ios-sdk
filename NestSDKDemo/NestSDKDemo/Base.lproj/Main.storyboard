@@ -18,21 +18,38 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="BKD-Ur-KDt">
-                                <rect key="frame" x="20" y="80" width="560" height="500"/>
+                                <rect key="frame" x="20" y="90" width="560" height="490"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xJz-0h-GJu" customClass="NestSDKConnectWithNestButton">
+                                <rect key="frame" x="218" y="40" width="164" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="8VA-zU-LQ5"/>
+                                    <constraint firstAttribute="width" constant="164" id="nHw-cf-afn"/>
+                                </constraints>
+                                <state key="normal" title="Connect with Nest"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="BKD-Ur-KDt" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="M1o-BT-HVV"/>
                             <constraint firstItem="BKD-Ur-KDt" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="60" id="Veq-pj-q00"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="BKD-Ur-KDt" secondAttribute="bottom" constant="20" id="ZR2-vn-V5w"/>
+                            <constraint firstItem="xJz-0h-GJu" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="20" id="gEs-Sh-9kk"/>
+                            <constraint firstItem="BKD-Ur-KDt" firstAttribute="top" secondItem="xJz-0h-GJu" secondAttribute="bottom" constant="20" id="r0z-F4-vPr"/>
+                            <constraint firstItem="xJz-0h-GJu" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="uYt-w1-icw"/>
                             <constraint firstAttribute="trailing" secondItem="BKD-Ur-KDt" secondAttribute="trailing" constant="20" id="zeA-Oy-iPg"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="Veq-pj-q00"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
+                        <outlet property="connectWithNestButton" destination="xJz-0h-GJu" id="2H7-ha-F2R"/>
                         <outlet property="nestInfoTextView" destination="BKD-Ur-KDt" id="Ev5-0T-7Yn"/>
                     </connections>
                 </viewController>

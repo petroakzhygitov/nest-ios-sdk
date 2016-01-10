@@ -160,7 +160,7 @@ Instead of using the predefined `Connect with Nest` button (explained in Add Con
 @end
 ```
 
-### Reading/Observing structures
+## Reading/Observing structures
 
 All Nest devices belong to a structure. A structure can have many devices. It's possible that a user has more than one structure attached to their Nest Account, so your product should offer a means for the user to choose from the available structures (a structure picker).
 
@@ -177,9 +177,9 @@ NestSDKStructuresManager *structuresManager = [[NestSDKStructuresManager alloc] 
 }];
 ```
 
-### Reading/Observing devices
+## Reading/Observing devices
 
-There are three types of Nest devices you can read:
+There are three types of Nest devices available read/observe:
 - Thermostat ([more information](https://developer.nest.com/documentation/cloud/thermostat-guide))
 - Smoke+CO Alarm ([more information](https://developer.nest.com/documentation/cloud/smoke-co-guide))
 - Camera ([more information](https://developer.nest.com/documentation/cloud/camera-guide))

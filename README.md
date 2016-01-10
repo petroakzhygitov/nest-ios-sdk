@@ -138,38 +138,38 @@ Instead of using the predefined `Connect with Nest` button (explained in 3. Add 
 - (void)viewDidLoad {
   [super viewDidLoad];
     
-  // Add a custom login button to your app
-  UIButton *myLoginButton=[UIButton buttonWithType:UIButtonTypeCustom];
-  myLoginButton.backgroundColor=[UIColor darkGrayColor];
-  myLoginButton.frame=CGRectMake(0,0,180,40);
-  myLoginButton.center = self.view.center;
-  [myLoginButton setTitle: @"My Login Button" forState: UIControlStateNormal];
+    // Add a custom connect with button to your app
+    UIButton *customConnectWithNestButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    customConnectWithNestButton.backgroundColor = [UIColor darkGrayColor];
+    customConnectWithNestButton.frame = CGRectMake(0, 0, 240, 40);
 
-  // Handle clicks on the button
-  [myLoginButton 
-    addTarget:self 
-    action:@selector(loginButtonClicked) forControlEvents:UIControlEventTouchUpInside];
- 
-  // Add the button to the view
-  [self.view addSubview:myLoginButton];
+    // Optional: Place the button in the center of your view.
+    customConnectWithNestButton.center = self.view.center;
+    [customConnectWithNestButton setTitle:@"Custom Connect Button" forState:UIControlStateNormal];
+
+    // Handle clicks on the button
+    [customConnectWithNestButton addTarget:self action:@selector(customConnectWithNestButtonClicked)
+                          forControlEvents:UIControlEventTouchUpInside];
+
+    // Add the button to the view
+    [self.view addSubview:customConnectWithNestButton];
 }
 
-// Once the button is clicked, show the login dialog
--(void)loginButtonClicked
-{
-  FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
-  [login
-    logInWithReadPermissions: @[@"public_profile"]
-          fromViewController:self
-                     handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
-    if (error) { 
-      NSLog(@"Process error");
-    } else if (result.isCancelled) {
-      NSLog(@"Cancelled");
-    } else {
-      NSLog(@"Logged in");
-    }
-  }];
+// Once the button is clicked, show the auth dialog
+- (void)customConnectWithNestButtonClicked {
+    NestSDKAuthorizationManager *authorizationManager = [[NestSDKAuthorizationManager alloc] init];
+    [authorizationManager authorizeWithNestAccountFromViewController:self
+                                                             handler:^(NestSDKAuthorizationManagerAuthorizationResult *result, NSError *error) {
+                                                                 if (error) {
+							         	                             NSLog(@"Process error: %@", error);
+								
+								                                 } else if (result.isCancelled) {
+								                                     NSLog(@"Cancelled");
+								
+								                                 } else {
+								                                     NSLog(@"Authorized!");
+								                                 }
+                                                             }];
 }
     
 @end

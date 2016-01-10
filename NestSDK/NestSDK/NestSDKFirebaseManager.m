@@ -51,12 +51,6 @@ static NSString *const kNestAPIEndpointURLString = @"https://developer-api.nest.
         self.fireBi = [[NSMutableDictionary alloc] init];
         self.rootFirebase = [[Firebase alloc] initWithUrl:kNestAPIEndpointURLString];
 
-        // DEPRECATED
-
-//        [self.rootFirebase authWithCredential:[NestSDKAccessToken currentAccessToken].tokenString withCompletionBlock:^(NSError *error, id data) {
-//            NSLog(@"completed!");
-//        } withCancelBlock:nil];
-
         if ([NestSDKAccessToken currentAccessToken]) {
             [self _authenticateWithAccessToken:[NestSDKAccessToken currentAccessToken]];
         }

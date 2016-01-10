@@ -1,7 +1,14 @@
 source 'https://github.com/CocoaPods/Specs.git'
 
-target 'NestSDK' do
+target "NestSDK" do
   pod 'Firebase', '1.2.3'
   pod 'JSONModel'
   pod 'SSKeychain'
+end
+
+target "NestSDKTests" do
+  pod 'Specta', '1.0.5'
+  pod 'Expecta', '1.0.0'
+  pod 'Nocilla', '0.10.0'
+  pod 'OCMock'
 end

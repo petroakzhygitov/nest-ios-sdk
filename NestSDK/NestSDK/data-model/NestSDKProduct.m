@@ -1,4 +1,8 @@
-#import "NestSDKCamera.h"
+#import "NestSDKProduct.h"
+#import "NestSDKProductIdentification.h"
+#import "NestSDKProductLocation.h"
+#import "NestSDKProductSoftware.h"
+#import "NestSDKProductResourceUse.h"
 
 #pragma mark macros
 
@@ -9,7 +13,7 @@
 #pragma mark typedef
 
 
-@implementation NestSDKCamera {
+@implementation NestSDKProduct {
 #pragma mark Instance variables
 }
 
@@ -20,11 +24,6 @@
 #pragma mark Notification selectors
 
 #pragma mark Override
-
-+ (BOOL)propertyIsOptional:(NSString *)propertyName {
-    // All primitives are optional
-    return YES;
-}
 
 #pragma mark Public
 

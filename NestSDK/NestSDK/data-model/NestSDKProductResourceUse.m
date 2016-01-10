@@ -1,4 +1,6 @@
-#import "NestSDKStructure.h"
+#import <JSONModel/JSONModel.h>
+#import "NestSDKProductResourceUse.h"
+#import "NestSDKProductResource.h"
 
 #pragma mark macros
 
@@ -9,7 +11,7 @@
 #pragma mark typedef
 
 
-@implementation NestSDKStructure {
+@implementation NestSDKProductResourceUse {
 #pragma mark Instance variables
 }
 
@@ -20,11 +22,6 @@
 #pragma mark Notification selectors
 
 #pragma mark Override
-
-+ (BOOL)propertyIsOptional:(NSString *)propertyName {
-    // All primitives are optional
-    return YES;
-}
 
 #pragma mark Public
 

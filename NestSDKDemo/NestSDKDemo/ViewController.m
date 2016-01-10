@@ -54,7 +54,7 @@
 
 
 - (void)createCustomConnectWithNestButton {
-    // Add a custom login button to your app
+    // Add a custom connect with button to your app
     UIButton *customConnectWithNestButton = [UIButton buttonWithType:UIButtonTypeCustom];
     customConnectWithNestButton.backgroundColor = [UIColor darkGrayColor];
     customConnectWithNestButton.frame = CGRectMake(0, 0, 240, 40);

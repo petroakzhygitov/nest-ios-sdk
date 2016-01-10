@@ -179,7 +179,7 @@ NestSDKStructuresManager *structuresManager = [[NestSDKStructuresManager alloc] 
 
 ## Reading/Observing devices
 
-There are three types of Nest devices available read/observe:
+There are three types of Nest devices available to read/observe:
 - Thermostat ([more information](https://developer.nest.com/documentation/cloud/thermostat-guide))
 - Smoke+CO Alarm ([more information](https://developer.nest.com/documentation/cloud/smoke-co-guide))
 - Camera ([more information](https://developer.nest.com/documentation/cloud/camera-guide))

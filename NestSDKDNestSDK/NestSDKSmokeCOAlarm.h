@@ -1,5 +1,6 @@
 #import <Foundation/Foundation.h>
 #import <JSONModel/JSONModel.h>
+#import "NestSDKDevice.h"
 
 #pragma mark macros
 
@@ -11,12 +12,12 @@
 
 #pragma mark Protocol
 
-@protocol NestSDKSmokeCoAlarm <NSObject>
+@protocol NestSDKSmokeCoAlarm <NestSDKDevice>
 
 @end
 
 
-@interface NestSDKSmokeCOAlarm : JSONModel <NestSDKSmokeCoAlarm>
+@interface NestSDKSmokeCOAlarm : NestSDKDevice <NestSDKSmokeCoAlarm>
 #pragma mark Properties
 
 @property(nonatomic, copy) NSString <Optional> *battery_health;

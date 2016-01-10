@@ -1,4 +1,5 @@
 #import <Foundation/Foundation.h>
+#import "JSONModel.h"
 
 @protocol Optional;
 
@@ -11,8 +12,12 @@
 #pragma mark typedef
 
 #pragma mark Protocol
+@protocol NestSDKWheres <NSObject>
 
-@interface NestSDKWheres : NSObject
+@end
+
+
+@interface NestSDKWheres : JSONModel <NestSDKWheres>
 #pragma mark Properties
 
 /**

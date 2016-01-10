@@ -66,9 +66,9 @@ pod "NestSDK", github => "https://github.com/petroakzhygitov/nest-ios-sdk.git"
   #import <FBSDKCoreKit/FBSDKCoreKit.h>
 
   - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    	[[NestSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
+    [[NestSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
   
-    	return YES;
+    return YES;
   }
   ```
 

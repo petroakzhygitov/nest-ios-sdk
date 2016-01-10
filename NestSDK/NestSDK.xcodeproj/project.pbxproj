@@ -6,6 +6,20 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		913AF1201C42A48B0079E5CA /* Documentation */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 913AF1231C42A48C0079E5CA /* Build configuration list for PBXAggregateTarget "Documentation" */;
+			buildPhases = (
+				913AF1241C42A4900079E5CA /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = Documentation;
+			productName = Documentation;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		913AF11F1C4267B50079E5CA /* NestSDKApplicationDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 91DC3D541C3F123C00A61B61 /* NestSDKApplicationDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		91DC3D3A1C3F103100A61B61 /* NestSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 91DC3D391C3F103100A61B61 /* NestSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -421,6 +435,9 @@
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "Petro Akzhygitov";
 				TargetAttributes = {
+					913AF1201C42A48B0079E5CA = {
+						CreatedOnToolsVersion = 7.2;
+					};
 					91DC3D351C3F103100A61B61 = {
 						CreatedOnToolsVersion = 7.2;
 					};
@@ -443,6 +460,7 @@
 			targets = (
 				91DC3D351C3F103100A61B61 /* NestSDK */,
 				91DC3D3F1C3F103100A61B61 /* NestSDKTests */,
+				913AF1201C42A48B0079E5CA /* Documentation */,
 			);
 		};
 /* End PBXProject section */
@@ -479,6 +497,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NestSDK/Pods-NestSDK-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		913AF1241C42A4900079E5CA /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#appledoc Xcode script\n# Start constants\ncompany=\"PetroAkzhygitov\";\ncompanyID=\"petroakzhygitov\";\ncompanyURL=\"http://github.com/petroakzhygitov\";\ntarget=\"iphoneos\";\n#target=\"macosx\";\noutputPath=\"${PROJECT_DIR}/../Documentation\";\nclassesToDocumentPath=\"${PROJECT_DIR}/NestSDK\";\n# End constants\n/usr/local/bin/appledoc \\\n--project-name \"${PROJECT_NAME}\" \\\n--project-company \"${company}\" \\\n--company-id \"${companyID}\" \\\n--docset-atom-filename \"${company}.atom\" \\\n--docset-feed-url \"${companyURL}/${company}/%DOCSETATOMFILENAME\" \\\n--docset-package-url \"${companyURL}/${company}/%DOCSETPACKAGEFILENAME\" \\\n--docset-fallback-url \"${companyURL}/${company}\" \\\n--output \"${outputPath}\" \\\n--publish-docset \\\n--docset-platform-family \"${target}\" \\\n--logformat xcode \\\n--keep-intermediate-files \\\n--no-repeat-first-par \\\n--no-warn-invalid-crossref \\\n--exit-threshold 2 \\\n\"${classesToDocumentPath}\"";
 		};
 		E315FDC93A3A7A4E77A272BA /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -552,6 +583,20 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		913AF1211C42A48C0079E5CA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		913AF1221C42A48C0079E5CA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		91DC3D481C3F103100A61B61 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -709,6 +754,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		913AF1231C42A48C0079E5CA /* Build configuration list for PBXAggregateTarget "Documentation" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				913AF1211C42A48C0079E5CA /* Debug */,
+				913AF1221C42A48C0079E5CA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		91DC3D301C3F103100A61B61 /* Build configuration list for PBXProject "NestSDK" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

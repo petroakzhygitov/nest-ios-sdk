@@ -47,6 +47,10 @@ static NSString *const kStructuresURLPath = @"structures/";
     return 0;
 }
 
+- (void)removeAllObservers {
+
+}
+
 #pragma mark IBAction
 
 #pragma mark Protocol @protocol-name

@@ -80,11 +80,11 @@ you can retrieve and modify information on their behalf.
 
 **NB:** Connect with Nest **supports Web-based Authorization** only. **PIN-based Authorization** is **not supported**.
 
-[More information](https://developer.nest.com/documentation/cloud/authorization-overview) about Nest authorization
+[More information](https://developer.nest.com/documentation/cloud/authorization-overview) about Nest authorization.
 
 ### Add Connect With Nest Button Code
 
-To add a `Connect with Nest` button to your app add the following code snippet to a view controller.
+To add a `Connect with Nest` button to your app add the following code snippet to a view controller:
 
 ```objective-c
 // Add this to the header of your file, e.g. in ViewController.m 
@@ -110,7 +110,7 @@ To add a `Connect with Nest` button to your app add the following code snippet t
 
 ### Custom Connect With Nest Button
 
-Instead of using the predefined `Connect with Nest` button (explained in Add Connect With Nest Button Code) you may want to design a custom layout and behavior. In the following code example we invoke the authorization dialog using the authorization manager class (`NestSDKAuthorizationManager`) and a custom button (`UIButton`). You can use any other custom user interface or event handling to invoke the login dialog.
+Instead of using the predefined `Connect with Nest` button (explained in Add Connect With Nest Button Code) you may want to design a custom layout and behavior. In the following code example we invoke the authorization dialog using the authorization manager class (`NestSDKAuthorizationManager`) and a custom button (`UIButton`). You can use any other custom user interface or event handling to invoke the authorization dialog.
 
 ```objective-c
 // Add this to the header of your file

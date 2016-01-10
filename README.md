@@ -26,65 +26,44 @@ pod "NestSDK", github => "https://github.com/petroakzhygitov/nest-ios-sdk.git"
 
 ## Usage
 
-### Connect with Nest
+### General Nest product Setup
 
-The Nest SDK for iOS enables people to connect your Nest product app with their's personal Nest account. 
-When people connect their's personal Nest account with your Nest product app they grant permissions to your app so 
-you can retrieve and modify information on their behalf.
+1. Create your Nest developers account at [https://home.nest.com] (https://home.nest.com/login/?style=default&next=%2Faccounts%2Fsaml2%2Fidp%2Fcomplete%3FSAMLRequest%3DPHNhbWxwOkF1dGhuUmVxdWVzdCBBc3NlcnRpb25Db25zdW1lclNlcnZpY2VVUkw9J2h0dHBzOi8vZGV2ZWxvcGVyLm5lc3QuY29tL2F1dGgvc2FtbC9zZXNzaW9ucycgRGVzdGluYXRpb249J2h0dHBzOi8vaG9tZS5uZXN0LmNvbS9hY2NvdW50cy9zYW1sMi9pZHAvcG9zdD9zdHlsZT1kZWZhdWx0JyBJRD0nXzJjNzBjYjQwLTk5YmYtMDEzMy05NmM1LTIyMDAwYjIyMDZiMCcgSXNQYXNzaXZlPSdmYWxzZScgSXNzdWVJbnN0YW50PScyMDE2LTAxLTEwVDExOjU2OjU3WicgVmVyc2lvbj0nMi4wJyB4bWxuczpzYW1sPSd1cm46b2FzaXM6bmFtZXM6dGM6U0FNTDoyLjA6YXNzZXJ0aW9uJyB4bWxuczpzYW1scD0ndXJuOm9hc2lzOm5hbWVzOnRjOlNBTUw6Mi4wOnByb3RvY29sJz48c2FtbDpJc3N1ZXI%252BaHR0cHM6Ly9kZXZlbG9wZXIubmVzdC5jb208L3NhbWw6SXNzdWVyPjxzYW1scDpOYW1lSURQb2xpY3kgQWxsb3dDcmVhdGU9J3RydWUnIEZvcm1hdD0ncm46b2FzaXM6bmFtZXM6dGM6U0FNTDoyLjA6cHJvdG9jb2wnLz48L3NhbWxwOkF1dGhuUmVxdWVzdD4%253D#/sign-up)
 
-**NB:** Connect with Nest **supports Web-based Authorization** only. **PIN-based Authorization** is **not supported**.
+2. Create your Nest Product at [https://developer.nest.com/products/new] (https://developer.nest.com/products/new)
 
-====================================
-####Setup steps:
+3. Indicate `Redirect URI`. Do not leave text field empty, since PIN-based Authorization is not supported.
 
-1. General Nest product Setup
-2. General iOS Setup
-3. Add Connect With Nest Button Code
+4. Use your product `Product ID`, `Product Secret` and `Redirect URI` for the iOS project setup.
 
-#####*Optional:*
+### General iOS project Setup
 
-- Custom Connect With Nest Button
+1. Add NestSDK to your project (see Installation)
 
-====================================
-####1. General Nest product Setup
+2. Configure the `.plist` for your project:
 
-- Create your Nest developers account at [https://home.nest.com] (https://home.nest.com/login/?style=default&next=%2Faccounts%2Fsaml2%2Fidp%2Fcomplete%3FSAMLRequest%3DPHNhbWxwOkF1dGhuUmVxdWVzdCBBc3NlcnRpb25Db25zdW1lclNlcnZpY2VVUkw9J2h0dHBzOi8vZGV2ZWxvcGVyLm5lc3QuY29tL2F1dGgvc2FtbC9zZXNzaW9ucycgRGVzdGluYXRpb249J2h0dHBzOi8vaG9tZS5uZXN0LmNvbS9hY2NvdW50cy9zYW1sMi9pZHAvcG9zdD9zdHlsZT1kZWZhdWx0JyBJRD0nXzJjNzBjYjQwLTk5YmYtMDEzMy05NmM1LTIyMDAwYjIyMDZiMCcgSXNQYXNzaXZlPSdmYWxzZScgSXNzdWVJbnN0YW50PScyMDE2LTAxLTEwVDExOjU2OjU3WicgVmVyc2lvbj0nMi4wJyB4bWxuczpzYW1sPSd1cm46b2FzaXM6bmFtZXM6dGM6U0FNTDoyLjA6YXNzZXJ0aW9uJyB4bWxuczpzYW1scD0ndXJuOm9hc2lzOm5hbWVzOnRjOlNBTUw6Mi4wOnByb3RvY29sJz48c2FtbDpJc3N1ZXI%252BaHR0cHM6Ly9kZXZlbG9wZXIubmVzdC5jb208L3NhbWw6SXNzdWVyPjxzYW1scDpOYW1lSURQb2xpY3kgQWxsb3dDcmVhdGU9J3RydWUnIEZvcm1hdD0ncm46b2FzaXM6bmFtZXM6dGM6U0FNTDoyLjA6cHJvdG9jb2wnLz48L3NhbWxwOkF1dGhuUmVxdWVzdD4%253D#/sign-up)
+  In Xcode right-click your `.plist` file and choose "Open As Source Code".
+  Copy & Paste the XML snippet into the body of your file (`<dict>...</dict>`).
 
-- Create your Nest Product at [https://developer.nest.com/products/new] (https://developer.nest.com/products/new)
-
-- Indicate `Redirect URI`. Do not leave text field empty, since PIN-based Authorization is not supported.
-
-- Use your product `Product ID`, `Product Secret` and `Redirect URI` for the iOS project setup.
-
-====================================
-####2. General iOS project Setup
-
-- Add NestSDK to your project (see Installation)
-
-- Configure the `.plist` for your project:
-
-In Xcode right-click your `.plist` file and choose "Open As Source Code".
-Copy & Paste the XML snippet into the body of your file (`<dict>...</dict>`).
-
-```objective-c
+  ```
 	<key>NestProductID</key>
 	<string>{your-product-id}</string>
 	<key>NestProductSecret</key>
 	<string>{your-product-secret}</string>
 	<key>NestRedirectURL</key>
 	<string>{your-product-redirect-url}</string>
-```
+  ```
 
-Replace:
-- `{your-product-id}` with your product `Product ID`.
-- `{your-product-secret}` with your product `Product Secret`.
-- `{your-product-redirect-url}` with your product `Redirect URI`.
+  Replace:
+    - `{your-product-id}` with your product `Product ID`.
+    - `{your-product-secret}` with your product `Product Secret`.
+    - `{your-product-redirect-url}` with your product `Redirect URI`.
 
-- Connect Application Delegate
+3. Connect Application Delegate
 
-Conenct your `AppDelegate` to the `NestSDKApplicationDelegate`. In your `AppDelegate.m` add:
+  Conenct your `AppDelegate` to the `NestSDKApplicationDelegate`. In your `AppDelegate.m` add:
 
-```objective-c
+  ```objective-c
 //  AppDelegate.m
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 
@@ -93,10 +72,19 @@ Conenct your `AppDelegate` to the `NestSDKApplicationDelegate`. In your `AppDele
   
   return YES;
 }
-```
+  ```
 
-====================================
-####3. Add Connect With Nest Button Code
+### Connect with Nest
+
+The Nest SDK for iOS enables people to connect your Nest product app with their's personal Nest account. 
+When people connect their's personal Nest account with your Nest product app they grant permissions to your app so 
+you can retrieve and modify information on their behalf.
+
+**NB:** Connect with Nest **supports Web-based Authorization** only. **PIN-based Authorization** is **not supported**.
+
+[More information](https://developer.nest.com/documentation/cloud/authorization-overview) about Nest authorization
+
+#### Add Connect With Nest Button Code
 
 To add a `Connect with Nest` button to your app add the following code snippet to a view controller.
 
@@ -122,10 +110,9 @@ To add a `Connect with Nest` button to your app add the following code snippet t
 @end
 ```
 
-====================================
-####Optional: Custom Connect With Nest Button
+#### Custom Connect With Nest Button
 
-Instead of using the predefined `Connect with Nest` button (explained in 3. Add Connect With Nest Button Code) you may want to design a custom layout and behavior. In the following code example we invoke the authorization dialog using the authorization manager class (`NestSDKAuthorizationManager`) and a custom button (`UIButton`). You can use any other custom user interface or event handling to invoke the login dialog.
+Instead of using the predefined `Connect with Nest` button (explained in Add Connect With Nest Button Code) you may want to design a custom layout and behavior. In the following code example we invoke the authorization dialog using the authorization manager class (`NestSDKAuthorizationManager`) and a custom button (`UIButton`). You can use any other custom user interface or event handling to invoke the login dialog.
 
 ```objective-c
 // Add this to the header of your file
@@ -173,6 +160,49 @@ Instead of using the predefined `Connect with Nest` button (explained in 3. Add 
 }
     
 @end
+```
+
+### Reading/Observing structures
+
+All Nest devices belong to a structure. A structure can have many devices. It's possible that a user has more than one structure attached to their Nest Account, so your product should offer a means for the user to choose from the available structures (a structure picker).
+
+[More information](https://developer.nest.com/documentation/cloud/structure-guide) about Nest structures
+
+To read/observe structures use `NestSDKStructuresManager`:
+```objective-c
+NestSDKStructuresManager *structuresManager = [[NestSDKStructuresManager alloc] init];
+[structuresManager observeStructuresWithBlock:^(NSArray <NestSDKStructure> *structuresArray) {
+	for (NestSDKStructure *structure in structuresArray) {
+		NSLog(@"Read structure with name: %@", structure.name);
+	}
+}];
+```
+
+### Reading/Observing devices
+
+There are three types of Nest devices you can read:
+- Thermostat ([more information](https://developer.nest.com/documentation/cloud/thermostat-guide))
+- Smoke+CO Alarm ([more information](https://developer.nest.com/documentation/cloud/smoke-co-guide))
+- Camera ([more information](https://developer.nest.com/documentation/cloud/camera-guide))
+
+To read/observe devices use `NestSDKDeviceManager`:
+```objective-c
+    NestSDKDevicesManager *devicesManager = [[NestSDKDevicesManager alloc] init];
+
+    NSString *thermostatId = structure.thermostats[someIndex];
+    [self.devicesManager observeThermostatWithId:thermostatId block:^(NestSDKThermostat *thermostat, NSError *error) {
+        NSLog(@"Read Thermostat with name: %@", thermostat.name);
+    }];
+
+    NSString *smokeCOAlarmId = structure.smoke_co_alarms[someIndex];
+    [self.devicesManager observeSmokeCOAlarmWithId:smokeCOAlarmId block:^(NestSDKSmokeCOAlarm *smokeCOAlarm, NSError *error) {
+        NSLog(@"Read Smoke+CO Alarm with name: %@", smokeCOAlarm.name);
+    }];
+ 
+    NSString *cameraId = structure.cameras[someIndex];
+    [self.devicesManager observeCameraWithId:cameraId block:^(NestSDKCamera *camera, NSError *error) {
+        NSLog(@"Read Camera with name: %@", camera.name);
+    }];
 ```
 
 ## Author

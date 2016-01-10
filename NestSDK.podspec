@@ -22,11 +22,13 @@ Pod::Spec.new do |s|
 
   s.source_files = 'NestSDK/NestSDK/**/*.{h,m}'
   s.public_header_files = 'NestSDK/NestSDK/*.{h}'
-
-  # s.frameworks = 'UIKit', 'MapKit'
+  
+  #s.frameworks = 'Firebase'
   
   s.dependency 'Firebase', '1.2.3'
   s.dependency 'JSONModel'
   s.dependency 'SSKeychain'
+  
+  s.pod_target_xcconfig = { 'FRAMEWORK_SEARCH_PATHS' => '${PODS_ROOT}/Firebase' }
   
 end

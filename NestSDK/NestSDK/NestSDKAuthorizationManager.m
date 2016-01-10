@@ -9,8 +9,8 @@
 
 static NSString *const kNestOAuthDomainString = @"home.nest.com";
 
-static NSString *const kNestClientIDKey = @"NestClientID";
-static NSString *const kNestClientSecretKey = @"NestClientSecret";
+static NSString *const kNestProductIDKey = @"NestProductID";
+static NSString *const kNestProductSecretKey = @"NestProductSecret";
 static NSString *const kNestStateKey = @"NestState";
 static NSString *const kNestRedirectURLKey = @"NestRedirectURL";
 
@@ -35,11 +35,11 @@ static NSString *const kNestAccessTokenURLFormat = @"https://api.%@/oauth2/acces
 #pragma mark Private
 
 - (NSString *)p_clientID {
-    return [[NSBundle mainBundle] objectForInfoDictionaryKey:kNestClientIDKey];
+    return [[NSBundle mainBundle] objectForInfoDictionaryKey:kNestProductIDKey];
 }
 
 - (NSString *)p_clientSecret {
-    return [[NSBundle mainBundle] objectForInfoDictionaryKey:kNestClientSecretKey];
+    return [[NSBundle mainBundle] objectForInfoDictionaryKey:kNestProductSecretKey];
 }
 
 - (NSString *)p_state {

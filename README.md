@@ -17,7 +17,7 @@ To run the example project, clone the repo, and run `pod install` from the NestS
 
 ## Installation
 
-NestSDK is available through [CocoaPods](http://cocoapods.org). To install
+NestSDK is under development so it is not publicly available through [CocoaPods](http://cocoapods.org) yet. To install
 it, simply add the following line to your Podfile:
 
 ```ruby
@@ -32,16 +32,17 @@ The Nest SDK for iOS enables people to connect your Nest product app with their'
 When people connect their's personal Nest account with your Nest product app they grant permissions to your app so 
 you can retrieve and modify information on their behalf.
 
-**bold**NB:**bold** Connect with Nest supports Web-based Authorization only. **bold**PIN-based Authorization is not supported.**bold**
+**NB:** Connect with Nest **supports Web-based Authorization** only. **PIN-based Authorization** is **not supported**.
 
-====================================
+####Setup steps:
 
 1. General Nest product Setup
 2. General iOS Setup
 3. Add Connect With Nest Button Code
 
-Optional:
--  Custom Connect With Nest Button
+#####*Optional:*
+
+- Custom Connect With Nest Button
 
 ====================================
 

@@ -1,4 +1,3 @@
-#import <Firebase/Firebase.h>
 #import "NestSDKStructuresManager.h"
 #import "NestSDKStructure.h"
 
@@ -27,7 +26,7 @@ static NSString *const kStructuresURLPath = @"structures/";
 #pragma mark Public
 
 - (NestSDKObserverHandle)observeStructuresWithBlock:(NestSDKStructuresManagerStructuresUpdateBlock)block {
-    if (!block) return NestSDKObserverHandleUndefined;
+    if (!block) return 0;
 
     [[NestSDKFirebaseManager sharedManager] addSubscriptionToURL:kStructuresURLPath withBlock:^(FDataSnapshot *snapshot) {
         NSMutableArray <NestSDKStructure> *structuresArray = (NSMutableArray <NestSDKStructure> *) [[NSMutableArray alloc] initWithCapacity:snapshot.childrenCount];

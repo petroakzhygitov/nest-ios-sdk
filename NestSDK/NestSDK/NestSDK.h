@@ -31,6 +31,7 @@
 #import <NestSDK/NestSDKThermostat.h>
 #import <NestSDK/NestSDKSmokeCOAlarm.h>
 #import <NestSDK/NestSDKCamera.h>
+#import <NestSDK/NestSDKService.h>
 
 #define NESTSDK_VERSION_STRING @"0.1.0"
 

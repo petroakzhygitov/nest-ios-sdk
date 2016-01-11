@@ -1,4 +1,5 @@
 #import <Foundation/Foundation.h>
+#import "NestSDKService.h"
 
 @protocol NestSDKStructure;
 @class NestSDKThermostat;
@@ -13,12 +14,14 @@
 #pragma mark typedef
 
 typedef void (^NestSDKRESTServiceGetStructuresRequestHandler)(NSArray <NestSDKStructure> *structuresArray, NSError *error);
+
 typedef void (^NestSDKRESTServiceGetThermostatRequestHandler)(NestSDKThermostat *thermostat, NSError *error);
+
 typedef void (^NestSDKRESTServiceGetSmokeCOAlarmRequestHandler)(NestSDKSmokeCOAlarm *smokeCOAlarm, NSError *error);
 
 #pragma mark Protocol
 
-@interface NestSDKRESTService : NSObject
+@interface NestSDKRESTService : NSObject <NestSDKService>
 #pragma mark Properties
 
 #pragma mark Methods

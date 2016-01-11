@@ -21,6 +21,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIApplication.h>
 
+@protocol NestSDKService;
+
 /**
  * NestSDKApplicationDelegate is main connection point with Nest SDK.
  * It is designed to be able process the results from Nest authorization dialogs (native app or Safari) in the future.
@@ -32,6 +34,8 @@
  * Gets the singleton instance.
  */
 + (instancetype)sharedInstance;
+
++ (id <NestSDKService>)service;
 
 /**
  * Call this method from the [UIApplicationDelegate application:openURL:sourceApplication:annotation:] method

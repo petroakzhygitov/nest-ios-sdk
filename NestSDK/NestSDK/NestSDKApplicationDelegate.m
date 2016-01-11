@@ -18,11 +18,72 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+#import <Firebase/Firebase.h>
 #import "NestSDKApplicationDelegate.h"
 #import "NestSDKAccessToken.h"
 #import "NestSDKAccessTokenCache.h"
+#import "NestSDKService.h"
+#import "NestSDKRESTService.h"
+#import "NestSDKFirebaseService.h"
+#import "NestSDKLogger.h"
+
+static NSString *const kNestAPIEndpointURLString = @"https://developer-api.nest.com/";
+
+static id <NestSDKService> g_service;
+
+
+@interface NestSDKApplicationDelegate ()
+// For future use
+@property(nonatomic) BOOL useRESTService;
+
+@end
+
 
 @implementation NestSDKApplicationDelegate
+#pragma mark Private
+
+- (void)_setService:(id <NestSDKService>)service {
+    g_service = service;
+}
+
+- (void)_initLogger {
+#if (DEBUG)
+    // By default notify user about errors only and only in debug
+    [NestSDKLogger setLogLevel:NestSDKLoggerLogLevelError];
+#else
+    // Do not log anything to TTY in production
+    [NestSDKLogger setLogLevel:NestSDKLoggerLogLevelNone];
+#endif
+}
+
+- (void)_restoreCachedAccessToken {
+// Restoring cached token
+    NestSDKAccessTokenCache *accessTokenCache = [[NestSDKAccessTokenCache alloc] init];
+    NestSDKAccessToken *cachedToken = [accessTokenCache fetchAccessToken];
+
+    // If expired then remove token
+    if (!cachedToken || [[cachedToken expirationDate] compare:[NSDate date]] == NSOrderedAscending) {
+        [accessTokenCache clearCache];
+
+    } else {
+        [NestSDKAccessToken setCurrentAccessToken:cachedToken];
+    }
+}
+
+- (void)_initService {
+    id <NestSDKService> service;
+
+    if (self.useRESTService) {
+        service = [[NestSDKRESTService alloc] init];
+
+    } else {
+        Firebase *firebase = [[Firebase alloc] initWithUrl:kNestAPIEndpointURLString];
+        service = [[NestSDKFirebaseService alloc] initWithFirebase:firebase];
+    }
+
+    [self _setService:service];
+}
+
 #pragma mark Public
 
 + (instancetype)sharedInstance {
@@ -41,19 +102,16 @@
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Restoring cached token
-    NestSDKAccessTokenCache *accessTokenCache = [[NestSDKAccessTokenCache alloc] init];
-    NestSDKAccessToken *cachedToken = [accessTokenCache fetchAccessToken];
+    [self _initLogger];
 
-    // If expired then remove token
-    if (!cachedToken || [[cachedToken expirationDate] compare:[NSDate date]] == NSOrderedAscending) {
-        [accessTokenCache clearCache];
-
-    } else {
-        [NestSDKAccessToken setCurrentAccessToken:cachedToken];
-    }
+    [self _restoreCachedAccessToken];
+    [self _initService];
 
     return NO;
+}
+
++ (id <NestSDKService>)service {
+    return g_service;
 }
 
 @end

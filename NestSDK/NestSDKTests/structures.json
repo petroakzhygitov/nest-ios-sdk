@@ -1,0 +1,32 @@
+{
+  "VqFabWH21nwVyd4RWgJgNb292wa7hG_dUwo2i2SG7j3-BOLY0BA4sw": {
+    "structure_id": "VqFabWH21nwVyd4RWgJgNb292wa7hG_dUwo2i2SG7j3-BOLY0BA4sw",
+    "thermostats": ["peyiJNo0IldT2YlIVtYaGQ", "AWinr2345"],
+    "smoke_co_alarms": ["RTMTKxsQTCxzVcsySOHPxKoF4OyCifrs", "NlheNIWMKacoOllk"],
+    "cameras": ["awJo6rH", "LKvoNasf"],
+    "devices": {
+      "$company": {
+        "$product_type": ["CPMEMSnC48JlSAHjQIp-aHI72IjLYHK_ul_c54UFb8CmPXNj4ixLbg"]
+      }
+    },
+    "away": "home",
+    "name": "Home",
+    "country_code": "US",
+    "postal_code": "94304",
+    "peak_period_start_time": "2015-10-31T23:59:59.000Z",
+    "peak_period_end_time": "2015-10-31T23:59:59.000Z",
+    "time_zone": "America/Los_Angeles",
+    "eta": {
+      "trip_id": "myTripHome1024",
+      "estimated_arrival_window_begin": "2015-10-31T22:42:59.000Z",
+      "estimated_arrival_window_end": "2015-10-31T23:59:59.000Z"
+    },
+    "rhr_enrollment": true,
+    "wheres": {
+      "Fqp6wJI...": {
+        "where_id": "Fqp6wJI...",
+        "name": "Bedroom"
+      }
+    }
+  }
+}

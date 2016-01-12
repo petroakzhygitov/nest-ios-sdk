@@ -19,24 +19,86 @@
 // THE SOFTWARE.
 
 #import <OCMock/OCMock.h>
+#import <Expecta/Expecta.h>
 #import "SpectaDSL.h"
 #import "SPTSpec.h"
 #import "NestSDKAccessToken.h"
 #import "LSStubRequestDSL.h"
 #import "LSNocilla.h"
 #import "NestSDKDataManager.h"
+#import "NestSDKApplicationDelegate.h"
+#import "NestSDKFirebaseService.h"
+#import "NestSDKMetaData.h"
+#import "NestSDKError.h"
 
-SpecBegin(NestSDKAuthorizationDataManager)
+SpecBegin(NestSDKDataManager)
     {
-        describe(@"NestSDKAuthorizationDataManager", ^{
+        describe(@"NestSDKDataManager", ^{
 
-//            it(@"should get metadata", ^{
-//                NestSDKDataManager *dataManager = [[NestSDKDataManager alloc] init];
-//                [dataManager metaDataWithBlock:^() {
-//
-//                }];
-//            });
-//
+            __block NSString *resourcePath;
+
+            __block id firebaseServiceMock;
+            __block id appDelegateMock;
+
+            beforeAll(^{
+                resourcePath = [NSBundle bundleForClass:[self class]].resourcePath;
+            });
+
+            beforeEach(^{
+                firebaseServiceMock = [OCMockObject mockForClass:[NestSDKFirebaseService class]];
+
+                appDelegateMock = [OCMockObject partialMockForObject:[NestSDKApplicationDelegate sharedInstance]];
+                [[[appDelegateMock stub] andReturn:firebaseServiceMock] service];
+            });
+
+            afterEach(^{
+                [firebaseServiceMock stopMocking];
+                [appDelegateMock stopMocking];
+            });
+
+            it(@"should get metadata", ^{
+                [[[firebaseServiceMock stub] andDo:^(NSInvocation *invocation) {
+                    [invocation retainArguments];
+
+                    NSString* filePath = [resourcePath stringByAppendingPathComponent:@"metadata.json"];
+                    
+                    NestSDKServiceUpdateBlock updateBlock;
+                    [invocation getArgument:&updateBlock atIndex:3];
+
+                    NSData *data = [NSData dataWithContentsOfFile:filePath];
+                    NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+
+                    updateBlock(dictionary, nil);
+                    
+                }] valuesForURL:@"/" withBlock:[OCMArg any]];
+
+                NestSDKDataManager *dataManager = [[NestSDKDataManager alloc] init];
+                [dataManager metadataWithBlock:^(NestSDKMetaData *metadata, NSError *error) {
+                    expect(error).to.equal(nil);
+                    expect(metadata.access_token).to.equal(@"c.FmDPkzyzaQe...");
+                    expect(metadata.client_version).to.equal(1);
+                }];
+            });
+
+            it(@"should not get metadata", ^{
+                [[[firebaseServiceMock stub] andDo:^(NSInvocation *invocation) {
+                    [invocation retainArguments];
+
+                    NestSDKServiceUpdateBlock updateBlock;
+                    [invocation getArgument:&updateBlock atIndex:3];
+
+                    updateBlock(@"bad_dictionary", nil);
+
+                }] valuesForURL:@"/" withBlock:[OCMArg any]];
+
+                NestSDKDataManager *dataManager = [[NestSDKDataManager alloc] init];
+                [dataManager metadataWithBlock:^(NestSDKMetaData *metadata, NSError *error) {
+                    expect(metadata).to.equal(nil);
+                    expect(error.domain).to.equal(NestSDKErrorDomain);
+                    expect(error.code).to.equal(NestSDKErrorCodeUnexpectedArgumentType);
+                }];
+            });
+
 //            it(@"should get structures", ^{
 //                NestSDKDataManager *dataManager = [[NestSDKDataManager alloc] init];
 //                [dataManager metaDataWithBlock:^() {

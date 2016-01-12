@@ -1,6 +1,7 @@
 #import <Foundation/Foundation.h>
 #import "NestSDKFirebaseManager.h"
 #import "NestSDKService.h"
+#import "NestSDKDataManager.h"
 
 @protocol NestSDKStructure;
 
@@ -12,8 +13,6 @@
 
 #pragma mark typedef
 
-typedef void (^NestSDKStructuresManagerStructuresUpdateBlock)(NSArray <NestSDKStructure> *structuresArray);
-
 #pragma mark Protocol
 
 @interface NestSDKStructuresManager : NSObject
@@ -22,10 +21,10 @@ typedef void (^NestSDKStructuresManagerStructuresUpdateBlock)(NSArray <NestSDKSt
 
 #pragma mark Methods
 
-- (void)structuresWithBlock:(NestSDKStructuresManagerStructuresUpdateBlock)block;
+- (void)structuresWithBlock:(NestSDKStructuresUpdateHandler)block;
 //- (void)setStructures:WithBlock:();
 
-- (NestSDKObserverHandle)observeStructuresWithBlock:(NestSDKStructuresManagerStructuresUpdateBlock)block;
+- (NestSDKObserverHandle)observeStructuresWithBlock:(NestSDKStructuresUpdateHandler)block;
 
 - (void)removeObserverWithObserveHandle:(NestSDKObserverHandle)handle;
 

@@ -25,7 +25,7 @@ static NSString *const kStructuresURLPath = @"structures/";
 
 #pragma mark Public
 
-- (NestSDKObserverHandle)observeStructuresWithBlock:(NestSDKStructuresManagerStructuresUpdateBlock)block {
+- (NestSDKObserverHandle)observeStructuresWithBlock:(NestSDKStructuresUpdateHandler)block {
     if (!block) return 0;
 
     [[NestSDKFirebaseManager sharedManager] addSubscriptionToURL:kStructuresURLPath withBlock:^(FDataSnapshot *snapshot) {
@@ -40,7 +40,7 @@ static NSString *const kStructuresURLPath = @"structures/";
             [structuresArray addObject:structure];
         }
 
-        block(structuresArray);
+        block(structuresArray, nil);
     }];
 
     return 0;

@@ -1,8 +1,11 @@
 #import <Foundation/Foundation.h>
-#import "NestSDKDevicesManager.h"
-#import "NestSDKStructuresManager.h"
+#import "NestSDKService.h"
 
-@class NestSDKMetaData;
+@class NestSDKMetadata;
+@class NestSDKThermostat;
+@class NestSDKSmokeCOAlarm;
+@class NestSDKCamera;
+@protocol NestSDKStructure;
 
 #pragma mark macros
 
@@ -12,7 +15,15 @@
 
 #pragma mark typedef
 
-typedef void (^NestSDKMetadataUpdateHandler)(NestSDKMetaData *, NSError *);
+typedef void (^NestSDKStructuresUpdateHandler)(NSArray <NestSDKStructure> *structuresArray, NSError *);
+
+typedef void (^NestSDKMetadataUpdateHandler)(NestSDKMetadata *, NSError *);
+
+typedef void (^NestSDKThermostatUpdateHandler)(NestSDKThermostat *, NSError *);
+
+typedef void (^NestSDKSmokeCOAlarmUpdateHandler)(NestSDKSmokeCOAlarm *, NSError *);
+
+typedef void (^NestSDKCameraUpdateHandler)(NestSDKCamera *, NSError *);
 
 #pragma mark Protocol
 
@@ -24,9 +35,9 @@ typedef void (^NestSDKMetadataUpdateHandler)(NestSDKMetaData *, NSError *);
 - (void)metadataWithBlock:(NestSDKMetadataUpdateHandler)block;
 
 
-- (void)structuresWithBlock:(NestSDKStructuresManagerStructuresUpdateBlock)block;
+- (void)structuresWithBlock:(NestSDKStructuresUpdateHandler)block;
 
-- (NestSDKObserverHandle)observeStructuresWithBlock:(NestSDKStructuresManagerStructuresUpdateBlock)block;
+- (NestSDKObserverHandle)observeStructuresWithBlock:(NestSDKStructuresUpdateHandler)block;
 
 
 - (void)thermostatWithId:(NSString *)thermostatId block:(NestSDKThermostatUpdateHandler)block;
@@ -44,11 +55,11 @@ typedef void (^NestSDKMetadataUpdateHandler)(NestSDKMetaData *, NSError *);
 - (void)setCamera:(NestSDKCamera *)camera block:(NestSDKThermostatUpdateHandler)block;
 
 
-- (void)observeThermostatWithId:(NSString *)thermostatId block:(NestSDKThermostatUpdateHandler)block;
+- (NestSDKObserverHandle)observeThermostatWithId:(NSString *)thermostatId block:(NestSDKThermostatUpdateHandler)block;
 
-- (void)observeSmokeCOAlarmWithId:(NSString *)smokeCOAlarmId block:(NestSDKSmokeCOAlarmUpdateHandler)block;
+- (NestSDKObserverHandle)observeSmokeCOAlarmWithId:(NSString *)smokeCOAlarmId block:(NestSDKSmokeCOAlarmUpdateHandler)block;
 
-- (void)observeCameraWithId:(NSString *)cameraId block:(NestSDKCameraUpdateHandler)block;
+- (NestSDKObserverHandle)observeCameraWithId:(NSString *)cameraId block:(NestSDKCameraUpdateHandler)block;
 
 
 - (void)removeObserverWithHandle:(NestSDKObserverHandle)handle;

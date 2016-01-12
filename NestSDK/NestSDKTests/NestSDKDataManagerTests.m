@@ -28,7 +28,7 @@
 #import "NestSDKDataManager.h"
 #import "NestSDKApplicationDelegate.h"
 #import "NestSDKFirebaseService.h"
-#import "NestSDKMetaData.h"
+#import "NestSDKMetadata.h"
 #import "NestSDKError.h"
 
 SpecBegin(NestSDKDataManager)
@@ -73,10 +73,10 @@ SpecBegin(NestSDKDataManager)
                 }] valuesForURL:@"/" withBlock:[OCMArg any]];
 
                 NestSDKDataManager *dataManager = [[NestSDKDataManager alloc] init];
-                [dataManager metadataWithBlock:^(NestSDKMetaData *metadata, NSError *error) {
+                [dataManager metadataWithBlock:^(NestSDKMetadata *metadata, NSError *error) {
                     expect(error).to.equal(nil);
-                    expect(metadata.access_token).to.equal(@"c.FmDPkzyzaQe...");
-                    expect(metadata.client_version).to.equal(1);
+                    expect(metadata.accessToken).to.equal(@"c.FmDPkzyzaQe...");
+                    expect(metadata.clientVersion).to.equal(1);
                 }];
             });
 
@@ -92,7 +92,7 @@ SpecBegin(NestSDKDataManager)
                 }] valuesForURL:@"/" withBlock:[OCMArg any]];
 
                 NestSDKDataManager *dataManager = [[NestSDKDataManager alloc] init];
-                [dataManager metadataWithBlock:^(NestSDKMetaData *metadata, NSError *error) {
+                [dataManager metadataWithBlock:^(NestSDKMetadata *metadata, NSError *error) {
                     expect(metadata).to.equal(nil);
                     expect(error.domain).to.equal(NestSDKErrorDomain);
                     expect(error.code).to.equal(NestSDKErrorCodeUnexpectedArgumentType);

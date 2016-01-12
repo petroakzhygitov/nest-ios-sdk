@@ -1,0 +1,17 @@
+{
+  "device_id": "RTMTKxsQTCxzVcsySOHPxKoF4OyCifrs",
+  "locale": "en-US",
+  "software_version": "1.01",
+  "structure_id": "VqFabWH21nwVyd4RWgJgNb292wa7hG_dUwo2i2SG7j3-BOLY0BA4sw",
+  "name": "Hallway (upstairs)",
+  "name_long": "Hallway Protect (upstairs)",
+  "last_connection": "2015-10-31T23:59:59.000Z",
+  "is_online": true,
+  "battery_health": "ok",
+  "co_alarm_state": "ok",
+  "smoke_alarm_state": "ok",
+  "is_manual_test_active": true,
+  "last_manual_test_time": "2015-10-31T23:59:59.000Z",
+  "ui_color_state": "gray",
+  "where_id": "UNCBGUnN24..."
+}

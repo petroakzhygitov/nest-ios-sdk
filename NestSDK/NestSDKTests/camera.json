@@ -1,0 +1,17 @@
+{
+  "device_id": "awJo6rH...",
+  "software_version": "4.0",
+  "structure_id": "VqFabWH21nwVyd4RWgJgNb292wa7hG_dUwo2i2SG7j3-BOLY0BA4sw",
+  "where_id": "d6reb_OZTM...",
+  "name": "Hallway (upstairs)",
+  "name_long": "Hallway Camera (upstairs)",
+  "is_online": true,
+  "is_streaming": true,
+  "is_audio_input_enabled": true,
+  "last_is_online_change": "2015-12-29T18:42:00.000Z",
+  "is_video_history_enabled": true,
+  "web_url": "https://home.nest.com/cameras/device_id?auth=access_token",
+  "app_url": "nestmobile://cameras/device_id?auth=access_token",
+  "last_event": {
+  }
+}

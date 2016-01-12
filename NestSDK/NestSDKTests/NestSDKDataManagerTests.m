@@ -121,7 +121,7 @@ SpecBegin(NestSDKDataManager)
                     expect(error).to.equal(nil);
 
                     NestSDKStructure *structure = structuresArray.firstObject;
-                    expect(structure.structure_id).to.equal(@"VqFabWH21nwVyd4RWgJgNb292wa7hG_dUwo2i2SG7j3-BOLY0BA4sw");
+                    expect(structure.structureId).to.equal(@"VqFabWH21nwVyd4RWgJgNb292wa7hG_dUwo2i2SG7j3-BOLY0BA4sw");
                 }];
             });
 

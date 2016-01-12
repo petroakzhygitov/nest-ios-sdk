@@ -114,7 +114,7 @@ SpecBegin(NestSDKDataManager)
 
                     updateBlock(dictionary, nil);
 
-                }] valuesForURL:@"/" withBlock:[OCMArg any]];
+                }] valuesForURL:@"structures/" withBlock:[OCMArg any]];
 
                 NestSDKDataManager *dataManager = [[NestSDKDataManager alloc] init];
                 [dataManager structuresWithBlock:^(NSArray <NestSDKStructure> *structuresArray, NSError *error) {

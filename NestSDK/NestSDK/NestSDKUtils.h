@@ -19,4 +19,8 @@
 
 + (UIViewController *)viewControllerForView:(UIView *)view;
 
++ (NSDate *)dateWithISO8601FormatDateString:(NSString *)dateString;
+
++ (NSString *)iso8601FormatDateStringWithDate:(NSDate *)date;
+
 @end

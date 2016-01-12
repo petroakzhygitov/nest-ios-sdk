@@ -36,8 +36,17 @@ typedef NS_ENUM(NSInteger, FBSDKErrorCode) {
     /**
      * The error code for errors from invalid arguments to SDK methods.
      */
-            NestSDKErrorCodeBadResponse
+            NestSDKErrorCodeBadResponse,
 
+    /**
+     * The error code for errors from invalid arguments to SDK methods.
+     */
+            NestSDKErrorCodeUnexpectedArgumentType,
+
+    /**
+     * The error code for errors from invalid arguments to SDK methods.
+     */
+            NestSDKErrorCodeUnableToParseData
 };
 
 #pragma mark typedef
@@ -54,5 +63,9 @@ typedef NS_ENUM(NSInteger, FBSDKErrorCode) {
 + (NSError *)mainBundleKeyRequiredErrorWithKey:(NSString *)key message:(NSString *)message;
 
 + (NSError *)badResponseErrorWithStatusCode:(NSInteger)statusCode message:(NSString *)message;
+
++ (NSError *)unexpectedArgumentTypeErrorWithName:(NSString *)name message:(NSString *)message;
+
++ (NSError *)unableToParseDataErrorWithUnderlyingError:(NSError *)error;
 
 @end

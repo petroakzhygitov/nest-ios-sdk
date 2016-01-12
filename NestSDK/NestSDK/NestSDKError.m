@@ -72,6 +72,24 @@ NSString *const NestSDKErrorDomain = @"NestSDKErrorDomain";
                underlyingError:nil];
 }
 
++ (NSError *)unexpectedArgumentTypeErrorWithName:(NSString *)name message:(NSString *)message {
+    if (!message) {
+        message = [[NSString alloc] initWithFormat:@"Argument %@ has unexpected type", name];
+    }
+
+    return [self errorWithCode:NestSDKErrorCodeUnexpectedArgumentType
+                      userInfo:nil
+                       message:message
+               underlyingError:nil];
+}
+
++ (NSError *)unableToParseDataErrorWithUnderlyingError:(NSError *)error {
+    return [self errorWithCode:NestSDKErrorCodeUnexpectedArgumentType
+                      userInfo:nil
+                       message:nil
+               underlyingError:error];
+}
+
 #pragma mark IBAction
 
 #pragma mark Protocol @protocol-name

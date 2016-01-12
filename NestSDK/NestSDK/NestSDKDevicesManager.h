@@ -1,4 +1,5 @@
 #import <Foundation/Foundation.h>
+#import "NestSDKDataManager.h"
 
 @class NestSDKThermostat;
 @class NestSDKSmokeCOAlarm;
@@ -11,12 +12,6 @@
 #pragma mark enum
 
 #pragma mark typedef
-
-typedef void (^NestSDKThermostatUpdateHandler)(NestSDKThermostat *, NSError *);
-
-typedef void (^NestSDKSmokeCOAlarmUpdateHandler)(NestSDKSmokeCOAlarm *, NSError *);
-
-typedef void (^NestSDKCameraUpdateHandler)(NestSDKCamera *, NSError *);
 
 #pragma mark Protocol
 

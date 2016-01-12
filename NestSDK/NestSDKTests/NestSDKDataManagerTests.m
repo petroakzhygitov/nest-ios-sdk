@@ -30,6 +30,7 @@
 #import "NestSDKFirebaseService.h"
 #import "NestSDKMetadata.h"
 #import "NestSDKError.h"
+#import "NestSDKStructure.h"
 
 SpecBegin(NestSDKDataManager)
     {
@@ -96,6 +97,31 @@ SpecBegin(NestSDKDataManager)
                     expect(metadata).to.equal(nil);
                     expect(error.domain).to.equal(NestSDKErrorDomain);
                     expect(error.code).to.equal(NestSDKErrorCodeUnexpectedArgumentType);
+                }];
+            });
+
+            it(@"should get structures", ^{
+                [[[firebaseServiceMock stub] andDo:^(NSInvocation *invocation) {
+                    [invocation retainArguments];
+
+                    NSString* filePath = [resourcePath stringByAppendingPathComponent:@"structures.json"];
+
+                    NestSDKServiceUpdateBlock updateBlock;
+                    [invocation getArgument:&updateBlock atIndex:3];
+
+                    NSData *data = [NSData dataWithContentsOfFile:filePath];
+                    NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+
+                    updateBlock(dictionary, nil);
+
+                }] valuesForURL:@"/" withBlock:[OCMArg any]];
+
+                NestSDKDataManager *dataManager = [[NestSDKDataManager alloc] init];
+                [dataManager structuresWithBlock:^(NSArray <NestSDKStructure> *structuresArray, NSError *error) {
+                    expect(error).to.equal(nil);
+
+                    NestSDKStructure *structure = structuresArray.firstObject;
+                    expect(structure.structure_id).to.equal(@"VqFabWH21nwVyd4RWgJgNb292wa7hG_dUwo2i2SG7j3-BOLY0BA4sw");
                 }];
             });
 

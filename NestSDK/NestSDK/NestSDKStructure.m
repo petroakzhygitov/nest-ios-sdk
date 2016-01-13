@@ -18,10 +18,10 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "NestSDKDataModel.h"
-#import "NestSDKStructure.h"
-#import "NestSDKWheres.h"
-#import "NestSDKUtils.h"
+#import <NestSDK/NestSDKDataModel.h>
+#import <NestSDK/NestSDKStructure.h>
+#import <NestSDK/NestSDKETA.h>
+#import <NestSDK/NestSDKUtils.h>
 
 #pragma mark const
 
@@ -77,6 +77,59 @@ static NSString *const kAwayStringAutoAway = @"auto-away";
     }
 
     return nil;
+}
+
+
+- (NSUInteger)hash {
+    NSUInteger intValueForYes = 1231;
+    NSUInteger intValueForNo = 1237;
+
+    NSUInteger prime = 31;
+    NSUInteger result = 1;
+
+    result = prime * result + self.structureId.hash;
+    result = prime * result + self.thermostats.hash;
+    result = prime * result + self.smokeCoAlarms.hash;
+    result = prime * result + self.cameras.hash;
+    result = prime * result + self.devices.hash;
+    result = prime * result + self.away;
+    result = prime * result + self.name.hash;
+    result = prime * result + self.countryCode.hash;
+    result = prime * result + self.postalCode.hash;
+    result = prime * result + self.peakPeriodStartTime.hash;
+    result = prime * result + self.peakPeriodEndTime.hash;
+    result = prime * result + self.timeZone.hash;
+    result = prime * result + self.eta.hash;
+    result = prime * result + (self.rhrEnrollment ? intValueForYes : intValueForNo);
+    result = prime * result + self.wheres.hash;
+
+    return result;
+}
+
+- (BOOL)isEqual:(id)other {
+    if (other == self)
+        return YES;
+
+    if (!other || ![[other class] isEqual:[self class]])
+        return NO;
+
+    NestSDKStructure *otherStructure = (NestSDKStructure *) other;
+    return ([NestSDKUtils object:self.structureId isEqualToObject:otherStructure.structureId] &&
+            ([NestSDKUtils object:self.structureId isEqualToObject:otherStructure.structureId]) &&
+            ([NestSDKUtils object:self.thermostats isEqualToObject:otherStructure.thermostats]) &&
+            ([NestSDKUtils object:self.smokeCoAlarms isEqualToObject:otherStructure.smokeCoAlarms]) &&
+            ([NestSDKUtils object:self.cameras isEqualToObject:otherStructure.cameras]) &&
+            ([NestSDKUtils object:self.devices isEqualToObject:otherStructure.devices]) &&
+            (self.away == otherStructure.away) &&
+            ([NestSDKUtils object:self.name isEqualToObject:otherStructure.name]) &&
+            ([NestSDKUtils object:self.countryCode isEqualToObject:otherStructure.countryCode]) &&
+            ([NestSDKUtils object:self.postalCode isEqualToObject:otherStructure.postalCode]) &&
+            ([NestSDKUtils object:self.peakPeriodStartTime isEqualToObject:otherStructure.peakPeriodStartTime]) &&
+            ([NestSDKUtils object:self.peakPeriodEndTime isEqualToObject:otherStructure.peakPeriodEndTime]) &&
+            ([NestSDKUtils object:self.timeZone isEqualToObject:otherStructure.timeZone]) &&
+            ([NestSDKUtils object:self.eta isEqualToObject:otherStructure.eta]) &&
+            (self.rhrEnrollment == otherStructure.rhrEnrollment) &&
+            ([NestSDKUtils object:self.wheres isEqualToObject:otherStructure.wheres]));
 }
 
 @end

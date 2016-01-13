@@ -31,9 +31,9 @@
 #pragma mark Properties
 
 /**
- * A unique, Nest-generated identifier that represents name
- * Use this value with the /$company/ object to send resource use
- * whereId is read-only, and is created automatically in the call to create a custom where name
+ * A unique, Nest-generated identifier that represents name.
+ * Use this value with the /$company/ object to send resource use.
+ * whereId is read-only, and is created automatically in the call to create a custom where name.
  */
 @property(nonatomic, copy) NSString <Optional> *whereId;
 
@@ -50,14 +50,19 @@
 
 @end
 
-
+/**
+ * NestSDKWheres is an object set on a structure, containing where identifiers (whereId and name).
+ * Use NestSDKWheres to create custom where names, or access standard where names.
+ *
+ * Access to the wheres object requires Product data read/write permission.
+ */
 @interface NestSDKWheres : NestSDKDataModel <NestSDKWheres>
 #pragma mark Properties
 
 /**
- * A unique, Nest-generated identifier that represents name
- * Use this value with the /$company/ object to send resource use
- * whereId is read-only, and is created automatically in the call to create a custom where name
+ * A unique, Nest-generated identifier that represents name.
+ * Use this value with the /$company/ object to send resource use.
+ * whereId is read-only, and is created automatically in the call to create a custom where name.
  */
 @property(nonatomic, copy) NSString <Optional> *whereId;
 

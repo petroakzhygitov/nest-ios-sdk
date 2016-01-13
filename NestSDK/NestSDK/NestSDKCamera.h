@@ -14,11 +14,7 @@
 
 #pragma mark Protocol
 
-@protocol NestSDKCamera <NestSDKDevice>
-
-@end
-
-@interface NestSDKCamera : NestSDKDevice <NestSDKCamera>
+@interface NestSDKCamera : NestSDKDevice
 #pragma mark Properties
 
 @property(nonatomic) BOOL is_streaming;

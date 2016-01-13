@@ -12,12 +12,7 @@
 
 #pragma mark Protocol
 
-@protocol NestSDKSmokeCoAlarm <NestSDKDevice>
-
-@end
-
-
-@interface NestSDKSmokeCOAlarm : NestSDKDevice <NestSDKSmokeCoAlarm>
+@interface NestSDKSmokeCOAlarm : NestSDKDevice
 #pragma mark Properties
 
 @property(nonatomic, copy) NSString <Optional> *battery_health;

@@ -15,12 +15,8 @@
 
 #pragma mark Protocol
 
-@protocol NestSDKThermostat <NestSDKDevice>
 
-@end
-
-
-@interface NestSDKThermostat : NestSDKDevice <NestSDKThermostat>
+@interface NestSDKThermostat : NestSDKDevice
 #pragma mark Properties
 
 @property(nonatomic) BOOL can_cool;

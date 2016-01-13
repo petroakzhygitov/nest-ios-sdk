@@ -26,7 +26,7 @@
 #import <NestSDK/NestSDK.h>
 #import <Expecta/Expecta.h>
 #import "NestSDKFirebaseService.h"
-#import "NestSDKDataManager.h"
+#import <Firebase/Firebase.h>
 
 SpecBegin(NestSDKFirebaseService)
     {
@@ -170,7 +170,7 @@ SpecBegin(NestSDKFirebaseService)
                 waitUntil(^(DoneCallback done) {
                     NestSDKObserverHandle handle = [firebaseService observeValuesForURL:@"someUrl" withBlock:^(id result, NSError *error) {
                         expect(error).to.equal(nil);
-                        expect(((FDataSnapshot *) result).value).to.equal(@"someValue");
+                        expect(result).to.equal(@"someValue");
                         done();
                     }];
 
@@ -178,7 +178,7 @@ SpecBegin(NestSDKFirebaseService)
                 });
             });
 
-            it(@"should not observer values for url", ^{
+            it(@"should not observe values for url", ^{
                 id firebaseMock = [OCMockObject mockForClass:[Firebase class]];
                 [[[firebaseMock stub] andReturn:firebaseMock] childByAppendingPath:@"someUrl"];
                 [[[[firebaseMock stub] andDo:^(NSInvocation *invocation) {

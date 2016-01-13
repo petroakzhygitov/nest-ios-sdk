@@ -49,7 +49,5 @@
 	<string>jiicVsgR5Mu3y34JW2NxtrQS4</string>
 	<key>NestRedirectURL</key>
 	<string>https://example.com</string>
-	<key>NestState</key>
-	<string>someState</string>
 </dict>
 </plist>

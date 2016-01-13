@@ -30,4 +30,6 @@
 
 + (NSString *)iso8601FormatDateStringWithDate:(NSDate *)date;
 
++ (BOOL)object:(id)object isEqualToObject:(id)other;
+
 @end

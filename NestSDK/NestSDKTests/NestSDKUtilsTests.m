@@ -85,6 +85,18 @@ SpecBegin(NestSDKUtils)
                 date = [calendar dateFromComponents:dateComponents];
                 expect([NestSDKUtils iso8601FormatDateStringWithDate:date]).to.equal(@"2015-10-31T22:42:59.000Z");
             });
+
+            it(@"should equals objects", ^{
+                NSString *string1 = @"someString";
+                NSString *string2 = @"someString";
+                NSString *string3 = @"someOtherString";
+
+                expect([NestSDKUtils object:string1 isEqualToObject:string2]).to.equal(YES);
+                expect([NestSDKUtils object:string1 isEqualToObject:string3]).to.equal(NO);
+                expect([NestSDKUtils object:nil isEqualToObject:string2]).to.equal(NO);
+                expect([NestSDKUtils object:string1 isEqualToObject:nil]).to.equal(NO);
+                expect([NestSDKUtils object:nil isEqualToObject:nil]).to.equal(YES);
+            });
         });
     }
 SpecEnd

@@ -56,4 +56,17 @@
     return [[self _iso8601DateFormatter] stringFromDate:date];
 }
 
++ (BOOL)object:(id)object isEqualToObject:(id)other {
+    if (object == other) {
+        return YES;
+    }
+
+    if (!object || !other) {
+        return NO;
+    }
+
+    return [object isEqual:other];
+}
+
+
 @end

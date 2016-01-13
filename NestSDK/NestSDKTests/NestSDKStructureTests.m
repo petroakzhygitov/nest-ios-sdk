@@ -27,6 +27,7 @@
 #import "LSNocilla.h"
 #import "NestSDKMetadata.h"
 #import "NestSDKStructure.h"
+#import "NestSDKWheres.h"
 
 SpecBegin(NestSDKStructure)
     {
@@ -39,27 +40,48 @@ SpecBegin(NestSDKStructure)
             });
 
             it(@"should deserialize/serialize data", ^{
-                NSString *dataPath = [resourcePath stringByAppendingPathComponent:@"structure.json"];
-                NSData *data = [NSData dataWithContentsOfFile:dataPath];
-
                 NSError *error;
-                NestSDKStructure *structure = [[NestSDKStructure alloc] initWithData:data error:&error];
+
+                NSString *structureJSONPath = [resourcePath stringByAppendingPathComponent:@"structure.json"];
+                NSData *structureData = [NSData dataWithContentsOfFile:structureJSONPath];
+
+                NestSDKStructure *structure = [[NestSDKStructure alloc] initWithData:structureData error:&error];
                 expect(error).to.equal(nil);
 
-                expect(structure.structureId).to.equal(@"VqFabWH21nwVyd4RWgJgNb292wa7hG_dUwo2i2SG7j3-BOLY0BA4sw");
-                expect(structure.thermostats.count).to.equal(2);
-                expect(structure.smokeCoAlarms.count).to.equal(2);
-                expect(structure.cameras.count).to.equal(2);
+                NSString *wheresJSONPath = [resourcePath stringByAppendingPathComponent:@"wheres.json"];
+                NSData *wheresData = [NSData dataWithContentsOfFile:wheresJSONPath];
+
+                NestSDKWheres *wheres = [[NestSDKWheres alloc] initWithData:wheresData error:&error];
+                expect(error).to.equal(nil);
+
+
+                NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+                calendar.timeZone = [NSTimeZone timeZoneWithAbbreviation:@"UTC"];
+
+                NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
+                dateComponents.timeZone = [NSTimeZone timeZoneWithAbbreviation:@"UTC"];
+                dateComponents.year = 2015;
+                dateComponents.month = 10;
+                dateComponents.day = 31;
+                dateComponents.hour = 23;
+                dateComponents.minute = 55;
+                dateComponents.second = 59;
+
+                NSDate *peakPeriodStartTimeDate = [calendar dateFromComponents:dateComponents];
+
+                dateComponents.minute = 59;
+                NSDate *peakPeriodEndTimeDate = [calendar dateFromComponents:dateComponents];
+
+//                expect(structure.devicesDictionary.allValues.firstObject).to.equal(devices);
+
                 expect(structure.away).to.equal(NestSDKStructureAwayStateAutoAway);
                 expect(structure.name).to.equal(@"Home");
                 expect(structure.countryCode).to.equal(@"US");
                 expect(structure.postalCode).to.equal(@"94304");
-                expect(structure.wheres).notTo.equal(nil);
-                expect(structure.peakPeriodStartTime).notTo.equal(nil);
-                expect(structure.peakPeriodEndTime).notTo.equal(nil);
-//                    "peak_period_start_time": "2015-10-31T23:59:59.000Z",
-//                    "peak_period_end_time": "2015-10-31T23:59:59.000Z",
+                expect(structure.peakPeriodStartTime).to.equal(peakPeriodStartTimeDate);
+                expect(structure.peakPeriodEndTime).to.equal(peakPeriodEndTimeDate);
                 expect(structure.timeZone).to.equal(@"America/Los_Angeles");
+                expect(structure.wheres.allValues.firstObject).to.equal(wheres);
 //                    "eta": {
 //                "trip_id": "myTripHome1024",
 //                        "estimated_arrival_window_begin": "2015-10-31T22:42:59.000Z",
@@ -72,7 +94,7 @@ SpecBegin(NestSDKStructure)
                 NSDictionary *serializedDictionary = [NSJSONSerialization JSONObjectWithData:[structure toJSONData] options:kNilOptions error:&error];
                 expect(error).to.equal(nil);
 
-                NSDictionary *initialDictionary = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+                NSDictionary *initialDictionary = [NSJSONSerialization JSONObjectWithData:structureData options:kNilOptions error:&error];
                 expect(error).to.equal(nil);
 
                 expect(serializedDictionary).to.equal(initialDictionary);

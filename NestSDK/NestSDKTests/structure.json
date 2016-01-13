@@ -23,7 +23,7 @@
   "name": "Home",
   "country_code": "US",
   "postal_code": "94304",
-  "peak_period_start_time": "2015-10-31T23:59:59.000Z",
+  "peak_period_start_time": "2015-10-31T23:55:59.000Z",
   "peak_period_end_time": "2015-10-31T23:59:59.000Z",
   "time_zone": "America/Los_Angeles",
   "eta": {

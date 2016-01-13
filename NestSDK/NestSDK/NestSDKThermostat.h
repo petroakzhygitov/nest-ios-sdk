@@ -1,3 +1,23 @@
+// Copyright (c) 2016 Petro Akzhygitov <petro.akzhygitov@gmail.com>
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
+
 #import <Foundation/Foundation.h>
 #import <CoreGraphics/CGBase.h>
 #import <JSONModel/JSONModel.h>
@@ -5,52 +25,149 @@
 
 @protocol Optional;
 
-#pragma mark macros
+typedef NS_ENUM(NSUInteger, NestSDKThermostatTemperatureScale) {
+    NestSDKThermostatTemperatureScaleUndefined = 0,
+    NestSDKThermostatTemperatureScaleC,
+    NestSDKThermostatTemperatureScaleF
+};
 
-#pragma mark const
+typedef NS_ENUM(NSUInteger, NestSDKThermostatHVACMode) {
+    NestSDKThermostatHVACModeUndefined = 0,
+    NestSDKThermostatHVACModeHeat,
+    NestSDKThermostatHVACModeCool,
+    NestSDKThermostatHVACModeHeatCool,
+    NestSDKThermostatHVACModeOff
+};
 
-#pragma mark enum
+typedef NS_ENUM(NSUInteger, NestSDKThermostatHVACState) {
+    NestSDKThermostatHVACStateUndefined = 0,
+    NestSDKThermostatHVACStateHeating,
+    NestSDKThermostatHVACStateCooling,
+    NestSDKThermostatHVACStateOff
+};
 
-#pragma mark typedef
-
-#pragma mark Protocol
-
-
+/**
+ * Thermostat device data model.
+ */
 @interface NestSDKThermostat : NestSDKDevice
 #pragma mark Properties
 
-@property(nonatomic) BOOL can_cool;
-@property(nonatomic) BOOL can_heat;
-@property(nonatomic) BOOL is_using_emergency_heat;
-@property(nonatomic) BOOL has_fan;
-@property(nonatomic) BOOL fan_timer_active;
+/**
+ * System ability to cool (has AC).
+ */
+@property(nonatomic) BOOL canCool;
 
-@property(nonatomic, copy) NSString <Optional> *fan_timer_timeout;
+/**
+ * System ability to heat.
+ */
+@property(nonatomic) BOOL canHeat;
 
-@property(nonatomic) BOOL has_leaf;
+/**
+ * Emergency Heat status in systems with heat pumps for cooling.
+ */
+@property(nonatomic) BOOL isUsingEmergencyHeat;
 
-@property(nonatomic, copy) NSString <Optional> *temperature_scale;
+/**
+ * System ability to control the fan independently from heating or cooling.
+ */
+@property(nonatomic) BOOL hasFan;
 
-@property(nonatomic) NSUInteger target_temperature_f;
-@property(nonatomic) CGFloat target_temperature_c;
-@property(nonatomic) NSUInteger target_temperature_high_f;
-@property(nonatomic) CGFloat target_temperature_high_c;
-@property(nonatomic) NSUInteger target_temperature_low_f;
-@property(nonatomic) CGFloat target_temperature_low_c;
-@property(nonatomic) NSUInteger away_temperature_high_f;
-@property(nonatomic) CGFloat away_temperature_high_c;
-@property(nonatomic) NSUInteger away_temperature_low_f;
-@property(nonatomic) CGFloat away_temperature_low_c;
+/**
+ * Indicates if the fan timer is engaged; used with fanTimerTimeout to turn on the fan for a (user-specified) preset duration.
+ */
+@property(nonatomic) BOOL fanTimerActive;
 
-@property(nonatomic, copy) NSString <Optional> *hvac_mode;
+/**
+ * Timestamp showing when the fan timer reaches 0 (stop time).
+ */
+@property(nonatomic) NSDate <Optional> *fanTimerTimeout;
 
-@property(nonatomic) CGFloat ambient_temperature_c;
-@property(nonatomic) NSUInteger ambient_temperature_f;
+/**
+ * Displayed when the thermostat is set to an energy-saving temperature.
+ */
+@property(nonatomic) BOOL hasLeaf;
 
+/**
+ * Fahrenheit or Celsius; used with temperature display.
+ */
+@property(nonatomic) NestSDKThermostatTemperatureScale temperatureScale;
+
+/**
+ * Desired temperature, in full degrees Fahrenheit (1°F). Used when hvacMode = "heat" or "cool".
+ */
+@property(nonatomic) NSUInteger targetTemperatureF;
+
+/**
+ * Desired temperature, in half degrees Celsius (0.5°C). Used when hvacMode = "heat" or "cool".
+ */
+@property(nonatomic) CGFloat targetTemperatureC;
+
+/**
+ * Maximum target temperature, displayed in whole degrees Fahrenheit (1°F). Used when hvacMode = "heat-cool" (Heat • Cool mode).
+ */
+@property(nonatomic) NSUInteger targetTemperatureHighF;
+
+/**
+ * Maximum target temperature, displayed in half degrees Celsius (0.5°C). Used when hvac_mode = "heat-cool" (Heat • Cool mode).
+ */
+@property(nonatomic) CGFloat targetTemperatureHighC;
+
+/**
+ * Minimum target temperature, displayed in whole degrees Fahrenheit (1°F). Used when hvac_mode = "heat-cool" (Heat • Cool mode).
+ */
+@property(nonatomic) NSUInteger targetTemperatureLowF;
+
+/**
+ * Minimum target temperature, displayed in half degrees Celsius (0.5°C). Used when hvac_mode = "heat-cool" (Heat • Cool mode).
+ */
+@property(nonatomic) CGFloat targetTemperatureLowC;
+
+/**
+ * Maximum away temperature, displayed in whole degrees Fahrenheit (1°F).
+ */
+@property(nonatomic) NSUInteger awayTemperatureHighF;
+
+/**
+ * Maximum away temperature, displayed in half degrees Celsius (0.5°C).
+ */
+@property(nonatomic) CGFloat awayTemperatureHighC;
+
+/**
+ * Minimum away temperature, displayed in whole degrees Fahrenheit (1°F).
+ */
+@property(nonatomic) NSUInteger awayTemperatureLowF;
+
+/**
+ * Minimum away temperature, displayed in half degrees Celsius (0.5°C).
+ */
+@property(nonatomic) CGFloat awayTemperatureLowC;
+
+/**
+ * Indicates HVAC system heating/cooling modes. For systems with both heating and cooling capability,
+ * set this value to "heat-cool" (Heat • Cool mode) to get the best experience.
+ *
+ * Learn more about Heat • Cool mode: http://support.nest.com/article/What-is-Heat-Cool-mode
+ */
+@property(nonatomic) NestSDKThermostatHVACMode hvacMode;
+
+/**
+ * Temperature, measured at the device, in half degrees Celsius (0.5°C).
+ */
+@property(nonatomic) CGFloat ambientTemperatureC;
+
+/**
+ * Temperature, measured at the device, in whole degrees Fahrenheit (1°F).
+ */
+@property(nonatomic) NSUInteger ambientTemperatureF;
+
+/**
+ * Humidity, in percent (%) format, measured at the device.
+ */
 @property(nonatomic) NSUInteger humidity;
 
-@property(nonatomic, copy) NSString <Optional> *hvac_state;
-
-#pragma mark Methods
+/**
+ * Indicates whether HVAC system is actively heating, cooling or is off. Use this value to indicate HVAC activity state.
+ */
+@property(nonatomic) NestSDKThermostatHVACState hvacState;
 
 @end

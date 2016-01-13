@@ -72,29 +72,29 @@ SpecBegin(NestSDKThermostat)
                 expect(thermostat.whereId).to.equal(@"UNCBGUnN24...");
 
                 NSDate *fanTimerTimeoutDate = [calendar dateFromComponents:dateComponents];
-                expect(thermostat.can_cool).to.equal(YES);
-                expect(thermostat.can_heat).to.equal(YES);
-                expect(thermostat.is_using_emergency_heat).to.equal(YES);
-                expect(thermostat.has_fan).to.equal(YES);
-                expect(thermostat.fan_timer_active).to.equal(YES);
-                expect(thermostat.fan_timer_timeout).to.equal(fanTimerTimeoutDate);
-                expect(thermostat.has_leaf).to.equal(YES);
-                expect(thermostat.temperature_scale).to.equal(@"C");
-                expect(thermostat.target_temperature_f).to.equal(72);
-                expect(thermostat.target_temperature_c).to.equal(21.5);
-                expect(thermostat.target_temperature_high_f).to.equal(72);
-                expect(thermostat.target_temperature_high_c).to.equal(21.5);
-                expect(thermostat.target_temperature_low_f).to.equal(64);
-                expect(thermostat.target_temperature_low_c).to.equal(17.5);
-                expect(thermostat.away_temperature_high_f).to.equal(72);
-                expect(thermostat.away_temperature_high_c).to.equal(21.5);
-                expect(thermostat.away_temperature_low_f).to.equal(64);
-                expect(thermostat.away_temperature_low_c).to.equal(17.5);
-                expect(thermostat.hvac_mode).to.equal(@"heat");
-                expect(thermostat.ambient_temperature_f).to.equal(72);
-                expect(thermostat.ambient_temperature_c).to.equal(21.5);
+                expect(thermostat.canCool).to.equal(YES);
+                expect(thermostat.canHeat).to.equal(YES);
+                expect(thermostat.isUsingEmergencyHeat).to.equal(YES);
+                expect(thermostat.hasFan).to.equal(YES);
+                expect(thermostat.fanTimerActive).to.equal(YES);
+                expect(thermostat.fanTimerTimeout).to.equal(fanTimerTimeoutDate);
+                expect(thermostat.hasLeaf).to.equal(YES);
+                expect(thermostat.temperatureScale).to.equal(NestSDKThermostatTemperatureScaleC);
+                expect(thermostat.targetTemperatureF).to.equal(72);
+                expect(thermostat.targetTemperatureC).to.equal(21.5);
+                expect(thermostat.targetTemperatureHighF).to.equal(72);
+                expect(thermostat.targetTemperatureHighC).to.equal(21.5);
+                expect(thermostat.targetTemperatureLowF).to.equal(64);
+                expect(thermostat.targetTemperatureLowC).to.equal(17.5);
+                expect(thermostat.awayTemperatureHighF).to.equal(72);
+                expect(thermostat.awayTemperatureHighC).to.equal(21.5);
+                expect(thermostat.awayTemperatureLowF).to.equal(64);
+                expect(thermostat.awayTemperatureLowC).to.equal(17.5);
+                expect(thermostat.hvacMode).to.equal(NestSDKThermostatHVACModeHeat);
+                expect(thermostat.ambientTemperatureF).to.equal(72);
+                expect(thermostat.ambientTemperatureC).to.equal(21.5);
                 expect(thermostat.humidity).to.equal(40);
-                expect(thermostat.hvac_state).to.equal(@"heating");
+                expect(thermostat.hvacState).to.equal(NestSDKThermostatHVACStateHeating);
 
                 NSDictionary *serializedDictionary = [NSJSONSerialization JSONObjectWithData:[thermostat toJSONData] options:kNilOptions error:&error];
                 expect(error).to.equal(nil);
@@ -107,22 +107,22 @@ SpecBegin(NestSDKThermostat)
 
             it(@"should have proper hash and equal", ^{
                 NSError *error;
-                NestSDKDevice *device1 = [[NestSDKDevice alloc] initWithData:data error:&error];
+                NestSDKThermostat *thermostat1 = [[NestSDKThermostat alloc] initWithData:data error:&error];
                 expect(error).to.equal(nil);
 
-                NestSDKDevice *device2 = [[NestSDKDevice alloc] initWithData:data error:&error];
+                NestSDKThermostat *thermostat2 = [[NestSDKThermostat alloc] initWithData:data error:&error];
                 expect(error).to.equal(nil);
 
-                NestSDKDevice *device3 = [[NestSDKDevice alloc] initWithData:data error:&error];
+                NestSDKThermostat *thermostat3 = [[NestSDKThermostat alloc] initWithData:data error:&error];
                 expect(error).to.equal(nil);
 
-                device3.name = @"someName";
+                thermostat3.humidity = 42;
 
-                expect(device1.hash).to.equal(device2.hash);
-                expect(device1.hash).notTo.equal(device3.hash);
+                expect(thermostat1.hash).to.equal(thermostat2.hash);
+                expect(thermostat1.hash).notTo.equal(thermostat3.hash);
 
-                expect(device1).to.equal(device2);
-                expect(device1).notTo.equal(device3);
+                expect(thermostat1).to.equal(thermostat2);
+                expect(thermostat1).notTo.equal(thermostat3);
             });
         });
     }

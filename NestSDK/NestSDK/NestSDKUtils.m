@@ -1,28 +1,13 @@
 #import "NestSDKUtils.h"
 
-#pragma mark macros
-
-#pragma mark const
-
-#pragma mark enum
-
-#pragma mark typedef
-
-
-@implementation NestSDKUtils {
-#pragma mark Instance variables
-}
-
-#pragma mark Initializer
-
+@implementation NestSDKUtils
 #pragma mark Private
 
 + (NSDateFormatter *)_iso8601DateFormatter {
-    NSLocale *enUSPOSIXLocale = [NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"];
-
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setLocale:enUSPOSIXLocale];
-    [formatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSSZ"];
+    [formatter setLocale:[NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"]];
+    [formatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
+    [formatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"];
 
     return formatter;
 }

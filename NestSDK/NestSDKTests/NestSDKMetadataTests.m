@@ -28,58 +28,54 @@
 #import "NestSDKMetadata.h"
 #import "NestSDKWheres.h"
 
-SpecBegin(NestSDKWheres)
+SpecBegin(NestSDKMetadata)
     {
-        describe(@"NestSDKWheres", ^{
+        describe(@"NestSDKMetadata", ^{
             
-            __block NSData *wheresData;
+            __block NSData *data;
 
             beforeAll(^{
                 NSString *resourcePath = [NSBundle bundleForClass:[self class]].resourcePath;
-                NSString *whereDataPath = [resourcePath stringByAppendingPathComponent:@"wheres.json"];
+                NSString *dataPath = [resourcePath stringByAppendingPathComponent:@"metadata.json"];
 
-                wheresData = [NSData dataWithContentsOfFile:whereDataPath];
+                data = [NSData dataWithContentsOfFile:dataPath];
             });
 
-            it(@"should deserialize/serialize wheres data", ^{
+            it(@"should deserialize/serialize data", ^{
                 NSError *error;
-                NestSDKWheres *wheres = [[NestSDKWheres alloc] initWithData:wheresData error:&error];
+                NestSDKMetadata *metadata = [[NestSDKMetadata alloc] initWithData:data error:&error];
                 expect(error).to.equal(nil);
 
-                expect(wheres.whereId).to.equal(@"Fqp6wJI...");
-                expect(wheres.name).to.equal(@"Bedroom");
+                expect(metadata.accessToken).to.equal(@"c.FmDPkzyzaQe...");
+                expect(metadata.clientVersion).to.equal(1);
+
+                NSDictionary *serializedDictionary = [NSJSONSerialization JSONObjectWithData:[metadata toJSONData] options:kNilOptions error:&error];
+                expect(error).to.equal(nil);
+
+                NSDictionary *initialDictionary = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+                expect(error).to.equal(nil);
+
+                expect(serializedDictionary).to.equal(initialDictionary);
             });
 
-            it(@"should have proper hash", ^{
+            it(@"should have proper hash and equal", ^{
                 NSError *error;
-                NestSDKWheres *wheres1 = [[NestSDKWheres alloc] initWithData:wheresData error:&error];
+                NestSDKMetadata *metadata1 = [[NestSDKMetadata alloc] initWithData:data error:&error];
                 expect(error).to.equal(nil);
 
-                NestSDKWheres *wheres2 = [[NestSDKWheres alloc] initWithData:wheresData error:&error];
+                NestSDKMetadata *metadata2 = [[NestSDKMetadata alloc] initWithData:data error:&error];
                 expect(error).to.equal(nil);
 
-                NestSDKWheres *wheres3 = [[NestSDKWheres alloc] initWithData:wheresData error:&error];
-                wheres3.name = @"SomeName";
+                NestSDKMetadata *metadata3 = [[NestSDKMetadata alloc] initWithData:data error:&error];
                 expect(error).to.equal(nil);
 
-                expect(wheres1.hash).to.equal(wheres2.hash);
-                expect(wheres1.hash).notTo.equal(wheres3.hash);
-            });
+                metadata3.clientVersion = 42;
 
-            it(@"should equal to another wheres", ^{
-                NSError *error;
-                NestSDKWheres *wheres1 = [[NestSDKWheres alloc] initWithData:wheresData error:&error];
-                expect(error).to.equal(nil);
+                expect(metadata1.hash).to.equal(metadata2.hash);
+                expect(metadata1.hash).notTo.equal(metadata3.hash);
 
-                NestSDKWheres *wheres2 = [[NestSDKWheres alloc] initWithData:wheresData error:&error];
-                expect(error).to.equal(nil);
-
-                NestSDKWheres *wheres3 = [[NestSDKWheres alloc] initWithData:wheresData error:&error];
-                wheres3.name = @"SomeName";
-                expect(error).to.equal(nil);
-
-                expect(wheres1).to.equal(wheres2);
-                expect(wheres1).notTo.equal(wheres3);
+                expect(metadata1).to.equal(metadata2);
+                expect(metadata1).notTo.equal(metadata3);
             });
         });
     }

@@ -28,6 +28,7 @@
 #import "NestSDKMetadata.h"
 #import "NestSDKStructure.h"
 #import "NestSDKWheres.h"
+#import "NestSDKETA.h"
 
 SpecBegin(NestSDKStructure)
     {
@@ -54,6 +55,11 @@ SpecBegin(NestSDKStructure)
                 NestSDKWheres *wheres = [[NestSDKWheres alloc] initWithData:wheresData error:&error];
                 expect(error).to.equal(nil);
 
+                NSString *etaJSONPath = [resourcePath stringByAppendingPathComponent:@"eta.json"];
+                NSData *etaData = [NSData dataWithContentsOfFile:etaJSONPath];
+
+                NestSDKETA *eta = [[NestSDKETA alloc] initWithData:etaData error:&error];
+                expect(error).to.equal(nil);
 
                 NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
                 calendar.timeZone = [NSTimeZone timeZoneWithAbbreviation:@"UTC"];
@@ -81,15 +87,11 @@ SpecBegin(NestSDKStructure)
                 expect(structure.peakPeriodStartTime).to.equal(peakPeriodStartTimeDate);
                 expect(structure.peakPeriodEndTime).to.equal(peakPeriodEndTimeDate);
                 expect(structure.timeZone).to.equal(@"America/Los_Angeles");
-                expect(structure.wheres.allValues.firstObject).to.equal(wheres);
-//                    "eta": {
-//                "trip_id": "myTripHome1024",
-//                        "estimated_arrival_window_begin": "2015-10-31T22:42:59.000Z",
-//                        "estimated_arrival_window_end": "2015-10-31T23:59:59.000Z"
-//            },
-                expect(structure.rhrEnrollment).to.equal(YES);
 
-                NSLog([structure toJSONString]);
+                expect(structure.wheres.allValues.firstObject).to.equal(wheres);
+                expect(structure.eta).to.equal(eta);
+
+                expect(structure.rhrEnrollment).to.equal(YES);
 
                 NSDictionary *serializedDictionary = [NSJSONSerialization JSONObjectWithData:[structure toJSONData] options:kNilOptions error:&error];
                 expect(error).to.equal(nil);
@@ -98,6 +100,29 @@ SpecBegin(NestSDKStructure)
                 expect(error).to.equal(nil);
 
                 expect(serializedDictionary).to.equal(initialDictionary);
+            });
+
+            it(@"should have proper hash and equal", ^{
+                NSString *structureJSONPath = [resourcePath stringByAppendingPathComponent:@"structure.json"];
+                NSData *structureData = [NSData dataWithContentsOfFile:structureJSONPath];
+
+                NSError *error;
+                NestSDKStructure *structure1 = [[NestSDKStructure alloc] initWithData:structureData error:&error];
+                expect(error).to.equal(nil);
+
+                NestSDKStructure *structure2 = [[NestSDKStructure alloc] initWithData:structureData error:&error];
+                expect(error).to.equal(nil);
+
+                NestSDKStructure *structure3 = [[NestSDKStructure alloc] initWithData:structureData error:&error];
+                expect(error).to.equal(nil);
+
+                structure3.name = @"someName42";
+
+                expect(structure1.hash).to.equal(structure2.hash);
+                expect(structure1.hash).notTo.equal(structure3.hash);
+
+                expect(structure1).to.equal(structure2);
+                expect(structure1).notTo.equal(structure3);
             });
         });
     }

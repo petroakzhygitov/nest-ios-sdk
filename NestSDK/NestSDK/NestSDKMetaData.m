@@ -20,7 +20,32 @@
 
 #import <JSONModel/JSONModel.h>
 #import "NestSDKMetadata.h"
+#import "NestSDKUtils.h"
 
 @implementation NestSDKMetadata
+#pragma mark Override
+
+- (NSUInteger)hash {
+    NSUInteger prime = 31;
+    NSUInteger result = 1;
+
+    result = prime * result + self.accessToken.hash;
+    result = prime * result + self.clientVersion;
+
+    return result;
+}
+
+- (BOOL)isEqual:(id)other {
+    if (other == self)
+        return YES;
+
+    if (!other || ![[other class] isEqual:[self class]])
+        return NO;
+
+    NestSDKMetadata *otherMetadata = (NestSDKMetadata *) other;
+    return (([NestSDKUtils object:self.accessToken isEqualToObject:otherMetadata.accessToken]) &&
+            (self.clientVersion == otherMetadata.clientVersion));
+}
+
 
 @end

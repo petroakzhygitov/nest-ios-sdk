@@ -23,7 +23,7 @@
 #import <NestSDK/NestSDKDataModel.h>
 
 @class NestSDKETA;
-@class NestSDKWheres;
+@protocol NestSDKWheres;
 
 #pragma mark typedef
 
@@ -58,7 +58,7 @@ typedef NS_ENUM(NSUInteger, NestSDKStructureAwayState) {
  * List of smoke+CO alarms in the structure, by unique device identifier.
  * This is an array of NSString objects that includes all smoke+CO alarms in the structure.
  */
-@property(nonatomic, copy) NSArray <Optional> *smokeCOAlarms;
+@property(nonatomic, copy) NSArray <Optional> *smokeCoAlarms;
 
 /**
  * List of cameras in the structure, by unique device identifier.
@@ -117,7 +117,7 @@ typedef NS_ENUM(NSUInteger, NestSDKStructureAwayState) {
  *
  * Learn more about ETA https://developer.nest.com/documentation/cloud/eta-guide
  */
-@property(nonatomic) NestSDKETA *eta;
+@property(nonatomic) NestSDKETA <Optional> *eta;
 
 /**
  * Rush Hour Rewards enrollment status.
@@ -131,6 +131,6 @@ typedef NS_ENUM(NSUInteger, NestSDKStructureAwayState) {
  *
  * Learn more about wheres https://developer.nest.com/documentation/cloud/how-to-structures-object#wheres
  */
-@property(nonatomic) NestSDKWheres *wheres;
+@property(nonatomic) NSDictionary <Optional, NestSDKWheres> *wheres;
 
 @end

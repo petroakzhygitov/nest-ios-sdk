@@ -1,38 +1,30 @@
 #import <Foundation/Foundation.h>
-#import "JSONModel.h"
+#import <JSONModel/JSONModel.h>
+#import <NestSDK/NestSDKDataModel.h>
 
 @protocol Optional;
 
-#pragma mark macros
-
-#pragma mark const
-
-#pragma mark enum
-
-#pragma mark typedef
-
-#pragma mark Protocol
 @protocol NestSDKWheres <NSObject>
 
 @end
 
 
-@interface NestSDKWheres : JSONModel <NestSDKWheres>
+@interface NestSDKWheres : NestSDKDataModel
 #pragma mark Properties
 
 /**
  *
  * A unique, Nest-generated identifier that represents name
  * Use this value with the /$company/ object to send resource use
- * where_id is read-only, and is created automatically in the call to create a custom where name
+ * whereId is read-only, and is created automatically in the call to create a custom where name
  *
  */
-@property(nonatomic, copy) NSString <Optional> *where_id;
+@property(nonatomic, copy) NSString <Optional> *whereId;
 
 /**
  *
  * The display name of the device
- * To create a custom where name, make a POST call to write a new, custom where name; the where_id is returned in the call
+ * To create a custom where name, make a POST call to write a new, custom where name; the whereId is returned in the call
  *
  * Considerations
  *      name cannot be edited or deleted after creation
@@ -42,7 +34,5 @@
  *
  */
 @property(nonatomic, copy) NSString <Optional> *name;
-
-#pragma mark Methods
 
 @end

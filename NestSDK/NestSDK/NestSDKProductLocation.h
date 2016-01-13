@@ -26,7 +26,7 @@
 @property(nonatomic, copy) NSString <Optional> *structure_id;
 
 /**
- * where_id is a unique, Nest-generated identifier that represents name, the display name of the device. Learn more about where names for Nest Thermostats, Nest Protects and Nest Cams.
+ * whereId is a unique, Nest-generated identifier that represents name, the display name of the device. Learn more about where names for Nest Thermostats, Nest Protects and Nest Cams.
  */
 @property(nonatomic, copy) NSString <Optional> *where_id;
 

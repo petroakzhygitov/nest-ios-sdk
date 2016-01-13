@@ -41,7 +41,7 @@ static NSString *const kAwayStringAutoAway = @"auto-away";
     return [NestSDKUtils iso8601FormatDateStringWithDate:self.peakPeriodStartTime];
 }
 
-- (void)setPeakPeriodEndTimeTimeWithNSString:(NSString *)peakPeriodEndTimeString {
+- (void)setPeakPeriodEndTimeWithNSString:(NSString *)peakPeriodEndTimeString {
     self.peakPeriodEndTime = [NestSDKUtils dateWithISO8601FormatDateString:peakPeriodEndTimeString];
 }
 

@@ -1,15 +1,26 @@
 {
   "VqFabWH21nwVyd4RWgJgNb292wa7hG_dUwo2i2SG7j3-BOLY0BA4sw": {
     "structure_id": "VqFabWH21nwVyd4RWgJgNb292wa7hG_dUwo2i2SG7j3-BOLY0BA4sw",
-    "thermostats": ["peyiJNo0IldT2YlIVtYaGQ", "AWinr2345"],
-    "smoke_co_alarms": ["RTMTKxsQTCxzVcsySOHPxKoF4OyCifrs", "NlheNIWMKacoOllk"],
-    "cameras": ["awJo6rH", "LKvoNasf"],
+    "thermostats": [
+      "peyiJNo0IldT2YlIVtYaGQ",
+      "AWinr2345"
+    ],
+    "smoke_co_alarms": [
+      "RTMTKxsQTCxzVcsySOHPxKoF4OyCifrs",
+      "NlheNIWMKacoOllk"
+    ],
+    "cameras": [
+      "awJo6rH",
+      "LKvoNasf"
+    ],
     "devices": {
       "$company": {
-        "$product_type": ["CPMEMSnC48JlSAHjQIp-aHI72IjLYHK_ul_c54UFb8CmPXNj4ixLbg"]
+        "$product_type": [
+          "CPMEMSnC48JlSAHjQIp-aHI72IjLYHK_ul_c54UFb8CmPXNj4ixLbg"
+        ]
       }
     },
-    "away": "home",
+    "away": "auto-away",
     "name": "Home",
     "country_code": "US",
     "postal_code": "94304",

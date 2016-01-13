@@ -34,7 +34,7 @@ pod "NestSDK", github => "https://github.com/petroakzhygitov/nest-ios-sdk.git"
 
 4. Use your product `Product ID`, `Product Secret` and `Redirect URI` for the iOS project setup.
 
-## General iOS project Setup
+## General iOS project setup
 
 1. Add NestSDK to your project (see Installation)
 
@@ -72,6 +72,14 @@ pod "NestSDK", github => "https://github.com/petroakzhygitov/nest-ios-sdk.git"
   }
   ```
 
+## General iOS application workflow
+
+Before reading, observing or writing any data to Nest structures or devices you should implement user authorization. So, the general application workflow should be following:
+
+1. Authorize user with Nest using predefined `Connect with Nest` button (`NestSDKConnectWithNestButton`) or by manually handling authorization dialog with authorization manager class (`NestSDKAuthorizationManager`).
+
+2. Read/Observe/Write structure, devices or meta data.
+
 ## Connect with Nest
 
 The Nest SDK for iOS enables people to connect your Nest product app with their's personal Nest account. 
@@ -108,6 +116,19 @@ To add a `Connect with Nest` button to your app add the following code snippet t
 @end
 ```
 
+To get known whether user is already authorized check result of `[NestSDKAccessToken currentToken]` before starting authorization process:
+
+```objective-c
+
+if ([NestSDKAccessToken currentToken]) {
+  NSLog(@"Authorized!");
+  
+} else {
+  NSLog(@"Not authorized!);
+}
+
+```
+
 ### Custom Connect with Nest button
 
 Instead of using the predefined `Connect with Nest` button (explained in Add Connect With Nest Button Code) you may want to design a custom layout and behavior. In the following code example we invoke the authorization dialog using the authorization manager class (`NestSDKAuthorizationManager`) and a custom button (`UIButton`). You can use any other custom user interface or event handling to invoke the authorization dialog.
@@ -121,7 +142,7 @@ Instead of using the predefined `Connect with Nest` button (explained in Add Con
 @implementation ViewController
 
 - (void)viewDidLoad {
-  [super viewDidLoad];
+    [super viewDidLoad];
     
     // Add a custom connect with button to your app
     UIButton *customConnectWithNestButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -160,7 +181,7 @@ Instead of using the predefined `Connect with Nest` button (explained in Add Con
 @end
 ```
 
-## Reading/Observing structures
+## Structures
 
 All Nest devices belong to a structure. A structure can have many devices. 
 
@@ -168,42 +189,66 @@ It's possible that a user has more than one structure attached to their Nest Acc
 
 [More information](https://developer.nest.com/documentation/cloud/structure-guide) about Nest structures.
 
-To read/observe structures use `NestSDKStructuresManager`:
-```objective-c
-NestSDKStructuresManager *structuresManager = [[NestSDKStructuresManager alloc] init];
+### Observing structures
 
-[structuresManager observeStructuresWithBlock:^(NSArray <NestSDKStructure> *structuresArray) {
+To observe structures use `NestSDKDataManager`:
+```objective-c
+NestSDKDataManager *dataManager = [[NestSDKDataManager alloc] init];
+
+[dataManager observeStructuresWithBlock:^(NSArray <NestSDKStructure> *structuresArray, NSError *error) {
+	if (error) {
+		NSLog(@"Error occurred while observing structures: %@", error);
+		return;
+	}
+	
 	for (NestSDKStructure *structure in structuresArray) {
 		NSLog(@"Read structure with name: %@", structure.name);
 	}
 }];
 ```
 
-## Reading/Observing devices
+## Devices
 
-There are three types of Nest devices available to read/observe:
+There are three types of Nest devices available to read/observe/write:
 - Thermostat ([more information](https://developer.nest.com/documentation/cloud/thermostat-guide))
 - Smoke+CO Alarm ([more information](https://developer.nest.com/documentation/cloud/smoke-co-guide))
 - Camera ([more information](https://developer.nest.com/documentation/cloud/camera-guide))
 
 **NB:** Ensure, you have set proper permissions to read specific device data with your [Nest Product](https://developer.nest.com/products).
 
-To read/observe devices use `NestSDKDeviceManager`:
+## Observing devices
+
+To observe devices use `NestSDKDataManager`:
 ```objective-c
-    NestSDKDevicesManager *devicesManager = [[NestSDKDevicesManager alloc] init];
+    NestSDKDataManager *dataManager = [[NestSDKDataManager alloc] init];
 
     NSString *thermostatId = structure.thermostats[someIndex];
-    [self.devicesManager observeThermostatWithId:thermostatId block:^(NestSDKThermostat *thermostat, NSError *error) {
+    [self.dataManager observeThermostatWithId:thermostatId block:^(NestSDKThermostat *thermostat, NSError *error) {
+    	if (error) {
+		NSLog(@"Error occurred while observing structures: %@", error);
+		return;
+	}
+	
         NSLog(@"Read Thermostat with name: %@", thermostat.name);
     }];
 
     NSString *smokeCOAlarmId = structure.smoke_co_alarms[someIndex];
-    [self.devicesManager observeSmokeCOAlarmWithId:smokeCOAlarmId block:^(NestSDKSmokeCOAlarm *smokeCOAlarm, NSError *error) {
+    [self.dataManager observeSmokeCOAlarmWithId:smokeCOAlarmId block:^(NestSDKSmokeCOAlarm *smokeCOAlarm, NSError *error) {
+    	if (error) {
+		NSLog(@"Error occurred while observing structures: %@", error);
+		return;
+	}
+	
         NSLog(@"Read Smoke+CO Alarm with name: %@", smokeCOAlarm.name);
     }];
  
     NSString *cameraId = structure.cameras[someIndex];
-    [self.devicesManager observeCameraWithId:cameraId block:^(NestSDKCamera *camera, NSError *error) {
+    [self.dataManager observeCameraWithId:cameraId block:^(NestSDKCamera *camera, NSError *error) {
+    	if (error) {
+		NSLog(@"Error occurred while observing structures: %@", error);
+		return;
+	}
+	
         NSLog(@"Read Camera with name: %@", camera.name);
     }];
 ```

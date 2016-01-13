@@ -26,60 +26,75 @@
 #import "LSStubRequestDSL.h"
 #import "LSNocilla.h"
 #import "NestSDKMetadata.h"
-#import "NestSDKWheres.h"
+#import "NestSDKETA.h"
 
-SpecBegin(NestSDKWheres)
+SpecBegin(NestSDKETA)
     {
-        describe(@"NestSDKWheres", ^{
-            
-            __block NSData *wheresData;
+        describe(@"NestSDKETA", ^{
+
+            __block NSData *data;
 
             beforeAll(^{
                 NSString *resourcePath = [NSBundle bundleForClass:[self class]].resourcePath;
-                NSString *whereDataPath = [resourcePath stringByAppendingPathComponent:@"wheres.json"];
+                NSString *dataPath = [resourcePath stringByAppendingPathComponent:@"eta.json"];
 
-                wheresData = [NSData dataWithContentsOfFile:whereDataPath];
+                data = [NSData dataWithContentsOfFile:dataPath];
             });
 
-            it(@"should deserialize/serialize wheres data", ^{
+            it(@"should deserialize/serialize data", ^{
                 NSError *error;
-                NestSDKWheres *wheres = [[NestSDKWheres alloc] initWithData:wheresData error:&error];
+                NestSDKETA *eta = [[NestSDKETA alloc] initWithData:data error:&error];
                 expect(error).to.equal(nil);
 
-                expect(wheres.whereId).to.equal(@"Fqp6wJI...");
-                expect(wheres.name).to.equal(@"Bedroom");
+                NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+                calendar.timeZone = [NSTimeZone timeZoneWithAbbreviation:@"UTC"];
+
+                NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
+                dateComponents.timeZone = [NSTimeZone timeZoneWithAbbreviation:@"UTC"];
+                dateComponents.year = 2015;
+                dateComponents.month = 10;
+                dateComponents.day = 31;
+                dateComponents.hour = 22;
+                dateComponents.minute = 42;
+                dateComponents.second = 59;
+
+                NSDate *estimatedArrivalWindowBeginDate = [calendar dateFromComponents:dateComponents];
+
+                dateComponents.hour = 23;
+                dateComponents.minute = 59;
+                NSDate *estimatedArrivalWindowEndDate = [calendar dateFromComponents:dateComponents];
+
+                expect(eta.tripId).to.equal(@"myTripHome1024");
+                expect(eta.estimatedArrivalWindowBegin).to.equal(estimatedArrivalWindowBeginDate);
+                expect(eta.estimatedArrivalWindowEnd).to.equal(estimatedArrivalWindowEndDate);
+
+                NSDictionary *serializedDictionary = [NSJSONSerialization JSONObjectWithData:[eta toJSONData] options:kNilOptions error:&error];
+                expect(error).to.equal(nil);
+
+                NSDictionary *initialDictionary = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+                expect(error).to.equal(nil);
+
+                expect(serializedDictionary).to.equal(initialDictionary);
             });
 
-            it(@"should have proper hash", ^{
+            it(@"should have proper hash and equal", ^{
                 NSError *error;
-                NestSDKWheres *wheres1 = [[NestSDKWheres alloc] initWithData:wheresData error:&error];
+                NestSDKETA *eta1 = [[NestSDKETA alloc] initWithData:data error:&error];
                 expect(error).to.equal(nil);
 
-                NestSDKWheres *wheres2 = [[NestSDKWheres alloc] initWithData:wheresData error:&error];
+                NestSDKETA *eta2 = [[NestSDKETA alloc] initWithData:data error:&error];
                 expect(error).to.equal(nil);
 
-                NestSDKWheres *wheres3 = [[NestSDKWheres alloc] initWithData:wheresData error:&error];
-                wheres3.name = @"SomeName";
+                NestSDKETA *eta3 = [[NestSDKETA alloc] initWithData:data error:&error];
                 expect(error).to.equal(nil);
 
-                expect(wheres1.hash).to.equal(wheres2.hash);
-                expect(wheres1.hash).notTo.equal(wheres3.hash);
-            });
+                eta3.tripId = @"someTripId";
 
-            it(@"should equal to another wheres", ^{
-                NSError *error;
-                NestSDKWheres *wheres1 = [[NestSDKWheres alloc] initWithData:wheresData error:&error];
-                expect(error).to.equal(nil);
+                expect(eta1.hash).to.equal(eta2.hash);
+                expect(eta1.hash).notTo.equal(eta3.hash);
 
-                NestSDKWheres *wheres2 = [[NestSDKWheres alloc] initWithData:wheresData error:&error];
-                expect(error).to.equal(nil);
-
-                NestSDKWheres *wheres3 = [[NestSDKWheres alloc] initWithData:wheresData error:&error];
-                wheres3.name = @"SomeName";
-                expect(error).to.equal(nil);
-
-                expect(wheres1).to.equal(wheres2);
-                expect(wheres1).notTo.equal(wheres3);
+                expect(eta1).to.equal(eta2);
+                expect(eta1).notTo.equal(eta3);
             });
         });
     }

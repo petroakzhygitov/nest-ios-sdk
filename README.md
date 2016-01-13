@@ -34,7 +34,7 @@ pod "NestSDK", github => "https://github.com/petroakzhygitov/nest-ios-sdk.git"
 
 4. Use your product `Product ID`, `Product Secret` and `Redirect URI` for the iOS project setup.
 
-## General iOS project Setup
+## General iOS project setup
 
 1. Add NestSDK to your project (see Installation)
 
@@ -66,11 +66,19 @@ pod "NestSDK", github => "https://github.com/petroakzhygitov/nest-ios-sdk.git"
   #import <FBSDKCoreKit/FBSDKCoreKit.h>
 
   - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    [[NestSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
+	  [[NestSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
   
-    return YES;
+	  return YES;
   }
   ```
+
+## General iOS application workflow
+
+Before reading, observing or writing any data to Nest devices or structures you should implement user authorization. So, the general application workflow should be following:
+
+1. Authorize user with Nest using predefined `Connect with Nest` button (`NestSDKConnectWithNestButton`) or by manually handling authorization dialog with authorization manager class (`NestSDKAuthorizationManager`).
+
+2. Read/Observe/Write devices, structures or meta data.
 
 ## Connect with Nest
 
@@ -95,17 +103,30 @@ To add a `Connect with Nest` button to your app add the following code snippet t
 @implementation ViewController
 
 - (void)viewDidLoad {
-  [super viewDidLoad];
+	[super viewDidLoad];
   
-  NestSDKConnectWithNestButton *connectWithNestButton = [[NestSDKConnectWithNestButton alloc] init];
+	NestSDKConnectWithNestButton *connectWithNestButton = [[NestSDKConnectWithNestButton alloc] init];
   
-  // Optional: Place the button in the center of your view.
-  connectWithNestButton.center = self.view.center;
+	// Optional: Place the button in the center of your view.
+	connectWithNestButton.center = self.view.center;
   
-  [self.view addSubview:connectWithNestButton];
+	[self.view addSubview:connectWithNestButton];
 }
     
 @end
+```
+
+To get known whether user is already authorized check result of `[NestSDKAccessToken currentToken]` before starting authorization process:
+
+```objective-c
+
+if ([NestSDKAccessToken currentToken]) {
+	NSLog(@"Authorized!");
+  
+} else {
+	NSLog(@"Not authorized!);
+}
+
 ```
 
 ### Custom Connect with Nest button
@@ -121,46 +142,46 @@ Instead of using the predefined `Connect with Nest` button (explained in Add Con
 @implementation ViewController
 
 - (void)viewDidLoad {
-  [super viewDidLoad];
+	[super viewDidLoad];
     
-    // Add a custom connect with button to your app
-    UIButton *customConnectWithNestButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    customConnectWithNestButton.backgroundColor = [UIColor darkGrayColor];
-    customConnectWithNestButton.frame = CGRectMake(0, 0, 240, 40);
+	// Add a custom connect with button to your app
+	UIButton *customConnectWithNestButton = [UIButton buttonWithType:UIButtonTypeCustom];
+	customConnectWithNestButton.backgroundColor = [UIColor darkGrayColor];
+	customConnectWithNestButton.frame = CGRectMake(0, 0, 240, 40);
 
-    // Optional: Place the button in the center of your view.
-    customConnectWithNestButton.center = self.view.center;
-    [customConnectWithNestButton setTitle:@"Custom Connect Button" forState:UIControlStateNormal];
+	// Optional: Place the button in the center of your view.
+	customConnectWithNestButton.center = self.view.center;
+	[customConnectWithNestButton setTitle:@"Custom Connect Button" forState:UIControlStateNormal];
 
-    // Handle clicks on the button
-    [customConnectWithNestButton addTarget:self action:@selector(customConnectWithNestButtonClicked)
-                          forControlEvents:UIControlEventTouchUpInside];
+	// Handle clicks on the button
+	[customConnectWithNestButton addTarget:self action:@selector(customConnectWithNestButtonClicked)
+			        forControlEvents:UIControlEventTouchUpInside];
 
-    // Add the button to the view
-    [self.view addSubview:customConnectWithNestButton];
+	// Add the button to the view
+	[self.view addSubview:customConnectWithNestButton];
 }
 
 // Once the button is clicked, show the auth dialog
 - (void)customConnectWithNestButtonClicked {
-    NestSDKAuthorizationManager *authorizationManager = [[NestSDKAuthorizationManager alloc] init];
-    [authorizationManager authorizeWithNestAccountFromViewController:self
-                                                             handler:^(NestSDKAuthorizationManagerAuthorizationResult *result, NSError *error) {
-                                                                 if (error) {
-							         	                             NSLog(@"Process error: %@", error);
+	NestSDKAuthorizationManager *authorizationManager = [[NestSDKAuthorizationManager alloc] init];
+	[authorizationManager authorizeWithNestAccountFromViewController:self
+                                                             	 handler:^(NestSDKAuthorizationManagerAuthorizationResult *result, NSError *error) {
+                                                                     if (error) {
+							         	                                 NSLog(@"Process error: %@", error);
 								
-								                                 } else if (result.isCancelled) {
-								                                     NSLog(@"Cancelled");
+								                                     } else if (result.isCancelled) {
+								                                         NSLog(@"Cancelled");
 								
-								                                 } else {
-								                                     NSLog(@"Authorized!");
-								                                 }
-                                                             }];
+								                                     } else {
+								                                         NSLog(@"Authorized!");
+								                                     }
+                                                                 }];
 }
     
 @end
 ```
 
-## Reading/Observing structures
+## Structures
 
 All Nest devices belong to a structure. A structure can have many devices. 
 
@@ -168,44 +189,67 @@ It's possible that a user has more than one structure attached to their Nest Acc
 
 [More information](https://developer.nest.com/documentation/cloud/structure-guide) about Nest structures.
 
-To read/observe structures use `NestSDKStructuresManager`:
-```objective-c
-NestSDKStructuresManager *structuresManager = [[NestSDKStructuresManager alloc] init];
+### Observing structures
 
-[structuresManager observeStructuresWithBlock:^(NSArray <NestSDKStructure> *structuresArray) {
+To observe structures use `NestSDKDataManager`:
+```objective-c
+NestSDKDataManager *dataManager = [[NestSDKDataManager alloc] init];
+[dataManager observeStructuresWithBlock:^(NSArray <NestSDKStructure> *structuresArray, NSError *error) {
+	if (error) {
+		NSLog(@"Error occurred while observing structures: %@", error);
+		return;
+	}
+	
 	for (NestSDKStructure *structure in structuresArray) {
 		NSLog(@"Read structure with name: %@", structure.name);
 	}
 }];
 ```
 
-## Reading/Observing devices
+## Devices
 
-There are three types of Nest devices available to read/observe:
+There are three types of Nest devices available to read/observe/write:
 - Thermostat ([more information](https://developer.nest.com/documentation/cloud/thermostat-guide))
 - Smoke+CO Alarm ([more information](https://developer.nest.com/documentation/cloud/smoke-co-guide))
 - Camera ([more information](https://developer.nest.com/documentation/cloud/camera-guide))
 
 **NB:** Ensure, you have set proper permissions to read specific device data with your [Nest Product](https://developer.nest.com/products).
 
-To read/observe devices use `NestSDKDeviceManager`:
+## Observing devices
+
+To observe devices use `NestSDKDataManager`:
 ```objective-c
-    NestSDKDevicesManager *devicesManager = [[NestSDKDevicesManager alloc] init];
+NestSDKDataManager *dataManager = [[NestSDKDataManager alloc] init];
 
-    NSString *thermostatId = structure.thermostats[someIndex];
-    [self.devicesManager observeThermostatWithId:thermostatId block:^(NestSDKThermostat *thermostat, NSError *error) {
+NSString *thermostatId = structure.thermostats[someIndex];
+[self.dataManager observeThermostatWithId:thermostatId block:^(NestSDKThermostat *thermostat, NSError *error) {
+	if (error) {
+		NSLog(@"Error occurred while observing thermostat: %@", error);
+		return;
+	}
+	
         NSLog(@"Read Thermostat with name: %@", thermostat.name);
-    }];
+}];
 
-    NSString *smokeCOAlarmId = structure.smoke_co_alarms[someIndex];
-    [self.devicesManager observeSmokeCOAlarmWithId:smokeCOAlarmId block:^(NestSDKSmokeCOAlarm *smokeCOAlarm, NSError *error) {
-        NSLog(@"Read Smoke+CO Alarm with name: %@", smokeCOAlarm.name);
-    }];
+NSString *smokeCOAlarmId = structure.smoke_co_alarms[someIndex];
+[self.dataManager observeSmokeCOAlarmWithId:smokeCOAlarmId block:^(NestSDKSmokeCOAlarm *smokeCOAlarm, NSError *error) {
+    	if (error) {
+		NSLog(@"Error occurred while observing smoke CO alarm: %@", error);
+		return;
+	}
+	
+	NSLog(@"Read Smoke+CO Alarm with name: %@", smokeCOAlarm.name);
+}];
  
-    NSString *cameraId = structure.cameras[someIndex];
-    [self.devicesManager observeCameraWithId:cameraId block:^(NestSDKCamera *camera, NSError *error) {
+NSString *cameraId = structure.cameras[someIndex];
+[self.dataManager observeCameraWithId:cameraId block:^(NestSDKCamera *camera, NSError *error) {
+	if (error) {
+		NSLog(@"Error occurred while observing camera: %@", error);
+		return;
+	}
+	
         NSLog(@"Read Camera with name: %@", camera.name);
-    }];
+}];
 ```
 
 ## Author

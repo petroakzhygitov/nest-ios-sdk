@@ -112,7 +112,7 @@
     Firebase *firebase = [self.firebase childByAppendingPath:url];
 
     return [firebase observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
-        block(snapshot, nil);
+        block(snapshot.value, nil);
 
     }                 withCancelBlock:^(NSError *error) {
         block(nil, error);

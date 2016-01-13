@@ -72,8 +72,24 @@ typedef void (^NestSDKDataModelUpdateHandler)(id, NSError *);
     [self _dataModelFromURL:url withClass:dataModelClass block:block asArray:NO];
 }
 
-- (void)_dataModelFromURL:(NSString *)url withClass:(Class)dataModelClass block:(NestSDKDataModelUpdateHandler)block asArray:(BOOL)asArray {
+- (void)_dataModelFromURL:(NSString *)url withClass:(Class)dataModelClass
+                    block:(NestSDKDataModelUpdateHandler)block asArray:(BOOL)asArray {
+
     [self.service valuesForURL:url withBlock:^(id result, NSError *error) {
+        [self _handleResultWithDataModelClass:dataModelClass block:block result:result error:error asArray:asArray];
+    }];
+}
+
+- (NestSDKObserverHandle)_observeDataModelWithURL:(NSString *)url withClass:(Class)dataModelClass
+                                            block:(NestSDKDataModelUpdateHandler)block {
+
+    return [self _observeDataModelWithURL:url withClass:dataModelClass block:block asArray:NO];
+}
+
+- (NestSDKObserverHandle)_observeDataModelWithURL:(NSString *)url withClass:(Class)dataModelClass
+                                            block:(NestSDKDataModelUpdateHandler)block asArray:(BOOL)asArray {
+
+    return [self.service observeValuesForURL:url withBlock:^(id result, NSError *error) {
         [self _handleResultWithDataModelClass:dataModelClass block:block result:result error:error asArray:asArray];
     }];
 }
@@ -138,7 +154,10 @@ typedef void (^NestSDKDataModelUpdateHandler)(id, NSError *);
 }
 
 - (NestSDKObserverHandle)observeStructuresWithBlock:(NestSDKStructuresUpdateHandler)block {
-    return 0;
+    return [self _observeDataModelWithURL:[self _structuresURL]
+                                withClass:[NestSDKStructure class]
+                                    block:block
+                                  asArray:YES];
 }
 
 - (void)thermostatWithId:(NSString *)thermostatId block:(NestSDKThermostatUpdateHandler)block {
@@ -172,15 +191,21 @@ typedef void (^NestSDKDataModelUpdateHandler)(id, NSError *);
 }
 
 - (NestSDKObserverHandle)observeThermostatWithId:(NSString *)thermostatId block:(NestSDKThermostatUpdateHandler)block {
-    return 0;
+    return [self _observeDataModelWithURL:[self _structuresURL]
+                                withClass:[NestSDKThermostat class]
+                                    block:block];
 }
 
 - (NestSDKObserverHandle)observeSmokeCOAlarmWithId:(NSString *)smokeCOAlarmId block:(NestSDKSmokeCOAlarmUpdateHandler)block {
-    return 0;
+    return [self _observeDataModelWithURL:[self _structuresURL]
+                                withClass:[NestSDKSmokeCOAlarm class]
+                                    block:block];
 }
 
 - (NestSDKObserverHandle)observeCameraWithId:(NSString *)cameraId block:(NestSDKCameraUpdateHandler)block {
-    return 0;
+    return [self _observeDataModelWithURL:[self _structuresURL]
+                                withClass:[NestSDKCamera class]
+                                    block:block];
 }
 
 - (void)removeObserverWithHandle:(NestSDKObserverHandle)handle {

@@ -26,11 +26,8 @@
 #import <NestSDK/NestSDKAuthorizationManagerAuthorizationResult.h>
 #import <NestSDK/NestSDKConnectWithNestButton.h>
 
-#import <NestSDK/NestSDKAccessToken.h>
-
-#import <NestSDK/NestSDKStructuresManager.h>
-#import <NestSDK/NestSDKDevicesManager.h>
 #import <NestSDK/NestSDKDataManager.h>
+#import <NestSDK/NestSDKAccessToken.h>
 
 #import <NestSDK/NestSDKService.h>
 #import <NestSDK/NestSDKError.h>

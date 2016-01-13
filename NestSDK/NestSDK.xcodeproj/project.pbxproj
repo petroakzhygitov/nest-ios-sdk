@@ -30,7 +30,6 @@
 		91DC3D711C3F123C00A61B61 /* NestSDKApplicationDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 91DC3D551C3F123C00A61B61 /* NestSDKApplicationDelegate.m */; };
 		994A46EB54FD53AA7CE1EDEF /* libPods-NestSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5091C3934F818825EFCA5F61 /* libPods-NestSDK.a */; };
 		D7C0200645B252F3C2B0CBF9 /* NestSDKDataManager.h in Headers */ = {isa = PBXBuildFile; fileRef = D7C02AC086B5EA6AC916A730 /* NestSDKDataManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D7C0201E95D587FE559F9806 /* NestSDKDevicesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D7C0228B69226A9184311B2F /* NestSDKDevicesManager.m */; };
 		D7C0202973191B1CCD917EF8 /* NestSDKFirebaseService.m in Sources */ = {isa = PBXBuildFile; fileRef = D7C02574CF95DA524944E039 /* NestSDKFirebaseService.m */; };
 		D7C0207D8EE3B09D60DCAB0E /* NestSDKSmokeCOAlarm.h in Headers */ = {isa = PBXBuildFile; fileRef = D7C02649C6182B3A56152947 /* NestSDKSmokeCOAlarm.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D7C020A403C52B2406E9C443 /* UIColor+NestBlue.h in Headers */ = {isa = PBXBuildFile; fileRef = D7C028ABC3D9860DDB1B9AF1 /* UIColor+NestBlue.h */; };
@@ -48,7 +47,6 @@
 		D7C022538D148AB5DADBB021 /* UIColor+NestBlue.m in Sources */ = {isa = PBXBuildFile; fileRef = D7C0209852FC57CDC7137DBD /* UIColor+NestBlue.m */; };
 		D7C0226A48869F98DD8C9139 /* NestSDKProductIdentification.m in Sources */ = {isa = PBXBuildFile; fileRef = D7C02385E7A1815D0F44AA64 /* NestSDKProductIdentification.m */; };
 		D7C0227322937C59ACD8B157 /* NestSDKAuthorizationManagerAuthorizationResultTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D7C024FF611FC84471870A37 /* NestSDKAuthorizationManagerAuthorizationResultTests.m */; };
-		D7C0234F3901D3CA0D1B79BB /* NestSDKStructuresManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D7C02D197720ED0ED3EE2DDA /* NestSDKStructuresManager.m */; };
 		D7C023ADD782EA5D3340FA5C /* NestSDKWheres.m in Sources */ = {isa = PBXBuildFile; fileRef = D7C024E96C3BE244AC866820 /* NestSDKWheres.m */; };
 		D7C023B83B7CC9AADC45A249 /* NestSDKProductSoftware.h in Headers */ = {isa = PBXBuildFile; fileRef = D7C02514FCFFF86F1A2AA0DF /* NestSDKProductSoftware.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D7C023C5B9AB1CC24A6444DF /* structure.json in Resources */ = {isa = PBXBuildFile; fileRef = D7C025B2520F58DEDD1DC363 /* structure.json */; };
@@ -56,13 +54,11 @@
 		D7C023EC3DF8E4817CCCDDF0 /* NestSDKRESTService.m in Sources */ = {isa = PBXBuildFile; fileRef = D7C022B4EE034E8CBA3CD885 /* NestSDKRESTService.m */; };
 		D7C02453577775B38E87113C /* NestSDKCameraLastEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = D7C02062DF429D0467B1A9E2 /* NestSDKCameraLastEvent.m */; };
 		D7C0245BB92D7A8E2361E17C /* NestSDKError.m in Sources */ = {isa = PBXBuildFile; fileRef = D7C0267171E4722D23510375 /* NestSDKError.m */; };
-		D7C02473E60F69417955F61C /* NestSDKStructuresManager.h in Headers */ = {isa = PBXBuildFile; fileRef = D7C02B53575795BEA047B351 /* NestSDKStructuresManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D7C0251DC02F6E3EDDD67A4A /* NestSDKETA.m in Sources */ = {isa = PBXBuildFile; fileRef = D7C028D9BE99F7FB0334331C /* NestSDKETA.m */; };
 		D7C02530A855F8E2DCEA11BA /* NestSDKProductResource.m in Sources */ = {isa = PBXBuildFile; fileRef = D7C025468FAE00EA1DDDACE4 /* NestSDKProductResource.m */; };
 		D7C0254233E8091358B0073F /* NestSDKUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = D7C028E10139B3C67BAE80AA /* NestSDKUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D7C0258702090EA4573F3221 /* NestSDKStructure.m in Sources */ = {isa = PBXBuildFile; fileRef = D7C02FF9783691308B1C0100 /* NestSDKStructure.m */; };
 		D7C026277B62D6CD5A0904E2 /* NestSDKProductResource.h in Headers */ = {isa = PBXBuildFile; fileRef = D7C02E5D069C59244A559F11 /* NestSDKProductResource.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D7C0262C02EBA3EEB31C6B1C /* NestSDKDevicesManager.h in Headers */ = {isa = PBXBuildFile; fileRef = D7C02719A33C71BA8D58CA82 /* NestSDKDevicesManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D7C02652A1D09F860CC4E047 /* NestSDKError.h in Headers */ = {isa = PBXBuildFile; fileRef = D7C024A63079E9EBDC7C862C /* NestSDKError.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D7C026600655F730C31BC80A /* NestSDKRESTService.h in Headers */ = {isa = PBXBuildFile; fileRef = D7C029EFA9AD5B3D73DB65A8 /* NestSDKRESTService.h */; };
 		D7C026851CE2363FD2F8E86E /* NestSDKAuthorizationManager.h in Headers */ = {isa = PBXBuildFile; fileRef = D7C02436225D3842DC259BC8 /* NestSDKAuthorizationManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -148,7 +144,6 @@
 		D7C022297DEC57200648225D /* NestSDKAuthorizationManagerAuthorizationResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NestSDKAuthorizationManagerAuthorizationResult.m; sourceTree = "<group>"; };
 		D7C0222E0913DE127EE0859F /* NestSDKProductResourceUse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NestSDKProductResourceUse.m; sourceTree = "<group>"; };
 		D7C02266AA9C46405A6562A8 /* NestSDKDataManagerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NestSDKDataManagerTests.m; sourceTree = "<group>"; };
-		D7C0228B69226A9184311B2F /* NestSDKDevicesManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NestSDKDevicesManager.m; sourceTree = "<group>"; };
 		D7C02296F470670C3211AC8D /* NestSDKProductSoftware.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NestSDKProductSoftware.m; sourceTree = "<group>"; };
 		D7C0229F281289BBD09790C0 /* NestSDKAuthorizationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NestSDKAuthorizationViewController.h; sourceTree = "<group>"; };
 		D7C022B4EE034E8CBA3CD885 /* NestSDKRESTService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NestSDKRESTService.m; sourceTree = "<group>"; };
@@ -181,7 +176,6 @@
 		D7C026DE0CEFA2F3ECDB762B /* NestSDKAccessToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NestSDKAccessToken.h; sourceTree = "<group>"; };
 		D7C026E8605A28BE2D5FE5CD /* NestSDKUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NestSDKUtils.m; sourceTree = "<group>"; };
 		D7C026F639A253CB066622AC /* NestSDKAuthorizationManagerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NestSDKAuthorizationManagerTests.m; sourceTree = "<group>"; };
-		D7C02719A33C71BA8D58CA82 /* NestSDKDevicesManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NestSDKDevicesManager.h; sourceTree = "<group>"; };
 		D7C02745F6B884E9A4F395BE /* NestSDKAccessToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NestSDKAccessToken.m; sourceTree = "<group>"; };
 		D7C0276207D694525CF3D027 /* NestSDKMetadataTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NestSDKMetadataTests.m; sourceTree = "<group>"; };
 		D7C02771EE2D69D2496F5C3B /* NestSDKFirebaseService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NestSDKFirebaseService.h; sourceTree = "<group>"; };
@@ -200,14 +194,12 @@
 		D7C02AD6AD3FE5675DEAA4A8 /* eta.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = eta.json; sourceTree = "<group>"; };
 		D7C02AE4A29F26716A573481 /* NestSDKAuthorizationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NestSDKAuthorizationManager.m; sourceTree = "<group>"; };
 		D7C02B2BE897CE8DD0A550CD /* NestSDKService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NestSDKService.h; sourceTree = "<group>"; };
-		D7C02B53575795BEA047B351 /* NestSDKStructuresManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NestSDKStructuresManager.h; sourceTree = "<group>"; };
 		D7C02BCA9FFF19496CB0B0E6 /* thermostat.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = thermostat.json; sourceTree = "<group>"; };
 		D7C02BD2B30A85EE418B9673 /* NestSDKAccessTokenCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NestSDKAccessTokenCache.h; sourceTree = "<group>"; };
 		D7C02C206732F084EA36C8C4 /* NestSDKSmokeCOAlarm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NestSDKSmokeCOAlarm.m; sourceTree = "<group>"; };
 		D7C02C64FAD4C300F0B14C54 /* NestSDKDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NestSDKDataModel.h; sourceTree = "<group>"; };
 		D7C02C78512CDB4192D83320 /* NestSDKAccessTokenCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NestSDKAccessTokenCache.m; sourceTree = "<group>"; };
 		D7C02CA2A9D4F9DF6CA297A4 /* NestSDKProductLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NestSDKProductLocation.h; sourceTree = "<group>"; };
-		D7C02D197720ED0ED3EE2DDA /* NestSDKStructuresManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NestSDKStructuresManager.m; sourceTree = "<group>"; };
 		D7C02D29C5136A59FA3C2AD8 /* NestSDKMetadata.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NestSDKMetadata.m; sourceTree = "<group>"; };
 		D7C02D5877EF9CB886A72B81 /* NestSDKDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NestSDKDataManager.m; sourceTree = "<group>"; };
 		D7C02D5B4650DFDC24DB3308 /* NestSDKFirebaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NestSDKFirebaseManager.m; sourceTree = "<group>"; };
@@ -439,10 +431,6 @@
 		D7C029DF9386225AEF2E99EA /* data-managers */ = {
 			isa = PBXGroup;
 			children = (
-				D7C02719A33C71BA8D58CA82 /* NestSDKDevicesManager.h */,
-				D7C02B53575795BEA047B351 /* NestSDKStructuresManager.h */,
-				D7C02D197720ED0ED3EE2DDA /* NestSDKStructuresManager.m */,
-				D7C0228B69226A9184311B2F /* NestSDKDevicesManager.m */,
 				D7C02D5877EF9CB886A72B81 /* NestSDKDataManager.m */,
 				D7C02AC086B5EA6AC916A730 /* NestSDKDataManager.h */,
 			);
@@ -540,8 +528,6 @@
 				D7C02A953EF50284D3E0CF92 /* NestSDKDataModel.h in Headers */,
 				D7C0254233E8091358B0073F /* NestSDKUtils.h in Headers */,
 				D7C02E7A4623EA5CA7BFE0B4 /* NestSDKAccessTokenCache.h in Headers */,
-				D7C0262C02EBA3EEB31C6B1C /* NestSDKDevicesManager.h in Headers */,
-				D7C02473E60F69417955F61C /* NestSDKStructuresManager.h in Headers */,
 				D7C02652A1D09F860CC4E047 /* NestSDKError.h in Headers */,
 				D7C02870978E5BA55A754510 /* NestSDKLogger.h in Headers */,
 			);
@@ -777,8 +763,6 @@
 				D7C02BADDFC591F9C3C845FD /* NestSDKUtils.m in Sources */,
 				D7C027ACCA85BDBA5A04DCBD /* NestSDKAccessTokenCache.m in Sources */,
 				D7C02B4A98D390AF641F4B52 /* NestSDKAccessToken.m in Sources */,
-				D7C0234F3901D3CA0D1B79BB /* NestSDKStructuresManager.m in Sources */,
-				D7C0201E95D587FE559F9806 /* NestSDKDevicesManager.m in Sources */,
 				D7C02CB2A86673E51C92BDB6 /* NestSDKDataManager.m in Sources */,
 				D7C0202973191B1CCD917EF8 /* NestSDKFirebaseService.m in Sources */,
 				D7C0245BB92D7A8E2361E17C /* NestSDKError.m in Sources */,

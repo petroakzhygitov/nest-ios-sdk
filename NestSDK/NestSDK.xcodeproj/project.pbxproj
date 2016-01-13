@@ -286,7 +286,7 @@
 				D7C029D0A8D8464A041C16B8 /* utils */,
 				D7C02636EF2E01548503AEB3 /* categories */,
 				D7C02C9B7C32117186F8C30D /* access-token */,
-				D7C029DF9386225AEF2E99EA /* data-managers */,
+				D7C029DF9386225AEF2E99EA /* data-manager */,
 				D7C024F2167BE4F9A3E75ABF /* logger */,
 				D7C026BC4DB2A883F87241DB /* error */,
 			);
@@ -428,13 +428,13 @@
 			name = utils;
 			sourceTree = "<group>";
 		};
-		D7C029DF9386225AEF2E99EA /* data-managers */ = {
+		D7C029DF9386225AEF2E99EA /* data-manager */ = {
 			isa = PBXGroup;
 			children = (
 				D7C02D5877EF9CB886A72B81 /* NestSDKDataManager.m */,
 				D7C02AC086B5EA6AC916A730 /* NestSDKDataManager.h */,
 			);
-			name = "data-managers";
+			name = "data-manager";
 			sourceTree = "<group>";
 		};
 		D7C02C9B7C32117186F8C30D /* access-token */ = {

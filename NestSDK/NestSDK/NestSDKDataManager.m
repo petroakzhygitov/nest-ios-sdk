@@ -1,13 +1,12 @@
-#import "NestSDKDataManager.h"
-#import "JSONModel.h"
-#import "NestSDKMetadata.h"
-#import "NestSDKApplicationDelegate.h"
-#import "OCMArg.h"
-#import "NestSDKError.h"
-#import "NestSDKStructure.h"
-#import "NestSDKThermostat.h"
-#import "NestSDKSmokeCOAlarm.h"
-#import "NestSDKCamera.h"
+#import <JSONModel/JSONModel.h>
+#import <NestSDK/NestSDKDataManager.h>
+#import <NestSDK/NestSDKMetadata.h>
+#import <NestSDK/NestSDKApplicationDelegate.h>
+#import <NestSDK/NestSDKError.h>
+#import <NestSDK/NestSDKStructure.h>
+#import <NestSDK/NestSDKThermostat.h>
+#import <NestSDK/NestSDKSmokeCOAlarm.h>
+#import <NestSDK/NestSDKCamera.h>
 
 #pragma mark macros
 #pragma mark const

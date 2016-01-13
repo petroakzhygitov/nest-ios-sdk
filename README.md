@@ -74,11 +74,11 @@ pod "NestSDK", github => "https://github.com/petroakzhygitov/nest-ios-sdk.git"
 
 ## General iOS application workflow
 
-Before reading, observing or writing any data to Nest structures or devices you should implement user authorization. So, the general application workflow should be following:
+Before reading, observing or writing any data to Nest devices or structures you should implement user authorization. So, the general application workflow should be following:
 
 1. Authorize user with Nest using predefined `Connect with Nest` button (`NestSDKConnectWithNestButton`) or by manually handling authorization dialog with authorization manager class (`NestSDKAuthorizationManager`).
 
-2. Read/Observe/Write structure, devices or meta data.
+2. Read/Observe/Write devices, structures or meta data.
 
 ## Connect with Nest
 

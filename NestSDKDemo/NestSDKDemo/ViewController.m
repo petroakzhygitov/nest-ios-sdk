@@ -138,7 +138,7 @@
 }
 
 - (void)removeDevicesObservers {
-    [self.dataManager removeAllObservers];
+//    [self.dataManager removeAllObservers];
 }
 
 - (void)removeObservers {

@@ -202,19 +202,19 @@ typedef void (^NestSDKDataModelUpdateHandler)(id, NSError *);
 }
 
 - (NestSDKObserverHandle)observeThermostatWithId:(NSString *)thermostatId block:(NestSDKThermostatUpdateHandler)block {
-    return [self _observeDataModelWithURL:[self _structuresURL]
+    return [self _observeDataModelWithURL:[self _thermostatURLWithThermostatId:thermostatId]
                                 withClass:[NestSDKThermostat class]
                                     block:block];
 }
 
 - (NestSDKObserverHandle)observeSmokeCOAlarmWithId:(NSString *)smokeCOAlarmId block:(NestSDKSmokeCOAlarmUpdateHandler)block {
-    return [self _observeDataModelWithURL:[self _structuresURL]
+    return [self _observeDataModelWithURL:[self _smokeCOAlarmURLWithSmokeCOAlarmId:smokeCOAlarmId]
                                 withClass:[NestSDKSmokeCOAlarm class]
                                     block:block];
 }
 
 - (NestSDKObserverHandle)observeCameraWithId:(NSString *)cameraId block:(NestSDKCameraUpdateHandler)block {
-    return [self _observeDataModelWithURL:[self _structuresURL]
+    return [self _observeDataModelWithURL:[self _cameraURLWithCameraId:cameraId]
                                 withClass:[NestSDKCamera class]
                                     block:block];
 }

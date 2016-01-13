@@ -70,4 +70,5 @@
             (self.isOnline == otherDevice.isOnline) &&
             ([NestSDKUtils object:self.whereId isEqualToObject:otherDevice.whereId]));
 }
+
 @end

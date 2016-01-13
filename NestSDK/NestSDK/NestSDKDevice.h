@@ -23,7 +23,7 @@
 #import <NestSDK/NestSDKDataModel.h>
 
 /**
- * Base class for Nest devices.
+ * Base class for Nest devices data models.
  */
 @interface NestSDKDevice : NestSDKDataModel
 #pragma mark Properties

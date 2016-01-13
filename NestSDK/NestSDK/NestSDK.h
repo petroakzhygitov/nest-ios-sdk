@@ -35,6 +35,7 @@
 #import <NestSDK/NestSDKService.h>
 #import <NestSDK/NestSDKError.h>
 #import <NestSDK/NestSDKLogger.h>
+#import <NestSDK/NestSDKUtils.h>
 
 #import <NestSDK/NestSDKDataModel.h>
 #import <NestSDK/NestSDKMetadata.h>

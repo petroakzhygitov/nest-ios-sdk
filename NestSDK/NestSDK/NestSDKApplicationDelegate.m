@@ -78,7 +78,9 @@ static id <NestSDKService> g_service;
 
     } else {
         Firebase *firebase = [[Firebase alloc] initWithUrl:kNestAPIEndpointURLString];
-        service = [[NestSDKFirebaseService alloc] initWithFirebase:firebase];
+
+        service = [[NestSDKFirebaseService alloc] initWithFirebase:firebase
+                                                       accessToken:[NestSDKAccessToken currentAccessToken]];
     }
 
     [self _setService:service];

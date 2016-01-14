@@ -27,17 +27,18 @@
 #import "LSNocilla.h"
 #import "NestSDKMetadata.h"
 #import "NestSDKDevice.h"
-#import "NestSDKThermostat.h"
 #import "NestSDKCamera.h"
+#import "NestSDKCameraLastEvent.h"
 
 SpecBegin(NestSDKCamera)
     {
         describe(@"NestSDKCamera", ^{
 
             __block NSData *data;
+            __block NSString *resourcePath;
 
             beforeAll(^{
-                NSString *resourcePath = [NSBundle bundleForClass:[self class]].resourcePath;
+                resourcePath = [NSBundle bundleForClass:[self class]].resourcePath;
                 NSString *dataPath = [resourcePath stringByAppendingPathComponent:@"camera.json"];
 
                 data = [NSData dataWithContentsOfFile:dataPath];
@@ -46,6 +47,12 @@ SpecBegin(NestSDKCamera)
             it(@"should deserialize/serialize data", ^{
                 NSError *error;
                 NestSDKCamera *camera = [[NestSDKCamera alloc] initWithData:data error:&error];
+                expect(error).to.equal(nil);
+
+                NSString *lastEventJSONPath = [resourcePath stringByAppendingPathComponent:@"camera_last_event.json"];
+                NSData *lastEventData = [NSData dataWithContentsOfFile:lastEventJSONPath];
+
+                NestSDKCameraLastEvent *lastEvent = [[NestSDKCameraLastEvent alloc] initWithData:lastEventData error:&error];
                 expect(error).to.equal(nil);
 
                 NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
@@ -75,7 +82,7 @@ SpecBegin(NestSDKCamera)
                 expect(camera.isVideoHistoryEnabled).to.equal(YES);
                 expect(camera.webUrl).to.equal(@"https://home.nest.com/cameras/device_id?auth=access_token");
                 expect(camera.appUrl).to.equal(@"nestmobile://cameras/device_id?auth=access_token");
-                expect(camera.lastEvent).to.equal(nil);
+                expect(camera.lastEvent).to.equal(lastEvent);
 
                 NSDictionary *serializedDictionary = [NSJSONSerialization JSONObjectWithData:[camera toJSONData] options:kNilOptions error:&error];
                 expect(error).to.equal(nil);

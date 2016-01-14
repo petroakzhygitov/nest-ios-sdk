@@ -39,8 +39,8 @@ static NSString *const kHVACModeStringOff = @"off";
 @implementation NestSDKThermostat
 #pragma mark Override
 
-- (void)setLastConnectionWithNSString:(NSString *)peakPeriodStartTimeString {
-    self.lastConnection = [NestSDKUtils dateWithISO8601FormatDateString:peakPeriodStartTimeString];
+- (void)setLastConnectionWithNSString:(NSString *)lastConnectionString {
+    self.lastConnection = [NestSDKUtils dateWithISO8601FormatDateString:lastConnectionString];
 }
 
 - (id)JSONObjectForLastConnection {

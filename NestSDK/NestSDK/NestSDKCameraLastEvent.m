@@ -25,7 +25,7 @@
 @implementation NestSDKCameraLastEvent
 #pragma mark Override
 
-- (void)setStartTimeNSString:(NSString *)startTimeString {
+- (void)setStartTimeWithNSString:(NSString *)startTimeString {
     self.startTime = [NestSDKUtils dateWithISO8601FormatDateString:startTimeString];
 }
 
@@ -33,7 +33,7 @@
     return [NestSDKUtils iso8601FormatDateStringWithDate:self.startTime];
 }
 
-- (void)setEndTimeNSString:(NSString *)endTimeString {
+- (void)setEndTimeWithNSString:(NSString *)endTimeString {
     self.endTime = [NestSDKUtils dateWithISO8601FormatDateString:endTimeString];
 }
 

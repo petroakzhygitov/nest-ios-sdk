@@ -21,12 +21,65 @@
 #import "NestSDKSmokeCOAlarm.h"
 #import "NestSDKUtils.h"
 
+#pragma mark const
+static NSString *const kBatteryHealthStringOk = @"ok";
+static NSString *const kBatteryHealthStringReplace = @"replace";
+
+static NSString *const kAlarmStateStringOk = @"ok";
+static NSString *const kAlarmStateStringWarning = @"warning";
+static NSString *const kAlarmStateStringEmergency = @"emergency";
+
+
+static NSString *const kUIColorStateGray = @"gray";
+
+static NSString *const kUIColorStateGreen = @"green";
+
+static NSString *const kUIColorStateYellow = @"yellow";
+
+static NSString *const kUIColorStateRed = @"red";
 
 @implementation NestSDKSmokeCOAlarm
+#pragma mark Private
+
+- (NestSDKSmokeCOAlarmAlarmState)_alarmStateWithAlarmStateString:(NSString *)alarmStateString {
+    NestSDKSmokeCOAlarmAlarmState alarmState = NestSDKSmokeCOAlarmAlarmStateUndefined;
+
+    if ([alarmStateString isEqualToString:kAlarmStateStringOk]) {
+        alarmState = NestSDKSmokeCOAlarmAlarmStateOk;
+
+    } else if ([alarmStateString isEqualToString:kAlarmStateStringWarning]) {
+        alarmState = NestSDKSmokeCOAlarmAlarmStateWarning;
+
+    } else if ([alarmStateString isEqualToString:kAlarmStateStringEmergency]) {
+        alarmState = NestSDKSmokeCOAlarmAlarmStateEmergency;
+    }
+
+    return alarmState;
+}
+
+- (NSString *)_alarmStateStringWithAlarmState:(NestSDKSmokeCOAlarmAlarmState)alarmState {
+    switch (alarmState) {
+        case NestSDKSmokeCOAlarmAlarmStateUndefined:
+            return nil;
+
+        case NestSDKSmokeCOAlarmAlarmStateOk:
+            return kAlarmStateStringOk;
+
+        case NestSDKSmokeCOAlarmAlarmStateWarning:
+            return kAlarmStateStringWarning;
+
+        case NestSDKSmokeCOAlarmAlarmStateEmergency:
+            return kAlarmStateStringEmergency;
+    }
+
+    return nil;
+}
+
+
 #pragma mark Override
 
-- (void)setLastConnectionWithNSString:(NSString *)peakPeriodStartTimeString {
-    self.lastConnection = [NestSDKUtils dateWithISO8601FormatDateString:peakPeriodStartTimeString];
+- (void)setLastConnectionWithNSString:(NSString *)lastConnectionString {
+    self.lastConnection = [NestSDKUtils dateWithISO8601FormatDateString:lastConnectionString];
 }
 
 - (id)JSONObjectForLastConnection {
@@ -39,6 +92,88 @@
 
 - (id)JSONObjectForLastManualTestTime {
     return [NestSDKUtils iso8601FormatDateStringWithDate:self.lastManualTestTime];
+}
+
+- (void)setBatteryHealthWithNSString:(NSString *)batteryHealthString {
+    if ([batteryHealthString isEqualToString:kBatteryHealthStringOk]) {
+        self.batteryHealth = NestSDKSmokeCOAlarmBatteryHealthOk;
+
+    } else if ([batteryHealthString isEqualToString:kBatteryHealthStringReplace]) {
+        self.batteryHealth = NestSDKSmokeCOAlarmBatteryHealthReplace;
+
+    } else {
+        self.batteryHealth = NestSDKSmokeCOAlarmBatteryHealthUndefined;
+    }
+}
+
+- (id)JSONObjectForBatteryHealth {
+    switch (self.batteryHealth) {
+        case NestSDKSmokeCOAlarmBatteryHealthUndefined:
+            return nil;
+
+        case NestSDKSmokeCOAlarmBatteryHealthOk:
+            return kBatteryHealthStringOk;
+
+        case NestSDKSmokeCOAlarmBatteryHealthReplace:
+            return kBatteryHealthStringReplace;
+    }
+
+    return nil;
+}
+
+- (void)setCoAlarmStateWithNSString:(NSString *)alarmStateString {
+    self.coAlarmState = [self _alarmStateWithAlarmStateString:alarmStateString];
+}
+
+- (id)JSONObjectForCoAlarmState {
+    return [self _alarmStateStringWithAlarmState:self.coAlarmState];
+}
+
+- (void)setSmokeAlarmStateWithNSString:(NSString *)alarmStateString {
+    self.smokeAlarmState = [self _alarmStateWithAlarmStateString:alarmStateString];
+}
+
+- (id)JSONObjectForSmokeAlarmState {
+    return [self _alarmStateStringWithAlarmState:self.smokeAlarmState];
+}
+
+- (void)setUiColorStateWithNSString:(NSString *)uiColorStateString {
+    if ([uiColorStateString isEqualToString:kUIColorStateGray]) {
+        self.uiColorState = NestSDKSmokeCOAlarmUIColorStateGray;
+
+    } else if ([uiColorStateString isEqualToString:kUIColorStateGreen]) {
+        self.uiColorState = NestSDKSmokeCOAlarmUIColorStateGreen;
+
+    } else if ([uiColorStateString isEqualToString:kUIColorStateYellow]) {
+        self.uiColorState = NestSDKSmokeCOAlarmUIColorStateYellow;
+
+    } else if ([uiColorStateString isEqualToString:kUIColorStateRed]) {
+        self.uiColorState = NestSDKSmokeCOAlarmUIColorStateRed;
+
+    } else {
+        self.uiColorState = NestSDKSmokeCOAlarmUIColorStateUndefined;
+    }
+}
+
+- (id)JSONObjectForUiColorState {
+    switch (self.uiColorState) {
+        case NestSDKSmokeCOAlarmUIColorStateUndefined:
+            return nil;
+
+        case NestSDKSmokeCOAlarmUIColorStateGray:
+            return kUIColorStateGray;
+
+        case NestSDKSmokeCOAlarmUIColorStateGreen:
+            return kUIColorStateGreen;
+
+        case NestSDKSmokeCOAlarmUIColorStateYellow:
+            return kUIColorStateYellow;
+
+        case NestSDKSmokeCOAlarmUIColorStateRed:
+            return kUIColorStateRed;
+    }
+
+    return nil;
 }
 
 

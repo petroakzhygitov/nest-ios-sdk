@@ -108,6 +108,7 @@
 		D7C02F1B97AC46C2FDF9CA5F /* NestSDKDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = D7C02454AD1A9348491AFE9C /* NestSDKDevice.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D7C02F5F79AEBD34A128E436 /* NestSDKThermostat.m in Sources */ = {isa = PBXBuildFile; fileRef = D7C0221CA8A18EDA70E0421A /* NestSDKThermostat.m */; };
 		D7C02FCA4421269BCF0FE722 /* NestSDKSmokeCOAlarm.m in Sources */ = {isa = PBXBuildFile; fileRef = D7C02C206732F084EA36C8C4 /* NestSDKSmokeCOAlarm.m */; };
+		D7C02FF5F2575FBB711E4E19 /* NestSDKCameraTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D7C02862D6941DFCC90DB2E2 /* NestSDKCameraTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -183,6 +184,7 @@
 		D7C0276207D694525CF3D027 /* NestSDKMetadataTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NestSDKMetadataTests.m; sourceTree = "<group>"; };
 		D7C02771EE2D69D2496F5C3B /* NestSDKFirebaseService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NestSDKFirebaseService.h; sourceTree = "<group>"; };
 		D7C027ACED758E98E3061DCD /* NestSDKAuthorizationManagerAuthorizationResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NestSDKAuthorizationManagerAuthorizationResult.h; sourceTree = "<group>"; };
+		D7C02862D6941DFCC90DB2E2 /* NestSDKCameraTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NestSDKCameraTests.m; sourceTree = "<group>"; };
 		D7C028666438670034496277 /* NestSDKWheresTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NestSDKWheresTests.m; sourceTree = "<group>"; };
 		D7C0288A03022C5947B28EBF /* NestSDKProduct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NestSDKProduct.h; sourceTree = "<group>"; };
 		D7C028ABC3D9860DDB1B9AF1 /* UIColor+NestBlue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+NestBlue.h"; sourceTree = "<group>"; };
@@ -310,6 +312,7 @@
 				D7C02E4D41FC5F439170551D /* data */,
 				D7C02FCA198469DECB11E7E6 /* data-models */,
 				D7C02714169BE3874C5F75CD /* utils */,
+				D7C02862D6941DFCC90DB2E2 /* NestSDKCameraTests.m */,
 			);
 			path = NestSDKTests;
 			sourceTree = "<group>";
@@ -797,6 +800,7 @@
 				D7C02A824799D6445E19AC4A /* NestSDKMetadataTests.m in Sources */,
 				D7C02ECDA6887CA05EFDC628 /* NestSDKDeviceTests.m in Sources */,
 				D7C02305BB9457BA542931CE /* NestSDKThermostatTests.m in Sources */,
+				D7C02FF5F2575FBB711E4E19 /* NestSDKCameraTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

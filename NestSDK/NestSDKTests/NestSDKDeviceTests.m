@@ -61,12 +61,10 @@ SpecBegin(NestSDKDevice)
                 NSDate *lastConnectionDate = [calendar dateFromComponents:dateComponents];
 
                 expect(device.deviceId).to.equal(@"peyiJNo0IldT2YlIVtYaGQ");
-                expect(device.locale).to.equal(@"en-US");
                 expect(device.softwareVersion).to.equal(@"4.0");
                 expect(device.structureId).to.equal(@"VqFabWH21nwVyd4RWgJgNb292wa7hG_dUwo2i2SG7j3-BOLY0BA4sw");
                 expect(device.name).to.equal(@"Hallway (upstairs)");
                 expect(device.nameLong).to.equal(@"Hallway Thermostat (upstairs)");
-                expect(device.lastConnection).to.equal(lastConnectionDate);
                 expect(device.isOnline).to.equal(YES);
                 expect(device.whereId).to.equal(@"UNCBGUnN24...");
 

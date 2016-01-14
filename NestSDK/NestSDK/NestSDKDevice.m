@@ -24,14 +24,6 @@
 @implementation NestSDKDevice
 #pragma mark Override
 
-- (void)setLastConnectionWithNSString:(NSString *)peakPeriodStartTimeString {
-    self.lastConnection = [NestSDKUtils dateWithISO8601FormatDateString:peakPeriodStartTimeString];
-}
-
-- (id)JSONObjectForLastConnection {
-    return [NestSDKUtils iso8601FormatDateStringWithDate:self.lastConnection];
-}
-
 - (NSUInteger)hash {
     NSUInteger intValueForYes = 1231;
     NSUInteger intValueForNo = 1237;
@@ -40,12 +32,10 @@
     NSUInteger result = 1;
 
     result = prime * result + self.deviceId.hash;
-    result = prime * result + self.locale.hash;
     result = prime * result + self.softwareVersion.hash;
     result = prime * result + self.structureId.hash;
     result = prime * result + self.name.hash;
     result = prime * result + self.nameLong.hash;
-    result = prime * result + self.lastConnection.hash;
     result = prime * result + (self.isOnline ? intValueForYes : intValueForNo);
     result = prime * result + self.whereId.hash;
 
@@ -61,12 +51,10 @@
 
     NestSDKDevice *otherDevice = (NestSDKDevice *) other;
     return ([NestSDKUtils object:self.deviceId isEqualToObject:otherDevice.deviceId] &&
-            ([NestSDKUtils object:self.locale isEqualToObject:otherDevice.locale]) &&
             ([NestSDKUtils object:self.softwareVersion isEqualToObject:otherDevice.softwareVersion]) &&
             ([NestSDKUtils object:self.structureId isEqualToObject:otherDevice.structureId]) &&
             ([NestSDKUtils object:self.name isEqualToObject:otherDevice.name]) &&
             ([NestSDKUtils object:self.nameLong isEqualToObject:otherDevice.nameLong]) &&
-            ([NestSDKUtils object:self.lastConnection isEqualToObject:otherDevice.lastConnection]) &&
             (self.isOnline == otherDevice.isOnline) &&
             ([NestSDKUtils object:self.whereId isEqualToObject:otherDevice.whereId]));
 }

@@ -39,6 +39,14 @@ static NSString *const kHVACModeStringOff = @"off";
 @implementation NestSDKThermostat
 #pragma mark Override
 
+- (void)setLastConnectionWithNSString:(NSString *)peakPeriodStartTimeString {
+    self.lastConnection = [NestSDKUtils dateWithISO8601FormatDateString:peakPeriodStartTimeString];
+}
+
+- (id)JSONObjectForLastConnection {
+    return [NestSDKUtils iso8601FormatDateStringWithDate:self.lastConnection];
+}
+
 - (void)setFanTimerTimeoutWithNSString:(NSString *)fanTimerTimeoutString {
     self.fanTimerTimeout = [NestSDKUtils dateWithISO8601FormatDateString:fanTimerTimeoutString];
 }
@@ -153,6 +161,9 @@ static NSString *const kHVACModeStringOff = @"off";
     NSUInteger prime = 31;
     NSUInteger result = [super hash];
 
+    result = prime * result + self.lastConnection.hash;
+    result = prime * result + self.locale.hash;
+
     result = prime * result + (self.canCool ? intValueForYes : intValueForNo);
     result = prime * result + (self.canHeat ? intValueForYes : intValueForNo);
     result = prime * result + (self.isUsingEmergencyHeat ? intValueForYes : intValueForNo);
@@ -199,7 +210,9 @@ static NSString *const kHVACModeStringOff = @"off";
         return NO;
 
     NestSDKThermostat *otherThermostat = (NestSDKThermostat *) other;
-    return ((self.canCool == otherThermostat.canCool) &&
+    return (([NestSDKUtils object:self.lastConnection isEqualToObject:otherThermostat.lastConnection]) &&
+            ([NestSDKUtils object:self.locale isEqualToObject:otherThermostat.locale]) &&
+            (self.canCool == otherThermostat.canCool) &&
             (self.canHeat == otherThermostat.canHeat) &&
             (self.isUsingEmergencyHeat == otherThermostat.isUsingEmergencyHeat) &&
             (self.hasFan == otherThermostat.hasFan) &&

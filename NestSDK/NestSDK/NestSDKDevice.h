@@ -34,11 +34,6 @@
 @property(nonatomic, copy) NSString <Optional> *deviceId;
 
 /**
- * Specifies language and region (or country) preference.
- */
-@property(nonatomic, copy) NSString <Optional> *locale;
-
-/**
  * Software version.
  */
 @property(nonatomic, copy) NSString <Optional> *softwareVersion;
@@ -67,11 +62,6 @@
  *      Nest Cams: https://nest.com/support/article/How-do-I-change-the-name-of-my-Nest-Cam
  */
 @property(nonatomic, copy) NSString <Optional> *nameLong;
-
-/**
- * Timestamp of the last successful interaction with the Nest service.
- */
-@property(nonatomic) NSDate <Optional> *lastConnection;
 
 /**
  * Device connection status with the Nest Service.

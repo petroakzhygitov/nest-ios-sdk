@@ -38,7 +38,7 @@
  *
  * Learn more about Nest Cam audio setting: https://nest.com/support/article/Does-Nest-Cam-have-audio
  */
-@property(nonatomic) BOOL isAaudioInputEnabled;
+@property(nonatomic) BOOL isAudioInputEnabled;
 
 /**
  * Timestamp that identifies the last change to the online status.

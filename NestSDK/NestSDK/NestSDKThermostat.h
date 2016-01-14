@@ -53,6 +53,16 @@ typedef NS_ENUM(NSUInteger, NestSDKThermostatHVACState) {
 #pragma mark Properties
 
 /**
+ * Specifies language and region (or country) preference.
+ */
+@property(nonatomic, copy) NSString <Optional> *locale;
+
+/**
+ * Timestamp of the last successful interaction with the Nest service.
+ */
+@property(nonatomic) NSDate <Optional> *lastConnection;
+
+/**
  * System ability to cool (has AC).
  */
 @property(nonatomic) BOOL canCool;

@@ -13,5 +13,13 @@
   "web_url": "https://home.nest.com/cameras/device_id?auth=access_token",
   "app_url": "nestmobile://cameras/device_id?auth=access_token",
   "last_event": {
+    "has_sound": true,
+    "has_motion": true,
+    "start_time": "2015-12-29T18:42:00.000Z",
+    "end_time": "2015-12-29T19:44:00.000Z",
+    "web_url": "https://home.nest.com/cameras/device_id?auth=access_token",
+    "app_url": "nestmobile://cameras/device_id?auth=access_token",
+    "image_url": "nestmobile://cameras/device_id?auth=access_token&image=true",
+    "animated_image_url": "nestmobile://cameras/device_id?auth=access_token&animated_image=true",
   }
 }

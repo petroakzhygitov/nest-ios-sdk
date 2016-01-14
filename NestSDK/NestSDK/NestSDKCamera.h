@@ -24,6 +24,9 @@
 
 @class NestSDKCameraLastEvent;
 
+/**
+ * Camera device data model.
+ */
 @interface NestSDKCamera : NestSDKDevice
 #pragma mark Properties
 

@@ -25,6 +25,7 @@
 
 @protocol Optional;
 
+#pragma mark typedef
 typedef NS_ENUM(NSUInteger, NestSDKThermostatTemperatureScale) {
     NestSDKThermostatTemperatureScaleUndefined = 0,
     NestSDKThermostatTemperatureScaleC,

@@ -33,4 +33,42 @@
     return [NestSDKUtils iso8601FormatDateStringWithDate:self.lastIsOnlineChange];
 }
 
+- (NSUInteger)hash {
+    NSUInteger intValueForYes = 1231;
+    NSUInteger intValueForNo = 1237;
+
+    NSUInteger prime = 31;
+    NSUInteger result = [super hash];
+
+    result = prime * result + (self.isStreaming ? intValueForYes : intValueForNo);
+    result = prime * result + (self.isAudioInputEnabled ? intValueForYes : intValueForNo);
+    result = prime * result + self.lastIsOnlineChange.hash;
+    result = prime * result + (self.isVideoHistoryEnabled ? intValueForYes : intValueForNo);
+    result = prime * result + self.webUrl.hash;
+    result = prime * result + self.appUrl.hash;
+    result = prime * result + self.lastEvent.hash;
+
+    return result;
+}
+
+- (BOOL)isEqual:(id)other {
+    if (other == self)
+        return YES;
+
+    if (!other || ![[other class] isEqual:[self class]])
+        return NO;
+
+    if (![super isEqual:other])
+        return NO;
+
+    NestSDKCamera *otherCamera = (NestSDKCamera *) other;
+    return ((self.isStreaming == otherCamera.isStreaming) &&
+            (self.isAudioInputEnabled == otherCamera.isAudioInputEnabled) &&
+            ([NestSDKUtils object:self.lastIsOnlineChange isEqualToObject:otherCamera.lastIsOnlineChange]) &&
+            (self.isVideoHistoryEnabled == otherCamera.isVideoHistoryEnabled) &&
+            ([NestSDKUtils object:self.webUrl isEqualToObject:otherCamera.webUrl]) &&
+            ([NestSDKUtils object:self.appUrl isEqualToObject:otherCamera.appUrl]) &&
+            ([NestSDKUtils object:self.lastEvent isEqualToObject:otherCamera.lastEvent]));
+}
+
 @end

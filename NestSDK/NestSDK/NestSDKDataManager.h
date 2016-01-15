@@ -59,8 +59,6 @@ typedef void (^NestSDKCameraUpdateHandler)(id <NestSDKCamera>, NSError *);
 
 - (void)smokeCOAlarmWithId:(NSString *)smokeCOAlarmId block:(NestSDKSmokeCOAlarmUpdateHandler)block;
 
-- (void)setSmokeCOAlarm:(id <NestSDKSmokeCOAlarm>)smokeCOAlarm block:(NestSDKSmokeCOAlarmUpdateHandler)block;
-
 
 - (void)cameraWithId:(NSString *)cameraId block:(NestSDKCameraUpdateHandler)block;
 

@@ -58,32 +58,32 @@ typedef NS_ENUM(NSUInteger, NestSDKSmokeCOAlarmUIColorState) {
 /**
  * Timestamp of the last successful interaction with the Nest service.
  */
-@property(nonatomic) NSDate *lastConnection;
+@property(nonatomic, readonly) NSDate *lastConnection;
 
 /**
  * Battery life/health; estimate of remaining battery power level.
  */
-@property(nonatomic) NestSDKSmokeCOAlarmBatteryHealth batteryHealth;
+@property(nonatomic, readonly) NestSDKSmokeCOAlarmBatteryHealth batteryHealth;
 
 /**
  * CO alarm status.
  */
-@property(nonatomic) NestSDKSmokeCOAlarmAlarmState coAlarmState;
+@property(nonatomic, readonly) NestSDKSmokeCOAlarmAlarmState coAlarmState;
 
 /**
  * Smoke alarm status.
  */
-@property(nonatomic) NestSDKSmokeCOAlarmAlarmState smokeAlarmState;
+@property(nonatomic, readonly) NestSDKSmokeCOAlarmAlarmState smokeAlarmState;
 
 /**
  * State of the manual smoke and CO alarm test.
  */
-@property(nonatomic) BOOL isManualTestActive;
+@property(nonatomic, readonly) BOOL isManualTestActive;
 
 /**
  * Timestamp of the last successful manual smoke and CO alarm test.
  */
-@property(nonatomic) NSDate *lastManualTestTime;
+@property(nonatomic, readonly) NSDate *lastManualTestTime;
 
 /**
  * Indicates device status by color in the Nest app UI.
@@ -92,6 +92,6 @@ typedef NS_ENUM(NSUInteger, NestSDKSmokeCOAlarmUIColorState) {
  * Learn more about color indicators on the Nest Protect: http://support.nest.com/article/What-do-the-lights-mean-on-Nest-Protect
  * Learn more about color indicators for the Nest Protect battery: http://support.nest.com/article/How-do-I-check-the-level-of-my-Nest-Protect-battery
  */
-@property(nonatomic) NestSDKSmokeCOAlarmUIColorState uiColorState;
+@property(nonatomic, readonly) NestSDKSmokeCOAlarmUIColorState uiColorState;
 
 @end

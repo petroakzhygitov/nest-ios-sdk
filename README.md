@@ -155,7 +155,7 @@ Instead of using the predefined `Connect with Nest` button (explained in Add Con
 
 	// Handle clicks on the button
 	[customConnectWithNestButton addTarget:self action:@selector(customConnectWithNestButtonClicked)
-			        forControlEvents:UIControlEventTouchUpInside];
+			              forControlEvents:UIControlEventTouchUpInside];
 
 	// Add the button to the view
 	[self.view addSubview:customConnectWithNestButton];
@@ -201,10 +201,45 @@ NestSDKDataManager *dataManager = [[NestSDKDataManager alloc] init];
 	}
 	
 	for (NestSDKStructure *structure in structuresArray) {
-		NSLog(@"Read structure with name: %@", structure.name);
+		NSLog(@"Updated structure with name: %@", structure.name);
 	}
 }];
 ```
+
+### Reading structures
+
+In general it is better to observe structures rather than read them, since you will be updated with any changes happen. 
+
+In case you want simply read structures use `NestSDKDataManager`:
+```objective-c
+NestSDKDataManager *dataManager = [[NestSDKDataManager alloc] init];
+[dataManager structuresWithBlock:^(NSArray <NestSDKStructure> *structuresArray, NSError *error) {
+	if (error) {
+		NSLog(@"Error occurred while reading structures: %@", error);
+		return;
+	}
+	
+	for (NestSDKStructure *structure in structuresArray) {
+		NSLog(@"Updated structure with name: %@", structure.name);
+	}
+}];
+```
+
+### Updating structures
+
+It is possible to update structure's `away` status and set `eta`. To update a structure use `NestSDKDataManager`:
+```objective-c
+NestSDKDataManager *dataManager = [[NestSDKDataManager alloc] init];
+[dataManager setStructure:structure block:^(id <NestSDKStructure> structure, NSError *) {
+	if (error) {
+		NSLog(@"Error occurred while observing structure: %@", error);
+		return;
+	}
+	
+	NSLog(@"Updated structure with name: %@", structure.name);
+}];
+```
+
 
 ## Devices
 
@@ -222,35 +257,104 @@ To observe devices use `NestSDKDataManager`:
 NestSDKDataManager *dataManager = [[NestSDKDataManager alloc] init];
 
 NSString *thermostatId = structure.thermostats[someIndex];
-[self.dataManager observeThermostatWithId:thermostatId block:^(NestSDKThermostat *thermostat, NSError *error) {
+[self.dataManager observeThermostatWithId:thermostatId block:^(id <NestSDKThermostat> thermostat, NSError *error) {
 	if (error) {
 		NSLog(@"Error occurred while observing thermostat: %@", error);
 		return;
 	}
 	
-        NSLog(@"Read Thermostat with name: %@", thermostat.name);
+	NSLog(@"Updated thermostat with name: %@", thermostat.name);
 }];
 
 NSString *smokeCOAlarmId = structure.smoke_co_alarms[someIndex];
-[self.dataManager observeSmokeCOAlarmWithId:smokeCOAlarmId block:^(NestSDKSmokeCOAlarm *smokeCOAlarm, NSError *error) {
+[self.dataManager observeSmokeCOAlarmWithId:smokeCOAlarmId block:^(id <NestSDKSmokeCOAlarm> smokeCOAlarm, NSError *error) {
     	if (error) {
 		NSLog(@"Error occurred while observing smoke CO alarm: %@", error);
 		return;
 	}
 	
-	NSLog(@"Read Smoke+CO Alarm with name: %@", smokeCOAlarm.name);
+	NSLog(@"Updated smoke+CO Alarm with name: %@", smokeCOAlarm.name);
 }];
  
 NSString *cameraId = structure.cameras[someIndex];
-[self.dataManager observeCameraWithId:cameraId block:^(NestSDKCamera *camera, NSError *error) {
+[self.dataManager observeCameraWithId:cameraId block:^(id <NestSDKCamera> camera, NSError *error) {
 	if (error) {
 		NSLog(@"Error occurred while observing camera: %@", error);
 		return;
 	}
 	
-        NSLog(@"Read Camera with name: %@", camera.name);
+	NSLog(@"Updated camera with name: %@", camera.name);
 }];
 ```
+
+## Reading devices
+
+In general it is better to observe devices rather than read them, since you will be updated with any changes happen. 
+
+In case you want simply read devices use `NestSDKDataManager`:
+```objective-c
+NestSDKDataManager *dataManager = [[NestSDKDataManager alloc] init];
+
+NSString *thermostatId = structure.thermostats[someIndex];
+[self.dataManager thermostatWithId:thermostatId block:^(id <NestSDKThermostat> thermostat, NSError *error) {
+	if (error) {
+		NSLog(@"Error occurred while observing thermostat: %@", error);
+		return;
+	}
+	
+	NSLog(@"Updated thermostat with name: %@", thermostat.name);
+}];
+
+NSString *smokeCOAlarmId = structure.smoke_co_alarms[someIndex];
+[self.dataManager smokeCOAlarmWithId:smokeCOAlarmId block:^(id <NestSDKSmokeCOAlarm> smokeCOAlarm, NSError *error) {
+    	if (error) {
+		NSLog(@"Error occurred while observing smoke CO alarm: %@", error);
+		return;
+	}
+	
+	NSLog(@"Updated smoke+CO Alarm with name: %@", smokeCOAlarm.name);
+}];
+ 
+NSString *cameraId = structure.cameras[someIndex];
+[self.dataManager cameraWithId:cameraId block:^(id <NestSDKCamera> camera, NSError *error) {
+	if (error) {
+		NSLog(@"Error occurred while observing camera: %@", error);
+		return;
+	}
+	
+	NSLog(@"Updated camera with name: %@", camera.name);
+}];
+```
+
+### Updating devices
+
+- It is possible to update thermostat's `fanTimerActive`, `fanTimerTimeout`, `targetTemperatureF`, `targetTemperatureC`, `targetTemperatureHighF`, `targetTemperatureHighC`, `targetTemperatureLowF`, `targetTemperatureLowC` and `hvacMode` values.
+- It is possible to update camera's `isStreaming` status.
+- It is **not possible** to update satuses/values for **smoke+CO alarm** device.
+
+To update devices use `NestSDKDataManager`:
+```objective-c
+NestSDKDataManager *dataManager = [[NestSDKDataManager alloc] init];
+
+[self.dataManager setThermostat:thermostat block:^(id <NestSDKThermostat> thermostat, NSError *error) {
+	if (error) {
+		NSLog(@"Error occurred while observing thermostat: %@", error);
+		return;
+	}
+	
+	NSLog(@"Updated thermostat with name: %@", thermostat.name);
+}];
+
+[self.dataManager setCamera:camera block:^(id <NestSDKCamera> camera, NSError *error) {
+	if (error) {
+		NSLog(@"Error occurred while observing camera: %@", error);
+		return;
+	}
+	
+	NSLog(@"Updated camera with name: %@", camera.name);
+}];
+```
+
 
 ## Author
 

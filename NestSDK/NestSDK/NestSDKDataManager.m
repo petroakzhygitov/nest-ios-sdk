@@ -97,7 +97,7 @@ typedef void (^NestSDKDataUpdateHandler)(id, NSError *);
 - (void)_setDataModel:(id <NestSDKDataModelProtocol>)dataModel forURL:(NSString *)url block:(NestSDKDataUpdateHandler)block {
     NestSDKDataModel *currentDataModel = (NestSDKDataModel *) dataModel;
 
-    [self.service setValues:[currentDataModel toDictionary] forURL:url withBlock:^(id result, NSError *error) {
+    [self.service setValues:[currentDataModel toWritableDataModelDictionary] forURL:url withBlock:^(id result, NSError *error) {
         [self _handleResultWithDataModelClass:[currentDataModel class] block:block result:result error:error asArray:NO];
     }];
 }

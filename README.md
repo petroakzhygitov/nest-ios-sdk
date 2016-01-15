@@ -365,7 +365,7 @@ To read metadata use `NestSDKDataManager`:
 ```objective-c
 NestSDKDataManager *dataManager = [[NestSDKDataManager alloc] init];
 
-[self.dataManager metadataWithBlock:^(id <NestSDKMetadata> metadata, NSError *) {
+[self.dataManager metadataWithBlock:^(id <NestSDKMetadata> metadata, NSError *error) {
 	if (error) {
 		NSLog(@"Error occurred while reading metadata: %@", error);
 		return;

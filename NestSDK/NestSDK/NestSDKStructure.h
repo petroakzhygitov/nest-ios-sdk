@@ -43,32 +43,32 @@ typedef NS_ENUM(NSUInteger, NestSDKStructureAwayState) {
 /**
  * ID number of the structure.
  */
-@property(nonatomic, copy) NSString *structureId;
+@property(nonatomic, copy, readonly) NSString *structureId;
 
 /**
  * List of thermostats in the structure, by unique device identifier.
  * This is an array of NSString objects that includes all thermostats in the structure.
  */
-@property(nonatomic, copy) NSArray *thermostats;
+@property(nonatomic, copy, readonly) NSArray *thermostats;
 
 /**
  * List of smoke+CO alarms in the structure, by unique device identifier.
  * This is an array of NSString objects that includes all smoke+CO alarms in the structure.
  */
-@property(nonatomic, copy) NSArray *smokeCoAlarms;
+@property(nonatomic, copy, readonly) NSArray *smokeCoAlarms;
 
 /**
  * List of cameras in the structure, by unique device identifier.
  * This is an array of NSString objects that includes all cameras in the structure.
  */
-@property(nonatomic, copy) NSArray *cameras;
+@property(nonatomic, copy, readonly) NSArray *cameras;
 
 /**
  * A dictionary containing $company and $product_type information.
  * Use this object with the Resource use API to read a list of your device ids.
  * https://developer.nest.com/documentation/cloud/resource-use-guide
  */
-@property(nonatomic, copy) NSDictionary *devices;
+@property(nonatomic, copy, readonly) NSDictionary *devices;
 
 /**
  * Indicates the state of the structure.
@@ -81,32 +81,32 @@ typedef NS_ENUM(NSUInteger, NestSDKStructureAwayState) {
 /**
  * User-defined name of the structure.
  */
-@property(nonatomic, copy) NSString *name;
+@property(nonatomic, copy, readonly) NSString *name;
 
 /**
  * Country code, in ISO 3166 alpha-2 format.
  */
-@property(nonatomic, copy) NSString *countryCode;
+@property(nonatomic, copy, readonly) NSString *countryCode;
 
 /**
  * Postal or zip code, depending on the country.
  */
-@property(nonatomic, copy) NSString *postalCode;
+@property(nonatomic, copy, readonly) NSString *postalCode;
 
 /**
  * Start time of the Energy rush hour event.
  */
-@property(nonatomic) NSDate *peakPeriodStartTime;
+@property(nonatomic, readonly) NSDate *peakPeriodStartTime;
 
 /**
  * End time of the Energy rush hour event.
  */
-@property(nonatomic) NSDate *peakPeriodEndTime;
+@property(nonatomic, readonly) NSDate *peakPeriodEndTime;
 
 /**
  * Time zone at the structure, in IANA time zone format.
  */
-@property(nonatomic, copy) NSString *timeZone;
+@property(nonatomic, copy, readonly) NSString *timeZone;
 
 /**
  * ETA is an object that can be set on a structure.
@@ -121,13 +121,13 @@ typedef NS_ENUM(NSUInteger, NestSDKStructureAwayState) {
  *
  * Learn more about Rush Hour Rewards http://support.nest.com/article/What-is-Rush-Hour-Rewards
  */
-@property(nonatomic) BOOL rhrEnrollment;
+@property(nonatomic, readonly) BOOL rhrEnrollment;
 
 /**
  * An object containing where identifiers (whereId and name) for devices in the structure.
  *
  * Learn more about wheres https://developer.nest.com/documentation/cloud/how-to-structures-object#wheres
  */
-@property(nonatomic) NSDictionary <NestSDKWheres> *wheres;
+@property(nonatomic, readonly) NSDictionary <NestSDKWheres> *wheres;
 
 @end

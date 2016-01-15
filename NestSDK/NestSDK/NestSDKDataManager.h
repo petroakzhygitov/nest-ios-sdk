@@ -22,19 +22,21 @@
 #import "NestSDKService.h"
 
 @class NestSDKMetadata;
-@class NestSDKThermostat;
 @class NestSDKSmokeCOAlarm;
 @class NestSDKCamera;
 @protocol NestSDKStructure;
+@protocol NestSDKThermostat;
 
 
 #pragma mark typedef
+
+typedef void (^NestSDKDataUpdateHandler)(id, NSError *);
 
 typedef void (^NestSDKStructuresUpdateHandler)(NSArray <NestSDKStructure> *structuresArray, NSError *);
 
 typedef void (^NestSDKMetadataUpdateHandler)(NestSDKMetadata *, NSError *);
 
-typedef void (^NestSDKThermostatUpdateHandler)(NestSDKThermostat *, NSError *);
+typedef void (^NestSDKThermostatUpdateHandler)(id <NestSDKThermostat>, NSError *);
 
 typedef void (^NestSDKSmokeCOAlarmUpdateHandler)(NestSDKSmokeCOAlarm *, NSError *);
 
@@ -54,17 +56,17 @@ typedef void (^NestSDKCameraUpdateHandler)(NestSDKCamera *, NSError *);
 
 - (void)thermostatWithId:(NSString *)thermostatId block:(NestSDKThermostatUpdateHandler)block;
 
-- (void)setThermostat:(NestSDKThermostat *)thermostat block:(NestSDKThermostatUpdateHandler)block;
+- (void)setThermostat:(id <NestSDKThermostat>)thermostat block:(NestSDKThermostatUpdateHandler)block;
 
 
-- (void)smokeCOAlarmWithId:(NSString *)smokeCOAlarmId block:(NestSDKThermostatUpdateHandler)block;
+- (void)smokeCOAlarmWithId:(NSString *)smokeCOAlarmId block:(NestSDKSmokeCOAlarmUpdateHandler)block;
 
-- (void)setSmokeCOAlarm:(NestSDKSmokeCOAlarm *)smokeCOAlarm block:(NestSDKThermostatUpdateHandler)block;
+- (void)setSmokeCOAlarm:(NestSDKSmokeCOAlarm *)smokeCOAlarm block:(NestSDKSmokeCOAlarmUpdateHandler)block;
 
 
-- (void)cameraWithId:(NSString *)cameraId block:(NestSDKThermostatUpdateHandler)block;
+- (void)cameraWithId:(NSString *)cameraId block:(NestSDKCameraUpdateHandler)block;
 
-- (void)setCamera:(NestSDKCamera *)camera block:(NestSDKThermostatUpdateHandler)block;
+- (void)setCamera:(NestSDKCamera *)camera block:(NestSDKCameraUpdateHandler)block;
 
 
 - (NestSDKObserverHandle)observeThermostatWithId:(NSString *)thermostatId block:(NestSDKThermostatUpdateHandler)block;

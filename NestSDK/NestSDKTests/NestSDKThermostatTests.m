@@ -27,11 +27,11 @@
 #import "LSNocilla.h"
 #import "NestSDKMetadata.h"
 #import "NestSDKDevice.h"
-#import "NestSDKThermostat.h"
+#import "NestSDKThermostatDataModel.h"
 
 SpecBegin(NestSDKThermostat)
     {
-        describe(@"NestSDKThermostat", ^{
+        describe(@"NestSDKThermostatDataModel", ^{
 
             __block NSData *data;
 
@@ -44,7 +44,7 @@ SpecBegin(NestSDKThermostat)
 
             it(@"should deserialize/serialize data", ^{
                 NSError *error;
-                NestSDKThermostat *thermostat = [[NestSDKThermostat alloc] initWithData:data error:&error];
+                NestSDKThermostatDataModel *thermostat = [[NestSDKThermostatDataModel alloc] initWithData:data error:&error];
                 expect(error).to.equal(nil);
 
                 NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
@@ -107,13 +107,13 @@ SpecBegin(NestSDKThermostat)
 
             it(@"should have proper hash and equal", ^{
                 NSError *error;
-                NestSDKThermostat *thermostat1 = [[NestSDKThermostat alloc] initWithData:data error:&error];
+                NestSDKThermostatDataModel *thermostat1 = [[NestSDKThermostatDataModel alloc] initWithData:data error:&error];
                 expect(error).to.equal(nil);
 
-                NestSDKThermostat *thermostat2 = [[NestSDKThermostat alloc] initWithData:data error:&error];
+                NestSDKThermostatDataModel *thermostat2 = [[NestSDKThermostatDataModel alloc] initWithData:data error:&error];
                 expect(error).to.equal(nil);
 
-                NestSDKThermostat *thermostat3 = [[NestSDKThermostat alloc] initWithData:data error:&error];
+                NestSDKThermostatDataModel *thermostat3 = [[NestSDKThermostatDataModel alloc] initWithData:data error:&error];
                 expect(error).to.equal(nil);
 
                 thermostat3.humidity = 42;

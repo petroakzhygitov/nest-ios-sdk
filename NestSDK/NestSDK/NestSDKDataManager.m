@@ -24,7 +24,7 @@
 #import <NestSDK/NestSDKApplicationDelegate.h>
 #import <NestSDK/NestSDKError.h>
 #import <NestSDK/NestSDKStructure.h>
-#import <NestSDK/NestSDKThermostat.h>
+#import "NestSDKThermostatDataModel.h"
 #import <NestSDK/NestSDKSmokeCOAlarm.h>
 #import <NestSDK/NestSDKCamera.h>
 
@@ -92,6 +92,12 @@ typedef void (^NestSDKDataModelUpdateHandler)(id, NSError *);
 
     [self.service valuesForURL:url withBlock:^(id result, NSError *error) {
         [self _handleResultWithDataModelClass:dataModelClass block:block result:result error:error asArray:asArray];
+    }];
+}
+
+- (void)_setDataModel:(id <NestSDKDataModel>)dataModel forURL:(NSString *)url block:(NestSDKDataUpdateHandler)block {
+    [self.service setValues:[dataModel toDictionary] forURL:url withBlock:^(id result, NSError *error) {
+        [self _handleResultWithDataModelClass:[dataModel class] block:block result:result error:error asArray:NO];
     }];
 }
 
@@ -173,37 +179,43 @@ typedef void (^NestSDKDataModelUpdateHandler)(id, NSError *);
 
 - (void)thermostatWithId:(NSString *)thermostatId block:(NestSDKThermostatUpdateHandler)block {
     [self _dataModelFromURL:[self _thermostatURLWithThermostatId:thermostatId]
-                  withClass:[NestSDKThermostat class]
+                  withClass:[NestSDKThermostatDataModel class]
                       block:block];
 }
 
-- (void)setThermostat:(NestSDKThermostat *)thermostat block:(NestSDKThermostatUpdateHandler)block {
-
+- (void)setThermostat:(id <NestSDKThermostat>)thermostat block:(NestSDKThermostatUpdateHandler)block {
+    [self _setDataModel:thermostat
+                 forURL:[self _thermostatURLWithThermostatId:thermostat.deviceId]
+                  block:block];
 }
 
-- (void)smokeCOAlarmWithId:(NSString *)smokeCOAlarmId block:(NestSDKThermostatUpdateHandler)block {
+- (void)smokeCOAlarmWithId:(NSString *)smokeCOAlarmId block:(NestSDKSmokeCOAlarmUpdateHandler)block {
     [self _dataModelFromURL:[self _smokeCOAlarmURLWithSmokeCOAlarmId:smokeCOAlarmId]
                   withClass:[NestSDKSmokeCOAlarm class]
                       block:block];
 }
 
-- (void)setSmokeCOAlarm:(NestSDKSmokeCOAlarm *)smokeCOAlarm block:(NestSDKThermostatUpdateHandler)block {
-
+- (void)setSmokeCOAlarm:(NestSDKSmokeCOAlarm *)smokeCOAlarm block:(NestSDKSmokeCOAlarmUpdateHandler)block {
+    [self _setDataModel:smokeCOAlarm
+                 forURL:[self _smokeCOAlarmURLWithSmokeCOAlarmId:smokeCOAlarm.deviceId]
+                  block:block];
 }
 
-- (void)cameraWithId:(NSString *)cameraId block:(NestSDKThermostatUpdateHandler)block {
+- (void)cameraWithId:(NSString *)cameraId block:(NestSDKCameraUpdateHandler)block {
     [self _dataModelFromURL:[self _cameraURLWithCameraId:cameraId]
                   withClass:[NestSDKCamera class]
                       block:block];
 }
 
-- (void)setCamera:(NestSDKCamera *)camera block:(NestSDKThermostatUpdateHandler)block {
-
+- (void)setCamera:(NestSDKCamera *)camera block:(NestSDKCameraUpdateHandler)block {
+    [self _setDataModel:camera
+                 forURL:[self _cameraURLWithCameraId:camera.deviceId]
+                  block:block];
 }
 
 - (NestSDKObserverHandle)observeThermostatWithId:(NSString *)thermostatId block:(NestSDKThermostatUpdateHandler)block {
     return [self _observeDataModelWithURL:[self _thermostatURLWithThermostatId:thermostatId]
-                                withClass:[NestSDKThermostat class]
+                                withClass:[NestSDKThermostatDataModel class]
                                     block:block];
 }
 

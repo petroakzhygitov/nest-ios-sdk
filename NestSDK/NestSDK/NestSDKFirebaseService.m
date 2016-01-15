@@ -48,6 +48,8 @@
 #pragma mark Private
 
 - (void)_authenticateWithAccessToken:(NestSDKAccessToken *)accessToken {
+    // WARNING: Do not call unauth method on firebase instance while making re-authentication
+
     [NestSDKLogger logInfo:@"Authenticating..." from:self];
 
     [self.firebase authWithCustomToken:accessToken.tokenString withCompletionBlock:^(NSError *error, FAuthData *authData) {
@@ -71,8 +73,6 @@
 
 - (void)setAccessToken:(NestSDKAccessToken *)accessToken {
     _accessToken = accessToken;
-
-    [self _unauthenticate];
 
     if (accessToken) {
         [self _authenticateWithAccessToken:accessToken];

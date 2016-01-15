@@ -30,17 +30,17 @@
 
 #pragma mark typedef
 
-typedef void (^NestSDKStructureUpdateHandler)(id <NestSDKStructure> structure, NSError *);
+typedef void (^NestSDKStructureUpdateHandler)(id <NestSDKStructure> structure, NSError *error);
 
-typedef void (^NestSDKStructuresArrayUpdateHandler)(NSArray <NestSDKStructure> *structuresArray, NSError *);
+typedef void (^NestSDKStructuresArrayUpdateHandler)(NSArray <NestSDKStructure> *structuresArray, NSError *error);
 
-typedef void (^NestSDKMetadataUpdateHandler)(id <NestSDKMetadata> metadata, NSError *);
+typedef void (^NestSDKMetadataUpdateHandler)(id <NestSDKMetadata> metadata, NSError *error);
 
-typedef void (^NestSDKThermostatUpdateHandler)(id <NestSDKThermostat> thermostat, NSError *);
+typedef void (^NestSDKThermostatUpdateHandler)(id <NestSDKThermostat> thermostat, NSError *error);
 
-typedef void (^NestSDKSmokeCOAlarmUpdateHandler)(id <NestSDKSmokeCOAlarm> smokeCOAlarm, NSError *);
+typedef void (^NestSDKSmokeCOAlarmUpdateHandler)(id <NestSDKSmokeCOAlarm> smokeCOAlarm, NSError *error);
 
-typedef void (^NestSDKCameraUpdateHandler)(id <NestSDKCamera> camera, NSError *);
+typedef void (^NestSDKCameraUpdateHandler)(id <NestSDKCamera> camera, NSError *error);
 
 
 @interface NestSDKDataManager : NSObject

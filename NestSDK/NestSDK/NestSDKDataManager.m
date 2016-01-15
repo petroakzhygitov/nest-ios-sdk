@@ -164,19 +164,24 @@ typedef void (^NestSDKDataUpdateHandler)(id, NSError *);
                       block:block];
 }
 
-- (void)structuresWithBlock:(NestSDKStructuresUpdateHandler)block {
+- (void)structuresWithBlock:(NestSDKStructuresArrayUpdateHandler)block {
     [self _dataModelFromURL:[self _structuresURL]
                   withClass:[NestSDKStructureDataModel class]
                       block:block
                     asArray:YES];
 }
 
-- (NestSDKObserverHandle)observeStructuresWithBlock:(NestSDKStructuresUpdateHandler)block {
+- (NestSDKObserverHandle)observeStructuresWithBlock:(NestSDKStructuresArrayUpdateHandler)block {
     return [self _observeDataModelWithURL:[self _structuresURL]
                                 withClass:[NestSDKStructureDataModel class]
                                     block:block
                                   asArray:YES];
 }
+
+- (void)setStructure:(id <NestSDKStructure>)structure block:(NestSDKStructureUpdateHandler)block {
+
+}
+
 
 - (void)thermostatWithId:(NSString *)thermostatId block:(NestSDKThermostatUpdateHandler)block {
     [self _dataModelFromURL:[self _thermostatURLWithThermostatId:thermostatId]

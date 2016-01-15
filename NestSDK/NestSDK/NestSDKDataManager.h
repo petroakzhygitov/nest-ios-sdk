@@ -30,7 +30,9 @@
 
 #pragma mark typedef
 
-typedef void (^NestSDKStructuresUpdateHandler)(NSArray <NestSDKStructure> *structuresArray, NSError *);
+typedef void (^NestSDKStructureUpdateHandler)(id <NestSDKStructure> structure, NSError *);
+
+typedef void (^NestSDKStructuresArrayUpdateHandler)(NSArray <NestSDKStructure> *structuresArray, NSError *);
 
 typedef void (^NestSDKMetadataUpdateHandler)(id <NestSDKMetadata>, NSError *);
 
@@ -47,9 +49,11 @@ typedef void (^NestSDKCameraUpdateHandler)(id <NestSDKCamera>, NSError *);
 - (void)metadataWithBlock:(NestSDKMetadataUpdateHandler)block;
 
 
-- (void)structuresWithBlock:(NestSDKStructuresUpdateHandler)block;
+- (void)structuresWithBlock:(NestSDKStructuresArrayUpdateHandler)block;
 
-- (NestSDKObserverHandle)observeStructuresWithBlock:(NestSDKStructuresUpdateHandler)block;
+- (NestSDKObserverHandle)observeStructuresWithBlock:(NestSDKStructuresArrayUpdateHandler)block;
+
+- (void)setStructure:(id <NestSDKStructure>)structure block:(NestSDKStructureUpdateHandler)block;
 
 
 - (void)thermostatWithId:(NSString *)thermostatId block:(NestSDKThermostatUpdateHandler)block;

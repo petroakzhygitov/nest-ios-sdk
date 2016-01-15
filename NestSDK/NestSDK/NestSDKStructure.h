@@ -19,6 +19,7 @@
 // THE SOFTWARE.
 
 #import <Foundation/Foundation.h>
+#import <NestSDK/NestSDKDataModelProtocol.h>
 
 @protocol NestSDKETA;
 @protocol NestSDKWheres;

@@ -189,6 +189,12 @@ typedef void (^NestSDKDataUpdateHandler)(id, NSError *);
                       block:block];
 }
 
+- (NestSDKObserverHandle)observeThermostatWithId:(NSString *)thermostatId block:(NestSDKThermostatUpdateHandler)block {
+    return [self _observeDataModelWithURL:[self _thermostatURLWithThermostatId:thermostatId]
+                                withClass:[NestSDKThermostatDataModel class]
+                                    block:block];
+}
+
 - (void)setThermostat:(id <NestSDKThermostat>)thermostat block:(NestSDKThermostatUpdateHandler)block {
     [self _setDataModel:thermostat
                  forURL:[self _thermostatURLWithThermostatId:thermostat.deviceId]
@@ -199,6 +205,12 @@ typedef void (^NestSDKDataUpdateHandler)(id, NSError *);
     [self _dataModelFromURL:[self _smokeCOAlarmURLWithSmokeCOAlarmId:smokeCOAlarmId]
                   withClass:[NestSDKSmokeCOAlarmDataModel class]
                       block:block];
+}
+
+- (NestSDKObserverHandle)observeSmokeCOAlarmWithId:(NSString *)smokeCOAlarmId block:(NestSDKSmokeCOAlarmUpdateHandler)block {
+    return [self _observeDataModelWithURL:[self _smokeCOAlarmURLWithSmokeCOAlarmId:smokeCOAlarmId]
+                                withClass:[NestSDKSmokeCOAlarmDataModel class]
+                                    block:block];
 }
 
 - (void)setSmokeCOAlarm:(NestSDKSmokeCOAlarmDataModel *)smokeCOAlarm block:(NestSDKSmokeCOAlarmUpdateHandler)block {
@@ -217,18 +229,6 @@ typedef void (^NestSDKDataUpdateHandler)(id, NSError *);
     [self _setDataModel:camera
                  forURL:[self _cameraURLWithCameraId:camera.deviceId]
                   block:block];
-}
-
-- (NestSDKObserverHandle)observeThermostatWithId:(NSString *)thermostatId block:(NestSDKThermostatUpdateHandler)block {
-    return [self _observeDataModelWithURL:[self _thermostatURLWithThermostatId:thermostatId]
-                                withClass:[NestSDKThermostatDataModel class]
-                                    block:block];
-}
-
-- (NestSDKObserverHandle)observeSmokeCOAlarmWithId:(NSString *)smokeCOAlarmId block:(NestSDKSmokeCOAlarmUpdateHandler)block {
-    return [self _observeDataModelWithURL:[self _smokeCOAlarmURLWithSmokeCOAlarmId:smokeCOAlarmId]
-                                withClass:[NestSDKSmokeCOAlarmDataModel class]
-                                    block:block];
 }
 
 - (NestSDKObserverHandle)observeCameraWithId:(NSString *)cameraId block:(NestSDKCameraUpdateHandler)block {

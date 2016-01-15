@@ -58,22 +58,21 @@ typedef void (^NestSDKCameraUpdateHandler)(id <NestSDKCamera>, NSError *);
 
 - (void)thermostatWithId:(NSString *)thermostatId block:(NestSDKThermostatUpdateHandler)block;
 
+- (NestSDKObserverHandle)observeThermostatWithId:(NSString *)thermostatId block:(NestSDKThermostatUpdateHandler)block;
+
 - (void)setThermostat:(id <NestSDKThermostat>)thermostat block:(NestSDKThermostatUpdateHandler)block;
 
 
 - (void)smokeCOAlarmWithId:(NSString *)smokeCOAlarmId block:(NestSDKSmokeCOAlarmUpdateHandler)block;
 
+- (NestSDKObserverHandle)observeSmokeCOAlarmWithId:(NSString *)smokeCOAlarmId block:(NestSDKSmokeCOAlarmUpdateHandler)block;
+
 
 - (void)cameraWithId:(NSString *)cameraId block:(NestSDKCameraUpdateHandler)block;
 
-- (void)setCamera:(id <NestSDKCamera>)camera block:(NestSDKCameraUpdateHandler)block;
-
-
-- (NestSDKObserverHandle)observeThermostatWithId:(NSString *)thermostatId block:(NestSDKThermostatUpdateHandler)block;
-
-- (NestSDKObserverHandle)observeSmokeCOAlarmWithId:(NSString *)smokeCOAlarmId block:(NestSDKSmokeCOAlarmUpdateHandler)block;
-
 - (NestSDKObserverHandle)observeCameraWithId:(NSString *)cameraId block:(NestSDKCameraUpdateHandler)block;
+
+- (void)setCamera:(id <NestSDKCamera>)camera block:(NestSDKCameraUpdateHandler)block;
 
 
 - (void)removeObserverWithHandle:(NestSDKObserverHandle)handle;

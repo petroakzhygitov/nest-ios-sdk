@@ -19,7 +19,7 @@
 // THE SOFTWARE.
 
 #import <Foundation/Foundation.h>
-#import "NestSDKDeviceProtocol.h"
+#import <NestSDK/NestSDKDeviceProtocol.h>
 
 #pragma mark typedef
 typedef NS_ENUM(NSUInteger, NestSDKSmokeCOAlarmBatteryHealth) {
@@ -53,7 +53,7 @@ typedef NS_ENUM(NSUInteger, NestSDKSmokeCOAlarmUIColorState) {
 /**
  * Specifies language and region (or country) preference.
  */
-@property(nonatomic, copy) NSString *locale;
+@property(nonatomic, copy, readonly) NSString *locale;
 
 /**
  * Timestamp of the last successful interaction with the Nest service.

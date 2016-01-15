@@ -21,34 +21,9 @@
 #import <Foundation/Foundation.h>
 #import <JSONModel/JSONModel.h>
 #import <NestSDK/NestSDKDataModel.h>
+#import <NestSDK/NestSDKWheresProtocol.h>
 
 @protocol Optional;
-
-/**
- * NestSDKWheres protocol is used to specify type of data presented in NSDictionary/NSArray instances returned by result handlers.
- */
-@protocol NestSDKWheres <NSObject>
-#pragma mark Properties
-
-/**
- * A unique, Nest-generated identifier that represents name.
- * Use this value with the /$company/ object to send resource use.
- * whereId is read-only, and is created automatically in the call to create a custom where name.
- */
-@property(nonatomic, copy) NSString <Optional> *whereId;
-
-/**
- * The display name of the device
- *
- * Considerations
- *      name cannot be edited or deleted after creation
- *      name must be unique within the structure
- *      If a device is paired to a structure, the custom where name associated with the device is accessible from the /structures/ path
- *      To move a device with a custom where name to a different structure, unpair the device, then re-pair the device with the desired name
- */
-@property(nonatomic, copy) NSString <Optional> *name;
-
-@end
 
 /**
  * NestSDKWheres is an object set on a structure, containing where identifiers (whereId and name).
@@ -56,7 +31,7 @@
  *
  * Access to the wheres object requires Product data read/write permission.
  */
-@interface NestSDKWheres : NestSDKDataModel <NestSDKWheres>
+@interface NestSDKWheres : NestSDKDataModel <NestSDKWheresProtocol>
 #pragma mark Properties
 
 /**

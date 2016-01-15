@@ -20,6 +20,7 @@
 
 #import <Foundation/Foundation.h>
 #import <NestSDK/NestSDKDataModel.h>
+#import <NestSDK/NestSDKETAProtocol.h>
 
 @protocol Optional;
 
@@ -27,7 +28,7 @@
  * ETA is an object, set on a structure. Use eta to give Nest information so we can prepare a house for your arrival.
  * Requires ETA permission, and is write only.
  */
-@interface NestSDKETA : NestSDKDataModel
+@interface NestSDKETA : NestSDKDataModel <NestSDKETAProtocol>
 #pragma mark Properties
 
 /**

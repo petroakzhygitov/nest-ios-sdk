@@ -21,8 +21,8 @@
 #import <Foundation/Foundation.h>
 #import <CoreGraphics/CGBase.h>
 #import <JSONModel/JSONModel.h>
-#import "NestSDKDevice.h"
-#import "NestSDKThermostat.h"
+#import <NestSDK/NestSDKDevice.h>
+#import <NestSDK/NestSDKThermostat.h>
 
 @protocol Optional;
 

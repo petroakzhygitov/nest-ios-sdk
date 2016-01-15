@@ -20,8 +20,8 @@
 
 #import <Foundation/Foundation.h>
 #import <JSONModel/JSONModel.h>
-#import "NestSDKDevice.h"
-#import "NestSDKSmokeCOAlarmProtocol.h"
+#import <NestSDK/NestSDKDevice.h>
+#import <NestSDK/NestSDKSmokeCOAlarmProtocol.h>
 
 
 /**

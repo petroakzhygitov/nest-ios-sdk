@@ -20,6 +20,7 @@
 
 #import <Foundation/Foundation.h>
 #import <NestSDK/NestSDKDataModel.h>
+#import <NestSDK/NestSDKMetadataProtocol.h>
 
 @protocol Optional;
 
@@ -28,7 +29,7 @@
  *
  * Learn more about metadata https://developer.nest.com/documentation/cloud/metadata
  */
-@interface NestSDKMetadata : NestSDKDataModel
+@interface NestSDKMetadata : NestSDKDataModel <NestSDKMetadataProtocol>
 #pragma mark Properties
 
 /**

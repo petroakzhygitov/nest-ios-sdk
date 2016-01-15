@@ -20,7 +20,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreGraphics/CGBase.h>
-#import "NestSDKDeviceProtocol.h"
+#import <NestSDK/NestSDKDeviceProtocol.h>
 
 #pragma mark typedef
 typedef NS_ENUM(NSUInteger, NestSDKThermostatTemperatureScale) {

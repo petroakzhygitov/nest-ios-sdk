@@ -220,7 +220,7 @@ NestSDKDataManager *dataManager = [[NestSDKDataManager alloc] init];
 	}
 	
 	for (NestSDKStructure *structure in structuresArray) {
-		NSLog(@"Updated structure with name: %@", structure.name);
+		NSLog(@"Read structure with name: %@", structure.name);
 	}
 }];
 ```
@@ -232,7 +232,7 @@ It is possible to update structure's `away` status and set `eta`. To update a st
 NestSDKDataManager *dataManager = [[NestSDKDataManager alloc] init];
 [dataManager setStructure:structure block:^(id <NestSDKStructure> structure, NSError *) {
 	if (error) {
-		NSLog(@"Error occurred while observing structure: %@", error);
+		NSLog(@"Error occurred while updating structure: %@", error);
 		return;
 	}
 	
@@ -298,31 +298,31 @@ NestSDKDataManager *dataManager = [[NestSDKDataManager alloc] init];
 NSString *thermostatId = structure.thermostats[someIndex];
 [self.dataManager thermostatWithId:thermostatId block:^(id <NestSDKThermostat> thermostat, NSError *error) {
 	if (error) {
-		NSLog(@"Error occurred while observing thermostat: %@", error);
+		NSLog(@"Error occurred while reading thermostat: %@", error);
 		return;
 	}
 	
-	NSLog(@"Updated thermostat with name: %@", thermostat.name);
+	NSLog(@"Read thermostat with name: %@", thermostat.name);
 }];
 
 NSString *smokeCOAlarmId = structure.smoke_co_alarms[someIndex];
 [self.dataManager smokeCOAlarmWithId:smokeCOAlarmId block:^(id <NestSDKSmokeCOAlarm> smokeCOAlarm, NSError *error) {
     	if (error) {
-		NSLog(@"Error occurred while observing smoke CO alarm: %@", error);
+		NSLog(@"Error occurred while reading smoke CO alarm: %@", error);
 		return;
 	}
 	
-	NSLog(@"Updated smoke+CO Alarm with name: %@", smokeCOAlarm.name);
+	NSLog(@"Read smoke+CO Alarm with name: %@", smokeCOAlarm.name);
 }];
  
 NSString *cameraId = structure.cameras[someIndex];
 [self.dataManager cameraWithId:cameraId block:^(id <NestSDKCamera> camera, NSError *error) {
 	if (error) {
-		NSLog(@"Error occurred while observing camera: %@", error);
+		NSLog(@"Error occurred while reading camera: %@", error);
 		return;
 	}
 	
-	NSLog(@"Updated camera with name: %@", camera.name);
+	NSLog(@"Read camera with name: %@", camera.name);
 }];
 ```
 
@@ -338,7 +338,7 @@ NestSDKDataManager *dataManager = [[NestSDKDataManager alloc] init];
 
 [self.dataManager setThermostat:thermostat block:^(id <NestSDKThermostat> thermostat, NSError *error) {
 	if (error) {
-		NSLog(@"Error occurred while observing thermostat: %@", error);
+		NSLog(@"Error occurred while updating thermostat: %@", error);
 		return;
 	}
 	
@@ -347,7 +347,7 @@ NestSDKDataManager *dataManager = [[NestSDKDataManager alloc] init];
 
 [self.dataManager setCamera:camera block:^(id <NestSDKCamera> camera, NSError *error) {
 	if (error) {
-		NSLog(@"Error occurred while observing camera: %@", error);
+		NSLog(@"Error occurred while updating camera: %@", error);
 		return;
 	}
 	
@@ -355,6 +355,25 @@ NestSDKDataManager *dataManager = [[NestSDKDataManager alloc] init];
 }];
 ```
 
+## Metadata
+
+Data about the data. Metadata values cannot be accessed directly and have no associated permissions.
+
+### Reading metadata
+
+To read metadata use `NestSDKDataManager`:
+```objective-c
+NestSDKDataManager *dataManager = [[NestSDKDataManager alloc] init];
+
+[self.dataManager metadataWithBlock:^(id <NestSDKMetadata> metadata, NSError *) {
+	if (error) {
+		NSLog(@"Error occurred while reading metadata: %@", error);
+		return;
+	}
+	
+	NSLog(@"Read metadata: %@", metadata);
+}];
+```
 
 ## Author
 

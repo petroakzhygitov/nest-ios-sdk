@@ -34,12 +34,14 @@
 #import <NestSDK/NestSDKLogger.h>
 #import <NestSDK/NestSDKUtils.h>
 
-#import <NestSDK/NestSDKDataModel.h>
-#import <NestSDK/NestSDKMetadata.h>
-#import <NestSDK/NestSDKStructure.h>
-#import "NestSDKThermostatDataModel.h"
-#import <NestSDK/NestSDKSmokeCOAlarm.h>
-#import <NestSDK/NestSDKCamera.h>
+#import <NestSDK/NestSDKDataModelProtocol.h>
+#import <NestSDK/NestSDKMetadataProtocol.h>
+#import <NestSDK/NestSDKStructureProtocol.h>
+#import <NestSDK/NestSDKDeviceProtocol.h>
+#import <NestSDK/NestSDKThermostat.h>
+#import <NestSDK/NestSDKSmokeCOAlarmProtocol.h>
+#import <NestSDK/NestSDKCameraProtocol.h>
+#import <NestSDK/NestSDKCameraLastEventProtocol.h>
 
 #define NESTSDK_VERSION_STRING @"0.1.0"
 

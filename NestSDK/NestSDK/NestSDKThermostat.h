@@ -58,7 +58,7 @@ typedef NS_ENUM(NSUInteger, NestSDKThermostatHVACState) {
 /**
  * Timestamp of the last successful interaction with the Nest service.
  */
-@property(nonatomic) NSDate *lastConnection;
+@property(nonatomic, readonly) NSDate *lastConnection;
 
 /**
  * System ability to cool (has AC).

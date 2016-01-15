@@ -47,6 +47,9 @@ SpecBegin(NestSDKFirebaseService)
             });
 
             it(@"should get values for url", ^{
+                id fdataSnapshotMock = [OCMockObject mockForClass:[FDataSnapshot class]];
+                [((FDataSnapshot *) [[fdataSnapshotMock stub] andReturn:@"someValue"]) value];
+
                 id firebaseMock = [OCMockObject mockForClass:[Firebase class]];
                 [[[firebaseMock stub] andReturn:firebaseMock] childByAppendingPath:@"someUrl"];
                 [[[firebaseMock stub] andDo:^(NSInvocation *invocation) {
@@ -55,7 +58,7 @@ SpecBegin(NestSDKFirebaseService)
                     NestSDKServiceUpdateBlock block;
                     [invocation getArgument:&block atIndex:3];
 
-                    block(@"result", nil);
+                    block(fdataSnapshotMock, nil);
 
                 }] observeSingleEventOfType:FEventTypeValue withBlock:[OCMArg any] withCancelBlock:[OCMArg any]];
 
@@ -64,7 +67,7 @@ SpecBegin(NestSDKFirebaseService)
                 waitUntil(^(DoneCallback done) {
                     [firebaseService valuesForURL:@"someUrl" withBlock:^(id result, NSError *error) {
                         expect(error).to.equal(nil);
-                        expect(result).to.equal(@"result");
+                        expect(result).to.equal(@"someValue");
                         done();
                     }];
                 });
@@ -117,7 +120,7 @@ SpecBegin(NestSDKFirebaseService)
                 waitUntil(^(DoneCallback done) {
                     [firebaseService setValues:@{@"some" : @"value"} forURL:@"someUrl" withBlock:^(id result, NSError *error) {
                         expect(error).to.equal(nil);
-                        expect(((FDataSnapshot *) result).value).to.equal(@"someValue");
+                        expect(result).to.equal(@"someValue");
                         done();
                     }];
                 });

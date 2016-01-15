@@ -85,7 +85,7 @@
     Firebase *firebase = [self.firebase childByAppendingPath:url];
 
     [firebase observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
-        block(snapshot, nil);
+        block(snapshot.value, nil);
 
     }                  withCancelBlock:^(NSError *error) {
         block(nil, error);
@@ -103,7 +103,7 @@
         return [FTransactionResult successWithValue:currentData];
 
     }          andCompletionBlock:^(NSError *error, BOOL committed, FDataSnapshot *snapshot) {
-        block(snapshot, error);
+        block(snapshot.value, error);
 
     }             withLocalEvents:NO];
 }

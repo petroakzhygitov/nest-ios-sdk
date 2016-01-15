@@ -40,35 +40,35 @@
  *
  * Learn more about Nest Cam audio setting: https://nest.com/support/article/Does-Nest-Cam-have-audio
  */
-@property(nonatomic) BOOL isAudioInputEnabled;
+@property(nonatomic, readonly) BOOL isAudioInputEnabled;
 
 /**
  * Timestamp that identifies the last change to the online status.
  */
-@property(nonatomic) NSDate *lastIsOnlineChange;
+@property(nonatomic, readonly) NSDate *lastIsOnlineChange;
 
 /**
  * Nest Aware with Video History subscription status (subscription active or not).
  *
  * Learn more about Nest Aware with Video History: https://nest.com/support/article/What-do-I-get-with-Nest-Aware-for-Nest-Cam
  */
-@property(nonatomic) BOOL isVideoHistoryEnabled;
+@property(nonatomic, readonly) BOOL isVideoHistoryEnabled;
 
 /**
  * Web URL (deep link) to the live camera feed at home.nest.com.
  */
-@property(nonatomic, copy) NSString *webUrl;
+@property(nonatomic, copy, readonly) NSString *webUrl;
 
 /**
  * App URL (deep link) to the live camera feed in the Nest app.
  */
-@property(nonatomic, copy) NSString *appUrl;
+@property(nonatomic, copy, readonly) NSString *appUrl;
 
 /**
  * This object captures information about the last event that triggered a notification.
  * In order to capture last event data, the Nest Cam must have a Nest Aware with Video History subscription.
  */
-@property(nonatomic) id <NestSDKCameraLastEvent> lastEvent;
+@property(nonatomic, readonly) id <NestSDKCameraLastEvent> lastEvent;
 
 
 @end

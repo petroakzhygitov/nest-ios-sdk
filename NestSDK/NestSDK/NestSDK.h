@@ -37,7 +37,7 @@
 #import <NestSDK/NestSDKDataModel.h>
 #import <NestSDK/NestSDKMetadata.h>
 #import <NestSDK/NestSDKStructure.h>
-#import <NestSDK/NestSDKThermostat.h>
+#import "NestSDKThermostatDataModel.h"
 #import <NestSDK/NestSDKSmokeCOAlarm.h>
 #import <NestSDK/NestSDKCamera.h>
 

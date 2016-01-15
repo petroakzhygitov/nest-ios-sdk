@@ -20,10 +20,11 @@
 
 #import <Foundation/Foundation.h>
 #import <JSONModel/JSONModel.h>
+#import "NestSDKDataModelProtocol.h"
 
 /**
  * Base class for all data models in NestSDK.
  */
-@interface NestSDKDataModel : JSONModel
+@interface NestSDKDataModel : JSONModel <NestSDKDataModelProtocol>
 
 @end

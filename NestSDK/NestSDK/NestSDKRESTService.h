@@ -2,7 +2,7 @@
 #import "NestSDKService.h"
 
 @protocol NestSDKStructure;
-@class NestSDKThermostat;
+@class NestSDKThermostatDataModel;
 @class NestSDKSmokeCOAlarm;
 
 #pragma mark macros
@@ -15,7 +15,7 @@
 
 typedef void (^NestSDKRESTServiceGetStructuresRequestHandler)(NSArray <NestSDKStructure> *structuresArray, NSError *error);
 
-typedef void (^NestSDKRESTServiceGetThermostatRequestHandler)(NestSDKThermostat *thermostat, NSError *error);
+typedef void (^NestSDKRESTServiceGetThermostatRequestHandler)(NestSDKThermostatDataModel *thermostat, NSError *error);
 
 typedef void (^NestSDKRESTServiceGetSmokeCOAlarmRequestHandler)(NestSDKSmokeCOAlarm *smokeCOAlarm, NSError *error);
 

@@ -1,6 +1,6 @@
 #import "NestSDKRESTService.h"
 #import "NestSDKStructure.h"
-#import "NestSDKThermostat.h"
+#import "NestSDKThermostatDataModel.h"
 #import "NestSDKAccessToken.h"
 #import "NestSDKSmokeCOAlarm.h"
 
@@ -160,7 +160,7 @@ static NSString *const kAPIEndpointSmokeCOAlarmsURLPath = @"/smoke_co_alarms";
                                                         return;
                                                     }
 
-                                                    NestSDKThermostat *thermostat = [[NestSDKThermostat alloc] initWithData:data error:&error];
+                                                    NestSDKThermostatDataModel *thermostat = [[NestSDKThermostatDataModel alloc] initWithData:data error:&error];
                                                     if (error) {
                                                         handler(nil, error);
 

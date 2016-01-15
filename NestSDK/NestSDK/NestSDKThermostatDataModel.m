@@ -18,7 +18,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "NestSDKThermostat.h"
+#import "NestSDKThermostatDataModel.h"
 #import "NestSDKUtils.h"
 
 #pragma mark const
@@ -36,7 +36,7 @@ static NSString *const kHVACModeStringHeatCool = @"heat-cool";
 static NSString *const kHVACModeStringOff = @"off";
 
 
-@implementation NestSDKThermostat
+@implementation NestSDKThermostatDataModel
 #pragma mark Override
 
 - (void)setLastConnectionWithNSString:(NSString *)lastConnectionString {
@@ -209,7 +209,7 @@ static NSString *const kHVACModeStringOff = @"off";
     if (![super isEqual:other])
         return NO;
 
-    NestSDKThermostat *otherThermostat = (NestSDKThermostat *) other;
+    NestSDKThermostatDataModel *otherThermostat = (NestSDKThermostatDataModel *) other;
     return (([NestSDKUtils object:self.lastConnection isEqualToObject:otherThermostat.lastConnection]) &&
             ([NestSDKUtils object:self.locale isEqualToObject:otherThermostat.locale]) &&
             (self.canCool == otherThermostat.canCool) &&

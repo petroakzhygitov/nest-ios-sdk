@@ -43,7 +43,7 @@ typedef void (^NestSDKDataUpdateHandler)(id, NSError *);
 
 @interface NestSDKDataManager ()
 
-@property(nonatomic) id <NestSDKService> service;
+@property(nonatomic, readonly) id <NestSDKService> service;
 
 @end
 
@@ -54,7 +54,6 @@ typedef void (^NestSDKDataUpdateHandler)(id, NSError *);
 - (instancetype)init {
     self = [super init];
     if (self) {
-        self.service = [NestSDKApplicationDelegate service];
     }
 
     return self;
@@ -158,6 +157,12 @@ typedef void (^NestSDKDataUpdateHandler)(id, NSError *);
     }
 
     block(dataModel, nil);
+}
+
+#pragma mark Override
+
+- (id <NestSDKService>)service {
+    return [NestSDKApplicationDelegate service];
 }
 
 #pragma mark Public

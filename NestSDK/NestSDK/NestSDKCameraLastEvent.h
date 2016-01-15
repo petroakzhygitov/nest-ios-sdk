@@ -21,6 +21,7 @@
 #import <Foundation/Foundation.h>
 #import "JSONModel.h"
 #import "NestSDKDataModel.h"
+#import "NestSDKCameraLastEventProtocol.h"
 
 /**
  * Camera last event data model.
@@ -30,7 +31,7 @@
  *
  * Learn more about Nest Aware with Video History subscription: https://nest.com/support/article/What-do-I-get-with-Nest-Aware-for-Nest-Cam
  */
-@interface NestSDKCameraLastEvent : NestSDKDataModel
+@interface NestSDKCameraLastEvent : NestSDKDataModel <NestSDKCameraLastEventProtocol>
 #pragma mark Properties
 
 /**

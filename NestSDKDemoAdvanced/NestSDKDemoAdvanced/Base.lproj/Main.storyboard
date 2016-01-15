@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="syt-JH-XOw">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="h6R-XI-3Cj">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="none" allowsSelection="NO" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="Elf-hv-JMC">
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="TsU-Ih-gHv"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="gcj-dT-fLB"/>
+                                </connections>
+                            </tableView>
+                            <view hidden="YES" alpha="0.40000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jGU-It-fFc" userLabel="Fader View">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="faa-eT-VPK" userLabel="Connect With Nest View">
+                                <rect key="frame" x="155" y="207" width="290" height="186"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connect with Nest account" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yCV-4X-upc" userLabel="Connect With Nest Label">
+                                        <rect key="frame" x="0.0" y="20" width="290" height="23"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="23" id="M3S-aC-Woc"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="19"/>
+                                        <color key="textColor" red="0.96862745100000003" green="0.23921568630000001" blue="0.23921568630000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please, connect NestSDK Demo application with your Nest account to receive information from your structures and devices" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h4H-J9-lr2" userLabel="Description Label">
+                                        <rect key="frame" x="15" y="61" width="260" height="47"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cNe-Wt-8Nq" userLabel="Connect with Nest Button" customClass="NestSDKConnectWithNestButton">
+                                        <rect key="frame" x="20" y="126" width="250" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="hfp-5h-X6m"/>
+                                        </constraints>
+                                        <state key="normal" title="Connect with Nest">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="cNe-Wt-8Nq" firstAttribute="top" secondItem="h4H-J9-lr2" secondAttribute="bottom" constant="18" id="0Ox-5j-47y"/>
+                                    <constraint firstAttribute="trailing" secondItem="cNe-Wt-8Nq" secondAttribute="trailing" constant="20" id="3zc-Q5-H5M"/>
+                                    <constraint firstAttribute="trailing" secondItem="h4H-J9-lr2" secondAttribute="trailing" constant="15" id="94X-bO-eq8"/>
+                                    <constraint firstItem="h4H-J9-lr2" firstAttribute="top" secondItem="yCV-4X-upc" secondAttribute="bottom" constant="18" id="Bj2-Qy-rU5"/>
+                                    <constraint firstAttribute="trailing" secondItem="yCV-4X-upc" secondAttribute="trailing" id="JR3-b0-KOn"/>
+                                    <constraint firstItem="yCV-4X-upc" firstAttribute="leading" secondItem="faa-eT-VPK" secondAttribute="leading" id="SRZ-pY-klY"/>
+                                    <constraint firstItem="yCV-4X-upc" firstAttribute="top" secondItem="faa-eT-VPK" secondAttribute="top" constant="20" id="VWb-WN-TlS"/>
+                                    <constraint firstAttribute="bottom" secondItem="cNe-Wt-8Nq" secondAttribute="bottom" constant="20" id="dVu-A8-J5y"/>
+                                    <constraint firstAttribute="width" constant="290" id="i31-9E-ZsT"/>
+                                    <constraint firstAttribute="height" constant="186" id="l0U-jv-zYC"/>
+                                    <constraint firstItem="cNe-Wt-8Nq" firstAttribute="leading" secondItem="faa-eT-VPK" secondAttribute="leading" constant="20" id="lCk-rD-Hjx"/>
+                                    <constraint firstItem="h4H-J9-lr2" firstAttribute="leading" secondItem="faa-eT-VPK" secondAttribute="leading" constant="15" id="rlO-1W-kId"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="faa-eT-VPK" firstAttribute="centerX" secondItem="h6R-XI-3Cj" secondAttribute="centerX" id="5Jq-Wm-tFV"/>
+                            <constraint firstItem="Elf-hv-JMC" firstAttribute="leading" secondItem="h6R-XI-3Cj" secondAttribute="leading" id="OHa-Ho-wsK"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="jGU-It-fFc" secondAttribute="bottom" id="R4W-bn-R40"/>
+                            <constraint firstAttribute="trailing" secondItem="Elf-hv-JMC" secondAttribute="trailing" id="SKZ-97-akW"/>
+                            <constraint firstItem="Elf-hv-JMC" firstAttribute="leading" secondItem="h6R-XI-3Cj" secondAttribute="leading" id="UeD-gh-gqK"/>
+                            <constraint firstItem="Elf-hv-JMC" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="YFX-Vw-kvI"/>
+                            <constraint firstAttribute="trailing" secondItem="Elf-hv-JMC" secondAttribute="trailing" id="ZcU-kT-ugg"/>
+                            <constraint firstItem="faa-eT-VPK" firstAttribute="centerY" secondItem="h6R-XI-3Cj" secondAttribute="centerY" id="dbS-re-9rW"/>
+                            <constraint firstItem="jGU-It-fFc" firstAttribute="leading" secondItem="h6R-XI-3Cj" secondAttribute="leading" id="dpB-nf-Ezm"/>
+                            <constraint firstItem="jGU-It-fFc" firstAttribute="top" secondItem="h6R-XI-3Cj" secondAttribute="top" id="duA-zT-3eL"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Elf-hv-JMC" secondAttribute="bottom" id="ohj-F8-inj"/>
+                            <constraint firstAttribute="trailing" secondItem="jGU-It-fFc" secondAttribute="trailing" id="zQk-Bm-xR6"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="Krl-Ov-xwg"/>
+                    <connections>
+                        <outlet property="connectWithNestButton" destination="cNe-Wt-8Nq" id="sh4-e3-LP0"/>
+                        <outlet property="connectWithNestView" destination="faa-eT-VPK" id="fbA-8R-IF9"/>
+                        <outlet property="faderView" destination="jGU-It-fFc" id="vnb-Y9-nh1"/>
+                        <outlet property="tableView" destination="Elf-hv-JMC" id="V0d-I0-OF9"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1085" y="387"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="121-8f-shd">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="syt-JH-XOw" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="VrD-KB-lXC">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="FG0-ly-SR5"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7cg-kv-U18" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="273" y="1047"/>
+        </scene>
+    </scenes>
+</document>

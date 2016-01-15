@@ -21,13 +21,14 @@
 #import <Foundation/Foundation.h>
 #import <JSONModel/JSONModel.h>
 #import "NestSDKDevice.h"
+#import "NestSDKCameraProtocol.h"
 
 @class NestSDKCameraLastEvent;
 
 /**
  * Camera device data model.
  */
-@interface NestSDKCamera : NestSDKDevice
+@interface NestSDKCamera : NestSDKDevice <NestSDKCameraProtocol>
 #pragma mark Properties
 
 /**

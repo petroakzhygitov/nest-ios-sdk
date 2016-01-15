@@ -28,7 +28,6 @@
 #import <NestSDK/NestSDKSmokeCOAlarm.h>
 #import <NestSDK/NestSDKCamera.h>
 
-
 #pragma mark const
 
 static NSString *const kEndpointPathRoot = @"/";
@@ -96,8 +95,9 @@ typedef void (^NestSDKDataModelUpdateHandler)(id, NSError *);
 }
 
 - (void)_setDataModel:(id <NestSDKDataModel>)dataModel forURL:(NSString *)url block:(NestSDKDataUpdateHandler)block {
-    [self.service setValues:[dataModel toDictionary] forURL:url withBlock:^(id result, NSError *error) {
-        [self _handleResultWithDataModelClass:[dataModel class] block:block result:result error:error asArray:NO];
+    NestSDKDataModel *currentDataModel = (NestSDKDataModel *)dataModel;
+    [self.service setValues:[currentDataModel toDictionary] forURL:url withBlock:^(id result, NSError *error) {
+        [self _handleResultWithDataModelClass:[currentDataModel class] block:block result:result error:error asArray:NO];
     }];
 }
 

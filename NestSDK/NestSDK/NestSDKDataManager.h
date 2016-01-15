@@ -24,6 +24,7 @@
 @class NestSDKMetadata;
 @class NestSDKSmokeCOAlarm;
 @class NestSDKCamera;
+@protocol NestSDKDataModel;
 @protocol NestSDKStructure;
 @protocol NestSDKThermostat;
 

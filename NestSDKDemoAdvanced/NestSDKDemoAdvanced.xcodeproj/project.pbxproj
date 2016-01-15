@@ -1,0 +1,534 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		91C3DA861C47FA6100D656EC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 91C3DA851C47FA6100D656EC /* main.m */; };
+		91C3DA891C47FA6100D656EC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 91C3DA881C47FA6100D656EC /* AppDelegate.m */; };
+		91C3DA8C1C47FA6100D656EC /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91C3DA8B1C47FA6100D656EC /* ViewController.m */; };
+		91C3DA8F1C47FA6100D656EC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 91C3DA8D1C47FA6100D656EC /* Main.storyboard */; };
+		91C3DA911C47FA6100D656EC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 91C3DA901C47FA6100D656EC /* Assets.xcassets */; };
+		91C3DA941C47FA6100D656EC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 91C3DA921C47FA6100D656EC /* LaunchScreen.storyboard */; };
+		91C3DA9F1C47FA6100D656EC /* NestSDKDemoAdvancedTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 91C3DA9E1C47FA6100D656EC /* NestSDKDemoAdvancedTests.m */; };
+		91C3DAAB1C4820DE00D656EC /* ThermostatViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91C3DAAA1C4820DE00D656EC /* ThermostatViewCell.xib */; };
+		91C3DAAD1C4820F400D656EC /* CameraViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91C3DAAC1C4820F400D656EC /* CameraViewCell.xib */; };
+		91C3DAAF1C48210200D656EC /* SmokeCOAlarmViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91C3DAAE1C48210200D656EC /* SmokeCOAlarmViewCell.xib */; };
+		D7C028DE116789CA0F6BA2D2 /* CameraViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D7C0263D2B7241966542DF82 /* CameraViewCell.m */; };
+		D7C02D33BB0B41ABE3AD5479 /* SmokeCOAlarmViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D7C02FF448463C33E20B84D4 /* SmokeCOAlarmViewCell.m */; };
+		D7C02F7332F454690C6CAC29 /* ThermostatViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D7C024FBF64AC224C24CFF8B /* ThermostatViewCell.m */; };
+		F028262D81FECE1285416386 /* libPods-NestSDKDemoAdvanced.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 95909D7BD5D4B81B9DA1E5DA /* libPods-NestSDKDemoAdvanced.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		91C3DA9B1C47FA6100D656EC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 91C3DA791C47FA6100D656EC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 91C3DA801C47FA6100D656EC;
+			remoteInfo = NestSDKDemoAdvanced;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		612DFCD767A9FDBC5FB56F7B /* Pods-NestSDKDemoAdvanced.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NestSDKDemoAdvanced.release.xcconfig"; path = "Pods/Target Support Files/Pods-NestSDKDemoAdvanced/Pods-NestSDKDemoAdvanced.release.xcconfig"; sourceTree = "<group>"; };
+		91C3DA811C47FA6100D656EC /* NestSDKDemoAdvanced.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NestSDKDemoAdvanced.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		91C3DA851C47FA6100D656EC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		91C3DA871C47FA6100D656EC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		91C3DA881C47FA6100D656EC /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		91C3DA8A1C47FA6100D656EC /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		91C3DA8B1C47FA6100D656EC /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		91C3DA8E1C47FA6100D656EC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		91C3DA901C47FA6100D656EC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		91C3DA931C47FA6100D656EC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		91C3DA951C47FA6100D656EC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		91C3DA9A1C47FA6100D656EC /* NestSDKDemoAdvancedTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NestSDKDemoAdvancedTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		91C3DA9E1C47FA6100D656EC /* NestSDKDemoAdvancedTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NestSDKDemoAdvancedTests.m; sourceTree = "<group>"; };
+		91C3DAA01C47FA6100D656EC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		91C3DAAA1C4820DE00D656EC /* ThermostatViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ThermostatViewCell.xib; path = ViewCells/ThermostatViewCell.xib; sourceTree = "<group>"; };
+		91C3DAAC1C4820F400D656EC /* CameraViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraViewCell.xib; sourceTree = "<group>"; };
+		91C3DAAE1C48210200D656EC /* SmokeCOAlarmViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SmokeCOAlarmViewCell.xib; sourceTree = "<group>"; };
+		95909D7BD5D4B81B9DA1E5DA /* libPods-NestSDKDemoAdvanced.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-NestSDKDemoAdvanced.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A9D9160811208D771E176AEF /* Pods-NestSDKDemoAdvanced.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NestSDKDemoAdvanced.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NestSDKDemoAdvanced/Pods-NestSDKDemoAdvanced.debug.xcconfig"; sourceTree = "<group>"; };
+		D7C024FBF64AC224C24CFF8B /* ThermostatViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThermostatViewCell.m; sourceTree = "<group>"; };
+		D7C0263D2B7241966542DF82 /* CameraViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraViewCell.m; sourceTree = "<group>"; };
+		D7C026CB83E40FF3DEC4E1BD /* CameraViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraViewCell.h; sourceTree = "<group>"; };
+		D7C0290AC1A3640B5A8F2FDB /* SmokeCOAlarmViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmokeCOAlarmViewCell.h; sourceTree = "<group>"; };
+		D7C02A58C8220B8AFD230E57 /* ThermostatViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThermostatViewCell.h; sourceTree = "<group>"; };
+		D7C02FF448463C33E20B84D4 /* SmokeCOAlarmViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SmokeCOAlarmViewCell.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		91C3DA7E1C47FA6100D656EC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F028262D81FECE1285416386 /* libPods-NestSDKDemoAdvanced.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		91C3DA971C47FA6100D656EC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0CFAAA6562BD71D8A5484D73 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				95909D7BD5D4B81B9DA1E5DA /* libPods-NestSDKDemoAdvanced.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3400A221C4667C9E7ECDA0C8 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A9D9160811208D771E176AEF /* Pods-NestSDKDemoAdvanced.debug.xcconfig */,
+				612DFCD767A9FDBC5FB56F7B /* Pods-NestSDKDemoAdvanced.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		91C3DA781C47FA6100D656EC = {
+			isa = PBXGroup;
+			children = (
+				91C3DA831C47FA6100D656EC /* NestSDKDemoAdvanced */,
+				91C3DA9D1C47FA6100D656EC /* NestSDKDemoAdvancedTests */,
+				91C3DA821C47FA6100D656EC /* Products */,
+				3400A221C4667C9E7ECDA0C8 /* Pods */,
+				0CFAAA6562BD71D8A5484D73 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		91C3DA821C47FA6100D656EC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				91C3DA811C47FA6100D656EC /* NestSDKDemoAdvanced.app */,
+				91C3DA9A1C47FA6100D656EC /* NestSDKDemoAdvancedTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		91C3DA831C47FA6100D656EC /* NestSDKDemoAdvanced */ = {
+			isa = PBXGroup;
+			children = (
+				91C3DAA91C4820B800D656EC /* View Cells */,
+				91C3DA871C47FA6100D656EC /* AppDelegate.h */,
+				91C3DA881C47FA6100D656EC /* AppDelegate.m */,
+				91C3DA8A1C47FA6100D656EC /* ViewController.h */,
+				91C3DA8B1C47FA6100D656EC /* ViewController.m */,
+				91C3DA8D1C47FA6100D656EC /* Main.storyboard */,
+				91C3DA901C47FA6100D656EC /* Assets.xcassets */,
+				91C3DA921C47FA6100D656EC /* LaunchScreen.storyboard */,
+				91C3DA951C47FA6100D656EC /* Info.plist */,
+				91C3DA841C47FA6100D656EC /* Supporting Files */,
+			);
+			path = NestSDKDemoAdvanced;
+			sourceTree = "<group>";
+		};
+		91C3DA841C47FA6100D656EC /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				91C3DA851C47FA6100D656EC /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		91C3DA9D1C47FA6100D656EC /* NestSDKDemoAdvancedTests */ = {
+			isa = PBXGroup;
+			children = (
+				91C3DA9E1C47FA6100D656EC /* NestSDKDemoAdvancedTests.m */,
+				91C3DAA01C47FA6100D656EC /* Info.plist */,
+			);
+			path = NestSDKDemoAdvancedTests;
+			sourceTree = "<group>";
+		};
+		91C3DAA91C4820B800D656EC /* View Cells */ = {
+			isa = PBXGroup;
+			children = (
+				91C3DAAA1C4820DE00D656EC /* ThermostatViewCell.xib */,
+				91C3DAAC1C4820F400D656EC /* CameraViewCell.xib */,
+				91C3DAAE1C48210200D656EC /* SmokeCOAlarmViewCell.xib */,
+				D7C0263D2B7241966542DF82 /* CameraViewCell.m */,
+				D7C026CB83E40FF3DEC4E1BD /* CameraViewCell.h */,
+				D7C02FF448463C33E20B84D4 /* SmokeCOAlarmViewCell.m */,
+				D7C0290AC1A3640B5A8F2FDB /* SmokeCOAlarmViewCell.h */,
+				D7C024FBF64AC224C24CFF8B /* ThermostatViewCell.m */,
+				D7C02A58C8220B8AFD230E57 /* ThermostatViewCell.h */,
+			);
+			name = "View Cells";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		91C3DA801C47FA6100D656EC /* NestSDKDemoAdvanced */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 91C3DAA31C47FA6100D656EC /* Build configuration list for PBXNativeTarget "NestSDKDemoAdvanced" */;
+			buildPhases = (
+				7C7554A23896452FBEA8CA38 /* Check Pods Manifest.lock */,
+				91C3DA7D1C47FA6100D656EC /* Sources */,
+				91C3DA7E1C47FA6100D656EC /* Frameworks */,
+				91C3DA7F1C47FA6100D656EC /* Resources */,
+				CD04144178AA38B9DD1794C2 /* Embed Pods Frameworks */,
+				CF1E6E72EB46927C00567219 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NestSDKDemoAdvanced;
+			productName = NestSDKDemoAdvanced;
+			productReference = 91C3DA811C47FA6100D656EC /* NestSDKDemoAdvanced.app */;
+			productType = "com.apple.product-type.application";
+		};
+		91C3DA991C47FA6100D656EC /* NestSDKDemoAdvancedTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 91C3DAA61C47FA6100D656EC /* Build configuration list for PBXNativeTarget "NestSDKDemoAdvancedTests" */;
+			buildPhases = (
+				91C3DA961C47FA6100D656EC /* Sources */,
+				91C3DA971C47FA6100D656EC /* Frameworks */,
+				91C3DA981C47FA6100D656EC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				91C3DA9C1C47FA6100D656EC /* PBXTargetDependency */,
+			);
+			name = NestSDKDemoAdvancedTests;
+			productName = NestSDKDemoAdvancedTests;
+			productReference = 91C3DA9A1C47FA6100D656EC /* NestSDKDemoAdvancedTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		91C3DA791C47FA6100D656EC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = "Petro Akzhygitov";
+				TargetAttributes = {
+					91C3DA801C47FA6100D656EC = {
+						CreatedOnToolsVersion = 7.2;
+					};
+					91C3DA991C47FA6100D656EC = {
+						CreatedOnToolsVersion = 7.2;
+						TestTargetID = 91C3DA801C47FA6100D656EC;
+					};
+				};
+			};
+			buildConfigurationList = 91C3DA7C1C47FA6100D656EC /* Build configuration list for PBXProject "NestSDKDemoAdvanced" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 91C3DA781C47FA6100D656EC;
+			productRefGroup = 91C3DA821C47FA6100D656EC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				91C3DA801C47FA6100D656EC /* NestSDKDemoAdvanced */,
+				91C3DA991C47FA6100D656EC /* NestSDKDemoAdvancedTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		91C3DA7F1C47FA6100D656EC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				91C3DAAF1C48210200D656EC /* SmokeCOAlarmViewCell.xib in Resources */,
+				91C3DA941C47FA6100D656EC /* LaunchScreen.storyboard in Resources */,
+				91C3DAAB1C4820DE00D656EC /* ThermostatViewCell.xib in Resources */,
+				91C3DAAD1C4820F400D656EC /* CameraViewCell.xib in Resources */,
+				91C3DA911C47FA6100D656EC /* Assets.xcassets in Resources */,
+				91C3DA8F1C47FA6100D656EC /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		91C3DA981C47FA6100D656EC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		7C7554A23896452FBEA8CA38 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		CD04144178AA38B9DD1794C2 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NestSDKDemoAdvanced/Pods-NestSDKDemoAdvanced-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CF1E6E72EB46927C00567219 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NestSDKDemoAdvanced/Pods-NestSDKDemoAdvanced-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		91C3DA7D1C47FA6100D656EC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				91C3DA8C1C47FA6100D656EC /* ViewController.m in Sources */,
+				91C3DA891C47FA6100D656EC /* AppDelegate.m in Sources */,
+				91C3DA861C47FA6100D656EC /* main.m in Sources */,
+				D7C028DE116789CA0F6BA2D2 /* CameraViewCell.m in Sources */,
+				D7C02D33BB0B41ABE3AD5479 /* SmokeCOAlarmViewCell.m in Sources */,
+				D7C02F7332F454690C6CAC29 /* ThermostatViewCell.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		91C3DA961C47FA6100D656EC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				91C3DA9F1C47FA6100D656EC /* NestSDKDemoAdvancedTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		91C3DA9C1C47FA6100D656EC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 91C3DA801C47FA6100D656EC /* NestSDKDemoAdvanced */;
+			targetProxy = 91C3DA9B1C47FA6100D656EC /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		91C3DA8D1C47FA6100D656EC /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				91C3DA8E1C47FA6100D656EC /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		91C3DA921C47FA6100D656EC /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				91C3DA931C47FA6100D656EC /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		91C3DAA11C47FA6100D656EC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		91C3DAA21C47FA6100D656EC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		91C3DAA41C47FA6100D656EC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A9D9160811208D771E176AEF /* Pods-NestSDKDemoAdvanced.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = NestSDKDemoAdvanced/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = NestSDK.NestSDKDemoAdvanced;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		91C3DAA51C47FA6100D656EC /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 612DFCD767A9FDBC5FB56F7B /* Pods-NestSDKDemoAdvanced.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = NestSDKDemoAdvanced/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = NestSDK.NestSDKDemoAdvanced;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		91C3DAA71C47FA6100D656EC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = NestSDKDemoAdvancedTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = NestSDK.NestSDKDemoAdvancedTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NestSDKDemoAdvanced.app/NestSDKDemoAdvanced";
+			};
+			name = Debug;
+		};
+		91C3DAA81C47FA6100D656EC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = NestSDKDemoAdvancedTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = NestSDK.NestSDKDemoAdvancedTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NestSDKDemoAdvanced.app/NestSDKDemoAdvanced";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		91C3DA7C1C47FA6100D656EC /* Build configuration list for PBXProject "NestSDKDemoAdvanced" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				91C3DAA11C47FA6100D656EC /* Debug */,
+				91C3DAA21C47FA6100D656EC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		91C3DAA31C47FA6100D656EC /* Build configuration list for PBXNativeTarget "NestSDKDemoAdvanced" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				91C3DAA41C47FA6100D656EC /* Debug */,
+				91C3DAA51C47FA6100D656EC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		91C3DAA61C47FA6100D656EC /* Build configuration list for PBXNativeTarget "NestSDKDemoAdvancedTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				91C3DAA71C47FA6100D656EC /* Debug */,
+				91C3DAA81C47FA6100D656EC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 91C3DA791C47FA6100D656EC /* Project object */;
+}

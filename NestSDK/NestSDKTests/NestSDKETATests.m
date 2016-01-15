@@ -25,12 +25,12 @@
 #import "NestSDKAccessToken.h"
 #import "LSStubRequestDSL.h"
 #import "LSNocilla.h"
-#import "NestSDKMetadata.h"
-#import "NestSDKETA.h"
+#import "NestSDKMetadataDataModel.h"
+#import "NestSDKETADataModel.h"
 
 SpecBegin(NestSDKETA)
     {
-        describe(@"NestSDKETA", ^{
+        describe(@"NestSDKETADataModel", ^{
 
             __block NSData *data;
 
@@ -43,7 +43,7 @@ SpecBegin(NestSDKETA)
 
             it(@"should deserialize/serialize data", ^{
                 NSError *error;
-                NestSDKETA *eta = [[NestSDKETA alloc] initWithData:data error:&error];
+                NestSDKETADataModel *eta = [[NestSDKETADataModel alloc] initWithData:data error:&error];
                 expect(error).to.equal(nil);
 
                 NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
@@ -79,13 +79,13 @@ SpecBegin(NestSDKETA)
 
             it(@"should have proper hash and equal", ^{
                 NSError *error;
-                NestSDKETA *eta1 = [[NestSDKETA alloc] initWithData:data error:&error];
+                NestSDKETADataModel *eta1 = [[NestSDKETADataModel alloc] initWithData:data error:&error];
                 expect(error).to.equal(nil);
 
-                NestSDKETA *eta2 = [[NestSDKETA alloc] initWithData:data error:&error];
+                NestSDKETADataModel *eta2 = [[NestSDKETADataModel alloc] initWithData:data error:&error];
                 expect(error).to.equal(nil);
 
-                NestSDKETA *eta3 = [[NestSDKETA alloc] initWithData:data error:&error];
+                NestSDKETADataModel *eta3 = [[NestSDKETADataModel alloc] initWithData:data error:&error];
                 expect(error).to.equal(nil);
 
                 eta3.tripId = @"someTripId";

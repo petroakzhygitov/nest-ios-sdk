@@ -18,7 +18,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "NestSDKSmokeCOAlarm.h"
+#import "NestSDKSmokeCOAlarmDataModel.h"
 #import "NestSDKUtils.h"
 
 #pragma mark const
@@ -38,7 +38,7 @@ static NSString *const kUIColorStateYellow = @"yellow";
 
 static NSString *const kUIColorStateRed = @"red";
 
-@implementation NestSDKSmokeCOAlarm
+@implementation NestSDKSmokeCOAlarmDataModel
 #pragma mark Private
 
 - (NestSDKSmokeCOAlarmAlarmState)_alarmStateWithAlarmStateString:(NSString *)alarmStateString {
@@ -210,7 +210,7 @@ static NSString *const kUIColorStateRed = @"red";
     if (![super isEqual:other])
         return NO;
 
-    NestSDKSmokeCOAlarm *otherSmokeCOAlarm = (NestSDKSmokeCOAlarm *) other;
+    NestSDKSmokeCOAlarmDataModel *otherSmokeCOAlarm = (NestSDKSmokeCOAlarmDataModel *) other;
     return (([NestSDKUtils object:self.lastConnection isEqualToObject:otherSmokeCOAlarm.lastConnection]) &&
             ([NestSDKUtils object:self.locale isEqualToObject:otherSmokeCOAlarm.locale]) &&
             (self.batteryHealth == otherSmokeCOAlarm.batteryHealth) &&

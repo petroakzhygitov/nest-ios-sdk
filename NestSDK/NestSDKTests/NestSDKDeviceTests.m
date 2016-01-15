@@ -25,12 +25,12 @@
 #import "NestSDKAccessToken.h"
 #import "LSStubRequestDSL.h"
 #import "LSNocilla.h"
-#import "NestSDKMetadata.h"
-#import "NestSDKDevice.h"
+#import "NestSDKMetadataDataModel.h"
+#import "NestSDKDeviceDataModel.h"
 
 SpecBegin(NestSDKDevice)
     {
-        describe(@"NestSDKDevice", ^{
+        describe(@"NestSDKDeviceDataModel", ^{
 
             __block NSData *data;
 
@@ -43,7 +43,7 @@ SpecBegin(NestSDKDevice)
 
             it(@"should deserialize/serialize data", ^{
                 NSError *error;
-                NestSDKDevice *device = [[NestSDKDevice alloc] initWithData:data error:&error];
+                NestSDKDeviceDataModel *device = [[NestSDKDeviceDataModel alloc] initWithData:data error:&error];
                 expect(error).to.equal(nil);
 
                 NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
@@ -79,13 +79,13 @@ SpecBegin(NestSDKDevice)
 
             it(@"should have proper hash and equal", ^{
                 NSError *error;
-                NestSDKDevice *device1 = [[NestSDKDevice alloc] initWithData:data error:&error];
+                NestSDKDeviceDataModel *device1 = [[NestSDKDeviceDataModel alloc] initWithData:data error:&error];
                 expect(error).to.equal(nil);
 
-                NestSDKDevice *device2 = [[NestSDKDevice alloc] initWithData:data error:&error];
+                NestSDKDeviceDataModel *device2 = [[NestSDKDeviceDataModel alloc] initWithData:data error:&error];
                 expect(error).to.equal(nil);
 
-                NestSDKDevice *device3 = [[NestSDKDevice alloc] initWithData:data error:&error];
+                NestSDKDeviceDataModel *device3 = [[NestSDKDeviceDataModel alloc] initWithData:data error:&error];
                 expect(error).to.equal(nil);
 
                 device3.name = @"someName";

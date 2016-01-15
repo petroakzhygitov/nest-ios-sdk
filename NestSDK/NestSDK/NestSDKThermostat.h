@@ -20,7 +20,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreGraphics/CGBase.h>
-#import <NestSDK/NestSDKDeviceProtocol.h>
+#import <NestSDK/NestSDKDevice.h>
 
 #pragma mark typedef
 typedef NS_ENUM(NSUInteger, NestSDKThermostatTemperatureScale) {
@@ -47,7 +47,7 @@ typedef NS_ENUM(NSUInteger, NestSDKThermostatHVACState) {
 /**
  * Protocol for Thermostat device data model
  */
-@protocol NestSDKThermostat <NestSDKDeviceProtocol>
+@protocol NestSDKThermostat <NestSDKDevice>
 #pragma mark Properties
 
 /**

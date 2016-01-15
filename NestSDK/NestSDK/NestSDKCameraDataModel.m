@@ -18,11 +18,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "NestSDKCamera.h"
-#import "NestSDKCameraLastEvent.h"
+#import "NestSDKCameraDataModel.h"
+#import "NestSDKCameraLastEventDataModel.h"
 #import "NestSDKUtils.h"
 
-@implementation NestSDKCamera
+@implementation NestSDKCameraDataModel
 #pragma mark Override
 
 - (void)setLastIsOnlineChangeWithNSString:(NSString *)lastIsOnlineChangeString {
@@ -61,7 +61,7 @@
     if (![super isEqual:other])
         return NO;
 
-    NestSDKCamera *otherCamera = (NestSDKCamera *) other;
+    NestSDKCameraDataModel *otherCamera = (NestSDKCameraDataModel *) other;
     return ((self.isStreaming == otherCamera.isStreaming) &&
             (self.isAudioInputEnabled == otherCamera.isAudioInputEnabled) &&
             ([NestSDKUtils object:self.lastIsOnlineChange isEqualToObject:otherCamera.lastIsOnlineChange]) &&

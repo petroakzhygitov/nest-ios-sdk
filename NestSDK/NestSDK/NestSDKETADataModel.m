@@ -19,10 +19,10 @@
 // THE SOFTWARE.
 
 #import <JSONModel/JSONModel.h>
-#import "NestSDKETA.h"
+#import "NestSDKETADataModel.h"
 #import "NestSDKUtils.h"
 
-@implementation NestSDKETA
+@implementation NestSDKETADataModel
 #pragma mark Override
 
 - (void)setEstimatedArrivalWindowBeginWithNSString:(NSString *)estimatedArrivalWindowBeginString {
@@ -59,7 +59,7 @@
     if (!other || ![[other class] isEqual:[self class]])
         return NO;
 
-    NestSDKETA *otherEta = (NestSDKETA *) other;
+    NestSDKETADataModel *otherEta = (NestSDKETADataModel *) other;
     return (([NestSDKUtils object:self.tripId isEqualToObject:otherEta.tripId]) &&
             ([NestSDKUtils object:self.estimatedArrivalWindowBegin isEqualToObject:otherEta.estimatedArrivalWindowBegin]) &&
             ([NestSDKUtils object:self.estimatedArrivalWindowEnd isEqualToObject:otherEta.estimatedArrivalWindowEnd]));

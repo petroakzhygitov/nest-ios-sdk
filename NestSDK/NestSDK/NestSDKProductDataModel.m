@@ -1,4 +1,4 @@
-#import "NestSDKProduct.h"
+#import "NestSDKProductDataModel.h"
 #import "NestSDKProductIdentification.h"
 #import "NestSDKProductLocation.h"
 #import "NestSDKProductSoftware.h"
@@ -13,7 +13,7 @@
 #pragma mark typedef
 
 
-@implementation NestSDKProduct {
+@implementation NestSDKProductDataModel {
 #pragma mark Instance variables
 }
 

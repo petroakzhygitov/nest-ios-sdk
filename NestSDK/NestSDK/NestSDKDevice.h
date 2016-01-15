@@ -19,29 +19,28 @@
 // THE SOFTWARE.
 
 #import <Foundation/Foundation.h>
-#import <JSONModel/JSONModel.h>
-#import <NestSDK/NestSDKDataModel.h>
+#import <NestSDK/NestSDKDataModelProtocol.h>
 
 /**
- * Base class for Nest devices data models.
+ * Base protocol for Nest devices data models.
  */
-@interface NestSDKDevice : NestSDKDataModel
+@protocol NestSDKDevice <NestSDKDataModelProtocol>
 #pragma mark Properties
 
 /**
  * Device unique identifier.
  */
-@property(nonatomic, copy) NSString <Optional> *deviceId;
+@property(nonatomic, copy, readonly) NSString *deviceId;
 
 /**
  * Software version.
  */
-@property(nonatomic, copy) NSString <Optional> *softwareVersion;
+@property(nonatomic, copy, readonly) NSString *softwareVersion;
 
 /**
  * Structure unique identifier.
  */
-@property(nonatomic, copy) NSString <Optional> *structureId;
+@property(nonatomic, copy, readonly) NSString *structureId;
 
 /**
  * Display name of the device. This data value is presented in labels in the Nest app (https://home.nest.com/).
@@ -51,7 +50,7 @@
  *      Nest Protects: https://nest.com/support/article/Learn-more-about-Nest-Protect-locations-names-and-labels
  *      Nest Cams: https://nest.com/support/article/How-do-I-change-the-name-of-my-Nest-Cam
  */
-@property(nonatomic, copy) NSString <Optional> *name;
+@property(nonatomic, copy, readonly) NSString *name;
 
 /**
  * Long display name of the device. This data value is selected by the user and presented in labels in the Nest app.
@@ -61,16 +60,17 @@
  *      Nest Protects: https://nest.com/support/article/Learn-more-about-Nest-Protect-locations-names-and-labels
  *      Nest Cams: https://nest.com/support/article/How-do-I-change-the-name-of-my-Nest-Cam
  */
-@property(nonatomic, copy) NSString <Optional> *nameLong;
+@property(nonatomic, copy, readonly) NSString *nameLong;
 
 /**
  * Device connection status with the Nest Service.
  */
-@property(nonatomic) BOOL isOnline;
+@property(nonatomic, readonly) BOOL isOnline;
 
 /**
  * whereId is a unique, Nest-generated identifier that represents name, the display name of the device.
  */
-@property(nonatomic, copy) NSString <Optional> *whereId;
+@property(nonatomic, copy, readonly) NSString *whereId;
+
 
 @end

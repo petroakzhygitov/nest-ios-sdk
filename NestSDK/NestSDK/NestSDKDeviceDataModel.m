@@ -18,10 +18,10 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "NestSDKDevice.h"
+#import "NestSDKDeviceDataModel.h"
 #import "NestSDKUtils.h"
 
-@implementation NestSDKDevice
+@implementation NestSDKDeviceDataModel
 #pragma mark Override
 
 - (NSUInteger)hash {
@@ -49,7 +49,7 @@
     if (!other || ![[other class] isEqual:[self class]])
         return NO;
 
-    NestSDKDevice *otherDevice = (NestSDKDevice *) other;
+    NestSDKDeviceDataModel *otherDevice = (NestSDKDeviceDataModel *) other;
     return ([NestSDKUtils object:self.deviceId isEqualToObject:otherDevice.deviceId] &&
             ([NestSDKUtils object:self.softwareVersion isEqualToObject:otherDevice.softwareVersion]) &&
             ([NestSDKUtils object:self.structureId isEqualToObject:otherDevice.structureId]) &&

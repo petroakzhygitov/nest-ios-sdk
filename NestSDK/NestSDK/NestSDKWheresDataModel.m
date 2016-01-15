@@ -19,18 +19,19 @@
 // THE SOFTWARE.
 
 #import <JSONModel/JSONModel.h>
-#import "NestSDKMetadata.h"
+#import "NestSDKWheresDataModel.h"
 #import "NestSDKUtils.h"
 
-@implementation NestSDKMetadata
+
+@implementation NestSDKWheresDataModel
 #pragma mark Override
 
 - (NSUInteger)hash {
     NSUInteger prime = 31;
     NSUInteger result = 1;
 
-    result = prime * result + self.accessToken.hash;
-    result = prime * result + self.clientVersion;
+    result = prime * result + self.name.hash;
+    result = prime * result + self.whereId.hash;
 
     return result;
 }
@@ -42,10 +43,9 @@
     if (!other || ![[other class] isEqual:[self class]])
         return NO;
 
-    NestSDKMetadata *otherMetadata = (NestSDKMetadata *) other;
-    return (([NestSDKUtils object:self.accessToken isEqualToObject:otherMetadata.accessToken]) &&
-            (self.clientVersion == otherMetadata.clientVersion));
+    NestSDKWheresDataModel *otherWheres = (NestSDKWheresDataModel *) other;
+    return (([NestSDKUtils object:self.name isEqualToObject:otherWheres.name]) &&
+            ([NestSDKUtils object:self.whereId isEqualToObject:otherWheres.whereId]));
 }
-
 
 @end

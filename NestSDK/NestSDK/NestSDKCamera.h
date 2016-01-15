@@ -19,16 +19,14 @@
 // THE SOFTWARE.
 
 #import <Foundation/Foundation.h>
-#import <JSONModel/JSONModel.h>
-#import "NestSDKDevice.h"
-#import "NestSDKCameraProtocol.h"
+#import <NestSDK/NestSDKDevice.h>
 
-@class NestSDKCameraLastEvent;
+@protocol NestSDKCameraLastEvent;
 
 /**
- * Camera device data model.
+ * Camera device data model protocol.
  */
-@interface NestSDKCamera : NestSDKDevice <NestSDKCameraProtocol>
+@protocol NestSDKCamera <NestSDKDevice>
 #pragma mark Properties
 
 /**
@@ -47,7 +45,7 @@
 /**
  * Timestamp that identifies the last change to the online status.
  */
-@property(nonatomic) NSDate <Optional> *lastIsOnlineChange;
+@property(nonatomic) NSDate *lastIsOnlineChange;
 
 /**
  * Nest Aware with Video History subscription status (subscription active or not).
@@ -59,17 +57,18 @@
 /**
  * Web URL (deep link) to the live camera feed at home.nest.com.
  */
-@property(nonatomic, copy) NSString <Optional> *webUrl;
+@property(nonatomic, copy) NSString *webUrl;
 
 /**
  * App URL (deep link) to the live camera feed in the Nest app.
  */
-@property(nonatomic, copy) NSString <Optional> *appUrl;
+@property(nonatomic, copy) NSString *appUrl;
 
 /**
  * This object captures information about the last event that triggered a notification.
  * In order to capture last event data, the Nest Cam must have a Nest Aware with Video History subscription.
  */
-@property(nonatomic) NestSDKCameraLastEvent *lastEvent;
+@property(nonatomic) id <NestSDKCameraLastEvent> lastEvent;
+
 
 @end

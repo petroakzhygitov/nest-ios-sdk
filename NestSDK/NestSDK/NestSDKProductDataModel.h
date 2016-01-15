@@ -16,11 +16,11 @@
 
 #pragma mark Protocol
 
-@protocol NestSDKProduct <NSObject>
+@protocol NestSDKProductDataModel <NSObject>
 
 @end
 
-@interface NestSDKProduct : JSONModel <NestSDKProduct>
+@interface NestSDKProductDataModel : JSONModel <NestSDKProductDataModel>
 #pragma mark Properties
 
 @property(nonatomic) NestSDKProductIdentification <Optional> *identification;

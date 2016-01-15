@@ -19,55 +19,51 @@
 // THE SOFTWARE.
 
 #import <Foundation/Foundation.h>
+#import <JSONModel/JSONModel.h>
+#import <NestSDK/NestSDKDataModel.h>
+#import "NestSDKStructure.h"
 
-@protocol NestSDKETAProtocol;
-@protocol NestSDKWheresProtocol;
+@class NestSDKETADataModel;
+@protocol NestSDKWheresDataModel;
 
-#pragma mark typedef
-typedef NS_ENUM(NSUInteger, NestSDKStructureAwayState) {
-    NestSDKStructureAwayStateUndefined = 0,
-    NestSDKStructureAwayStateHome,
-    NestSDKStructureAwayStateAway,
-    NestSDKStructureAwayStateAutoAway,
-};
 
 /**
- * Data model protocol for Nest structure.
+ * Data model for Nest structure.
  *
  * Users can add a maximum of two structures, with multiple devices per structure.
  */
-@protocol NestSDKStructureProtocol <NestSDKDataModelProtocol>
+@interface NestSDKStructureDataModel : NestSDKDataModel <NestSDKStructure>
 #pragma mark Properties
 
 /**
  * ID number of the structure.
  */
-@property(nonatomic, copy) NSString *structureId;
+@property(nonatomic, copy) NSString <Optional> *structureId;
 
 /**
  * List of thermostats in the structure, by unique device identifier.
  * This is an array of NSString objects that includes all thermostats in the structure.
  */
-@property(nonatomic, copy) NSArray *thermostats;
+@property(nonatomic, copy) NSArray <Optional> *thermostats;
 
 /**
  * List of smoke+CO alarms in the structure, by unique device identifier.
  * This is an array of NSString objects that includes all smoke+CO alarms in the structure.
  */
-@property(nonatomic, copy) NSArray *smokeCoAlarms;
+@property(nonatomic, copy) NSArray <Optional> *smokeCoAlarms;
 
 /**
  * List of cameras in the structure, by unique device identifier.
  * This is an array of NSString objects that includes all cameras in the structure.
  */
-@property(nonatomic, copy) NSArray *cameras;
+@property(nonatomic, copy) NSArray <Optional> *cameras;
 
 /**
  * A dictionary containing $company and $product_type information.
  * Use this object with the Resource use API to read a list of your device ids.
  * https://developer.nest.com/documentation/cloud/resource-use-guide
  */
-@property(nonatomic, copy) NSDictionary *devices;
+@property(nonatomic, copy) NSDictionary <Optional> *devices;
 
 /**
  * Indicates the state of the structure.
@@ -80,32 +76,32 @@ typedef NS_ENUM(NSUInteger, NestSDKStructureAwayState) {
 /**
  * User-defined name of the structure.
  */
-@property(nonatomic, copy) NSString *name;
+@property(nonatomic, copy) NSString <Optional> *name;
 
 /**
  * Country code, in ISO 3166 alpha-2 format.
  */
-@property(nonatomic, copy) NSString *countryCode;
+@property(nonatomic, copy) NSString <Optional> *countryCode;
 
 /**
  * Postal or zip code, depending on the country.
  */
-@property(nonatomic, copy) NSString *postalCode;
+@property(nonatomic, copy) NSString <Optional> *postalCode;
 
 /**
  * Start time of the Energy rush hour event.
  */
-@property(nonatomic) NSDate *peakPeriodStartTime;
+@property(nonatomic) NSDate <Optional> *peakPeriodStartTime;
 
 /**
  * End time of the Energy rush hour event.
  */
-@property(nonatomic) NSDate *peakPeriodEndTime;
+@property(nonatomic) NSDate <Optional> *peakPeriodEndTime;
 
 /**
  * Time zone at the structure, in IANA time zone format.
  */
-@property(nonatomic, copy) NSString *timeZone;
+@property(nonatomic, copy) NSString <Optional> *timeZone;
 
 /**
  * ETA is an object that can be set on a structure.
@@ -113,7 +109,7 @@ typedef NS_ENUM(NSUInteger, NestSDKStructureAwayState) {
  *
  * Learn more about ETA https://developer.nest.com/documentation/cloud/eta-guide
  */
-@property(nonatomic) id <NestSDKETAProtocol> eta;
+@property(nonatomic) NestSDKETADataModel <Optional> *eta;
 
 /**
  * Rush Hour Rewards enrollment status.
@@ -127,6 +123,6 @@ typedef NS_ENUM(NSUInteger, NestSDKStructureAwayState) {
  *
  * Learn more about wheres https://developer.nest.com/documentation/cloud/how-to-structures-object#wheres
  */
-@property(nonatomic) NSDictionary <NestSDKWheresProtocol> *wheres;
+@property(nonatomic) NSDictionary <Optional, NestSDKWheresDataModel> *wheres;
 
 @end

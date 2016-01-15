@@ -25,15 +25,15 @@
 #import "NestSDKAccessToken.h"
 #import "LSStubRequestDSL.h"
 #import "LSNocilla.h"
-#import "NestSDKMetadata.h"
-#import "NestSDKDevice.h"
-#import "NestSDKCamera.h"
-#import "NestSDKCameraLastEvent.h"
-#import "NestSDKSmokeCOAlarm.h"
+#import "NestSDKMetadataDataModel.h"
+#import "NestSDKDeviceDataModel.h"
+#import "NestSDKCameraDataModel.h"
+#import "NestSDKCameraLastEventDataModel.h"
+#import "NestSDKSmokeCOAlarmDataModel.h"
 
 SpecBegin(NestSDKSmokeCOAlarm)
     {
-        describe(@"NestSDKSmokeCOAlarm", ^{
+        describe(@"NestSDKSmokeCOAlarmDataModel", ^{
 
             __block NSData *data;
             __block NSString *resourcePath;
@@ -47,7 +47,7 @@ SpecBegin(NestSDKSmokeCOAlarm)
 
             it(@"should deserialize/serialize data", ^{
                 NSError *error;
-                NestSDKSmokeCOAlarm *smokeCOAlarm = [[NestSDKSmokeCOAlarm alloc] initWithData:data error:&error];
+                NestSDKSmokeCOAlarmDataModel *smokeCOAlarm = [[NestSDKSmokeCOAlarmDataModel alloc] initWithData:data error:&error];
                 expect(error).to.equal(nil);
 
                 NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
@@ -92,13 +92,13 @@ SpecBegin(NestSDKSmokeCOAlarm)
 
             it(@"should have proper hash and equal", ^{
                 NSError *error;
-                NestSDKSmokeCOAlarm *smokeCOAlarm1 = [[NestSDKSmokeCOAlarm alloc] initWithData:data error:&error];
+                NestSDKSmokeCOAlarmDataModel *smokeCOAlarm1 = [[NestSDKSmokeCOAlarmDataModel alloc] initWithData:data error:&error];
                 expect(error).to.equal(nil);
 
-                NestSDKSmokeCOAlarm *smokeCOAlarm2 = [[NestSDKSmokeCOAlarm alloc] initWithData:data error:&error];
+                NestSDKSmokeCOAlarmDataModel *smokeCOAlarm2 = [[NestSDKSmokeCOAlarmDataModel alloc] initWithData:data error:&error];
                 expect(error).to.equal(nil);
 
-                NestSDKSmokeCOAlarm *smokeCOAlarm3 = [[NestSDKSmokeCOAlarm alloc] initWithData:data error:&error];
+                NestSDKSmokeCOAlarmDataModel *smokeCOAlarm3 = [[NestSDKSmokeCOAlarmDataModel alloc] initWithData:data error:&error];
                 expect(error).to.equal(nil);
 
                 smokeCOAlarm3.uiColorState = NestSDKSmokeCOAlarmUIColorStateYellow;

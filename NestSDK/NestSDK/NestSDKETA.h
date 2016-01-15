@@ -19,31 +19,27 @@
 // THE SOFTWARE.
 
 #import <Foundation/Foundation.h>
-#import <NestSDK/NestSDKDataModel.h>
-#import <NestSDK/NestSDKETAProtocol.h>
-
-@protocol Optional;
 
 /**
  * ETA is an object, set on a structure. Use eta to give Nest information so we can prepare a house for your arrival.
  * Requires ETA permission, and is write only.
  */
-@interface NestSDKETA : NestSDKDataModel <NestSDKETAProtocol>
+@protocol NestSDKETA <NestSDKDataModelProtocol>
 #pragma mark Properties
 
 /**
  * A unique, client-generated identifier to organize a stream of eta estimates
  */
-@property(nonatomic, copy) NSString <Optional> *tripId;
+@property(nonatomic, copy) NSString *tripId;
 
 /**
  * The timestamp of the earliest time you expect the user to arrive, in ISO 8601 format
  */
-@property(nonatomic) NSDate <Optional> *estimatedArrivalWindowBegin;
+@property(nonatomic) NSDate *estimatedArrivalWindowBegin;
 
 /**
  * The timestamp of the latest time you expect the user to arrive, in ISO 8601 format
  */
-@property(nonatomic) NSDate <Optional> *estimatedArrivalWindowEnd;
+@property(nonatomic) NSDate *estimatedArrivalWindowEnd;
 
 @end

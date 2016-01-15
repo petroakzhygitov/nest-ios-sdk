@@ -19,8 +19,8 @@
 // THE SOFTWARE.
 
 #import <NestSDK/NestSDKDataModel.h>
-#import <NestSDK/NestSDKStructure.h>
-#import <NestSDK/NestSDKETA.h>
+#import "NestSDKStructureDataModel.h"
+#import "NestSDKETADataModel.h"
 #import <NestSDK/NestSDKUtils.h>
 
 #pragma mark const
@@ -30,7 +30,7 @@ static NSString *const kAwayStringHome = @"home";
 static NSString *const kAwayStringAutoAway = @"auto-away";
 
 
-@implementation NestSDKStructure
+@implementation NestSDKStructureDataModel
 #pragma mark Override
 
 - (void)setPeakPeriodStartTimeWithNSString:(NSString *)peakPeriodStartTimeString {
@@ -113,7 +113,7 @@ static NSString *const kAwayStringAutoAway = @"auto-away";
     if (!other || ![[other class] isEqual:[self class]])
         return NO;
 
-    NestSDKStructure *otherStructure = (NestSDKStructure *) other;
+    NestSDKStructureDataModel *otherStructure = (NestSDKStructureDataModel *) other;
     return ([NestSDKUtils object:self.structureId isEqualToObject:otherStructure.structureId] &&
             ([NestSDKUtils object:self.structureId isEqualToObject:otherStructure.structureId]) &&
             ([NestSDKUtils object:self.thermostats isEqualToObject:otherStructure.thermostats]) &&

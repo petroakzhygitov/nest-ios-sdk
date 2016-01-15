@@ -18,11 +18,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "NestSDKCameraLastEvent.h"
+#import "NestSDKCameraLastEventDataModel.h"
 #import "NestSDKUtils.h"
 
 
-@implementation NestSDKCameraLastEvent
+@implementation NestSDKCameraLastEventDataModel
 #pragma mark Override
 
 - (void)setStartTimeWithNSString:(NSString *)startTimeString {
@@ -68,7 +68,7 @@
     if (!other || ![[other class] isEqual:[self class]])
         return NO;
 
-    NestSDKCameraLastEvent *otherCamera = (NestSDKCameraLastEvent *) other;
+    NestSDKCameraLastEventDataModel *otherCamera = (NestSDKCameraLastEventDataModel *) other;
     return ((self.hasSound == otherCamera.hasSound) &&
             (self.hasMotion == otherCamera.hasMotion) &&
             ([NestSDKUtils object:self.startTime isEqualToObject:otherCamera.startTime]) &&

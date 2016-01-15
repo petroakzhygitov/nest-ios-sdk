@@ -25,14 +25,14 @@
 #import "NestSDKAccessToken.h"
 #import "LSStubRequestDSL.h"
 #import "LSNocilla.h"
-#import "NestSDKMetadata.h"
-#import "NestSDKStructure.h"
-#import "NestSDKWheres.h"
-#import "NestSDKETA.h"
+#import "NestSDKMetadataDataModel.h"
+#import "NestSDKStructureDataModel.h"
+#import "NestSDKWheresDataModel.h"
+#import "NestSDKETADataModel.h"
 
 SpecBegin(NestSDKStructure)
     {
-        describe(@"NestSDKStructure", ^{
+        describe(@"NestSDKStructureDataModel", ^{
 
             __block NSString *resourcePath;
 
@@ -46,19 +46,19 @@ SpecBegin(NestSDKStructure)
                 NSString *structureJSONPath = [resourcePath stringByAppendingPathComponent:@"structure.json"];
                 NSData *structureData = [NSData dataWithContentsOfFile:structureJSONPath];
 
-                NestSDKStructure *structure = [[NestSDKStructure alloc] initWithData:structureData error:&error];
+                NestSDKStructureDataModel *structure = [[NestSDKStructureDataModel alloc] initWithData:structureData error:&error];
                 expect(error).to.equal(nil);
 
                 NSString *wheresJSONPath = [resourcePath stringByAppendingPathComponent:@"wheres.json"];
                 NSData *wheresData = [NSData dataWithContentsOfFile:wheresJSONPath];
 
-                NestSDKWheres *wheres = [[NestSDKWheres alloc] initWithData:wheresData error:&error];
+                NestSDKWheresDataModel *wheres = [[NestSDKWheresDataModel alloc] initWithData:wheresData error:&error];
                 expect(error).to.equal(nil);
 
                 NSString *etaJSONPath = [resourcePath stringByAppendingPathComponent:@"eta.json"];
                 NSData *etaData = [NSData dataWithContentsOfFile:etaJSONPath];
 
-                NestSDKETA *eta = [[NestSDKETA alloc] initWithData:etaData error:&error];
+                NestSDKETADataModel *eta = [[NestSDKETADataModel alloc] initWithData:etaData error:&error];
                 expect(error).to.equal(nil);
 
                 NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
@@ -107,13 +107,13 @@ SpecBegin(NestSDKStructure)
                 NSData *structureData = [NSData dataWithContentsOfFile:structureJSONPath];
 
                 NSError *error;
-                NestSDKStructure *structure1 = [[NestSDKStructure alloc] initWithData:structureData error:&error];
+                NestSDKStructureDataModel *structure1 = [[NestSDKStructureDataModel alloc] initWithData:structureData error:&error];
                 expect(error).to.equal(nil);
 
-                NestSDKStructure *structure2 = [[NestSDKStructure alloc] initWithData:structureData error:&error];
+                NestSDKStructureDataModel *structure2 = [[NestSDKStructureDataModel alloc] initWithData:structureData error:&error];
                 expect(error).to.equal(nil);
 
-                NestSDKStructure *structure3 = [[NestSDKStructure alloc] initWithData:structureData error:&error];
+                NestSDKStructureDataModel *structure3 = [[NestSDKStructureDataModel alloc] initWithData:structureData error:&error];
                 expect(error).to.equal(nil);
 
                 structure3.name = @"someName42";

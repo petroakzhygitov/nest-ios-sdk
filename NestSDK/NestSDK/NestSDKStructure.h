@@ -19,50 +19,55 @@
 // THE SOFTWARE.
 
 #import <Foundation/Foundation.h>
-#import <JSONModel/JSONModel.h>
-#import <NestSDK/NestSDKDataModel.h>
-#import <NestSDK/NestSDKStructureProtocol.h>
 
-@class NestSDKETA;
+@protocol NestSDKETA;
 @protocol NestSDKWheres;
 
+#pragma mark typedef
+typedef NS_ENUM(NSUInteger, NestSDKStructureAwayState) {
+    NestSDKStructureAwayStateUndefined = 0,
+    NestSDKStructureAwayStateHome,
+    NestSDKStructureAwayStateAway,
+    NestSDKStructureAwayStateAutoAway,
+};
+
 /**
- * Data model for Nest structure.
+ * Data model protocol for Nest structure.
  *
  * Users can add a maximum of two structures, with multiple devices per structure.
  */
-@interface NestSDKStructure : NestSDKDataModel <NestSDKStructureProtocol>
+@protocol NestSDKStructure <NestSDKDataModelProtocol>
 #pragma mark Properties
 
 /**
  * ID number of the structure.
  */
-@property(nonatomic, copy) NSString <Optional> *structureId;
+@property(nonatomic, copy) NSString *structureId;
 
 /**
  * List of thermostats in the structure, by unique device identifier.
  * This is an array of NSString objects that includes all thermostats in the structure.
  */
-@property(nonatomic, copy) NSArray <Optional> *thermostats;
+@property(nonatomic, copy) NSArray *thermostats;
 
 /**
  * List of smoke+CO alarms in the structure, by unique device identifier.
  * This is an array of NSString objects that includes all smoke+CO alarms in the structure.
  */
-@property(nonatomic, copy) NSArray <Optional> *smokeCoAlarms;
+@property(nonatomic, copy) NSArray *smokeCoAlarms;
 
 /**
  * List of cameras in the structure, by unique device identifier.
  * This is an array of NSString objects that includes all cameras in the structure.
  */
-@property(nonatomic, copy) NSArray <Optional> *cameras;
+@property(nonatomic, copy) NSArray *cameras;
 
 /**
  * A dictionary containing $company and $product_type information.
  * Use this object with the Resource use API to read a list of your device ids.
  * https://developer.nest.com/documentation/cloud/resource-use-guide
  */
-@property(nonatomic, copy) NSDictionary <Optional> *devices;
+@property(nonatomic, copy) NSDictionary *devices;
 
 /**
  * Indicates the state of the structure.
@@ -75,32 +80,32 @@
 /**
  * User-defined name of the structure.
  */
-@property(nonatomic, copy) NSString <Optional> *name;
+@property(nonatomic, copy) NSString *name;
 
 /**
  * Country code, in ISO 3166 alpha-2 format.
  */
-@property(nonatomic, copy) NSString <Optional> *countryCode;
+@property(nonatomic, copy) NSString *countryCode;
 
 /**
  * Postal or zip code, depending on the country.
  */
-@property(nonatomic, copy) NSString <Optional> *postalCode;
+@property(nonatomic, copy) NSString *postalCode;
 
 /**
  * Start time of the Energy rush hour event.
  */
-@property(nonatomic) NSDate <Optional> *peakPeriodStartTime;
+@property(nonatomic) NSDate *peakPeriodStartTime;
 
 /**
  * End time of the Energy rush hour event.
  */
-@property(nonatomic) NSDate <Optional> *peakPeriodEndTime;
+@property(nonatomic) NSDate *peakPeriodEndTime;
 
 /**
  * Time zone at the structure, in IANA time zone format.
  */
-@property(nonatomic, copy) NSString <Optional> *timeZone;
+@property(nonatomic, copy) NSString *timeZone;
 
 /**
  * ETA is an object that can be set on a structure.
@@ -108,7 +113,7 @@
  *
  * Learn more about ETA https://developer.nest.com/documentation/cloud/eta-guide
  */
-@property(nonatomic) NestSDKETA <Optional> *eta;
+@property(nonatomic) id <NestSDKETA> eta;
 
 /**
  * Rush Hour Rewards enrollment status.
@@ -122,6 +127,6 @@
  *
  * Learn more about wheres https://developer.nest.com/documentation/cloud/how-to-structures-object#wheres
  */
-@property(nonatomic) NSDictionary <Optional, NestSDKWheres> *wheres;
+@property(nonatomic) NSDictionary <NestSDKWheres> *wheres;
 
 @end

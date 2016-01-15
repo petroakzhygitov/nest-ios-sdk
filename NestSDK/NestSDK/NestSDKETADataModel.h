@@ -18,34 +18,32 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import <JSONModel/JSONModel.h>
-#import "NestSDKWheres.h"
-#import "NestSDKUtils.h"
+#import <Foundation/Foundation.h>
+#import <NestSDK/NestSDKDataModel.h>
+#import "NestSDKETA.h"
 
+@protocol Optional;
 
-@implementation NestSDKWheres
-#pragma mark Override
+/**
+ * ETA is an object, set on a structure. Use eta to give Nest information so we can prepare a house for your arrival.
+ * Requires ETA permission, and is write only.
+ */
+@interface NestSDKETADataModel : NestSDKDataModel <NestSDKETA>
+#pragma mark Properties
 
-- (NSUInteger)hash {
-    NSUInteger prime = 31;
-    NSUInteger result = 1;
+/**
+ * A unique, client-generated identifier to organize a stream of eta estimates
+ */
+@property(nonatomic, copy) NSString <Optional> *tripId;
 
-    result = prime * result + self.name.hash;
-    result = prime * result + self.whereId.hash;
+/**
+ * The timestamp of the earliest time you expect the user to arrive, in ISO 8601 format
+ */
+@property(nonatomic) NSDate <Optional> *estimatedArrivalWindowBegin;
 
-    return result;
-}
-
-- (BOOL)isEqual:(id)other {
-    if (other == self)
-        return YES;
-
-    if (!other || ![[other class] isEqual:[self class]])
-        return NO;
-
-    NestSDKWheres *otherWheres = (NestSDKWheres *) other;
-    return (([NestSDKUtils object:self.name isEqualToObject:otherWheres.name]) &&
-            ([NestSDKUtils object:self.whereId isEqualToObject:otherWheres.whereId]));
-}
+/**
+ * The timestamp of the latest time you expect the user to arrive, in ISO 8601 format
+ */
+@property(nonatomic) NSDate <Optional> *estimatedArrivalWindowEnd;
 
 @end

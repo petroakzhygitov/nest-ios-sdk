@@ -3,7 +3,7 @@
 
 @protocol NestSDKStructure;
 @class NestSDKThermostatDataModel;
-@class NestSDKSmokeCOAlarm;
+@class NestSDKSmokeCOAlarmDataModel;
 
 #pragma mark macros
 
@@ -17,7 +17,7 @@ typedef void (^NestSDKRESTServiceGetStructuresRequestHandler)(NSArray <NestSDKSt
 
 typedef void (^NestSDKRESTServiceGetThermostatRequestHandler)(NestSDKThermostatDataModel *thermostat, NSError *error);
 
-typedef void (^NestSDKRESTServiceGetSmokeCOAlarmRequestHandler)(NestSDKSmokeCOAlarm *smokeCOAlarm, NSError *error);
+typedef void (^NestSDKRESTServiceGetSmokeCOAlarmRequestHandler)(NestSDKSmokeCOAlarmDataModel *smokeCOAlarm, NSError *error);
 
 #pragma mark Protocol
 

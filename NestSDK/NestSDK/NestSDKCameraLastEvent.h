@@ -19,19 +19,17 @@
 // THE SOFTWARE.
 
 #import <Foundation/Foundation.h>
-#import "JSONModel.h"
-#import "NestSDKDataModel.h"
-#import "NestSDKCameraLastEventProtocol.h"
+#import <NestSDK/NestSDKDataModelProtocol.h>
 
 /**
- * Camera last event data model.
- *
- * This object captures information about the last event that triggered a notification.
- * In order to capture last event data, the Nest Cam must have a Nest Aware with Video History subscription.
- *
- * Learn more about Nest Aware with Video History subscription: https://nest.com/support/article/What-do-I-get-with-Nest-Aware-for-Nest-Cam
- */
-@interface NestSDKCameraLastEvent : NestSDKDataModel <NestSDKCameraLastEventProtocol>
+* Camera last event data model protocol
+*
+* This object captures information about the last event that triggered a notification.
+* In order to capture last event data, the Nest Cam must have a Nest Aware with Video History subscription.
+*
+* Learn more about Nest Aware with Video History subscription: https://nest.com/support/article/What-do-I-get-with-Nest-Aware-for-Nest-Cam
+*/
+@protocol NestSDKCameraLastEvent <NestSDKDataModelProtocol>
 #pragma mark Properties
 
 /**
@@ -47,33 +45,34 @@
 /**
  * Event start time.
  */
-@property(nonatomic) NSDate <Optional> *startTime;
+@property(nonatomic) NSDate *startTime;
 
 /**
  * Event end time.
  */
-@property(nonatomic) NSDate <Optional> *endTime;
+@property(nonatomic) NSDate *endTime;
 
 /**
  * Web URL (deep link) to the last sound or motion event at home.nest.com.
  * Used to display the last recorded event, and requires user to be signed in to the account.
  */
-@property(nonatomic, copy) NSString <Optional> *webUrl;
+@property(nonatomic, copy) NSString *webUrl;
 
 /**
  * Nest app URL (deep link) to the last sound or motion event.
  * Used to display the last recorded event, and requires user to be signed in to the account.
  */
-@property(nonatomic, copy) NSString <Optional> *appUrl;
+@property(nonatomic, copy) NSString *appUrl;
 
 /**
  * URL (link) to the image file captured for a sound or motion event.
  */
-@property(nonatomic, copy) NSString <Optional> *imageUrl;
+@property(nonatomic, copy) NSString *imageUrl;
 
 /**
  * URL (link) to the gif file captured for a sound or motion event.
  */
-@property(nonatomic, copy) NSString <Optional> *animatedImageUrl;
+@property(nonatomic, copy) NSString *animatedImageUrl;
+
 
 @end

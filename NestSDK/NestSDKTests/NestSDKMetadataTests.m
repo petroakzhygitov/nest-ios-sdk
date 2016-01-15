@@ -25,12 +25,12 @@
 #import "NestSDKAccessToken.h"
 #import "LSStubRequestDSL.h"
 #import "LSNocilla.h"
-#import "NestSDKMetadata.h"
-#import "NestSDKWheres.h"
+#import "NestSDKMetadataDataModel.h"
+#import "NestSDKWheresDataModel.h"
 
 SpecBegin(NestSDKMetadata)
     {
-        describe(@"NestSDKMetadata", ^{
+        describe(@"NestSDKMetadataDataModel", ^{
             
             __block NSData *data;
 
@@ -43,7 +43,7 @@ SpecBegin(NestSDKMetadata)
 
             it(@"should deserialize/serialize data", ^{
                 NSError *error;
-                NestSDKMetadata *metadata = [[NestSDKMetadata alloc] initWithData:data error:&error];
+                NestSDKMetadataDataModel *metadata = [[NestSDKMetadataDataModel alloc] initWithData:data error:&error];
                 expect(error).to.equal(nil);
 
                 expect(metadata.accessToken).to.equal(@"c.FmDPkzyzaQe...");
@@ -60,13 +60,13 @@ SpecBegin(NestSDKMetadata)
 
             it(@"should have proper hash and equal", ^{
                 NSError *error;
-                NestSDKMetadata *metadata1 = [[NestSDKMetadata alloc] initWithData:data error:&error];
+                NestSDKMetadataDataModel *metadata1 = [[NestSDKMetadataDataModel alloc] initWithData:data error:&error];
                 expect(error).to.equal(nil);
 
-                NestSDKMetadata *metadata2 = [[NestSDKMetadata alloc] initWithData:data error:&error];
+                NestSDKMetadataDataModel *metadata2 = [[NestSDKMetadataDataModel alloc] initWithData:data error:&error];
                 expect(error).to.equal(nil);
 
-                NestSDKMetadata *metadata3 = [[NestSDKMetadata alloc] initWithData:data error:&error];
+                NestSDKMetadataDataModel *metadata3 = [[NestSDKMetadataDataModel alloc] initWithData:data error:&error];
                 expect(error).to.equal(nil);
 
                 metadata3.clientVersion = 42;

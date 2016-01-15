@@ -1,8 +1,8 @@
 #import "NestSDKRESTService.h"
-#import "NestSDKStructure.h"
+#import "NestSDKStructureDataModel.h"
 #import "NestSDKThermostatDataModel.h"
 #import "NestSDKAccessToken.h"
-#import "NestSDKSmokeCOAlarm.h"
+#import "NestSDKSmokeCOAlarmDataModel.h"
 
 #pragma mark macros
 
@@ -120,7 +120,7 @@ static NSString *const kAPIEndpointSmokeCOAlarmsURLPath = @"/smoke_co_alarms";
             return;
         }
 
-        NSMutableArray *structuresArray = [NestSDKStructure arrayOfModelsFromDictionaries:structuresDictionary.allValues error:&error];
+        NSMutableArray *structuresArray = [NestSDKStructureDataModel arrayOfModelsFromDictionaries:structuresDictionary.allValues error:&error];
         if (error) {
             handler(nil, [self p_parseDataErrorWithError:error]);
 
@@ -206,7 +206,7 @@ static NSString *const kAPIEndpointSmokeCOAlarmsURLPath = @"/smoke_co_alarms";
 //                                                        return;
 //                                                    }
 
-                                                    NestSDKSmokeCOAlarm *smokeCOAlarm = [[NestSDKSmokeCOAlarm alloc] initWithData:data error:&error];
+                                                    NestSDKSmokeCOAlarmDataModel *smokeCOAlarm = [[NestSDKSmokeCOAlarmDataModel alloc] initWithData:data error:&error];
                                                     if (error) {
                                                         handler(nil, error);
 

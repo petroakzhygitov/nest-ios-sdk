@@ -25,14 +25,14 @@
 #import "NestSDKAccessToken.h"
 #import "LSStubRequestDSL.h"
 #import "LSNocilla.h"
-#import "NestSDKMetadata.h"
-#import "NestSDKDevice.h"
-#import "NestSDKCamera.h"
-#import "NestSDKCameraLastEvent.h"
+#import "NestSDKMetadataDataModel.h"
+#import "NestSDKDeviceDataModel.h"
+#import "NestSDKCameraDataModel.h"
+#import "NestSDKCameraLastEventDataModel.h"
 
 SpecBegin(NestSDKCameraLastEvent)
     {
-        describe(@"NestSDKCameraLastEvent", ^{
+        describe(@"NestSDKCameraLastEventDataModel", ^{
 
             __block NSData *data;
 
@@ -45,7 +45,7 @@ SpecBegin(NestSDKCameraLastEvent)
 
             it(@"should deserialize/serialize data", ^{
                 NSError *error;
-                NestSDKCameraLastEvent *lastEvent = [[NestSDKCameraLastEvent alloc] initWithData:data error:&error];
+                NestSDKCameraLastEventDataModel *lastEvent = [[NestSDKCameraLastEventDataModel alloc] initWithData:data error:&error];
                 expect(error).to.equal(nil);
 
                 NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
@@ -87,13 +87,13 @@ SpecBegin(NestSDKCameraLastEvent)
 
             it(@"should have proper hash and equal", ^{
                 NSError *error;
-                NestSDKCameraLastEvent *lastEvent1 = [[NestSDKCameraLastEvent alloc] initWithData:data error:&error];
+                NestSDKCameraLastEventDataModel *lastEvent1 = [[NestSDKCameraLastEventDataModel alloc] initWithData:data error:&error];
                 expect(error).to.equal(nil);
 
-                NestSDKCameraLastEvent *lastEvent2 = [[NestSDKCameraLastEvent alloc] initWithData:data error:&error];
+                NestSDKCameraLastEventDataModel *lastEvent2 = [[NestSDKCameraLastEventDataModel alloc] initWithData:data error:&error];
                 expect(error).to.equal(nil);
 
-                NestSDKCameraLastEvent *lastEvent3 = [[NestSDKCameraLastEvent alloc] initWithData:data error:&error];
+                NestSDKCameraLastEventDataModel *lastEvent3 = [[NestSDKCameraLastEventDataModel alloc] initWithData:data error:&error];
                 expect(error).to.equal(nil);
 
                 lastEvent3.appUrl = @"someURL";

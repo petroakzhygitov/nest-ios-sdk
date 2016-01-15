@@ -20,13 +20,13 @@
 
 #import <JSONModel/JSONModel.h>
 #import <NestSDK/NestSDKDataManager.h>
-#import <NestSDK/NestSDKMetadata.h>
+#import "NestSDKMetadataDataModel.h"
 #import <NestSDK/NestSDKApplicationDelegate.h>
 #import <NestSDK/NestSDKError.h>
-#import <NestSDK/NestSDKStructure.h>
+#import "NestSDKStructureDataModel.h"
 #import "NestSDKThermostatDataModel.h"
-#import <NestSDK/NestSDKSmokeCOAlarm.h>
-#import <NestSDK/NestSDKCamera.h>
+#import "NestSDKSmokeCOAlarmDataModel.h"
+#import "NestSDKCameraDataModel.h"
 
 #pragma mark const
 
@@ -159,20 +159,20 @@ typedef void (^NestSDKDataModelUpdateHandler)(id, NSError *);
 
 - (void)metadataWithBlock:(NestSDKMetadataUpdateHandler)block {
     [self _dataModelFromURL:[self _rootURL]
-                  withClass:[NestSDKMetadata class]
+                  withClass:[NestSDKMetadataDataModel class]
                       block:block];
 }
 
 - (void)structuresWithBlock:(NestSDKStructuresUpdateHandler)block {
     [self _dataModelFromURL:[self _structuresURL]
-                  withClass:[NestSDKStructure class]
+                  withClass:[NestSDKStructureDataModel class]
                       block:block
                     asArray:YES];
 }
 
 - (NestSDKObserverHandle)observeStructuresWithBlock:(NestSDKStructuresUpdateHandler)block {
     return [self _observeDataModelWithURL:[self _structuresURL]
-                                withClass:[NestSDKStructure class]
+                                withClass:[NestSDKStructureDataModel class]
                                     block:block
                                   asArray:YES];
 }
@@ -191,11 +191,11 @@ typedef void (^NestSDKDataModelUpdateHandler)(id, NSError *);
 
 - (void)smokeCOAlarmWithId:(NSString *)smokeCOAlarmId block:(NestSDKSmokeCOAlarmUpdateHandler)block {
     [self _dataModelFromURL:[self _smokeCOAlarmURLWithSmokeCOAlarmId:smokeCOAlarmId]
-                  withClass:[NestSDKSmokeCOAlarm class]
+                  withClass:[NestSDKSmokeCOAlarmDataModel class]
                       block:block];
 }
 
-- (void)setSmokeCOAlarm:(NestSDKSmokeCOAlarm *)smokeCOAlarm block:(NestSDKSmokeCOAlarmUpdateHandler)block {
+- (void)setSmokeCOAlarm:(NestSDKSmokeCOAlarmDataModel *)smokeCOAlarm block:(NestSDKSmokeCOAlarmUpdateHandler)block {
     [self _setDataModel:smokeCOAlarm
                  forURL:[self _smokeCOAlarmURLWithSmokeCOAlarmId:smokeCOAlarm.deviceId]
                   block:block];
@@ -203,11 +203,11 @@ typedef void (^NestSDKDataModelUpdateHandler)(id, NSError *);
 
 - (void)cameraWithId:(NSString *)cameraId block:(NestSDKCameraUpdateHandler)block {
     [self _dataModelFromURL:[self _cameraURLWithCameraId:cameraId]
-                  withClass:[NestSDKCamera class]
+                  withClass:[NestSDKCameraDataModel class]
                       block:block];
 }
 
-- (void)setCamera:(NestSDKCamera *)camera block:(NestSDKCameraUpdateHandler)block {
+- (void)setCamera:(NestSDKCameraDataModel *)camera block:(NestSDKCameraUpdateHandler)block {
     [self _setDataModel:camera
                  forURL:[self _cameraURLWithCameraId:camera.deviceId]
                   block:block];
@@ -221,13 +221,13 @@ typedef void (^NestSDKDataModelUpdateHandler)(id, NSError *);
 
 - (NestSDKObserverHandle)observeSmokeCOAlarmWithId:(NSString *)smokeCOAlarmId block:(NestSDKSmokeCOAlarmUpdateHandler)block {
     return [self _observeDataModelWithURL:[self _smokeCOAlarmURLWithSmokeCOAlarmId:smokeCOAlarmId]
-                                withClass:[NestSDKSmokeCOAlarm class]
+                                withClass:[NestSDKSmokeCOAlarmDataModel class]
                                     block:block];
 }
 
 - (NestSDKObserverHandle)observeCameraWithId:(NSString *)cameraId block:(NestSDKCameraUpdateHandler)block {
     return [self _observeDataModelWithURL:[self _cameraURLWithCameraId:cameraId]
-                                withClass:[NestSDKCamera class]
+                                withClass:[NestSDKCameraDataModel class]
                                     block:block];
 }
 

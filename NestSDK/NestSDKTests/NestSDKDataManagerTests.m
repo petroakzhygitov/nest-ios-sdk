@@ -28,9 +28,9 @@
 #import "NestSDKDataManager.h"
 #import "NestSDKApplicationDelegate.h"
 #import "NestSDKFirebaseService.h"
-#import "NestSDKMetadata.h"
+#import "NestSDKMetadataDataModel.h"
 #import "NestSDKError.h"
-#import "NestSDKStructure.h"
+#import "NestSDKStructureDataModel.h"
 
 SpecBegin(NestSDKDataManager)
     {
@@ -74,7 +74,7 @@ SpecBegin(NestSDKDataManager)
                 }] valuesForURL:@"/" withBlock:[OCMArg any]];
 
                 NestSDKDataManager *dataManager = [[NestSDKDataManager alloc] init];
-                [dataManager metadataWithBlock:^(NestSDKMetadata *metadata, NSError *error) {
+                [dataManager metadataWithBlock:^(NestSDKMetadataDataModel *metadata, NSError *error) {
                     expect(error).to.equal(nil);
                     expect(metadata.accessToken).to.equal(@"c.FmDPkzyzaQe...");
                     expect(metadata.clientVersion).to.equal(1);
@@ -93,7 +93,7 @@ SpecBegin(NestSDKDataManager)
                 }] valuesForURL:@"/" withBlock:[OCMArg any]];
 
                 NestSDKDataManager *dataManager = [[NestSDKDataManager alloc] init];
-                [dataManager metadataWithBlock:^(NestSDKMetadata *metadata, NSError *error) {
+                [dataManager metadataWithBlock:^(NestSDKMetadataDataModel *metadata, NSError *error) {
                     expect(metadata).to.equal(nil);
                     expect(error.domain).to.equal(NestSDKErrorDomain);
                     expect(error.code).to.equal(NestSDKErrorCodeUnexpectedArgumentType);
@@ -120,7 +120,7 @@ SpecBegin(NestSDKDataManager)
                 [dataManager structuresWithBlock:^(NSArray <NestSDKStructure> *structuresArray, NSError *error) {
                     expect(error).to.equal(nil);
 
-                    NestSDKStructure *structure = structuresArray.firstObject;
+                    NestSDKStructureDataModel *structure = structuresArray.firstObject;
                     expect(structure.structureId).to.equal(@"VqFabWH21nwVyd4RWgJgNb292wa7hG_dUwo2i2SG7j3-BOLY0BA4sw");
                 }];
             });

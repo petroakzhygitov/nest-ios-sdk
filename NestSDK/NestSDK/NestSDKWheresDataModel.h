@@ -19,15 +19,26 @@
 // THE SOFTWARE.
 
 #import <Foundation/Foundation.h>
-#import <NestSDK/NestSDKDataModelProtocol.h>
+#import <JSONModel/JSONModel.h>
+#import <NestSDK/NestSDKDataModel.h>
+#import "NestSDKWheres.h"
+
+@protocol Optional;
 
 /**
- * NestSDKWheres is an protocol set on a structure, containing where identifiers (whereId and name).
- * Use NestSDKWheres to create custom where names, or access standard where names.
+ * NestSDKWheres protocol is used to specify type of data presented in NSDictionary/NSArray instances returned by result handlers.
+ */
+@protocol NestSDKWheresDataModel <NSObject>
+@end
+
+
+/**
+ * NestSDKWheresDataModel is an object set on a structure, containing where identifiers (whereId and name).
+ * Use NestSDKWheresDataModel to create custom where names, or access standard where names.
  *
  * Access to the wheres object requires Product data read/write permission.
  */
-@protocol NestSDKWheresProtocol <NestSDKDataModelProtocol>
+@interface NestSDKWheresDataModel : NestSDKDataModel <NestSDKWheres>
 #pragma mark Properties
 
 /**
@@ -35,7 +46,7 @@
  * Use this value with the /$company/ object to send resource use.
  * whereId is read-only, and is created automatically in the call to create a custom where name.
  */
-@property(nonatomic, copy) NSString *whereId;
+@property(nonatomic, copy) NSString <Optional> *whereId;
 
 /**
  * The display name of the device
@@ -46,6 +57,6 @@
  *      If a device is paired to a structure, the custom where name associated with the device is accessible from the /structures/ path
  *      To move a device with a custom where name to a different structure, unpair the device, then re-pair the device with the desired name
  */
-@property(nonatomic, copy) NSString *name;
+@property(nonatomic, copy) NSString <Optional> *name;
 
 @end

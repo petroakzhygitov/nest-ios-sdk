@@ -18,28 +18,34 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import <Foundation/Foundation.h>
+#import <JSONModel/JSONModel.h>
+#import "NestSDKMetadataDataModel.h"
+#import "NestSDKUtils.h"
 
-/**
- * ETA is an object, set on a structure. Use eta to give Nest information so we can prepare a house for your arrival.
- * Requires ETA permission, and is write only.
- */
-@protocol NestSDKETAProtocol <NestSDKDataModelProtocol>
-#pragma mark Properties
+@implementation NestSDKMetadataDataModel
+#pragma mark Override
 
-/**
- * A unique, client-generated identifier to organize a stream of eta estimates
- */
-@property(nonatomic, copy) NSString *tripId;
+- (NSUInteger)hash {
+    NSUInteger prime = 31;
+    NSUInteger result = 1;
 
-/**
- * The timestamp of the earliest time you expect the user to arrive, in ISO 8601 format
- */
-@property(nonatomic) NSDate *estimatedArrivalWindowBegin;
+    result = prime * result + self.accessToken.hash;
+    result = prime * result + self.clientVersion;
 
-/**
- * The timestamp of the latest time you expect the user to arrive, in ISO 8601 format
- */
-@property(nonatomic) NSDate *estimatedArrivalWindowEnd;
+    return result;
+}
+
+- (BOOL)isEqual:(id)other {
+    if (other == self)
+        return YES;
+
+    if (!other || ![[other class] isEqual:[self class]])
+        return NO;
+
+    NestSDKMetadataDataModel *otherMetadata = (NestSDKMetadataDataModel *) other;
+    return (([NestSDKUtils object:self.accessToken isEqualToObject:otherMetadata.accessToken]) &&
+            (self.clientVersion == otherMetadata.clientVersion));
+}
+
 
 @end

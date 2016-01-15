@@ -25,14 +25,14 @@
 #import "NestSDKAccessToken.h"
 #import "LSStubRequestDSL.h"
 #import "LSNocilla.h"
-#import "NestSDKMetadata.h"
-#import "NestSDKDevice.h"
-#import "NestSDKCamera.h"
-#import "NestSDKCameraLastEvent.h"
+#import "NestSDKMetadataDataModel.h"
+#import "NestSDKDeviceDataModel.h"
+#import "NestSDKCameraDataModel.h"
+#import "NestSDKCameraLastEventDataModel.h"
 
 SpecBegin(NestSDKCamera)
     {
-        describe(@"NestSDKCamera", ^{
+        describe(@"NestSDKCameraDataModel", ^{
 
             __block NSData *data;
             __block NSString *resourcePath;
@@ -46,13 +46,13 @@ SpecBegin(NestSDKCamera)
 
             it(@"should deserialize/serialize data", ^{
                 NSError *error;
-                NestSDKCamera *camera = [[NestSDKCamera alloc] initWithData:data error:&error];
+                NestSDKCameraDataModel *camera = [[NestSDKCameraDataModel alloc] initWithData:data error:&error];
                 expect(error).to.equal(nil);
 
                 NSString *lastEventJSONPath = [resourcePath stringByAppendingPathComponent:@"camera_last_event.json"];
                 NSData *lastEventData = [NSData dataWithContentsOfFile:lastEventJSONPath];
 
-                NestSDKCameraLastEvent *lastEvent = [[NestSDKCameraLastEvent alloc] initWithData:lastEventData error:&error];
+                NestSDKCameraLastEventDataModel *lastEvent = [[NestSDKCameraLastEventDataModel alloc] initWithData:lastEventData error:&error];
                 expect(error).to.equal(nil);
 
                 NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
@@ -95,13 +95,13 @@ SpecBegin(NestSDKCamera)
 
             it(@"should have proper hash and equal", ^{
                 NSError *error;
-                NestSDKCamera *camera1 = [[NestSDKCamera alloc] initWithData:data error:&error];
+                NestSDKCameraDataModel *camera1 = [[NestSDKCameraDataModel alloc] initWithData:data error:&error];
                 expect(error).to.equal(nil);
 
-                NestSDKCamera *camera2 = [[NestSDKCamera alloc] initWithData:data error:&error];
+                NestSDKCameraDataModel *camera2 = [[NestSDKCameraDataModel alloc] initWithData:data error:&error];
                 expect(error).to.equal(nil);
 
-                NestSDKCamera *camera3 = [[NestSDKCamera alloc] initWithData:data error:&error];
+                NestSDKCameraDataModel *camera3 = [[NestSDKCameraDataModel alloc] initWithData:data error:&error];
                 expect(error).to.equal(nil);
 
                 camera3.appUrl = @"someURL";

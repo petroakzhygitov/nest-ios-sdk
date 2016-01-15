@@ -19,24 +19,21 @@
 // THE SOFTWARE.
 
 #import <Foundation/Foundation.h>
-#import <NestSDK/NestSDKDataModel.h>
-#import <NestSDK/NestSDKMetadataProtocol.h>
-
-@protocol Optional;
+#import <NestSDK/NestSDKDataModelProtocol.h>
 
 /**
- * Additional data provided by Nest.
+ * Protocol for additional data provided by Nest.
  *
  * Learn more about metadata https://developer.nest.com/documentation/cloud/metadata
  */
-@interface NestSDKMetadata : NestSDKDataModel <NestSDKMetadataProtocol>
+@protocol NestSDKMetadata <NestSDKDataModelProtocol>
 #pragma mark Properties
 
 /**
  * Part of user authorization, your product will use an access token to make API calls to the Nest service.
  * This access token serves as proof that a user has authorized your product to make calls on their behalf.
  */
-@property(nonatomic, copy) NSString <Optional> *accessToken;
+@property(nonatomic, copy, readonly) NSString *accessToken;
 
 /**
  * Client version is the last user-authorized version of a product, and is associated with an access_token.
@@ -47,6 +44,6 @@
  *
  * Learn more about client version https://developer.nest.com/documentation/cloud/client-version
  */
-@property(nonatomic) NSUInteger clientVersion;
+@property(nonatomic, readonly) NSUInteger clientVersion;
 
 @end

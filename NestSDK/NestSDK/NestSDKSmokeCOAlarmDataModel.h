@@ -19,46 +19,26 @@
 // THE SOFTWARE.
 
 #import <Foundation/Foundation.h>
-#import <NestSDK/NestSDKDeviceProtocol.h>
-
-#pragma mark typedef
-typedef NS_ENUM(NSUInteger, NestSDKSmokeCOAlarmBatteryHealth) {
-    NestSDKSmokeCOAlarmBatteryHealthUndefined = 0,
-    NestSDKSmokeCOAlarmBatteryHealthOk,
-    NestSDKSmokeCOAlarmBatteryHealthReplace
-};
-
-typedef NS_ENUM(NSUInteger, NestSDKSmokeCOAlarmAlarmState) {
-    NestSDKSmokeCOAlarmAlarmStateUndefined = 0,
-    NestSDKSmokeCOAlarmAlarmStateOk,
-    NestSDKSmokeCOAlarmAlarmStateWarning,
-    NestSDKSmokeCOAlarmAlarmStateEmergency
-};
-
-typedef NS_ENUM(NSUInteger, NestSDKSmokeCOAlarmUIColorState) {
-    NestSDKSmokeCOAlarmUIColorStateUndefined = 0,
-    NestSDKSmokeCOAlarmUIColorStateGray,
-    NestSDKSmokeCOAlarmUIColorStateGreen,
-    NestSDKSmokeCOAlarmUIColorStateYellow,
-    NestSDKSmokeCOAlarmUIColorStateRed
-};
+#import <JSONModel/JSONModel.h>
+#import "NestSDKDeviceDataModel.h"
+#import "NestSDKSmokeCOAlarm.h"
 
 
 /**
- * Smoke+CO alarm data model protocol
+ * Smoke+CO alarm data model
  */
-@protocol NestSDKSmokeCOAlarmProtocol <NestSDKDeviceProtocol>
+@interface NestSDKSmokeCOAlarmDataModel : NestSDKDeviceDataModel <NestSDKSmokeCOAlarm>
 #pragma mark Properties
 
 /**
  * Specifies language and region (or country) preference.
  */
-@property(nonatomic, copy, readonly) NSString *locale;
+@property(nonatomic, copy) NSString <Optional> *locale;
 
 /**
  * Timestamp of the last successful interaction with the Nest service.
  */
-@property(nonatomic) NSDate *lastConnection;
+@property(nonatomic) NSDate <Optional> *lastConnection;
 
 /**
  * Battery life/health; estimate of remaining battery power level.
@@ -83,7 +63,7 @@ typedef NS_ENUM(NSUInteger, NestSDKSmokeCOAlarmUIColorState) {
 /**
  * Timestamp of the last successful manual smoke and CO alarm test.
  */
-@property(nonatomic) NSDate *lastManualTestTime;
+@property(nonatomic) NSDate <Optional> *lastManualTestTime;
 
 /**
  * Indicates device status by color in the Nest app UI.

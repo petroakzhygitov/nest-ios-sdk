@@ -25,12 +25,12 @@
 #import "NestSDKAccessToken.h"
 #import "LSStubRequestDSL.h"
 #import "LSNocilla.h"
-#import "NestSDKMetadata.h"
-#import "NestSDKWheres.h"
+#import "NestSDKMetadataDataModel.h"
+#import "NestSDKWheresDataModel.h"
 
 SpecBegin(NestSDKWheres)
     {
-        describe(@"NestSDKWheres", ^{
+        describe(@"NestSDKWheresDataModel", ^{
             
             __block NSData *data;
 
@@ -43,7 +43,7 @@ SpecBegin(NestSDKWheres)
 
             it(@"should deserialize/serialize data", ^{
                 NSError *error;
-                NestSDKWheres *wheres = [[NestSDKWheres alloc] initWithData:data error:&error];
+                NestSDKWheresDataModel *wheres = [[NestSDKWheresDataModel alloc] initWithData:data error:&error];
                 expect(error).to.equal(nil);
 
                 expect(wheres.whereId).to.equal(@"Fqp6wJI...");
@@ -60,13 +60,13 @@ SpecBegin(NestSDKWheres)
 
             it(@"should have proper hash and equal", ^{
                 NSError *error;
-                NestSDKWheres *wheres1 = [[NestSDKWheres alloc] initWithData:data error:&error];
+                NestSDKWheresDataModel *wheres1 = [[NestSDKWheresDataModel alloc] initWithData:data error:&error];
                 expect(error).to.equal(nil);
 
-                NestSDKWheres *wheres2 = [[NestSDKWheres alloc] initWithData:data error:&error];
+                NestSDKWheresDataModel *wheres2 = [[NestSDKWheresDataModel alloc] initWithData:data error:&error];
                 expect(error).to.equal(nil);
 
-                NestSDKWheres *wheres3 = [[NestSDKWheres alloc] initWithData:data error:&error];
+                NestSDKWheresDataModel *wheres3 = [[NestSDKWheresDataModel alloc] initWithData:data error:&error];
                 expect(error).to.equal(nil);
 
                 wheres3.name = @"SomeName";

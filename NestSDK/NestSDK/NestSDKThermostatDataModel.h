@@ -21,7 +21,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreGraphics/CGBase.h>
 #import <JSONModel/JSONModel.h>
-#import <NestSDK/NestSDKDevice.h>
+#import "NestSDKDeviceDataModel.h"
 #import <NestSDK/NestSDKThermostat.h>
 
 @protocol Optional;
@@ -30,7 +30,7 @@
 /**
  * Thermostat device data model.
  */
-@interface NestSDKThermostatDataModel : NestSDKDevice <NestSDKThermostat>
+@interface NestSDKThermostatDataModel : NestSDKDeviceDataModel <NestSDKThermostat>
 #pragma mark Properties
 
 /**

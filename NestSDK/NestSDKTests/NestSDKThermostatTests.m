@@ -25,8 +25,8 @@
 #import "NestSDKAccessToken.h"
 #import "LSStubRequestDSL.h"
 #import "LSNocilla.h"
-#import "NestSDKMetadata.h"
-#import "NestSDKDevice.h"
+#import "NestSDKMetadataDataModel.h"
+#import "NestSDKDeviceDataModel.h"
 #import "NestSDKThermostatDataModel.h"
 
 SpecBegin(NestSDKThermostat)

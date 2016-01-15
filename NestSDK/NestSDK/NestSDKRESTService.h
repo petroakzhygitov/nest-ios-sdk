@@ -1,5 +1,6 @@
 #import <Foundation/Foundation.h>
 #import "NestSDKService.h"
+#import "NestSDKAuthenticableService.h"
 
 @protocol NestSDKStructure;
 @class NestSDKThermostatDataModel;
@@ -21,7 +22,7 @@ typedef void (^NestSDKRESTServiceGetSmokeCOAlarmRequestHandler)(NestSDKSmokeCOAl
 
 #pragma mark Protocol
 
-@interface NestSDKRESTService : NSObject <NestSDKService>
+@interface NestSDKRESTService : NSObject <NestSDKAuthenticableService>
 #pragma mark Properties
 
 #pragma mark Methods

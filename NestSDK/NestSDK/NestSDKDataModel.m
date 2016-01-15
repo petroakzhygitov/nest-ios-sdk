@@ -18,9 +18,56 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+#import <objc/runtime.h>
 #import "NestSDKDataModel.h"
 
+#pragma mark const
+static NSString *const kReadOnlyAttributeString = @",R";
+
+
 @implementation NestSDKDataModel
+#pragma mark Private
+
+- (NSArray *)writablePropertiesArrayFromConformedProtocols {
+    NSMutableArray *propertyNames = [NSMutableArray array];
+
+    unsigned int protocolCount = 0;
+    Protocol *__unsafe_unretained *protocols = class_copyProtocolList([self class], &protocolCount);
+
+    for (unsigned i = 0; i < protocolCount; i++) {
+        NSLog(@"Class implements protocol <%s>", protocol_getName(protocols[i]));
+        [propertyNames addObjectsFromArray:[self writablePropertyNamesArrayWithProtocol:(protocols[i])]];
+    }
+
+    free(protocols);
+
+    return propertyNames;
+}
+
+- (NSArray *)writablePropertyNamesArrayWithProtocol:(Protocol *)aProtocol {
+    unsigned int propertyCount = 0;
+    objc_property_t *properties = protocol_copyPropertyList(aProtocol, &propertyCount);
+
+    NSMutableArray *propertyNames = [NSMutableArray array];
+    for (unsigned int i = 0; i < propertyCount; ++i) {
+        objc_property_t property = properties[i];
+
+        const char *c_attributes = property_getAttributes(property);
+        NSString *propertyAttributesString = [NSString stringWithUTF8String:c_attributes];
+
+        // Search only for writable properties
+        if ([propertyAttributesString rangeOfString:kReadOnlyAttributeString].location == NSNotFound) {
+            const char *name = property_getName(property);
+            [propertyNames addObject:[NSString stringWithUTF8String:name]];
+        }
+    }
+
+    free(properties);
+
+    return propertyNames;
+}
+
+
 #pragma mark Override
 
 + (BOOL)propertyIsOptional:(NSString *)propertyName {
@@ -31,5 +78,13 @@
 + (JSONKeyMapper *)keyMapper {
     return [JSONKeyMapper mapperFromUnderscoreCaseToCamelCase];
 }
+
+
+#pragma mark Public
+
+- (NSDictionary *)toWritableDataModelDictionary {
+    return [self toDictionaryWithKeys:[self writablePropertiesArrayFromConformedProtocols]];
+}
+
 
 @end

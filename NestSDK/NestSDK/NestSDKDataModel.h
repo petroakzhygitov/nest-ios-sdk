@@ -26,5 +26,8 @@
  * Base class for all data models in NestSDK.
  */
 @interface NestSDKDataModel : JSONModel <NestSDKDataModelProtocol>
+#pragma mark Methods
+
+- (NSDictionary *)toWritableDataModelDictionary;
 
 @end

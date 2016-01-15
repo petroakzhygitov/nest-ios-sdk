@@ -34,13 +34,13 @@ typedef void (^NestSDKStructureUpdateHandler)(id <NestSDKStructure> structure, N
 
 typedef void (^NestSDKStructuresArrayUpdateHandler)(NSArray <NestSDKStructure> *structuresArray, NSError *);
 
-typedef void (^NestSDKMetadataUpdateHandler)(id <NestSDKMetadata>, NSError *);
+typedef void (^NestSDKMetadataUpdateHandler)(id <NestSDKMetadata> metadata, NSError *);
 
-typedef void (^NestSDKThermostatUpdateHandler)(id <NestSDKThermostat>, NSError *);
+typedef void (^NestSDKThermostatUpdateHandler)(id <NestSDKThermostat> thermostat, NSError *);
 
-typedef void (^NestSDKSmokeCOAlarmUpdateHandler)(id <NestSDKSmokeCOAlarm>, NSError *);
+typedef void (^NestSDKSmokeCOAlarmUpdateHandler)(id <NestSDKSmokeCOAlarm> smokeCOAlarm, NSError *);
 
-typedef void (^NestSDKCameraUpdateHandler)(id <NestSDKCamera>, NSError *);
+typedef void (^NestSDKCameraUpdateHandler)(id <NestSDKCamera> camera, NSError *);
 
 
 @interface NestSDKDataManager : NSObject

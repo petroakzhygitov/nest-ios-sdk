@@ -70,6 +70,10 @@ typedef void (^NestSDKDataUpdateHandler)(id, NSError *);
     return kEndpointPathStructures;
 }
 
+- (NSString *)_structureURLWithStructureId:(NSString *)structureId {
+    return [NSString stringWithFormat:@"%@%@/", kEndpointPathStructures, structureId];
+}
+
 - (NSString *)_thermostatURLWithThermostatId:(NSString *)thermostatId {
     return [NSString stringWithFormat:@"%@%@%@/", kEndpointPathDevices, kEndpointPathThermostats, thermostatId];
 }
@@ -179,7 +183,9 @@ typedef void (^NestSDKDataUpdateHandler)(id, NSError *);
 }
 
 - (void)setStructure:(id <NestSDKStructure>)structure block:(NestSDKStructureUpdateHandler)block {
-
+    [self _setDataModel:structure
+                 forURL:[self _structureURLWithStructureId:structure.structureId]
+                  block:block];
 }
 
 

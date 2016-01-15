@@ -250,7 +250,7 @@ There are three types of Nest devices available to read/observe/write:
 
 **NB:** Ensure, you have set proper permissions to read specific device data with your [Nest Product](https://developer.nest.com/products).
 
-## Observing devices
+### Observing devices
 
 To observe devices use `NestSDKDataManager`:
 ```objective-c
@@ -287,7 +287,7 @@ NSString *cameraId = structure.cameras[someIndex];
 }];
 ```
 
-## Reading devices
+### Reading devices
 
 In general it is better to observe devices rather than read them, since you will be updated with any changes happen. 
 

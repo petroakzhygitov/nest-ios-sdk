@@ -26,48 +26,7 @@
 @end
 
 
-@implementation ViewController {
-    id<NestSDKThermostat> _thermostat;
-    id<NestSDKStructure> _structure;
-    id<NestSDKCamera> _camera;
-}
-
-- (IBAction)click:(id)sender {
-//    _thermostat.targetTemperatureC = 32;
-//
-//    [self.dataManager setThermostat:_thermostat block:^(id <NestSDKThermostat> thermostat, NSError *error) {
-//        NSLog(@"thermostat: %@", thermostat);
-//        NSLog(@"error: %@", error);
-//    }];
-//
-//    _camera.isStreaming = YES;
-//
-//    [self.dataManager setCamera:_camera block:^(id <NestSDKCamera> camera, NSError *error) {
-//        NSLog(@"camera: %@", camera);
-//        NSLog(@"error: %@", error);
-//    }];
-
-//    NestSDKETADataModel *model = [[NestSDKETADataModel alloc] init];
-//    model.tripId = @"asdsad";
-//    model.estimatedArrivalWindowBegin = [NSDate dateWithTimeInterval:2000 sinceDate:[NSDate date]];
-//    model.estimatedArrivalWindowEnd = [NSDate dateWithTimeInterval:4000 sinceDate:[NSDate date]];
-//    _structure.eta = model;
-//    _structure.away = NestSDKStructureAwayStateHome;
-//
-//    [self.dataManager setStructure:_structure block:^(id <NestSDKStructure> structure, NSError *error) {
-//        NSLog(@"structure: %@", structure);
-//        NSLog(@"error: %@", error);
-//    }];
-
-    [self.dataManager metadataWithBlock:^(id <NestSDKMetadata> metadata, NSError *error) {
-        if (error) {
-            NSLog(@"Error occurred while reading metadata: %@", error);
-            return;
-        }
-
-        NSLog(@"Read metadata: %@", metadata);
-    }];
-}
+@implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -113,10 +72,10 @@
 }
 
 - (void)observeStructures {
-    // Init manager
-    self.dataManager = [[NestSDKDataManager alloc] init];
+    // Clean up previous observers
+    [self removeObservers];
 
-    // Start observing structures changes
+    // Start observing structures
     [self.dataManager structuresWithBlock:^(NSArray <NestSDKStructure> *structuresArray, NSError *error) {
         [self logMessage:@"Structures updated!"];
 
@@ -130,8 +89,6 @@
             [self observeThermostatsWithinStructure:structure];
             [self observeSmokeCOAlarmsWithinStructure:structure];
             [self observeCamerasWithinStructure:structure];
-
-            _structure = structure;
         }
     }];
 }
@@ -149,8 +106,6 @@
             } else {
                 [self logMessage:[NSString stringWithFormat:@"Thermostat %@ updated! Current temperature in C: %.1f",
                                                             thermostat.name, thermostat.ambientTemperatureC]];
-                
-                _thermostat = thermostat;
             }
         }];
     }
@@ -179,8 +134,6 @@
             } else {
                 [self logMessage:[NSString stringWithFormat:@"Camera %@ updated! Streaming state: %@",
                                                             camera.name, camera.isStreaming ? @"YES" : @"NO"]];
-
-                _camera = camera;
             }
         }];
     }

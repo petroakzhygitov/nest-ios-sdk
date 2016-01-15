@@ -34,7 +34,7 @@
         _accessToken = accessToken;
 
         if (accessToken) {
-            [self _authenticateWithAccessToken:accessToken];
+            [self authenticateWithAccessToken:accessToken];
         }
     }
 
@@ -45,10 +45,22 @@
     return [self initWithFirebase:firebase accessToken:nil];
 }
 
-#pragma mark Private
+#pragma mark Override
 
-- (void)_authenticateWithAccessToken:(NestSDKAccessToken *)accessToken {
-    // WARNING: Do not call unauth method on firebase instance while making re-authentication
+- (void)setAccessToken:(NestSDKAccessToken *)accessToken {
+    _accessToken = accessToken;
+
+    if (accessToken) {
+        [self authenticateWithAccessToken:accessToken];
+    }
+}
+
+#pragma mark Public
+
+- (void)authenticateWithAccessToken:(NestSDKAccessToken *)accessToken {
+    // WARNING: Do not call unathenticate method while making re-authentication
+
+    if (!accessToken) return;
 
     [NestSDKLogger logInfo:@"Authenticating..." from:self];
 
@@ -63,23 +75,13 @@
     }];
 }
 
-- (void)_unauthenticate {
+- (void)unauthenticate {
+    [self removeAllObservers];
+
     [self.firebase unauth];
 
     [NestSDKLogger logInfo:@"Unauthenticated!" from:self];
 }
-
-#pragma mark Override
-
-- (void)setAccessToken:(NestSDKAccessToken *)accessToken {
-    _accessToken = accessToken;
-
-    if (accessToken) {
-        [self _authenticateWithAccessToken:accessToken];
-    }
-}
-
-#pragma mark Public
 
 - (void)valuesForURL:(NSString *)url withBlock:(NestSDKServiceUpdateBlock)block {
     Firebase *firebase = [self.firebase childByAppendingPath:url];

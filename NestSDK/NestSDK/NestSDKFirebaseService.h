@@ -19,7 +19,8 @@
 // THE SOFTWARE.
 
 #import <Foundation/Foundation.h>
-#import "NestSDKService.h"
+#import <NestSDK/NestSDKService.h>
+#import "NestSDKAuthenticableService.h"
 
 @class Firebase;
 @class NestSDKAccessToken;
@@ -27,7 +28,7 @@
 /**
  * NestSDK Service implementation using Firebase.
  */
-@interface NestSDKFirebaseService : NSObject <NestSDKService>
+@interface NestSDKFirebaseService : NSObject <NestSDKAuthenticableService>
 #pragma mark Properties
 
 /**
@@ -62,5 +63,17 @@
  * @param accessToken The access token to authenticate Firebase instance with.
  */
 - (instancetype)initWithFirebase:(Firebase *)firebase accessToken:(NestSDKAccessToken *)accessToken NS_DESIGNATED_INITIALIZER;
+
+/**
+ * Authenticates current Firebase instance with provided AccessToken.
+ *
+ * @param accessToken The access token to authenticate Firebase instance with.
+ */
+- (void)authenticateWithAccessToken:(NestSDKAccessToken *)accessToken;
+
+/**
+ * Unuthenticates current Firebase instance.
+ */
+- (void)unauthenticate;
 
 @end

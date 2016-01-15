@@ -16,6 +16,8 @@
 #import <NestSDK/NestSDKCamera.h>
 #import <NestSDK/NestSDKThermostat.h>
 #import "ViewController.h"
+#import "NestSDKCameraLastEventDataModel.h"
+#import "NestSDKETADataModel.h"
 
 @interface ViewController ()
 
@@ -24,7 +26,48 @@
 @end
 
 
-@implementation ViewController
+@implementation ViewController {
+    id<NestSDKThermostat> _thermostat;
+    id<NestSDKStructure> _structure;
+    id<NestSDKCamera> _camera;
+}
+
+- (IBAction)click:(id)sender {
+//    _thermostat.targetTemperatureC = 32;
+//
+//    [self.dataManager setThermostat:_thermostat block:^(id <NestSDKThermostat> thermostat, NSError *error) {
+//        NSLog(@"thermostat: %@", thermostat);
+//        NSLog(@"error: %@", error);
+//    }];
+//
+//    _camera.isStreaming = YES;
+//
+//    [self.dataManager setCamera:_camera block:^(id <NestSDKCamera> camera, NSError *error) {
+//        NSLog(@"camera: %@", camera);
+//        NSLog(@"error: %@", error);
+//    }];
+
+//    NestSDKETADataModel *model = [[NestSDKETADataModel alloc] init];
+//    model.tripId = @"asdsad";
+//    model.estimatedArrivalWindowBegin = [NSDate dateWithTimeInterval:2000 sinceDate:[NSDate date]];
+//    model.estimatedArrivalWindowEnd = [NSDate dateWithTimeInterval:4000 sinceDate:[NSDate date]];
+//    _structure.eta = model;
+//    _structure.away = NestSDKStructureAwayStateHome;
+//
+//    [self.dataManager setStructure:_structure block:^(id <NestSDKStructure> structure, NSError *error) {
+//        NSLog(@"structure: %@", structure);
+//        NSLog(@"error: %@", error);
+//    }];
+
+    [self.dataManager metadataWithBlock:^(id <NestSDKMetadata> metadata, NSError *error) {
+        if (error) {
+            NSLog(@"Error occurred while reading metadata: %@", error);
+            return;
+        }
+
+        NSLog(@"Read metadata: %@", metadata);
+    }];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -74,19 +117,21 @@
     self.dataManager = [[NestSDKDataManager alloc] init];
 
     // Start observing structures changes
-    [self.dataManager observeStructuresWithBlock:^(NSArray <NestSDKStructure> *structuresArray, NSError *error) {
+    [self.dataManager structuresWithBlock:^(NSArray <NestSDKStructure> *structuresArray, NSError *error) {
         [self logMessage:@"Structures updated!"];
 
         // Structure may change while observing, so remove all current device observers and then set all new ones
         [self removeDevicesObservers];
 
         // Cycle through all structures and set observers for all devices
-        for (NestSDKStructure *structure in structuresArray) {
+        for (id<NestSDKStructure> structure in structuresArray) {
             [self logMessage:[NSString stringWithFormat:@"Found structure: %@!", structure.name]];
 
             [self observeThermostatsWithinStructure:structure];
             [self observeSmokeCOAlarmsWithinStructure:structure];
             [self observeCamerasWithinStructure:structure];
+
+            _structure = structure;
         }
     }];
 }
@@ -95,43 +140,47 @@
     [self.dataManager removeAllObservers];
 }
 
-- (void)observeThermostatsWithinStructure:(NestSDKStructure *)structure {
+- (void)observeThermostatsWithinStructure:(id<NestSDKStructure>)structure {
     for (NSString *thermostatId in structure.thermostats) {
-        [self.dataManager observeThermostatWithId:thermostatId block:^(NestSDKThermostat *thermostat, NSError *error) {
+        [self.dataManager thermostatWithId:thermostatId block:^(id <NestSDKThermostat> thermostat, NSError *error) {
             if (error) {
                 [self logMessage:[NSString stringWithFormat:@"Error observing thermostat: %@", error]];
 
             } else {
                 [self logMessage:[NSString stringWithFormat:@"Thermostat %@ updated! Current temperature in C: %.1f",
-                                                            thermostat.name, thermostat.ambient_temperature_c]];
+                                                            thermostat.name, thermostat.ambientTemperatureC]];
+                
+                _thermostat = thermostat;
             }
         }];
     }
 }
 
-- (void)observeSmokeCOAlarmsWithinStructure:(NestSDKStructure *)structure {
+- (void)observeSmokeCOAlarmsWithinStructure:(id<NestSDKStructure>)structure {
     for (NSString *smokeCOAlarmId in structure.smokeCoAlarms) {
-        [self.dataManager observeSmokeCOAlarmWithId:smokeCOAlarmId block:^(NestSDKSmokeCOAlarm *smokeCOAlarm, NSError *error) {
+        [self.dataManager smokeCOAlarmWithId:smokeCOAlarmId block:^(id <NestSDKSmokeCOAlarm> smokeCOAlarm, NSError *error) {
             if (error) {
                 [self logMessage:[NSString stringWithFormat:@"Error observing smokeCOAlarm: %@", error]];
 
             } else {
-                [self logMessage:[NSString stringWithFormat:@"smokeCOAlarm %@ updated! Current state: %@",
-                                                            smokeCOAlarm.name, smokeCOAlarm.co_alarm_state]];
+                [self logMessage:[NSString stringWithFormat:@"smokeCOAlarm %@ updated! Current state: %d",
+                                                            smokeCOAlarm.name, smokeCOAlarm.coAlarmState]];
             }
         }];
     }
 }
 
-- (void)observeCamerasWithinStructure:(NestSDKStructure *)structure {
+- (void)observeCamerasWithinStructure:(id<NestSDKStructure>)structure {
     for (NSString *cameraId in structure.cameras) {
-        [self.dataManager observeCameraWithId:cameraId block:^(NestSDKCamera *camera, NSError *error) {
+        [self.dataManager cameraWithId:cameraId block:^(id <NestSDKCamera> camera, NSError *error) {
             if (error) {
                 [self logMessage:[NSString stringWithFormat:@"Error observing camera: %@", error]];
 
             } else {
                 [self logMessage:[NSString stringWithFormat:@"Camera %@ updated! Streaming state: %@",
-                                                            camera.name, camera.is_streaming ? @"YES" : @"NO"]];
+                                                            camera.name, camera.isStreaming ? @"YES" : @"NO"]];
+
+                _camera = camera;
             }
         }];
     }

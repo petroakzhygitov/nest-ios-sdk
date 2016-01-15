@@ -26,6 +26,7 @@
 #import "NestSDKRESTService.h"
 #import "NestSDKFirebaseService.h"
 #import "NestSDKLogger.h"
+#import "NestSDKAuthenticableService.h"
 
 static NSString *const kNestAPIEndpointURLString = @"https://developer-api.nest.com/";
 
@@ -42,7 +43,11 @@ static id <NestSDKService> g_service;
 @implementation NestSDKApplicationDelegate
 #pragma mark Private
 
-- (void)_setService:(id <NestSDKService>)service {
+- (id <NestSDKAuthenticableService>)_service {
+    return (id <NestSDKAuthenticableService>) g_service;
+}
+
+- (void)_setService:(id <NestSDKAuthenticableService>)service {
     g_service = service;
 }
 
@@ -68,10 +73,15 @@ static id <NestSDKService> g_service;
     } else {
         [NestSDKAccessToken setCurrentAccessToken:cachedToken];
     }
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(_accessTokenDidChangeNotification:)
+                                                 name:NestSDKAccessTokenDidChangeNotification
+                                               object:nil];
 }
 
 - (void)_initService {
-    id <NestSDKService> service;
+    id <NestSDKAuthenticableService> service;
 
     if (self.useRESTService) {
         service = [[NestSDKRESTService alloc] init];
@@ -85,6 +95,34 @@ static id <NestSDKService> g_service;
 
     [self _setService:service];
 }
+
+- (void)_removeService {
+    [[self _service] unauthenticate];
+    [self _setService:nil];
+}
+
+- (void)_accessTokenDidChangeNotification:(NSNotification *)notification {
+    NestSDKAccessToken *accessToken = notification.userInfo[NestSDKAccessTokenChangeNewKey];
+
+    // If access token has changed, then re-authenticate service
+    if (accessToken) {
+        id <NestSDKAuthenticableService> service = [self _service];
+        if (service) {
+            if ([service isKindOfClass:[NestSDKFirebaseService class]]) {
+                [service authenticateWithAccessToken:accessToken];
+            }
+
+            // If there is no service, then recreate it
+        } else {
+            [self _initService];
+        }
+
+        // If token was removed, then remove the service
+    } else {
+        [self _removeService];
+    }
+}
+
 
 #pragma mark Public
 

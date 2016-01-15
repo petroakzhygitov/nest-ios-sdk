@@ -20,13 +20,13 @@
 
 #import <JSONModel/JSONModel.h>
 #import <NestSDK/NestSDKDataManager.h>
-#import "NestSDKMetadataDataModel.h"
+#import <NestSDK/NestSDKMetadataDataModel.h>
 #import <NestSDK/NestSDKApplicationDelegate.h>
 #import <NestSDK/NestSDKError.h>
-#import "NestSDKStructureDataModel.h"
-#import "NestSDKThermostatDataModel.h"
-#import "NestSDKSmokeCOAlarmDataModel.h"
-#import "NestSDKCameraDataModel.h"
+#import <NestSDK/NestSDKStructureDataModel.h>
+#import <NestSDK/NestSDKThermostatDataModel.h>
+#import <NestSDK/NestSDKSmokeCOAlarmDataModel.h>
+#import <NestSDK/NestSDKCameraDataModel.h>
 
 #pragma mark const
 
@@ -39,7 +39,7 @@ static NSString *const kEndpointPathCameras = @"cameras/";
 
 #pragma mark typedef
 
-typedef void (^NestSDKDataModelUpdateHandler)(id, NSError *);
+typedef void (^NestSDKDataUpdateHandler)(id, NSError *);
 
 @interface NestSDKDataManager ()
 
@@ -82,40 +82,41 @@ typedef void (^NestSDKDataModelUpdateHandler)(id, NSError *);
     return [NSString stringWithFormat:@"%@%@%@/", kEndpointPathDevices, kEndpointPathCameras, cameraId];
 }
 
-- (void)_dataModelFromURL:(NSString *)url withClass:(Class)dataModelClass block:(NestSDKDataModelUpdateHandler)block {
+- (void)_dataModelFromURL:(NSString *)url withClass:(Class)dataModelClass block:(NestSDKDataUpdateHandler)block {
     [self _dataModelFromURL:url withClass:dataModelClass block:block asArray:NO];
 }
 
 - (void)_dataModelFromURL:(NSString *)url withClass:(Class)dataModelClass
-                    block:(NestSDKDataModelUpdateHandler)block asArray:(BOOL)asArray {
+                    block:(NestSDKDataUpdateHandler)block asArray:(BOOL)asArray {
 
     [self.service valuesForURL:url withBlock:^(id result, NSError *error) {
         [self _handleResultWithDataModelClass:dataModelClass block:block result:result error:error asArray:asArray];
     }];
 }
 
-- (void)_setDataModel:(id <NestSDKDataModel>)dataModel forURL:(NSString *)url block:(NestSDKDataUpdateHandler)block {
-    NestSDKDataModel *currentDataModel = (NestSDKDataModel *)dataModel;
+- (void)_setDataModel:(id <NestSDKDataModelProtocol>)dataModel forURL:(NSString *)url block:(NestSDKDataUpdateHandler)block {
+    NestSDKDataModel *currentDataModel = (NestSDKDataModel *) dataModel;
+
     [self.service setValues:[currentDataModel toDictionary] forURL:url withBlock:^(id result, NSError *error) {
         [self _handleResultWithDataModelClass:[currentDataModel class] block:block result:result error:error asArray:NO];
     }];
 }
 
 - (NestSDKObserverHandle)_observeDataModelWithURL:(NSString *)url withClass:(Class)dataModelClass
-                                            block:(NestSDKDataModelUpdateHandler)block {
+                                            block:(NestSDKDataUpdateHandler)block {
 
     return [self _observeDataModelWithURL:url withClass:dataModelClass block:block asArray:NO];
 }
 
 - (NestSDKObserverHandle)_observeDataModelWithURL:(NSString *)url withClass:(Class)dataModelClass
-                                            block:(NestSDKDataModelUpdateHandler)block asArray:(BOOL)asArray {
+                                            block:(NestSDKDataUpdateHandler)block asArray:(BOOL)asArray {
 
     return [self.service observeValuesForURL:url withBlock:^(id result, NSError *error) {
         [self _handleResultWithDataModelClass:dataModelClass block:block result:result error:error asArray:asArray];
     }];
 }
 
-- (void)_handleResultWithDataModelClass:(Class)dataModelClass block:(NestSDKDataModelUpdateHandler)block
+- (void)_handleResultWithDataModelClass:(Class)dataModelClass block:(NestSDKDataUpdateHandler)block
                                  result:(id)result error:(NSError *)error asArray:(BOOL)asArray {
     if (error) {
         block(nil, error);

@@ -19,29 +19,26 @@
 // THE SOFTWARE.
 
 #import <Foundation/Foundation.h>
-#import "NestSDKService.h"
+#import <NestSDK/NestSDKService.h>
 
-@class NestSDKMetadataDataModel;
-@class NestSDKSmokeCOAlarmDataModel;
-@class NestSDKCameraDataModel;
-@protocol NestSDKDataModel;
 @protocol NestSDKStructure;
 @protocol NestSDKThermostat;
+@protocol NestSDKMetadata;
+@protocol NestSDKSmokeCOAlarm;
+@protocol NestSDKCamera;
 
 
 #pragma mark typedef
 
-typedef void (^NestSDKDataUpdateHandler)(id, NSError *);
-
 typedef void (^NestSDKStructuresUpdateHandler)(NSArray <NestSDKStructure> *structuresArray, NSError *);
 
-typedef void (^NestSDKMetadataUpdateHandler)(NestSDKMetadataDataModel *, NSError *);
+typedef void (^NestSDKMetadataUpdateHandler)(id <NestSDKMetadata>, NSError *);
 
 typedef void (^NestSDKThermostatUpdateHandler)(id <NestSDKThermostat>, NSError *);
 
-typedef void (^NestSDKSmokeCOAlarmUpdateHandler)(NestSDKSmokeCOAlarmDataModel *, NSError *);
+typedef void (^NestSDKSmokeCOAlarmUpdateHandler)(id <NestSDKSmokeCOAlarm>, NSError *);
 
-typedef void (^NestSDKCameraUpdateHandler)(NestSDKCameraDataModel *, NSError *);
+typedef void (^NestSDKCameraUpdateHandler)(id <NestSDKCamera>, NSError *);
 
 
 @interface NestSDKDataManager : NSObject
@@ -62,12 +59,12 @@ typedef void (^NestSDKCameraUpdateHandler)(NestSDKCameraDataModel *, NSError *);
 
 - (void)smokeCOAlarmWithId:(NSString *)smokeCOAlarmId block:(NestSDKSmokeCOAlarmUpdateHandler)block;
 
-- (void)setSmokeCOAlarm:(NestSDKSmokeCOAlarmDataModel *)smokeCOAlarm block:(NestSDKSmokeCOAlarmUpdateHandler)block;
+- (void)setSmokeCOAlarm:(id <NestSDKSmokeCOAlarm>)smokeCOAlarm block:(NestSDKSmokeCOAlarmUpdateHandler)block;
 
 
 - (void)cameraWithId:(NSString *)cameraId block:(NestSDKCameraUpdateHandler)block;
 
-- (void)setCamera:(NestSDKCameraDataModel *)camera block:(NestSDKCameraUpdateHandler)block;
+- (void)setCamera:(id <NestSDKCamera>)camera block:(NestSDKCameraUpdateHandler)block;
 
 
 - (NestSDKObserverHandle)observeThermostatWithId:(NSString *)thermostatId block:(NestSDKThermostatUpdateHandler)block;

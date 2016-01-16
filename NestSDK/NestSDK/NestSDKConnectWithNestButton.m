@@ -154,9 +154,9 @@ static NSString *const kStringCancel = @"Cancel";
     });
 }
 
-- (void)_buttonPressed:(id)_buttonPressed {
-    if ([self.delegate respondsToSelector:@selector(loginButtonWillLogin:)]) {
-        if (![self.delegate loginButtonWillLogin:self]) return;
+- (void)_buttonPressed:(id)sender {
+    if ([self.delegate respondsToSelector:@selector(connectWithNestButtonWillAuthorize:)]) {
+        if (![self.delegate connectWithNestButtonWillAuthorize:self]) return;
     }
 
     if ([NestSDKAccessToken currentAccessToken]) {
@@ -171,8 +171,8 @@ static NSString *const kStringCancel = @"Cancel";
 
     } else {
         NestSDKAuthorizationManagerAuthorizationHandler handler = ^(NestSDKAuthorizationManagerAuthorizationResult *result, NSError *error) {
-            if ([self.delegate respondsToSelector:@selector(connectWithNestButton:didCompleteWithResult:error:)]) {
-                [self.delegate connectWithNestButton:self didCompleteWithResult:result error:error];
+            if ([self.delegate respondsToSelector:@selector(connectWithNestButton:didAuthorizeWithResult:error:)]) {
+                [self.delegate connectWithNestButton:self didAuthorizeWithResult:result error:error];
             }
         };
 
@@ -192,7 +192,7 @@ static NSString *const kStringCancel = @"Cancel";
     if (buttonIndex == kButtonIndexDisconnect) {
         [self.authorizationManager unauthorize];
 
-        [self.delegate loginButtonDidLogOut:self];
+        [self.delegate connectWithNestButtonDidUnauthorize:self];
     }
 }
 

@@ -40,32 +40,32 @@
 
  Sent to the delegate when the button was used to login.
 
- @param loginButton the sender
+ @param connectWithNestButton the sender
  @param result The results of the login
  @param error The error (if any) from the login
 
  */
-- (void)connectWithNestButton:(NestSDKConnectWithNestButton *)loginButton
-        didCompleteWithResult:(NestSDKAuthorizationManagerAuthorizationResult *)result
+- (void)connectWithNestButton:(NestSDKConnectWithNestButton *)connectWithNestButton
+       didAuthorizeWithResult:(NestSDKAuthorizationManagerAuthorizationResult *)result
                         error:(NSError *)error;
 
 /**
 
  Sent to the delegate when the button was used to logout.
- @param loginButton The button that was clicked.
+ @param connectWithNestButton The button that was clicked.
 
 */
-- (void)loginButtonDidLogOut:(NestSDKConnectWithNestButton *)loginButton;
+- (void)connectWithNestButtonDidUnauthorize:(NestSDKConnectWithNestButton *)connectWithNestButton;
 
 @optional
 /**
 
  Sent to the delegate when the button is about to login.
- @param loginButton the sender
+ @param connectWithNestButton the sender
  @return YES if the login should be allowed to proceed, NO otherwise
 
  */
-- (BOOL)loginButtonWillLogin:(NestSDKConnectWithNestButton *)loginButton;
+- (BOOL)connectWithNestButtonWillAuthorize:(NestSDKConnectWithNestButton *)connectWithNestButton;
 
 @end
 

@@ -27,15 +27,18 @@
 
 
 #pragma mark const
+
 static const int kDefaultFontSize = 16;
 
-static const int kButtonIndexDisconnect = 0;
+static const int kDefaultWidth = 200;
+static const int kDefaultHeight = 32;
+
+static const int kActionSheetButtonIndexDisconnect = 0;
 
 static NSString *const kStringConnectWithNest = @"Connect with Nest";
 static NSString *const kStringDisconnect = @"Disconnect";
 static NSString *const kStringDisconnectFromNest = @"Disconnect from Nest";
 static NSString *const kStringCancel = @"Cancel";
-
 
 @interface NestSDKConnectWithNestButton ()
 
@@ -60,7 +63,7 @@ static NSString *const kStringCancel = @"Cancel";
 - (void)awakeFromNib {
     [super awakeFromNib];
 
-    [self _configureButtonWithFrame:CGRectMake(0, 0, 200, 32)];
+    [self _configureButtonWithFrame:CGRectMake(0, 0, kDefaultWidth, kDefaultHeight)];
 }
 
 #pragma mark Private
@@ -78,7 +81,7 @@ static NSString *const kStringCancel = @"Cancel";
     CGFloat scale = [UIScreen mainScreen].scale;
     UIImage *backgroundImage;
 
-    CGFloat cornerRadius = (CGFloat) (frame.size.height * .5);
+    CGFloat cornerRadius = 6; //(CGFloat) (frame.size.height * .5);
 
     backgroundImage = [self _backgroundImageWithColor:[UIColor nestBlue] cornerRadius:cornerRadius scale:scale];
     [self setBackgroundImage:backgroundImage forState:UIControlStateNormal];
@@ -189,7 +192,7 @@ static NSString *const kStringCancel = @"Cancel";
 #pragma mark - UIActionSheetDelegate
 
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
-    if (buttonIndex == kButtonIndexDisconnect) {
+    if (buttonIndex == kActionSheetButtonIndexDisconnect) {
         [self.authorizationManager unauthorize];
 
         [self.delegate connectWithNestButtonDidUnauthorize:self];

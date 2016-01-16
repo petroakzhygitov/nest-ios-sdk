@@ -32,16 +32,25 @@ SpecBegin(NestSDKFirebaseService)
     {
         describe(@"NestSDKFirebaseService", ^{
 
-            it(@"should authenticate and unauthenticate", ^{
+            it(@"should authenticate", ^{
                 id firebaseMock = [OCMockObject mockForClass:[Firebase class]];
                 [[firebaseMock expect] authWithCustomToken:@"qwerty" withCompletionBlock:[OCMArg any]];
-                [[firebaseMock expect] unauth];
 
                 NestSDKAccessToken *accessToken = [[NestSDKAccessToken alloc] initWithTokenString:@"qwerty" expirationDate:[NSDate distantFuture]];
                 NestSDKFirebaseService *firebaseService = [[NestSDKFirebaseService alloc] initWithFirebase:firebaseMock accessToken:accessToken];
 
-                // Set empty access token to make service unauthenticate
-                firebaseService.accessToken = nil;
+                [firebaseMock verify];
+            });
+
+            it(@"should unauthenticate", ^{
+                id firebaseMock = [OCMockObject mockForClass:[Firebase class]];
+                [[firebaseMock expect] authWithCustomToken:@"qwerty" withCompletionBlock:[OCMArg any]];
+                [[firebaseMock expect] removeAllObservers];
+                [[firebaseMock expect] unauth];
+
+                NestSDKAccessToken *accessToken = [[NestSDKAccessToken alloc] initWithTokenString:@"qwerty" expirationDate:[NSDate distantFuture]];
+                NestSDKFirebaseService *firebaseService = [[NestSDKFirebaseService alloc] initWithFirebase:firebaseMock accessToken:accessToken];
+                [firebaseService unauthenticate];
 
                 [firebaseMock verify];
             });

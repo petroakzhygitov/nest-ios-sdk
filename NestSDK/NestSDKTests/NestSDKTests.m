@@ -7,6 +7,8 @@
 //
 
 #import <XCTest/XCTest.h>
+#import <JSONModel/JSONModel.h>
+#import "NestSDKThermostatDataModel.h"
 
 @interface NestSDKTests : XCTestCase
 
@@ -25,8 +27,16 @@
 }
 
 - (void)testExample {
-    // This is an example of a functional test case.
-    // Use XCTAssert and related functions to verify your tests produce the correct results.
+    NSString *resourcePath = [NSBundle bundleForClass:[self class]].resourcePath;
+    NSString *dataPath = [resourcePath stringByAppendingPathComponent:@"thermostat.json"];
+
+    NSData *data = [NSData dataWithContentsOfFile:dataPath];
+
+    NSError *error;
+    NestSDKThermostatDataModel *thermostat = [[NestSDKThermostatDataModel alloc] initWithData:data error:&error];
+    NSLog(@"Properties: %@", [thermostat toWritableDataModelDictionary]);
+//    NestSDKThermostat2 *thermostat2 = (id) thermostat;
+//    NSLog(@"%@", [thermostat2 toDictionary]);
 }
 
 - (void)testPerformanceExample {

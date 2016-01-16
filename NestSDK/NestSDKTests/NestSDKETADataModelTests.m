@@ -26,30 +26,49 @@
 #import "LSStubRequestDSL.h"
 #import "LSNocilla.h"
 #import "NestSDKMetadataDataModel.h"
-#import "NestSDKWheresDataModel.h"
+#import "NestSDKETADataModel.h"
 
-SpecBegin(NestSDKMetadata)
+SpecBegin(NestSDKETADataModel)
     {
-        describe(@"NestSDKMetadataDataModel", ^{
-            
+        describe(@"NestSDKETADataModel", ^{
+
             __block NSData *data;
 
             beforeAll(^{
                 NSString *resourcePath = [NSBundle bundleForClass:[self class]].resourcePath;
-                NSString *dataPath = [resourcePath stringByAppendingPathComponent:@"metadata.json"];
+                NSString *dataPath = [resourcePath stringByAppendingPathComponent:@"eta.json"];
 
                 data = [NSData dataWithContentsOfFile:dataPath];
             });
 
             it(@"should deserialize/serialize data", ^{
                 NSError *error;
-                NestSDKMetadataDataModel *metadata = [[NestSDKMetadataDataModel alloc] initWithData:data error:&error];
+                NestSDKETADataModel *eta = [[NestSDKETADataModel alloc] initWithData:data error:&error];
                 expect(error).to.equal(nil);
 
-                expect(metadata.accessToken).to.equal(@"c.FmDPkzyzaQe...");
-                expect(metadata.clientVersion).to.equal(1);
+                NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+                calendar.timeZone = [NSTimeZone timeZoneWithAbbreviation:@"UTC"];
 
-                NSDictionary *serializedDictionary = [NSJSONSerialization JSONObjectWithData:[metadata toJSONData] options:kNilOptions error:&error];
+                NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
+                dateComponents.timeZone = [NSTimeZone timeZoneWithAbbreviation:@"UTC"];
+                dateComponents.year = 2015;
+                dateComponents.month = 10;
+                dateComponents.day = 31;
+                dateComponents.hour = 22;
+                dateComponents.minute = 42;
+                dateComponents.second = 59;
+
+                NSDate *estimatedArrivalWindowBeginDate = [calendar dateFromComponents:dateComponents];
+
+                dateComponents.hour = 23;
+                dateComponents.minute = 59;
+                NSDate *estimatedArrivalWindowEndDate = [calendar dateFromComponents:dateComponents];
+
+                expect(eta.tripId).to.equal(@"myTripHome1024");
+                expect(eta.estimatedArrivalWindowBegin).to.equal(estimatedArrivalWindowBeginDate);
+                expect(eta.estimatedArrivalWindowEnd).to.equal(estimatedArrivalWindowEndDate);
+
+                NSDictionary *serializedDictionary = [NSJSONSerialization JSONObjectWithData:[eta toJSONData] options:kNilOptions error:&error];
                 expect(error).to.equal(nil);
 
                 NSDictionary *initialDictionary = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
@@ -60,22 +79,22 @@ SpecBegin(NestSDKMetadata)
 
             it(@"should have proper hash and equal", ^{
                 NSError *error;
-                NestSDKMetadataDataModel *metadata1 = [[NestSDKMetadataDataModel alloc] initWithData:data error:&error];
+                NestSDKETADataModel *eta1 = [[NestSDKETADataModel alloc] initWithData:data error:&error];
                 expect(error).to.equal(nil);
 
-                NestSDKMetadataDataModel *metadata2 = [[NestSDKMetadataDataModel alloc] initWithData:data error:&error];
+                NestSDKETADataModel *eta2 = [[NestSDKETADataModel alloc] initWithData:data error:&error];
                 expect(error).to.equal(nil);
 
-                NestSDKMetadataDataModel *metadata3 = [[NestSDKMetadataDataModel alloc] initWithData:data error:&error];
+                NestSDKETADataModel *eta3 = [[NestSDKETADataModel alloc] initWithData:data error:&error];
                 expect(error).to.equal(nil);
 
-                metadata3.clientVersion = 42;
+                eta3.tripId = @"someTripId";
 
-                expect(metadata1.hash).to.equal(metadata2.hash);
-                expect(metadata1.hash).notTo.equal(metadata3.hash);
+                expect(eta1.hash).to.equal(eta2.hash);
+                expect(eta1.hash).notTo.equal(eta3.hash);
 
-                expect(metadata1).to.equal(metadata2);
-                expect(metadata1).notTo.equal(metadata3);
+                expect(eta1).to.equal(eta2);
+                expect(eta1).notTo.equal(eta3);
             });
         });
     }

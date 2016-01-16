@@ -29,7 +29,7 @@
 #import "NestSDKDeviceDataModel.h"
 #import "NestSDKThermostatDataModel.h"
 
-SpecBegin(NestSDKThermostat)
+SpecBegin(NestSDKThermostatDataModel)
     {
         describe(@"NestSDKThermostatDataModel", ^{
 

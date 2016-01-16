@@ -28,7 +28,7 @@
 #import "NestSDKMetadataDataModel.h"
 #import "NestSDKDeviceDataModel.h"
 
-SpecBegin(NestSDKDevice)
+SpecBegin(NestSDKDeviceDataModel)
     {
         describe(@"NestSDKDeviceDataModel", ^{
 

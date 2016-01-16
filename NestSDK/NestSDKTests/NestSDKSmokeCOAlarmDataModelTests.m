@@ -31,7 +31,7 @@
 #import "NestSDKCameraLastEventDataModel.h"
 #import "NestSDKSmokeCOAlarmDataModel.h"
 
-SpecBegin(NestSDKSmokeCOAlarm)
+SpecBegin(NestSDKSmokeCOAlarmDataModel)
     {
         describe(@"NestSDKSmokeCOAlarmDataModel", ^{
 

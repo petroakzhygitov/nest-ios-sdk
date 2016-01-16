@@ -30,7 +30,7 @@
 #import "NestSDKCameraDataModel.h"
 #import "NestSDKCameraLastEventDataModel.h"
 
-SpecBegin(NestSDKCamera)
+SpecBegin(NestSDKCameraDataModel)
     {
         describe(@"NestSDKCameraDataModel", ^{
 

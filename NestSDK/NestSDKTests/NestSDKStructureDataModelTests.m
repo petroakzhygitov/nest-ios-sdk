@@ -30,7 +30,7 @@
 #import "NestSDKWheresDataModel.h"
 #import "NestSDKETADataModel.h"
 
-SpecBegin(NestSDKStructure)
+SpecBegin(NestSDKStructureDataModel)
     {
         describe(@"NestSDKStructureDataModel", ^{
 

@@ -23,6 +23,7 @@
 
 @class NestSDKAuthorizationManagerAuthorizationResult;
 @class NestSDKConnectWithNestButton;
+@class NestSDKAuthorizationManager;
 
 #pragma mark Protocol
 

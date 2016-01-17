@@ -28,51 +28,58 @@
 #pragma mark Protocol
 
 /**
-
- A delegate for `NestSDKConnectWithNestButton`
-
+ * A delegate for `NestSDKConnectWithNestButton`
  */
 @protocol NestSDKConnectWithNestButtonDelegate <NSObject>
 #pragma mark Methods
 
 @required
+
 /**
-
- Sent to the delegate when the button was used to login.
-
- @param connectWithNestButton the sender
- @param result The results of the login
- @param error The error (if any) from the login
-
+ * Sent to the delegate when the button was used to login.
+ *
+ * @param connectWithNestButton the sender
+ * @param result The results of the authorization
+ * @param error The error (if any) from the authorization
  */
 - (void)connectWithNestButton:(NestSDKConnectWithNestButton *)connectWithNestButton
        didAuthorizeWithResult:(NestSDKAuthorizationManagerAuthorizationResult *)result
                         error:(NSError *)error;
 
 /**
-
- Sent to the delegate when the button was used to logout.
- @param connectWithNestButton The button that was clicked.
-
+ * Sent to the delegate when the button was used to unauthorize.
+ *
+ * @param connectWithNestButton The button that was clicked.
 */
 - (void)connectWithNestButtonDidUnauthorize:(NestSDKConnectWithNestButton *)connectWithNestButton;
 
 @optional
 /**
-
- Sent to the delegate when the button is about to login.
- @param connectWithNestButton the sender
- @return YES if the login should be allowed to proceed, NO otherwise
-
+ * Sent to the delegate when the button is about to authorize.
+ *
+ * @param connectWithNestButton the sender
+ * @return YES if the authorization should be allowed to proceed, NO otherwise
  */
 - (BOOL)connectWithNestButtonWillAuthorize:(NestSDKConnectWithNestButton *)connectWithNestButton;
 
 @end
 
-
+/**
+ * A button that initiates a authorization or unauthorization with Nest upon tapping.
+ *
+ * `NestSDKConnectWithNestButton` works with `[NestSDKAccessToken currentAccessToken]` to
+ * determine what to display, and automatically starts authentication when tapped (i.e.,
+ * you do not need to manually subscribe action targets).
+ *
+ * Like `NestSDKAuthorizationManager`, you should make sure your app delegate is connected to
+ * `NestSDKApplicationDelegate` in order for the button's delegate to receive messages.
+ */
 @interface NestSDKConnectWithNestButton : UIButton <UIActionSheetDelegate>
 #pragma mark Properties
 
+/**
+ * Gets or sets the delegate.
+ */
 @property(weak, nonatomic) IBOutlet id <NestSDKConnectWithNestButtonDelegate> delegate;
 
 @end

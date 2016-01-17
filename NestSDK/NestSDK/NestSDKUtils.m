@@ -48,6 +48,23 @@
     return nil;
 }
 
++ (NSDictionary *)queryParametersDictionaryFromQueryString:(NSString *)queryString {
+    NSMutableDictionary *queryParametersDictionary = [[NSMutableDictionary alloc] init];
+    
+    for (NSString *parameter in [queryString componentsSeparatedByString:@"&"]) {
+        NSArray *parameterArray = [parameter componentsSeparatedByString:@"="];
+        if (parameterArray.count != 2) continue;
+
+        NSString *value = [parameterArray lastObject];
+        value = [value stringByReplacingOccurrencesOfString:@"+" withString:@" "];
+        value = [value stringByRemovingPercentEncoding];
+
+        queryParametersDictionary[parameterArray.firstObject] = value;
+    }
+
+    return queryParametersDictionary;
+}
+
 + (NSDate *)dateWithISO8601FormatDateString:(NSString *)dateString {
     return [[self _iso8601DateFormatter] dateFromString:dateString];
 }

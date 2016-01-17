@@ -26,6 +26,8 @@
 
 + (UIViewController *)viewControllerForView:(UIView *)view;
 
++ (NSDictionary *)queryParametersDictionaryFromQueryString:(NSString *)queryString;
+
 + (NSDate *)dateWithISO8601FormatDateString:(NSString *)dateString;
 
 + (NSString *)iso8601FormatDateStringWithDate:(NSDate *)date;

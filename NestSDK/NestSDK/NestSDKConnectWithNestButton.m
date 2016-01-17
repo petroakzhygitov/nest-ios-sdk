@@ -48,7 +48,6 @@ static NSString *const kStringCancel = @"Cancel";
 
 
 @implementation NestSDKConnectWithNestButton
-
 #pragma mark Initializer
 
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -189,7 +188,7 @@ static NSString *const kStringCancel = @"Cancel";
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-#pragma mark - UIActionSheetDelegate
+#pragma mark Delegate UIActionSheetDelegate
 
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
     if (buttonIndex == kActionSheetButtonIndexDisconnect) {

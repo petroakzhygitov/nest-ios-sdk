@@ -142,7 +142,7 @@ SpecBegin(NestSDKAuthorizationManager)
                     NestSDKAuthorizationViewController *authorizationViewController;
                     [invocation getArgument:&authorizationViewController atIndex:2];
 
-                    [authorizationViewController.delegate hasCancelledAuthorization];
+                    [authorizationViewController.delegate viewControllerDidCancel:viewControllerMock];
 
                 }] presentViewController:[OCMArg any] animated:YES completion:[OCMArg any]];
 
@@ -166,7 +166,7 @@ SpecBegin(NestSDKAuthorizationManager)
                     NestSDKAuthorizationViewController *authorizationViewController;
                     [invocation getArgument:&authorizationViewController atIndex:2];
 
-                    [authorizationViewController.delegate hasReceivedAuthorizationCode:@"someCode"];
+                    [authorizationViewController.delegate viewController:authorizationViewController didReceiveAuthorizationCode:@"someCode"];
 
                 }] presentViewController:[OCMArg any] animated:YES completion:[OCMArg any]];
 
@@ -194,7 +194,7 @@ SpecBegin(NestSDKAuthorizationManager)
                     NestSDKAuthorizationViewController *authorizationViewController;
                     [invocation getArgument:&authorizationViewController atIndex:2];
 
-                    [authorizationViewController.delegate hasReceivedAuthorizationCode:@"someCode"];
+                    [authorizationViewController.delegate viewController:authorizationViewController didReceiveAuthorizationCode:@"someCode"];
 
                 }] presentViewController:[OCMArg any] animated:YES completion:[OCMArg any]];
 
@@ -222,7 +222,7 @@ SpecBegin(NestSDKAuthorizationManager)
                     NestSDKAuthorizationViewController *authorizationViewController;
                     [invocation getArgument:&authorizationViewController atIndex:2];
 
-                    [authorizationViewController.delegate hasReceivedAuthorizationCode:@"someCode"];
+                    [authorizationViewController.delegate viewController:authorizationViewController didReceiveAuthorizationCode:@"someCode"];
 
                 }] presentViewController:[OCMArg any] animated:YES completion:[OCMArg any]];
 

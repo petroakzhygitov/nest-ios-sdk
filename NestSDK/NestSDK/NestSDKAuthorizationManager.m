@@ -198,13 +198,17 @@ static const NSTimeInterval kDefaultTimeoutInterval = 8.0;
 
 #pragma mark NestSDKAuthorizationViewControllerDelegate
 
-- (void)viewControllerDidCancelAuthorization {
+- (void)viewControllerDidCancel:(NestSDKAuthorizationViewController *)viewController {
     NestSDKAuthorizationManagerAuthorizationResult *result = [[NestSDKAuthorizationManagerAuthorizationResult alloc] initWithToken:nil isCancelled:YES];
     [self _finishAuthorizationWithAuthorizationResult:result error:nil];
 }
 
-- (void)authorizationViewControllerDidReceiveAuthorizationCode:(NSString *)authorizationCode {
+- (void)viewController:(NestSDKAuthorizationViewController *)viewController didReceiveAuthorizationCode:(NSString *)authorizationCode {
     [self _obtainTokenWithAuthorizationCode:authorizationCode];
+}
+
+- (void)viewController:(NestSDKAuthorizationViewController *)viewController didFailWithError:(NSError *)error {
+    [self _finishAuthorizationWithAuthorizationResult:nil error:error];
 }
 
 @end

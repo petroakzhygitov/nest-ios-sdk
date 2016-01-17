@@ -31,6 +31,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    self.dataManager = [[NestSDKDataManager alloc] init];
+
     // Connect with Nest using NestSDKConnectWithNestButton
     self.connectWithNestButton.delegate = self;
 
@@ -175,14 +177,13 @@
                                                              }];
 }
 
-- (void)connectWithNestButton:(NestSDKConnectWithNestButton *)loginButton
-        didCompleteWithResult:(NestSDKAuthorizationManagerAuthorizationResult *)result
-                        error:(NSError *)error {
+- (void)connectWithNestButton:(NestSDKConnectWithNestButton *)connectWithNestButton
+       didAuthorizeWithResult:(NestSDKAuthorizationManagerAuthorizationResult *)result error:(NSError *)error {
 
     [self handleAuthorizationResult:result error:error];
 }
 
-- (void)loginButtonDidLogOut:(NestSDKConnectWithNestButton *)loginButton {
+- (void)connectWithNestButtonDidUnauthorize:(NestSDKConnectWithNestButton *)connectWithNestButton {
     [self removeObservers];
 }
 

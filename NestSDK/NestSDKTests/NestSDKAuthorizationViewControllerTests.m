@@ -19,19 +19,184 @@
 // THE SOFTWARE.
 
 #import <OCMock/OCMock.h>
+#import <Expecta/Expecta.h>
 #import "SpectaDSL.h"
 #import "SPTSpec.h"
-#import "Expecta.h"
-#import "NestSDKAccessToken.h"
-#import "NestSDKConnectWithNestButton.h"
 #import "NestSDKAuthorizationManager.h"
-#import "NestSDKAuthorizationManagerAuthorizationResult.h"
+#import "NestSDKError.h"
 
 SpecBegin(NestSDKAuthorizationViewController)
     {
         describe(@"NestSDKAuthorizationViewController", ^{
 
-            it(@"should change state depending on currentToken", ^{
+            it(@"should fail with error without authorization URL", ^{
+                waitUntil(^(DoneCallback done) {
+                    NSURL *redirectURL = [NSURL URLWithString:@"https://example.com"];
+
+                    id delegateMock = [OCMockObject mockForProtocol:@protocol(NestSDKAuthorizationViewControllerDelegate)];
+                    [[[delegateMock stub] andDo:^(NSInvocation *invocation) {
+                        [invocation retainArguments];
+
+                        NSError *error;
+                        [invocation getArgument:&error atIndex:3];
+
+                        expect(error.code).to.equal(NestSDKErrorCodeArgumentRequired);
+
+                        done();
+
+                    }] viewController:[OCMArg any] didFailWithError:[OCMArg any]];
+
+                    NestSDKAuthorizationViewController *viewController = [[NestSDKAuthorizationViewController alloc] initWithAuthorizationURL:nil
+                                                                                                                                  redirectURL:redirectURL
+                                                                                                                                     delegate:delegateMock];
+                });
+            });
+
+            it(@"should fail with error without redirect URL", ^{
+                waitUntil(^(DoneCallback done) {
+                    NSURL *authorizationURL = [NSURL URLWithString:@"https://example.com"];
+
+                    id delegateMock = [OCMockObject mockForProtocol:@protocol(NestSDKAuthorizationViewControllerDelegate)];
+                    [[[delegateMock stub] andDo:^(NSInvocation *invocation) {
+                        [invocation retainArguments];
+
+                        NSError *error;
+                        [invocation getArgument:&error atIndex:3];
+
+                        expect(error.code).to.equal(NestSDKErrorCodeArgumentRequired);
+
+                        done();
+
+                    }] viewController:[OCMArg any] didFailWithError:[OCMArg any]];
+
+                    NestSDKAuthorizationViewController *viewController = [[NestSDKAuthorizationViewController alloc] initWithAuthorizationURL:authorizationURL
+                                                                                                                                  redirectURL:nil
+                                                                                                                                     delegate:delegateMock];
+                });
+            });
+
+            it(@"should cancel", ^{
+                waitUntil(^(DoneCallback done) {
+                    NSURL *authorizationURL = [NSURL URLWithString:@"https://authorization.com"];
+                    NSURL *redirectURL = [NSURL URLWithString:@"https://example.com"];
+
+                    id delegateMock = [OCMockObject mockForProtocol:@protocol(NestSDKAuthorizationViewControllerDelegate)];
+                    [[[delegateMock stub] andDo:^(NSInvocation *invocation) {
+                        done();
+
+                    }] viewControllerDidCancel:[OCMArg any]];
+
+                    NestSDKAuthorizationViewController *viewController = [[NestSDKAuthorizationViewController alloc] initWithAuthorizationURL:authorizationURL
+                                                                                                                                  redirectURL:redirectURL
+                                                                                                                                     delegate:delegateMock];
+
+                    [viewController performSelector:@selector(_cancelBarButtonItemPressed:) withObject:nil];
+                });
+            });
+
+            it(@"should fail with wrong state", ^{
+                waitUntil(^(DoneCallback done) {
+                    NSURL *authorizationURL = [NSURL URLWithString:@"https://authorization.com/?state=goodState"];
+                    NSURL *redirectURL = [NSURL URLWithString:@"https://example.com?state=12345"];
+
+                    id delegateMock = [OCMockObject mockForProtocol:@protocol(NestSDKAuthorizationViewControllerDelegate)];
+                    [[[delegateMock stub] andDo:^(NSInvocation *anInvocation) {
+                        [anInvocation retainArguments];
+
+                        NSError *error;
+                        [anInvocation getArgument:&error atIndex:3];
+
+                        expect(error.code).to.equal(NestSDKErrorCodeInvalidURLParameter);
+
+                        done();
+
+                    }] viewController:[OCMArg any] didFailWithError:[OCMArg any]];
+
+                    NestSDKAuthorizationViewController *viewController = [[NestSDKAuthorizationViewController alloc] initWithAuthorizationURL:authorizationURL
+                                                                                                                                  redirectURL:redirectURL
+                                                                                                                                     delegate:delegateMock];
+
+                    UIWebViewNavigationType navigationType = UIWebViewNavigationTypeOther;
+                    NSURLRequest *request = [NSURLRequest requestWithURL:redirectURL];
+
+                    NSMethodSignature *signature = [NestSDKAuthorizationViewController instanceMethodSignatureForSelector:@selector(webView:shouldStartLoadWithRequest:navigationType:)];
+                    NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:signature];
+                    [invocation setTarget:viewController];
+                    [invocation setSelector:@selector(webView:shouldStartLoadWithRequest:navigationType:)];
+                    [invocation setArgument:&request atIndex:3];
+                    [invocation setArgument:&navigationType atIndex:4];
+                    [invocation invoke];
+                });
+            });
+
+            it(@"should fail with wrong code", ^{
+                waitUntil(^(DoneCallback done) {
+                    NSURL *authorizationURL = [NSURL URLWithString:@"https://authorization.com/?state=goodState"];
+                    NSURL *redirectURL = [NSURL URLWithString:@"https://example.com?state=goodState&code="];
+
+                    id delegateMock = [OCMockObject mockForProtocol:@protocol(NestSDKAuthorizationViewControllerDelegate)];
+                    [[[delegateMock stub] andDo:^(NSInvocation *anInvocation) {
+                        [anInvocation retainArguments];
+
+                        NSError *error;
+                        [anInvocation getArgument:&error atIndex:3];
+
+                        expect(error.code).to.equal(NestSDKErrorCodeInvalidURLParameter);
+
+                        done();
+
+                    }] viewController:[OCMArg any] didFailWithError:[OCMArg any]];
+
+                    NestSDKAuthorizationViewController *viewController = [[NestSDKAuthorizationViewController alloc] initWithAuthorizationURL:authorizationURL
+                                                                                                                                  redirectURL:redirectURL
+                                                                                                                                     delegate:delegateMock];
+
+                    UIWebViewNavigationType navigationType = UIWebViewNavigationTypeOther;
+                    NSURLRequest *request = [NSURLRequest requestWithURL:redirectURL];
+
+                    NSMethodSignature *signature = [NestSDKAuthorizationViewController instanceMethodSignatureForSelector:@selector(webView:shouldStartLoadWithRequest:navigationType:)];
+                    NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:signature];
+                    [invocation setTarget:viewController];
+                    [invocation setSelector:@selector(webView:shouldStartLoadWithRequest:navigationType:)];
+                    [invocation setArgument:&request atIndex:3];
+                    [invocation setArgument:&navigationType atIndex:4];
+                    [invocation invoke];
+                });
+            });
+
+            it(@"should receive authorization code", ^{
+                waitUntil(^(DoneCallback done) {
+                    NSURL *authorizationURL = [NSURL URLWithString:@"https://authorization.com/?state=goodState"];
+                    NSURL *redirectURL = [NSURL URLWithString:@"https://example.com?state=goodState&code=42"];
+
+                    id delegateMock = [OCMockObject mockForProtocol:@protocol(NestSDKAuthorizationViewControllerDelegate)];
+                    [[[delegateMock stub] andDo:^(NSInvocation *anInvocation) {
+                        [anInvocation retainArguments];
+
+                        NSString *code;
+                        [anInvocation getArgument:&code atIndex:3];
+
+                        expect(code).to.equal(@"42");
+
+                        done();
+
+                    }] viewController:[OCMArg any] didReceiveAuthorizationCode:[OCMArg any]];
+
+                    NestSDKAuthorizationViewController *viewController = [[NestSDKAuthorizationViewController alloc] initWithAuthorizationURL:authorizationURL
+                                                                                                                                  redirectURL:redirectURL
+                                                                                                                                     delegate:delegateMock];
+
+                    UIWebViewNavigationType navigationType = UIWebViewNavigationTypeOther;
+                    NSURLRequest *request = [NSURLRequest requestWithURL:redirectURL];
+
+                    NSMethodSignature *signature = [NestSDKAuthorizationViewController instanceMethodSignatureForSelector:@selector(webView:shouldStartLoadWithRequest:navigationType:)];
+                    NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:signature];
+                    [invocation setTarget:viewController];
+                    [invocation setSelector:@selector(webView:shouldStartLoadWithRequest:navigationType:)];
+                    [invocation setArgument:&request atIndex:3];
+                    [invocation setArgument:&navigationType atIndex:4];
+                    [invocation invoke];
+                });
             });
         });
     }

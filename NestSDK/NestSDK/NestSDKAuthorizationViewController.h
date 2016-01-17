@@ -24,12 +24,32 @@
 
 #pragma mark Protocol
 
+/**
+ * A delegate for `NestSDKAuthorizationViewController`
+ */
 @protocol NestSDKAuthorizationViewControllerDelegate <NSObject>
 
+/**
+ * Sent to the delegate when the authorization view controller has been canceled by user.
+ *
+ * @param viewController the sender
+ */
 - (void)viewControllerDidCancel:(NestSDKAuthorizationViewController *)viewController;
 
+/**
+ * Sent to the delegate when the authorization view controller has received authorization code.
+ *
+ * @param viewController the sender
+ * @param authorizationCode The authorization code received
+ */
 - (void)viewController:(NestSDKAuthorizationViewController *)viewController didReceiveAuthorizationCode:(NSString *)authorizationCode;
 
+/**
+ * Sent to the delegate when authorization view controller was unable to receive authorization code because of error happen.
+ *
+ * @param viewController the sender
+ * @param error The error happen during the authorization
+ */
 - (void)viewController:(NestSDKAuthorizationViewController *)viewController didFailWithError:(NSError *)error;
 
 @end
@@ -41,7 +61,7 @@
 #pragma mark Properties
 
 /**
- *
+ * Gets or sets the delegate.
  */
 @property(nonatomic) id <NestSDKAuthorizationViewControllerDelegate> delegate;
 
@@ -62,6 +82,13 @@
  */
 - (instancetype)init NS_UNAVAILABLE;
 
+/**
+ * Initializer.
+ *
+ * @param authorizationURL the URL for authorization endpoint
+ * @param redirectURL the URL for redirect endpoint
+ * @param delegate the delegate
+ */
 - (instancetype)initWithAuthorizationURL:(NSURL *)authorizationURL
                              redirectURL:(NSURL *)redirectURL
                                 delegate:(id <NestSDKAuthorizationViewControllerDelegate>)delegate;

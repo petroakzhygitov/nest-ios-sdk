@@ -29,11 +29,13 @@ static NSString *const kErrorDescriptionStingMainBundleKeyRequired = @"Main bund
 static NSString *const kErrorDescriptionStingBadResponse = @"Bad response received error!";
 static NSString *const kErrorDescriptionStingUnexpectedType = @"Unexpected type of argument error!";
 static NSString *const kErrorDescriptionStingUnableToParseData = @"Unable to parse data error!";
+static NSString *const kErrorDescriptionStingInvalidURLParameter = @"Invalid URL parameter!";
 
 static NSString *const kErrorFailureReasonStingArgumentRequired = @"Value for '%@' is required.";
 static NSString *const kErrorFailureReasonStingMainBundleKeyRequired = @"'%@' key in main bundle is required.";
 static NSString *const kErrorFailureReasonStingBadResponse = @"Received wrong status code: %d";
 static NSString *const kErrorFailureReasonStingUnexpectedType = @"Argument '%@' has unexpected type.";
+static NSString *const kErrorFailureReasonStingInvalidURLParameter = @"There is invalid parameter '%@' in your redirect URL.";
 
 static NSString *const kErrorRecoverySuggestionStingMainBundleKeyRequired = @"Check '%@' key is set in your info.plist file.";
 
@@ -100,6 +102,14 @@ static NSString *const kErrorRecoverySuggestionStingMainBundleKeyRequired = @"Ch
                  failureReason:nil
             recoverySuggestion:nil
                underlyingError:error];
+}
+
++ (NSError *)invalidURLParameterWithName:(NSString *)name {
+    return [self errorWithCode:NestSDKErrorCodeInvalidURLParameter
+                   description:kErrorDescriptionStingInvalidURLParameter
+                 failureReason:[NSString stringWithFormat:kErrorFailureReasonStingInvalidURLParameter, name]
+            recoverySuggestion:nil
+               underlyingError:nil];
 }
 
 @end

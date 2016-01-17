@@ -44,7 +44,7 @@ typedef NS_ENUM(NSInteger, FBSDKErrorCode) {
     /**
      * The error code for errors from invalid arguments to SDK methods.
      */
-            NestSDKErrorCodeInvalidArgument,
+            NestSDKErrorCodeInvalidURLParameter,
 
     /**
      * The error code for errors from invalid arguments to SDK methods.
@@ -83,4 +83,5 @@ typedef NS_ENUM(NSInteger, FBSDKErrorCode) {
 
 + (NSError *)unableToParseDataErrorWithUnderlyingError:(NSError *)error;
 
++ (NSError *)invalidURLParameterWithName:(NSString *)name;
 @end

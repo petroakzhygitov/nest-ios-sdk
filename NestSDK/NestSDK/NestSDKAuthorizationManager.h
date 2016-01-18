@@ -54,7 +54,7 @@ typedef void (^NestSDKAuthorizationManagerAuthorizationHandler)(NestSDKAuthoriza
  * This method will present UI the user. You typically should check if [NestSDKAccessToken currentAccessToken]
  * before calling this method. For example, you could make that check at viewDidLoad.
  *
- * @param the view controller to present from.
+ * @param viewController the view controller to present from.
  * @param handler the callback.
  */
 - (void)authorizeWithNestAccountFromViewController:(UIViewController *)viewController

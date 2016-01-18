@@ -26,14 +26,9 @@
 #pragma mark typedef
 
 /**
- * Handle used to unregister observers.
+ * Describes the result of service authentication request.
  */
-typedef NSUInteger NestSDKObserverHandle;
-
-/**
- * Describes the result of service request or data update.
- */
-typedef void (^NestSDKServiceUpdateBlock)(id result, NSError *error);
+typedef void (^NestSDKAuthenticableServiceCompletionBlock)(NSError *error);
 
 /**
  * Protocol for authenticable NestSDK service. Each NestSDK service should conform this protocol.
@@ -42,18 +37,13 @@ typedef void (^NestSDKServiceUpdateBlock)(id result, NSError *error);
 #pragma mark Methods
 
 /**
- * Get data from a particular location. Your block will be triggered when data is delivered.
- *
- * @param url Location to get data from.
- * @param block The block that should be called when data is delivered or error happen.
- */
-
-/**
  * Authenticates current service instance with provided AccessToken.
  *
  * @param accessToken The access token to authenticate service instance with.
+ * @param completionBlock The block called when authentication has completed or failed. In case of failure returns error.
  */
-- (void)authenticateWithAccessToken:(NestSDKAccessToken *)accessToken;
+- (void)authenticateWithAccessToken:(NestSDKAccessToken *)accessToken
+                    completionBlock:(NestSDKAuthenticableServiceCompletionBlock)completionBlock;
 
 /**
  * Unauthenticates current service.

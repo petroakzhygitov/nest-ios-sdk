@@ -54,22 +54,16 @@
  *
  * @param firebase Firebase instance.
  */
-- (instancetype)initWithFirebase:(Firebase *)firebase;
-
-/**
- * Initializes a new service instance.
- *
- * @param firebase Firebase instance.
- * @param accessToken The access token to authenticate Firebase instance with.
- */
-- (instancetype)initWithFirebase:(Firebase *)firebase accessToken:(NestSDKAccessToken *)accessToken NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithFirebase:(Firebase *)firebase NS_DESIGNATED_INITIALIZER;
 
 /**
  * Authenticates current Firebase instance with provided AccessToken.
  *
  * @param accessToken The access token to authenticate Firebase instance with.
+ * @param completionBlock The block called when authentication has completed or failed. In case of failure returns error.
  */
-- (void)authenticateWithAccessToken:(NestSDKAccessToken *)accessToken;
+- (void)authenticateWithAccessToken:(NestSDKAccessToken *)accessToken
+                    completionBlock:(NestSDKAuthenticableServiceCompletionBlock)completionBlock;
 
 /**
  * Unuthenticates current Firebase instance.

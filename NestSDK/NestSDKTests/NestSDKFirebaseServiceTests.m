@@ -25,34 +25,91 @@
 #import "LSNocilla.h"
 #import <NestSDK/NestSDK.h>
 #import <Expecta/Expecta.h>
-#import "NestSDKFirebaseService.h"
 #import <Firebase/Firebase.h>
+#import "NestSDKFirebaseService.h"
 
 SpecBegin(NestSDKFirebaseService)
     {
         describe(@"NestSDKFirebaseService", ^{
 
             it(@"should authenticate", ^{
-                id firebaseMock = [OCMockObject mockForClass:[Firebase class]];
-                [[firebaseMock expect] authWithCustomToken:@"qwerty" withCompletionBlock:[OCMArg any]];
+                waitUntil(^(DoneCallback done) {
+                    id firebaseMock = [OCMockObject mockForClass:[Firebase class]];
+                    [[[firebaseMock stub] andDo:^(NSInvocation *invocation) {
+                        [invocation retainArguments];
 
-                NestSDKAccessToken *accessToken = [[NestSDKAccessToken alloc] initWithTokenString:@"qwerty" expirationDate:[NSDate distantFuture]];
-                NestSDKFirebaseService *firebaseService = [[NestSDKFirebaseService alloc] initWithFirebase:firebaseMock accessToken:accessToken];
+                        void (^block)(NSError *, FAuthData *);
+                        [invocation getArgument:&block atIndex:3];
 
-                [firebaseMock verify];
+                        block(nil, nil);
+
+                    }] authWithCustomToken:@"qwerty" withCompletionBlock:[OCMArg any]];
+
+                    NestSDKAccessToken *accessToken = [[NestSDKAccessToken alloc] initWithTokenString:@"qwerty" expirationDate:[NSDate distantFuture]];
+                    NestSDKFirebaseService *firebaseService = [[NestSDKFirebaseService alloc] initWithFirebase:firebaseMock];
+                    [firebaseService authenticateWithAccessToken:accessToken completionBlock:^(NSError *error) {
+                        expect(error).to.equal(nil);
+
+                        done();
+                    }];
+                });
+            });
+
+            it(@"should not authenticate", ^{
+                waitUntil(^(DoneCallback done) {
+                    id firebaseMock = [OCMockObject mockForClass:[Firebase class]];
+                    [[[firebaseMock stub] andDo:^(NSInvocation *invocation) {
+                        [invocation retainArguments];
+
+                        void (^block)(NSError *, FAuthData *);
+                        [invocation getArgument:&block atIndex:3];
+
+                        NSError *error = [NSError errorWithDomain:@"someDomain" code:1 userInfo:nil];
+                        block(error, nil);
+
+                    }] authWithCustomToken:@"qwerty" withCompletionBlock:[OCMArg any]];
+
+                    NestSDKAccessToken *accessToken = [[NestSDKAccessToken alloc] initWithTokenString:@"qwerty" expirationDate:[NSDate distantFuture]];
+                    NestSDKFirebaseService *firebaseService = [[NestSDKFirebaseService alloc] initWithFirebase:firebaseMock];
+                    [firebaseService authenticateWithAccessToken:accessToken completionBlock:^(NSError *error) {
+                        expect(error.domain).to.equal(@"someDomain");
+                        expect(error.code).to.equal(1);
+
+                        done();
+                    }];
+                });
             });
 
             it(@"should unauthenticate", ^{
-                id firebaseMock = [OCMockObject mockForClass:[Firebase class]];
-                [[firebaseMock expect] authWithCustomToken:@"qwerty" withCompletionBlock:[OCMArg any]];
-                [[firebaseMock expect] removeAllObservers];
-                [[firebaseMock expect] unauth];
+                waitUntil(^(DoneCallback done) {
+                    id firebaseMock = [OCMockObject mockForClass:[Firebase class]];
+                    [[firebaseMock expect] removeAllObservers];
 
-                NestSDKAccessToken *accessToken = [[NestSDKAccessToken alloc] initWithTokenString:@"qwerty" expirationDate:[NSDate distantFuture]];
-                NestSDKFirebaseService *firebaseService = [[NestSDKFirebaseService alloc] initWithFirebase:firebaseMock accessToken:accessToken];
-                [firebaseService unauthenticate];
+                    [[[firebaseMock stub] andDo:^(NSInvocation *invocation) {
+                        [invocation retainArguments];
 
-                [firebaseMock verify];
+                        void (^block)(NSError *, FAuthData *);
+                        [invocation getArgument:&block atIndex:3];
+
+                        block(nil, nil);
+
+                    }] authWithCustomToken:@"qwerty" withCompletionBlock:[OCMArg any]];
+
+                    [[[firebaseMock stub] andDo:^(NSInvocation *invocation) {
+                        [firebaseMock verify];
+
+                        done();
+
+                    }] unauth];
+
+                    NestSDKAccessToken *accessToken = [[NestSDKAccessToken alloc] initWithTokenString:@"qwerty" expirationDate:[NSDate distantFuture]];
+                    NestSDKFirebaseService *firebaseService = [[NestSDKFirebaseService alloc] initWithFirebase:firebaseMock];
+                    [firebaseService authenticateWithAccessToken:accessToken completionBlock:^(NSError *error) {
+                        expect(error).to.equal(nil);
+
+                        [firebaseService unauthenticate];
+                    }];
+                });
             });
 
             it(@"should get values for url", ^{

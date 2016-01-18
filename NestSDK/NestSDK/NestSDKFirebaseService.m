@@ -22,60 +22,60 @@
 #import "NestSDKFirebaseService.h"
 #import "NestSDKAccessToken.h"
 #import "NestSDKLogger.h"
+#import "NestSDKError.h"
+
+
+#pragma mark const
+static NSString *const kArgumentNameAccessToken = @"accessToken";
 
 
 @implementation NestSDKFirebaseService
 #pragma mark Initializer
 
-- (instancetype)initWithFirebase:(Firebase *)firebase accessToken:(NestSDKAccessToken *)accessToken {
+- (instancetype)initWithFirebase:(Firebase *)firebase {
     self = [super init];
     if (self) {
         _firebase = firebase;
-        _accessToken = accessToken;
-
-        if (accessToken) {
-            [self authenticateWithAccessToken:accessToken];
-        }
     }
 
     return self;
 }
 
-- (instancetype)initWithFirebase:(Firebase *)firebase {
-    return [self initWithFirebase:firebase accessToken:nil];
-}
+#pragma mark Private
 
-#pragma mark Override
+- (void)_completeAuthenticationWithBlock:(NestSDKAuthenticableServiceCompletionBlock)block error:(NSError *)error {
+    if (!block) return;
 
-- (void)setAccessToken:(NestSDKAccessToken *)accessToken {
-    _accessToken = accessToken;
-
-    if (accessToken) {
-        [self authenticateWithAccessToken:accessToken];
-    }
+    block(error);
 }
 
 #pragma mark Public
 
-- (void)authenticateWithAccessToken:(NestSDKAccessToken *)accessToken {
+- (void)authenticateWithAccessToken:(NestSDKAccessToken *)accessToken
+                    completionBlock:(NestSDKAuthenticableServiceCompletionBlock)completionBlock {
     // WARNING: Do not call unathenticate method while making re-authentication
 
-    if (!accessToken) return;
+    if (!accessToken) {
+        NSError *error = [NestSDKError argumentRequiredErrorWithName:kArgumentNameAccessToken message:nil];
+        [self _completeAuthenticationWithBlock:completionBlock error:error];
+
+        return;
+    }
 
     [NestSDKLogger logInfo:@"Authenticating..." from:self];
 
-    __weak typeof(self)weakSelf = self;
+    __weak typeof(self) weakSelf = self;
     [self.firebase authWithCustomToken:accessToken.tokenString withCompletionBlock:^(NSError *error, FAuthData *authData) {
         typeof(self) self = weakSelf;
         if (!self) return;
 
         if (error) {
-            [NestSDKLogger logError:@"Authentication failed!" withErorr:error from:self];
+            [self _completeAuthenticationWithBlock:completionBlock error:error];
 
             return;
         }
 
-        [NestSDKLogger logInfo:@"Authentication successful!" from:self];
+        [self _completeAuthenticationWithBlock:completionBlock error:error];
     }];
 }
 
@@ -88,6 +88,8 @@
 }
 
 - (void)valuesForURL:(NSString *)url withBlock:(NestSDKServiceUpdateBlock)block {
+    if (!block) return;
+
     Firebase *firebase = [self.firebase childByAppendingPath:url];
 
     [firebase observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
@@ -109,12 +111,14 @@
         return [FTransactionResult successWithValue:currentData];
 
     }          andCompletionBlock:^(NSError *error, BOOL committed, FDataSnapshot *snapshot) {
-        block(snapshot.value, error);
+        if (block) block(snapshot.value, error);
 
     }             withLocalEvents:NO];
 }
 
 - (NestSDKObserverHandle)observeValuesForURL:(NSString *)url withBlock:(NestSDKServiceUpdateBlock)block {
+    if (!block) return 0;
+
     Firebase *firebase = [self.firebase childByAppendingPath:url];
 
     return [firebase observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {

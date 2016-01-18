@@ -88,9 +88,11 @@ static id <NestSDKService> g_service;
 
     } else {
         Firebase *firebase = [[Firebase alloc] initWithUrl:kNestAPIEndpointURLString];
+        service = [[NestSDKFirebaseService alloc] initWithFirebase:firebase];
+    }
 
-        service = [[NestSDKFirebaseService alloc] initWithFirebase:firebase
-                                                       accessToken:[NestSDKAccessToken currentAccessToken]];
+    if ([NestSDKAccessToken currentAccessToken]) {
+        [self _authenticateServiceWithAccessToken:[NestSDKAccessToken currentAccessToken]];
     }
 
     [self _setService:service];
@@ -101,6 +103,21 @@ static id <NestSDKService> g_service;
     [self _setService:nil];
 }
 
+- (void)_authenticateServiceWithAccessToken:(NestSDKAccessToken *)accessToken {
+    [[self _service] authenticateWithAccessToken:accessToken completionBlock:^(NSError *error) {
+        if (error) {
+            // Something went wrong
+            [NestSDKLogger logError:@"Authentication failed!" withErorr:error from:self];
+
+            // Remove current access token expecting that renewed access token will fix the problem
+            [NestSDKAccessToken setCurrentAccessToken:nil];
+
+        } else {
+            [NestSDKLogger logInfo:@"Authentication successful!" from:self];
+        }
+    }];
+}
+
 - (void)_accessTokenDidChangeNotification:(NSNotification *)notification {
     NestSDKAccessToken *accessToken = notification.userInfo[NestSDKAccessTokenChangeNewKey];
 
@@ -108,9 +125,7 @@ static id <NestSDKService> g_service;
     if (accessToken) {
         id <NestSDKAuthenticableService> service = [self _service];
         if (service) {
-            if ([service isKindOfClass:[NestSDKFirebaseService class]]) {
-                [service authenticateWithAccessToken:accessToken];
-            }
+            [self _authenticateServiceWithAccessToken:[NestSDKAccessToken currentAccessToken]];
 
             // If there is no service, then recreate it
         } else {
@@ -122,7 +137,6 @@ static id <NestSDKService> g_service;
         [self _removeService];
     }
 }
-
 
 #pragma mark Public
 

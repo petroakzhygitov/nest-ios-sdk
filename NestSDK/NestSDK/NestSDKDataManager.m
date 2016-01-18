@@ -92,7 +92,11 @@ typedef void (^NestSDKDataUpdateHandler)(id, NSError *);
 - (void)_dataModelFromURL:(NSString *)url withClass:(Class)dataModelClass
                     block:(NestSDKDataUpdateHandler)block asArray:(BOOL)asArray {
 
+    __weak typeof(self)weakSelf = self;
     [self.service valuesForURL:url withBlock:^(id result, NSError *error) {
+        typeof(self) self = weakSelf;
+        if (!self) return;
+
         [self _handleResultWithDataModelClass:dataModelClass block:block result:result error:error asArray:asArray];
     }];
 }
@@ -100,7 +104,11 @@ typedef void (^NestSDKDataUpdateHandler)(id, NSError *);
 - (void)_setDataModel:(id <NestSDKDataModelProtocol>)dataModel forURL:(NSString *)url block:(NestSDKDataUpdateHandler)block {
     NestSDKDataModel *currentDataModel = (NestSDKDataModel *) dataModel;
 
+    __weak typeof(self)weakSelf = self;
     [self.service setValues:[currentDataModel toWritableDataModelDictionary] forURL:url withBlock:^(id result, NSError *error) {
+        typeof(self) self = weakSelf;
+        if (!self) return;
+
         [self _handleResultWithDataModelClass:[currentDataModel class] block:block result:result error:error asArray:NO];
     }];
 }
@@ -114,7 +122,11 @@ typedef void (^NestSDKDataUpdateHandler)(id, NSError *);
 - (NestSDKObserverHandle)_observeDataModelWithURL:(NSString *)url withClass:(Class)dataModelClass
                                             block:(NestSDKDataUpdateHandler)block asArray:(BOOL)asArray {
 
+    __weak typeof(self)weakSelf = self;
     return [self.service observeValuesForURL:url withBlock:^(id result, NSError *error) {
+        typeof(self) self = weakSelf;
+        if (!self) return;
+
         [self _handleResultWithDataModelClass:dataModelClass block:block result:result error:error asArray:asArray];
     }];
 }

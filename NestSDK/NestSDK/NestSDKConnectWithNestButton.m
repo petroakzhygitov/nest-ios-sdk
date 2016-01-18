@@ -172,7 +172,11 @@ static NSString *const kStringCancel = @"Cancel";
         [sheet showInView:self];
 
     } else {
+        __weak typeof(self)weakSelf = self;
         NestSDKAuthorizationManagerAuthorizationHandler handler = ^(NestSDKAuthorizationManagerAuthorizationResult *result, NSError *error) {
+            typeof(self) self = weakSelf;
+            if (!self) return;
+
             if ([self.delegate respondsToSelector:@selector(connectWithNestButton:didAuthorizeWithResult:error:)]) {
                 [self.delegate connectWithNestButton:self didAuthorizeWithResult:result error:error];
             }

@@ -111,8 +111,12 @@ static const NSTimeInterval kDefaultTimeoutInterval = 8.0;
 
     NSURLSession *urlSession = [NSURLSession sessionWithConfiguration:urlSessionConfiguration delegate:nil delegateQueue:nil];
 
+    __weak typeof(self)weakSelf = self;
     NSURLSessionDataTask *dataTask = [urlSession dataTaskWithRequest:request
                                                    completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                       typeof(self) self = weakSelf;
+                                                       if (!self) return;
+
                                                        if (error) {
                                                            [self _finishAuthorizationWithAuthorizationResult:nil error:error];
 

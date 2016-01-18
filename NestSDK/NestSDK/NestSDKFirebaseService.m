@@ -64,7 +64,11 @@
 
     [NestSDKLogger logInfo:@"Authenticating..." from:self];
 
+    __weak typeof(self)weakSelf = self;
     [self.firebase authWithCustomToken:accessToken.tokenString withCompletionBlock:^(NSError *error, FAuthData *authData) {
+        typeof(self) self = weakSelf;
+        if (!self) return;
+
         if (error) {
             [NestSDKLogger logError:@"Authentication failed!" withErorr:error from:self];
 

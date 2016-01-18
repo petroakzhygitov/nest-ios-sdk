@@ -35,15 +35,15 @@
 typedef void (^NestSDKAuthorizationManagerAuthorizationHandler)(NestSDKAuthorizationManagerAuthorizationResult *result, NSError *error);
 
 /**
- * NestSDKAuthorizationManager provides methods for authorizing and unauthorizing the user
- * NestSDKAuthorizationManager works directly with [NestSDKAccessToken currentAccessToken]
- * and sets the currentAccessToken upon successful authorizations (or sets nil in case of unauthorization).
+ * Provides methods for authorizing and unauthorizing the user.
+ * `NestSDKAuthorizationManager` works directly with `[NestSDKAccessToken currentAccessToken]`
+ * and sets the `currentAccessToken` upon successful authorizations (or sets nil in case of unauthorization).
  *
- * You should check [NestSDKAccessToken currentAccessToken] before calling authorize* to see if there is
- * a cached token available (typically in your viewDidLoad).
+ * You should check `[NestSDKAccessToken currentAccessToken]` before calling authorize to see if there is
+ * a cached token available (typically in your `viewDidLoad`).
  *
- * If you are managing your own token instances outside of currentAccessToken, you will need to set
- * currentAccessToken before calling authorize*.
+ * If you are managing your own token instances outside of `currentAccessToken`, you will need to set
+ * `currentAccessToken` before calling authorize.
  */
 @interface NestSDKAuthorizationManager : NSObject <NestSDKAuthorizationViewControllerDelegate>
 #pragma mark Methods

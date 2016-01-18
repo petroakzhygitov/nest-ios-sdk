@@ -24,7 +24,7 @@
 @protocol NestSDKService;
 
 /**
- * NestSDKApplicationDelegate is main connection point with Nest SDK.
+ * NestSDKApplicationDelegate is a main connection point with Nest SDK.
  * It is designed to be able process the results from Nest authorization dialogs (native app or Safari) in the future.
  */
 @interface NestSDKApplicationDelegate : NSObject

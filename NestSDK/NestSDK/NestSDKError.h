@@ -28,9 +28,8 @@ FOUNDATION_EXTERN NSString *const NestSDKErrorDomain;
 
 /**
  * Error codes for NestSDKErrorDomain
- * @typedef NS_ENUM(NSInteger, NestSDKErrorCode)
  */
-typedef NS_ENUM(NSInteger, FBSDKErrorCode) {
+typedef NS_ENUM(NSInteger, NestSDKErrorCode) {
     /**
      *  Undefined.
      */

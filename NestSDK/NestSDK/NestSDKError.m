@@ -33,7 +33,7 @@ static NSString *const kErrorDescriptionStingInvalidURLParameter = @"Invalid URL
 
 static NSString *const kErrorFailureReasonStingArgumentRequired = @"Value for '%@' is required.";
 static NSString *const kErrorFailureReasonStingMainBundleKeyRequired = @"'%@' key in main bundle is required.";
-static NSString *const kErrorFailureReasonStingBadResponse = @"Received wrong status code: %d";
+static NSString *const kErrorFailureReasonStingBadResponse = @"Received wrong status code: %ld";
 static NSString *const kErrorFailureReasonStingUnexpectedType = @"Argument '%@' has unexpected type.";
 static NSString *const kErrorFailureReasonStingInvalidURLParameter = @"There is invalid parameter '%@' in your redirect URL.";
 
@@ -82,7 +82,7 @@ static NSString *const kErrorRecoverySuggestionStingMainBundleKeyRequired = @"Ch
 + (NSError *)badResponseErrorWithStatusCode:(NSInteger)statusCode message:(NSString *)message {
     return [self errorWithCode:NestSDKErrorCodeBadResponse
                    description:kErrorDescriptionStingBadResponse
-                 failureReason:[NSString stringWithFormat:kErrorFailureReasonStingBadResponse, statusCode]
+                 failureReason:[NSString stringWithFormat:kErrorFailureReasonStingBadResponse, (long)statusCode]
             recoverySuggestion:nil
                underlyingError:nil];
 }

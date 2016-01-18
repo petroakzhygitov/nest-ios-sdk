@@ -218,6 +218,34 @@ static NSString *const kAPIEndpointSmokeCOAlarmsURLPath = @"/smoke_co_alarms";
     [task resume];
 }
 
+- (void)authenticateWithAccessToken:(NestSDKAccessToken *)accessToken completionBlock:(NestSDKAuthenticableServiceCompletionBlock)completionBlock {
+
+}
+
+- (void)unauthenticate {
+
+}
+
+- (void)valuesForURL:(NSString *)url withBlock:(NestSDKServiceUpdateBlock)block {
+
+}
+
+- (void)setValues:(NSDictionary *)values forURL:(NSString *)url withBlock:(NestSDKServiceUpdateBlock)block {
+
+}
+
+- (NestSDKObserverHandle)observeValuesForURL:(NSString *)url withBlock:(NestSDKServiceUpdateBlock)block {
+    return 0;
+}
+
+- (void)removeObserverWithHandle:(NestSDKObserverHandle)handle {
+
+}
+
+- (void)removeAllObservers {
+
+}
+
 
 #pragma mark IBAction
 

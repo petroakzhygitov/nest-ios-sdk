@@ -26,6 +26,8 @@ pod "NestSDK", github => "https://github.com/petroakzhygitov/nest-ios-sdk.git"
 
 ## General Nest product setup
 
+To work with NestSDK you need to have Nest Product created. If you already have one, you may skip this section, if not, follow these steps:
+
 1. Create your Nest developers account at [https://home.nest.com] (https://home.nest.com/login/?style=default&next=%2Faccounts%2Fsaml2%2Fidp%2Fcomplete%3FSAMLRequest%3DPHNhbWxwOkF1dGhuUmVxdWVzdCBBc3NlcnRpb25Db25zdW1lclNlcnZpY2VVUkw9J2h0dHBzOi8vZGV2ZWxvcGVyLm5lc3QuY29tL2F1dGgvc2FtbC9zZXNzaW9ucycgRGVzdGluYXRpb249J2h0dHBzOi8vaG9tZS5uZXN0LmNvbS9hY2NvdW50cy9zYW1sMi9pZHAvcG9zdD9zdHlsZT1kZWZhdWx0JyBJRD0nXzJjNzBjYjQwLTk5YmYtMDEzMy05NmM1LTIyMDAwYjIyMDZiMCcgSXNQYXNzaXZlPSdmYWxzZScgSXNzdWVJbnN0YW50PScyMDE2LTAxLTEwVDExOjU2OjU3WicgVmVyc2lvbj0nMi4wJyB4bWxuczpzYW1sPSd1cm46b2FzaXM6bmFtZXM6dGM6U0FNTDoyLjA6YXNzZXJ0aW9uJyB4bWxuczpzYW1scD0ndXJuOm9hc2lzOm5hbWVzOnRjOlNBTUw6Mi4wOnByb3RvY29sJz48c2FtbDpJc3N1ZXI%252BaHR0cHM6Ly9kZXZlbG9wZXIubmVzdC5jb208L3NhbWw6SXNzdWVyPjxzYW1scDpOYW1lSURQb2xpY3kgQWxsb3dDcmVhdGU9J3RydWUnIEZvcm1hdD0ncm46b2FzaXM6bmFtZXM6dGM6U0FNTDoyLjA6cHJvdG9jb2wnLz48L3NhbWxwOkF1dGhuUmVxdWVzdD4%253D#/sign-up)
 
 2. Create your Nest Product at [https://developer.nest.com/products/new] (https://developer.nest.com/products/new)
@@ -35,6 +37,8 @@ pod "NestSDK", github => "https://github.com/petroakzhygitov/nest-ios-sdk.git"
 4. Use your product `Product ID`, `Product Secret` and `Redirect URI` for the iOS project setup.
 
 ## General iOS project setup
+
+Any iOS project should be properly setup in order to use NestSDK. Follow these steps to setup your iOS project:
 
 1. Add NestSDK to your project (see Installation)
 
@@ -74,16 +78,16 @@ pod "NestSDK", github => "https://github.com/petroakzhygitov/nest-ios-sdk.git"
 
 ## General iOS application workflow
 
-Before reading, observing or writing any data to Nest devices or structures you should implement user authorization. So, the general application workflow should be following:
+Before reading, observing or updating any data to Nest devices or structures you should implement user authorization. So, the general application workflow should be the following:
 
 1. Authorize user with Nest using predefined `Connect with Nest` button (`NestSDKConnectWithNestButton`) or by manually handling authorization dialog with authorization manager class (`NestSDKAuthorizationManager`).
 
-2. Read/Observe/Write devices, structures or meta data.
+2. Read/Observe/Update devices, structures or meta data.
 
 ## Connect with Nest
 
-The Nest SDK for iOS enables people to connect your Nest product app with their's personal Nest account. 
-When people connect their's personal Nest account with your Nest product app they grant permissions to your app so 
+The Nest SDK for iOS enables users to connect your Nest product app with their's personal Nest account. 
+When users connect their's personal Nest account with your Nest product app they grant permissions to your app so 
 you can retrieve and modify information on their behalf.
 
 **NB:** Connect with Nest **supports Web-based Authorization** only. **PIN-based Authorization** is **not supported**.
@@ -116,7 +120,7 @@ To add a `Connect with Nest` button to your app add the following code snippet t
 @end
 ```
 
-To get known whether user is already authorized check result of `[NestSDKAccessToken currentToken]` before starting authorization process:
+To know whether user is already authorized check the result of `[NestSDKAccessToken currentToken]` before starting authorization process:
 
 ```objective-c
 
@@ -131,7 +135,7 @@ if ([NestSDKAccessToken currentToken]) {
 
 ### Custom Connect with Nest button
 
-Instead of using the predefined `Connect with Nest` button (explained in Add Connect With Nest Button Code) you may want to design a custom layout and behavior. In the following code example we invoke the authorization dialog using the authorization manager class (`NestSDKAuthorizationManager`) and a custom button (`UIButton`). You can use any other custom user interface or event handling to invoke the authorization dialog.
+Instead of using the predefined `Connect with Nest` button (explained in Add Connect with Nest button code) you may want to design a custom layout and behavior. In the following code example we invoke the authorization dialog using the authorization manager class (`NestSDKAuthorizationManager`) and a custom button (`UIButton`). You can use any other custom user interface or event handling to invoke the authorization dialog.
 
 ```objective-c
 // Add this to the header of your file
@@ -183,9 +187,9 @@ Instead of using the predefined `Connect with Nest` button (explained in Add Con
 
 ## Structures
 
-All Nest devices belong to a structure. A structure can have many devices. 
+All Nest devices belong to a structure. Structure can have many devices. 
 
-It's possible that a user has more than one structure attached to their Nest Account, so your product should offer a means for the user to choose from the available structures (a structure picker).
+It's possible that user has more than one structure attached to their Nest Account, so your product should offer means for the user to choose from the available structures (a structure picker).
 
 [More information](https://developer.nest.com/documentation/cloud/structure-guide) about Nest structures.
 
@@ -243,12 +247,12 @@ NestSDKDataManager *dataManager = [[NestSDKDataManager alloc] init];
 
 ## Devices
 
-There are three types of Nest devices available to read/observe/write:
+There are three types of Nest devices available to read/observe/update:
 - Thermostat ([more information](https://developer.nest.com/documentation/cloud/thermostat-guide))
 - Smoke+CO Alarm ([more information](https://developer.nest.com/documentation/cloud/smoke-co-guide))
 - Camera ([more information](https://developer.nest.com/documentation/cloud/camera-guide))
 
-**NB:** Ensure, you have set proper permissions to read specific device data with your [Nest Product](https://developer.nest.com/products).
+**NB:** Ensure you have set proper permissions to read specific device data with your [Nest Product](https://developer.nest.com/products).
 
 ### Observing devices
 

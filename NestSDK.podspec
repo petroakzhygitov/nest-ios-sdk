@@ -2,10 +2,14 @@ Pod::Spec.new do |s|
 
   s.name             = "NestSDK"
   s.version          = "0.1.0"
-  s.summary          = "Under development"
+  s.summary          = "This open-source library allows you to integrate Nest API into your iOS app."
 
   s.description      = <<-DESC
-                       The NestSDK. Under development.
+                       NestSDK for iOS.
+                       
+                       This open-source library allows you to integrate Nest API into your iOS app.
+
+                       Learn more about Nest API at https://developer.nest.com/documentation/cloud/get-started
                        DESC
 
   s.homepage         = "https://github.com/petroakzhygitov/NestSDK"
@@ -22,8 +26,6 @@ Pod::Spec.new do |s|
 
   s.source_files = 'NestSDK/NestSDK/**/*.{h,m}'
   s.public_header_files = 'NestSDK/NestSDK/*.{h}'
-  
-  #s.frameworks = 'Firebase'
   
   s.dependency 'Firebase', '1.2.3'
   s.dependency 'JSONModel'

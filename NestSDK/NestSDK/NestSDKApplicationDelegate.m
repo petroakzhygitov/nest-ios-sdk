@@ -91,11 +91,11 @@ static id <NestSDKService> g_service;
         service = [[NestSDKFirebaseService alloc] initWithFirebase:firebase];
     }
 
+    [self _setService:service];
+
     if ([NestSDKAccessToken currentAccessToken]) {
         [self _authenticateServiceWithAccessToken:[NestSDKAccessToken currentAccessToken]];
     }
-
-    [self _setService:service];
 }
 
 - (void)_removeService {

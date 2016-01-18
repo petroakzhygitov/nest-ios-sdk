@@ -97,6 +97,12 @@ SpecBegin(NestSDKUtils)
                 expect([NestSDKUtils object:string1 isEqualToObject:nil]).to.equal(NO);
                 expect([NestSDKUtils object:nil isEqualToObject:nil]).to.equal(YES);
             });
+            
+            it(@"should parse url query", ^{
+                NSDictionary *dictionary = [NestSDKUtils queryParametersDictionaryFromQueryString:@"state=someState&code=someCode"];
+                expect(dictionary[@"state"]).to.equal(@"someState");
+                expect(dictionary[@"code"]).to.equal(@"someCode");
+            });
         });
     }
 SpecEnd

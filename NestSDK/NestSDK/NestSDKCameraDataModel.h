@@ -20,8 +20,9 @@
 
 #import <Foundation/Foundation.h>
 #import <JSONModel/JSONModel.h>
-#import "NestSDKDeviceDataModel.h"
-#import "NestSDKCamera.h"
+#import <NestSDK/NestSDKCamera.h>
+#import <NestSDK/NestSDKCameraLastEventDataModel.h>
+#import <NestSDK/NestSDKDeviceDataModel.h>
 
 @class NestSDKCameraLastEventDataModel;
 

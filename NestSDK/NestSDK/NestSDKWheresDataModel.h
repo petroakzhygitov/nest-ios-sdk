@@ -28,7 +28,7 @@
 /**
  * NestSDKWheres protocol is used to specify type of data presented in NSDictionary/NSArray instances returned by result handlers.
  */
-@protocol NestSDKWheresDataModel <NSObject>
+@protocol NestSDKWheresDataModel <NestSDKWheres>
 @end
 
 

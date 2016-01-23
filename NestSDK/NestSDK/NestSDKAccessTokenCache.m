@@ -24,7 +24,7 @@
 
 #pragma mark const
 
-static NSString *const kServiceName = @"NestSDKApplicationDelegate";
+static NSString *const kServiceName = @"NestSDK";
 static NSString *const kAccountName = @"default";
 
 

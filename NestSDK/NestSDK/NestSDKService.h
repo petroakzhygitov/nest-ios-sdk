@@ -75,7 +75,7 @@ typedef void (^NestSDKServiceUpdateBlock)(id result, NSError *error);
 - (void)removeObserverWithHandle:(NestSDKObserverHandle)handle;
 
 /**
- * Detach all blocks previously attached to this service with observeEventType:withBlock:
+ * Detach all blocks previously attached to this service with observeValuesForURL:withBlock:
  */
 - (void)removeAllObservers;
 

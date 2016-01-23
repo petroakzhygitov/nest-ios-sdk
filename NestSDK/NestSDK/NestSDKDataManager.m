@@ -89,7 +89,7 @@ typedef void (^NestSDKDataUpdateHandler)(id, NSError *);
     return nil;
 }
 
-- (NSArray *)_dataModelsArrayWithClass:(Class)dataModelClass result:(id)result error:(NSError **)error {
+- (NSArray *)_parseDataModelArrayWithClass:(Class)dataModelClass fromData:(id)result error:(NSError **)error {
     NSDictionary *resultDictionary = (NSDictionary *) result;
     NSMutableArray *dataModelsArray = [[NSMutableArray alloc] initWithCapacity:resultDictionary.count];
 
@@ -103,8 +103,19 @@ typedef void (^NestSDKDataUpdateHandler)(id, NSError *);
     return dataModelsArray;
 }
 
-- (NestSDKDataModel *)_dataModelWithClass:(Class)dataModelClass result:(id)result error:(NSError **)error {
+- (NestSDKDataModel *)_parseDataModelWithClass:(Class)dataModelClass fromData:(id)result error:(NSError **)error {
     return [(NestSDKDataModel *) [dataModelClass alloc] initWithDictionary:result error:error];
+}
+
+- (id)_parseDataModelWithClass:(Class)dataModelClass asArray:(BOOL)asArray fromData:(id)data parseError:(NSError **)parseError {
+    // In case we need array of models, like for example for structures
+    if (asArray) {
+        return [self _parseDataModelArrayWithClass:dataModelClass fromData:data error:parseError];
+
+    } else {
+        // In case there is only one model needed
+        return [self _parseDataModelWithClass:dataModelClass fromData:data error:parseError];
+    }
 }
 
 - (void)_executeBlock:(NestSDKDataUpdateHandler)block withDataModel:(id)dataModel parseError:(NSError *)parseError {
@@ -178,17 +189,8 @@ typedef void (^NestSDKDataUpdateHandler)(id, NSError *);
         return;
     }
 
-    id dataModel;
     NSError *parseError;
-
-    // In case we need array of models, like for example for structures
-    if (asArray) {
-        dataModel = [self _dataModelsArrayWithClass:dataModelClass result:result error:&parseError];
-
-    } else {
-        // In case there is only one model needed
-        dataModel = [self _dataModelWithClass:dataModelClass result:result error:&parseError];
-    }
+    id dataModel = [self _parseDataModelWithClass:dataModelClass asArray:asArray fromData:result parseError:&parseError];
 
     [self _executeBlock:block withDataModel:dataModel parseError:parseError];
 }

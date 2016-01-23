@@ -35,7 +35,6 @@ static NSString *const kReadOnlyAttributeString = @",R";
     Protocol *__unsafe_unretained *protocols = class_copyProtocolList([self class], &protocolCount);
 
     for (unsigned i = 0; i < protocolCount; i++) {
-        NSLog(@"Class implements protocol <%s>", protocol_getName(protocols[i]));
         [propertyNames addObjectsFromArray:[self writablePropertyNamesArrayWithProtocol:(protocols[i])]];
     }
 

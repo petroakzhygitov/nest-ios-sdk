@@ -83,7 +83,10 @@ SpecBegin(NestSDKFirebaseService)
             it(@"should unauthenticate", ^{
                 waitUntil(^(DoneCallback done) {
                     id firebaseMock = [OCMockObject mockForClass:[Firebase class]];
-                    [[firebaseMock expect] removeAllObservers];
+                    [[[firebaseMock stub] andReturnValue:@(42)] observeEventType:FEventTypeValue withBlock:[OCMArg any] withCancelBlock:[OCMArg any]];
+                    [[[firebaseMock stub] andReturn:firebaseMock] childByAppendingPath:@"structures/"];
+
+                    [[firebaseMock expect] removeObserverWithHandle:42];
 
                     [[[firebaseMock stub] andDo:^(NSInvocation *invocation) {
                         [invocation retainArguments];
@@ -104,6 +107,7 @@ SpecBegin(NestSDKFirebaseService)
 
                     NestSDKAccessToken *accessToken = [[NestSDKAccessToken alloc] initWithTokenString:@"qwerty" expirationDate:[NSDate distantFuture]];
                     NestSDKFirebaseService *firebaseService = [[NestSDKFirebaseService alloc] initWithFirebase:firebaseMock];
+                    [firebaseService observeValuesForURL:@"structures/" withBlock:^(id result, NSError *error) {}];
                     [firebaseService authenticateWithAccessToken:accessToken completionBlock:^(NSError *error) {
                         expect(error).to.equal(nil);
 
@@ -277,6 +281,7 @@ SpecBegin(NestSDKFirebaseService)
 
             it(@"should remove observer with handler", ^{
                 id firebaseMock = [OCMockObject mockForClass:[Firebase class]];
+                [[[firebaseMock stub] andReturn:firebaseMock] childByAppendingPath:[OCMArg any]];
                 [[firebaseMock expect] removeObserverWithHandle:42];
 
                 NestSDKFirebaseService *firebaseService = [[NestSDKFirebaseService alloc] initWithFirebase:firebaseMock];
@@ -287,14 +292,18 @@ SpecBegin(NestSDKFirebaseService)
 
             it(@"should remove all observers", ^{
                 id firebaseMock = [OCMockObject mockForClass:[Firebase class]];
-                [[firebaseMock expect] removeAllObservers];
+                [[[firebaseMock stub] andReturnValue:@(42)] observeEventType:FEventTypeValue withBlock:[OCMArg any] withCancelBlock:[OCMArg any]];
+                [[[firebaseMock stub] andReturn:firebaseMock] childByAppendingPath:[OCMArg any]];
+
+                [[firebaseMock expect] removeObserverWithHandle:42];
 
                 NestSDKFirebaseService *firebaseService = [[NestSDKFirebaseService alloc] initWithFirebase:firebaseMock];
+                [firebaseService observeValuesForURL:@"structures/" withBlock:^(id result, NSError *error) {}];
+
                 [firebaseService removeAllObservers];
 
                 [firebaseMock verify];
             });
-
         });
     }
 SpecEnd

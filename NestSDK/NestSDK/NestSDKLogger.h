@@ -41,7 +41,7 @@ typedef NS_ENUM(NSUInteger, NestSDKLoggerLogLevel) {
 
 + (void)logWarn:(NSString *)message from:(id)from;
 
-+ (void)logError:(NSString *)message withErorr:(NSError *)erorr from:(id)from;
++ (void)logError:(NSString *)message withErorr:(NSError *)error from:(id)from;
 
 + (NestSDKLoggerLogLevel)logLevel;
 

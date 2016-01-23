@@ -26,9 +26,9 @@ static NestSDKLoggerLogLevel g_logLevel;
 @implementation NestSDKLogger
 #pragma mark Public
 
-+ (void)logError:(NSString *)message withErorr:(NSError *)erorr from:(id)from {
++ (void)logError:(NSString *)message withErorr:(NSError *)error from:(id)from {
     if (g_logLevel >= NestSDKLoggerLogLevelError) {
-        NSLog(@"%@ Error: %@", message, erorr);
+        NSLog(@"%@ Error: %@", message, error);
     }
 }
 

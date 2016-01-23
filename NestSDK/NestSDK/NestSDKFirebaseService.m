@@ -29,6 +29,13 @@
 static NSString *const kArgumentNameAccessToken = @"accessToken";
 
 
+@interface NestSDKFirebaseService ()
+
+@property(nonatomic) NSMutableDictionary *handleToURLDictionary;
+
+@end
+
+
 @implementation NestSDKFirebaseService
 #pragma mark Initializer
 
@@ -36,6 +43,8 @@ static NSString *const kArgumentNameAccessToken = @"accessToken";
     self = [super init];
     if (self) {
         _firebase = firebase;
+
+        self.handleToURLDictionary = [[NSMutableDictionary alloc] init];
     }
 
     return self;
@@ -47,6 +56,10 @@ static NSString *const kArgumentNameAccessToken = @"accessToken";
     if (!block) return;
 
     block(error);
+}
+
+- (Firebase *)_firebaseWithURL:(NSString *)url {
+    return [self.firebase childByAppendingPath:url];
 }
 
 #pragma mark Public
@@ -90,8 +103,7 @@ static NSString *const kArgumentNameAccessToken = @"accessToken";
 - (void)valuesForURL:(NSString *)url withBlock:(NestSDKServiceUpdateBlock)block {
     if (!block) return;
 
-    Firebase *firebase = [self.firebase childByAppendingPath:url];
-
+    Firebase *firebase = [self _firebaseWithURL:url];
     [firebase observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
         block(snapshot.value, nil);
 
@@ -101,7 +113,7 @@ static NSString *const kArgumentNameAccessToken = @"accessToken";
 }
 
 - (void)setValues:(NSDictionary *)values forURL:(NSString *)url withBlock:(NestSDKServiceUpdateBlock)block {
-    Firebase *firebase = [self.firebase childByAppendingPath:url];
+    Firebase *firebase = [self _firebaseWithURL:url];
 
     // IMPORTANT to set withLocalEvents to NO.
     // More information here: https://www.firebase.com/docs/transactions.html
@@ -119,21 +131,33 @@ static NSString *const kArgumentNameAccessToken = @"accessToken";
 - (NestSDKObserverHandle)observeValuesForURL:(NSString *)url withBlock:(NestSDKServiceUpdateBlock)block {
     if (!block) return 0;
 
-    Firebase *firebase = [self.firebase childByAppendingPath:url];
-
-    return [firebase observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+    Firebase *firebase = [self _firebaseWithURL:url];
+    FirebaseHandle handle = [firebase observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
         block(snapshot.value, nil);
 
-    }                 withCancelBlock:^(NSError *error) {
+    }                                  withCancelBlock:^(NSError *error) {
         block(nil, error);
     }];
+
+    // Map handle and url, since to remove observer we will need same instance of firebase to call removeObserver
+    self.handleToURLDictionary[@(handle)] = url;
+
+    return handle;
 }
 
 - (void)removeObserverWithHandle:(NestSDKObserverHandle)handle {
-    [self.firebase removeObserverWithHandle:handle];
+    Firebase *firebase = [self _firebaseWithURL:self.handleToURLDictionary[@(handle)]];
+    [firebase removeObserverWithHandle:handle];
 }
 
 - (void)removeAllObservers {
+    for (NSString *url in self.handleToURLDictionary.allValues) {
+        Firebase *firebase = [self _firebaseWithURL:url];
+        [firebase removeAllObservers];
+    }
+
+    [self.handleToURLDictionary removeAllObjects];
+
     [self.firebase removeAllObservers];
 }
 

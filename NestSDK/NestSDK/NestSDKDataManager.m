@@ -49,16 +49,6 @@ typedef void (^NestSDKDataUpdateHandler)(id, NSError *);
 
 
 @implementation NestSDKDataManager
-#pragma mark Initializer
-
-- (instancetype)init {
-    self = [super init];
-    if (self) {
-    }
-
-    return self;
-}
-
 #pragma mark Private
 
 - (NSString *)_rootURL {
@@ -85,6 +75,53 @@ typedef void (^NestSDKDataUpdateHandler)(id, NSError *);
     return [NSString stringWithFormat:@"%@%@%@/", kEndpointPathDevices, kEndpointPathCameras, cameraId];
 }
 
+- (NSError *)_parseErrorWithUnderlyingError:(NSError *)error {
+    return error ? [NestSDKError unableToParseDataErrorWithUnderlyingError:error] : nil;
+}
+
+- (NSError *)_errorInResult:(id)result orError:(NSError *)error {
+    if (error) return error;
+
+    if (![result isKindOfClass:[NSDictionary class]]) {
+        return [NestSDKError unexpectedArgumentTypeErrorWithName:@"result" message:nil];
+    }
+
+    return nil;
+}
+
+- (NSArray *)_dataModelsArrayWithClass:(Class)dataModelClass result:(id)result error:(NSError **)error {
+    NSDictionary *resultDictionary = (NSDictionary *) result;
+    NSMutableArray *dataModelsArray = [[NSMutableArray alloc] initWithCapacity:resultDictionary.count];
+
+    for (NSDictionary *dictionary in resultDictionary.allValues) {
+        id dataModelInArray = [(JSONModel *) [dataModelClass alloc] initWithDictionary:dictionary error:error];
+        if ((*error)) return nil;
+
+        [dataModelsArray addObject:dataModelInArray];
+    }
+
+    return dataModelsArray;
+}
+
+- (NestSDKDataModel *)_dataModelWithClass:(Class)dataModelClass result:(id)result error:(NSError **)error {
+    return [(NestSDKDataModel *) [dataModelClass alloc] initWithDictionary:result error:error];
+}
+
+- (void)_executeBlock:(NestSDKDataUpdateHandler)block withDataModel:(id)dataModel parseError:(NSError *)parseError {
+    NSError *error = [self _parseErrorWithUnderlyingError:parseError];
+
+    [self _executeBlock:block withDataModel:dataModel error:error];
+}
+
+- (void)_executeBlock:(NestSDKDataUpdateHandler)block withDataModel:(id)dataModel error:(NSError *)error {
+    if (error) {
+        block(nil, error);
+
+    } else {
+        block(dataModel, nil);
+    }
+}
+
 - (void)_dataModelFromURL:(NSString *)url withClass:(Class)dataModelClass block:(NestSDKDataUpdateHandler)block {
     [self _dataModelFromURL:url withClass:dataModelClass block:block asArray:NO];
 }
@@ -92,7 +129,7 @@ typedef void (^NestSDKDataUpdateHandler)(id, NSError *);
 - (void)_dataModelFromURL:(NSString *)url withClass:(Class)dataModelClass
                     block:(NestSDKDataUpdateHandler)block asArray:(BOOL)asArray {
 
-    __weak typeof(self)weakSelf = self;
+    __weak typeof(self) weakSelf = self;
     [self.service valuesForURL:url withBlock:^(id result, NSError *error) {
         typeof(self) self = weakSelf;
         if (!self) return;
@@ -104,7 +141,7 @@ typedef void (^NestSDKDataUpdateHandler)(id, NSError *);
 - (void)_setDataModel:(id <NestSDKDataModelProtocol>)dataModel forURL:(NSString *)url block:(NestSDKDataUpdateHandler)block {
     NestSDKDataModel *currentDataModel = (NestSDKDataModel *) dataModel;
 
-    __weak typeof(self)weakSelf = self;
+    __weak typeof(self) weakSelf = self;
     [self.service setValues:[currentDataModel toWritableDataModelDictionary] forURL:url withBlock:^(id result, NSError *error) {
         typeof(self) self = weakSelf;
         if (!self) return;
@@ -122,7 +159,7 @@ typedef void (^NestSDKDataUpdateHandler)(id, NSError *);
 - (NestSDKObserverHandle)_observeDataModelWithURL:(NSString *)url withClass:(Class)dataModelClass
                                             block:(NestSDKDataUpdateHandler)block asArray:(BOOL)asArray {
 
-    __weak typeof(self)weakSelf = self;
+    __weak typeof(self) weakSelf = self;
     return [self.service observeValuesForURL:url withBlock:^(id result, NSError *error) {
         typeof(self) self = weakSelf;
         if (!self) return;
@@ -133,42 +170,27 @@ typedef void (^NestSDKDataUpdateHandler)(id, NSError *);
 
 - (void)_handleResultWithDataModelClass:(Class)dataModelClass block:(NestSDKDataUpdateHandler)block
                                  result:(id)result error:(NSError *)error asArray:(BOOL)asArray {
-    if (error) {
-        block(nil, error);
-        return;
-    }
 
-    if (![result isKindOfClass:[NSDictionary class]]) {
-        block(nil, [NestSDKError unexpectedArgumentTypeErrorWithName:@"result" message:nil]);
+    NSError *resultError = [self _errorInResult:result orError:error];
+    if (resultError) {
+        [self _executeBlock:block withDataModel:nil error:resultError];
+
         return;
     }
 
     id dataModel;
+    NSError *parseError;
 
     // In case we need array of models, like for example for structures
     if (asArray) {
-        NSDictionary *resultDictionary = (NSDictionary *) result;
-        NSMutableArray *dataModelsArray = [[NSMutableArray alloc] initWithCapacity:resultDictionary.count];
-
-        for (NSDictionary *dictionary in resultDictionary.allValues) {
-            id dataModelInArray = [(JSONModel *) [dataModelClass alloc] initWithDictionary:dictionary error:&error];
-            if (error) break;
-
-            [dataModelsArray addObject:dataModelInArray];
-        }
-
-        dataModel = dataModelsArray;
+        dataModel = [self _dataModelsArrayWithClass:dataModelClass result:result error:&parseError];
 
     } else {
         // In case there is only one model needed
-        dataModel = [(JSONModel *) [dataModelClass alloc] initWithDictionary:result error:&error];
+        dataModel = [self _dataModelWithClass:dataModelClass result:result error:&parseError];
     }
 
-    if (error) {
-        block(nil, [NestSDKError unableToParseDataErrorWithUnderlyingError:error]);
-    }
-
-    block(dataModel, nil);
+    [self _executeBlock:block withDataModel:dataModel parseError:parseError];
 }
 
 #pragma mark Override

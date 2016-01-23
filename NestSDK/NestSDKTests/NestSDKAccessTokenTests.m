@@ -19,15 +19,130 @@
 // THE SOFTWARE.
 
 #import <OCMock/OCMock.h>
+#import <Expecta/Expecta.h>
 #import "SpectaDSL.h"
 #import "SPTSpec.h"
 #import "LSStubRequestDSL.h"
 #import "LSNocilla.h"
+#import "NestSDKAccessToken.h"
 
 SpecBegin(NestSDKAccessToken)
     {
         describe(@"NestSDKAccessToken", ^{
+            it(@"should init", ^{
+                NestSDKAccessToken *accessToken = [[NestSDKAccessToken alloc] initWithTokenString:@"someToken"
+                                                                                   expirationDate:[NSDate dateWithTimeIntervalSince1970:42]];
 
+                expect(accessToken.tokenString).to.equal(@"someToken");
+                expect(accessToken.expirationDate).to.equal([NSDate dateWithTimeIntervalSince1970:42]);
+            });
+
+            it(@"should equal", ^{
+                NestSDKAccessToken *accessToken1 = [[NestSDKAccessToken alloc] initWithTokenString:@"someToken"
+                                                                                    expirationDate:[NSDate dateWithTimeIntervalSince1970:42]];
+
+                NestSDKAccessToken *accessToken2 = [[NestSDKAccessToken alloc] initWithTokenString:@"someToken"
+                                                                                    expirationDate:[NSDate dateWithTimeIntervalSince1970:42]];
+
+                NestSDKAccessToken *accessToken3 = accessToken1;
+
+                NestSDKAccessToken *accessToken4 = [[NestSDKAccessToken alloc] initWithTokenString:@"someToken"
+                                                                                    expirationDate:[NSDate dateWithTimeIntervalSince1970:44]];
+
+                NestSDKAccessToken *accessToken5 = [[NestSDKAccessToken alloc] initWithTokenString:@"someToken2"
+                                                                                    expirationDate:[NSDate dateWithTimeIntervalSince1970:42]];
+
+                expect(accessToken1).to.equal(accessToken2);
+                expect(accessToken1).to.equal(accessToken3);
+                expect(accessToken1).notTo.equal(accessToken4);
+                expect(accessToken1).notTo.equal(accessToken5);
+
+                expect([accessToken1 isEqualToAccessToken:accessToken2]).to.equal(YES);
+                expect([accessToken1 isEqualToAccessToken:accessToken3]).to.equal(YES);
+                expect([accessToken1 isEqualToAccessToken:accessToken4]).to.equal(NO);
+                expect([accessToken1 isEqualToAccessToken:accessToken5]).to.equal(NO);
+            });
+
+            it(@"should have proper hash", ^{
+                NestSDKAccessToken *accessToken1 = [[NestSDKAccessToken alloc] initWithTokenString:@"someToken"
+                                                                                    expirationDate:[NSDate dateWithTimeIntervalSince1970:42]];
+
+                NestSDKAccessToken *accessToken2 = [[NestSDKAccessToken alloc] initWithTokenString:@"someToken"
+                                                                                    expirationDate:[NSDate dateWithTimeIntervalSince1970:42]];
+
+                NestSDKAccessToken *accessToken3 = accessToken1;
+
+                NestSDKAccessToken *accessToken4 = [[NestSDKAccessToken alloc] initWithTokenString:@"someToken"
+                                                                                    expirationDate:[NSDate dateWithTimeIntervalSince1970:44]];
+
+                NestSDKAccessToken *accessToken5 = [[NestSDKAccessToken alloc] initWithTokenString:@"someToken2"
+                                                                                    expirationDate:[NSDate dateWithTimeIntervalSince1970:42]];
+
+                expect(accessToken1.hash).to.equal(accessToken2.hash);
+                expect(accessToken1.hash).to.equal(accessToken3.hash);
+                expect(accessToken1.hash).notTo.equal(accessToken4.hash);
+                expect(accessToken1.hash).notTo.equal(accessToken5.hash);
+            });
+
+            it(@"should set and get current access token", ^{
+                NestSDKAccessToken *accessToken = [[NestSDKAccessToken alloc] initWithTokenString:@"someToken"
+                                                                                   expirationDate:[NSDate distantFuture]];
+
+                expect([NestSDKAccessToken currentAccessToken]).to.equal(nil);
+
+                [NestSDKAccessToken setCurrentAccessToken:accessToken];
+                expect([NestSDKAccessToken currentAccessToken]).to.equal(accessToken);
+
+                [NestSDKAccessToken setCurrentAccessToken:nil];
+                expect([NestSDKAccessToken currentAccessToken]).to.equal(nil);
+            });
+
+            it(@"should archive and unarchive", ^{
+                NestSDKAccessToken *accessToken = [[NestSDKAccessToken alloc] initWithTokenString:@"someToken"
+                                                                                   expirationDate:[NSDate dateWithTimeIntervalSince1970:42]];
+
+                NSData *archivedTokenData = [NSKeyedArchiver archivedDataWithRootObject:accessToken];
+                NestSDKAccessToken *unarchivedAccessToken = [NSKeyedUnarchiver unarchiveObjectWithData:archivedTokenData];
+
+                expect(accessToken).to.equal(unarchivedAccessToken);
+            });
+
+            it(@"should send notifications", ^{
+                NestSDKAccessToken *accessToken = [[NestSDKAccessToken alloc] initWithTokenString:@"someToken"
+                                                                                   expirationDate:[NSDate distantFuture]];
+
+                waitUntil(^(DoneCallback done) {
+                    id observer = [[NSNotificationCenter defaultCenter] addObserverForName:NestSDKAccessTokenDidChangeNotification
+                                                                                    object:nil
+                                                                                     queue:nil
+                                                                                usingBlock:^(NSNotification *notification) {
+                                                                                    expect(notification.userInfo[NestSDKAccessTokenChangeNewKey]).to.equal(accessToken);
+                                                                                    expect(notification.userInfo[NestSDKAccessTokenChangeOldKey]).to.equal(nil);
+
+                                                                                    done();
+                                                                                }];
+
+                    [NestSDKAccessToken setCurrentAccessToken:accessToken];
+
+                    [[NSNotificationCenter defaultCenter] removeObserver:observer];
+                });
+
+                waitUntil(^(DoneCallback done) {
+                    id observer = [[NSNotificationCenter defaultCenter] addObserverForName:NestSDKAccessTokenDidChangeNotification
+                                                                                    object:nil
+                                                                                     queue:nil
+                                                                                usingBlock:^(NSNotification *notification) {
+                                                                                    expect(notification.userInfo[NestSDKAccessTokenChangeNewKey]).to.equal(nil);
+                                                                                    expect(notification.userInfo[NestSDKAccessTokenChangeOldKey]).to.equal(accessToken);
+
+                                                                                    done();
+                                                                                }];
+
+                    [NestSDKAccessToken setCurrentAccessToken:nil];
+
+                    [[NSNotificationCenter defaultCenter] removeObserver:observer];
+                });
+            });
         });
     }
 SpecEnd

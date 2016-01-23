@@ -1,7 +1,25 @@
+// Copyright (c) 2016 Petro Akzhygitov <petro.akzhygitov@gmail.com>
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
+
 #import "NestSDKAccessToken.h"
 #import "NestSDKAccessTokenCache.h"
-
-#pragma mark macros
 
 #pragma mark const
 
@@ -13,16 +31,12 @@ NSString *const NestSDKAccessTokenChangeOldKey = @"NestSDKAccessTokenOld";
 static NSString *const kExpirationDateKey = @"expirationDateKey";
 static NSString *const kTokenStringKey = @"tokenStringKey";
 
-#pragma mark enum
-
-#pragma mark typedef
 
 static NestSDKAccessToken *g_currentAccessToken;
 
 
-@implementation NestSDKAccessToken {
-#pragma mark Instance variables
-}
+@implementation NestSDKAccessToken
+#pragma mark Initializer
 
 - (instancetype)init {
     return [self initWithTokenString:nil expirationDate:nil];
@@ -37,12 +51,6 @@ static NestSDKAccessToken *g_currentAccessToken;
 
     return self;
 }
-
-#pragma mark Initializer
-
-#pragma mark Private
-
-#pragma mark Notification selectors
 
 #pragma mark Override
 
@@ -92,15 +100,13 @@ static NestSDKAccessToken *g_currentAccessToken;
                                                       userInfo:userInfo];
 }
 
-#pragma mark IBAction
-
 #pragma mark Protocol NSCopying
 
 - (id)copyWithZone:(NSZone *)zone {
     return self;
 }
 
-#pragma mark Protocol NSCoding
+#pragma mark Protocol NSSecureCoding
 
 + (BOOL)supportsSecureCoding {
     return YES;
@@ -117,8 +123,5 @@ static NestSDKAccessToken *g_currentAccessToken;
     [encoder encodeObject:self.tokenString forKey:kTokenStringKey];
     [encoder encodeObject:self.expirationDate forKey:kExpirationDateKey];
 }
-
-#pragma mark Delegate @delegate-name
-
 
 @end

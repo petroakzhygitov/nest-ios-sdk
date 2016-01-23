@@ -19,15 +19,35 @@
 // THE SOFTWARE.
 
 #import <OCMock/OCMock.h>
+#import <Expecta/Expecta.h>
 #import "SpectaDSL.h"
 #import "SPTSpec.h"
 #import "LSStubRequestDSL.h"
 #import "LSNocilla.h"
+#import "NestSDKAccessTokenCache.h"
+#import "NestSDKAccessToken.h"
 
 SpecBegin(NestSDKAccessTokenCache)
     {
         describe(@"NestSDKAccessTokenCache", ^{
 
+            it(@"should cache, fetch and clear access token cache", ^{
+                NestSDKAccessTokenCache *cache = [[NestSDKAccessTokenCache alloc] init];
+                expect(cache.fetchAccessToken).to.equal(nil);
+
+                NestSDKAccessToken *accessToken = [[NestSDKAccessToken alloc] initWithTokenString:@"someToken"
+                                                                                   expirationDate:[NSDate dateWithTimeIntervalSince1970:42]];
+
+                [cache cacheAccessToken:accessToken];
+                expect(cache.fetchAccessToken).to.equal(accessToken);
+
+                NestSDKAccessTokenCache *cache2 = [[NestSDKAccessTokenCache alloc] init];
+                expect(cache2.fetchAccessToken).to.equal(accessToken);
+
+                [cache2 clearCache];
+                expect(cache2.fetchAccessToken).to.equal(nil);
+                expect(cache.fetchAccessToken).to.equal(nil);
+            });
         });
     }
 SpecEnd

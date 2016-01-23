@@ -151,14 +151,11 @@ static NSString *const kArgumentNameAccessToken = @"accessToken";
 }
 
 - (void)removeAllObservers {
-    for (NSString *url in self.handleToURLDictionary.allValues) {
-        Firebase *firebase = [self _firebaseWithURL:url];
-        [firebase removeAllObservers];
+    for (NSNumber *handle in self.handleToURLDictionary.allKeys) {
+        [self removeObserverWithHandle:handle.unsignedIntegerValue];
     }
 
     [self.handleToURLDictionary removeAllObjects];
-
-    [self.firebase removeAllObservers];
 }
 
 @end

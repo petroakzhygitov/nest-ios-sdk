@@ -26,7 +26,6 @@
 #import "NestSDKRESTService.h"
 #import "NestSDKFirebaseService.h"
 #import "NestSDKLogger.h"
-#import "NestSDKAuthenticableService.h"
 
 static NSString *const kNestAPIEndpointURLString = @"https://developer-api.nest.com/";
 
@@ -62,7 +61,7 @@ static id <NestSDKService> g_service;
 }
 
 - (void)_restoreCachedAccessToken {
-// Restoring cached token
+    // Restoring cached token
     NestSDKAccessTokenCache *accessTokenCache = [[NestSDKAccessTokenCache alloc] init];
     NestSDKAccessToken *cachedToken = [accessTokenCache fetchAccessToken];
 
@@ -123,8 +122,7 @@ static id <NestSDKService> g_service;
 
     // If access token has changed, then re-authenticate service
     if (accessToken) {
-        id <NestSDKAuthenticableService> service = [self _service];
-        if (service) {
+        if ([self _service]) {
             [self _authenticateServiceWithAccessToken:[NestSDKAccessToken currentAccessToken]];
 
             // If there is no service, then recreate it

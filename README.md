@@ -17,11 +17,11 @@ To run the example project, clone the repo, and run `pod install` from the NestS
 
 ## Installation
 
-NestSDK is under development so it is not publicly available through [CocoaPods](http://cocoapods.org) yet. To install
+NestSDK is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod "NestSDK", github => "https://github.com/petroakzhygitov/nest-ios-sdk.git"
+pod "NestSDK", "0.1.1"
 ```
 
 ## General Nest product setup

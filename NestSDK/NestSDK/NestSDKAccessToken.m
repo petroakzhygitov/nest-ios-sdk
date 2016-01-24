@@ -31,6 +31,7 @@ NSString *const NestSDKAccessTokenChangeOldKey = @"NestSDKAccessTokenOld";
 static NSString *const kExpirationDateKey = @"expirationDateKey";
 static NSString *const kTokenStringKey = @"tokenStringKey";
 
+#pragma mark static
 
 static NestSDKAccessToken *g_currentAccessToken;
 

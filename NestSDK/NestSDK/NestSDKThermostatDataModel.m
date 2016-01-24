@@ -35,9 +35,71 @@ static NSString *const kHVACModeStringCool = @"cool";
 static NSString *const kHVACModeStringHeatCool = @"heat-cool";
 static NSString *const kHVACModeStringOff = @"off";
 
+static const NSUInteger kTemperatureCAllowableMin = 9;
+static const NSUInteger kTemperatureCAllowableMax = 32;
+
+static const NSUInteger kTemperatureFAllowableMin = 48;
+static const NSUInteger kTemperatureFAllowableMax = 90;
+
 
 @implementation NestSDKThermostatDataModel
+#pragma mark Private
+
+- (CGFloat)_temperatureInAllowableRangeWithTemperature:(CGFloat)temperature
+                                          allowableMin:(NSUInteger)allowableMin
+                                          allowableMax:(NSUInteger)allowableMax {
+
+    if (temperature < allowableMin) return allowableMin;
+    if (temperature > allowableMax) return allowableMax;
+
+    return temperature;
+}
+
+- (CGFloat)_temperatureInAllowableRangeWithTemperatureC:(CGFloat)temperatureC {
+    return [self _temperatureInAllowableRangeWithTemperature:temperatureC
+                                                allowableMin:kTemperatureCAllowableMin
+                                                allowableMax:kTemperatureCAllowableMax];
+}
+
+- (NSUInteger)_temperatureInAllowableRangeWithTemperatureF:(NSUInteger)temperatureF {
+    return (NSUInteger) [self _temperatureInAllowableRangeWithTemperature:temperatureF
+                                                       allowableMin:kTemperatureFAllowableMin
+                                                       allowableMax:kTemperatureFAllowableMax];
+}
+
 #pragma mark Override
+
+- (void)setTargetTemperatureF:(NSUInteger)targetTemperatureF {
+    _targetTemperatureF = [self _temperatureInAllowableRangeWithTemperatureF:targetTemperatureF];
+}
+
+- (void)setTargetTemperatureC:(CGFloat)targetTemperatureC {
+    _targetTemperatureC = [self _temperatureInAllowableRangeWithTemperatureC:targetTemperatureC];
+}
+
+- (void)setTargetTemperatureHighF:(NSUInteger)targetTemperatureHighF {
+    _targetTemperatureHighF = [self _temperatureInAllowableRangeWithTemperatureF:targetTemperatureHighF];
+}
+
+- (void)setTargetTemperatureHighC:(CGFloat)targetTemperatureHighC {
+    _targetTemperatureHighC = [self _temperatureInAllowableRangeWithTemperatureC:targetTemperatureHighC];
+}
+
+- (void)setTargetTemperatureLowF:(NSUInteger)targetTemperatureLowF {
+    _targetTemperatureLowF = [self _temperatureInAllowableRangeWithTemperatureF:targetTemperatureLowF];
+}
+
+- (void)setTargetTemperatureLowC:(CGFloat)targetTemperatureLowC {
+    _targetTemperatureLowC = [self _temperatureInAllowableRangeWithTemperatureC:targetTemperatureLowC];
+}
+
+- (void)setHvacMode:(NestSDKThermostatHVACMode)hvacMode {
+    _hvacMode = hvacMode;
+}
+
+- (void)setFanTimerTimeout:(NSDate <Optional> *)fanTimerTimeout {
+    _fanTimerTimeout = fanTimerTimeout;
+}
 
 - (void)setLastConnectionWithNSString:(NSString *)lastConnectionString {
     self.lastConnection = [NestSDKUtils dateWithISO8601FormatDateString:lastConnectionString];

@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name             = "NestSDK"
-  s.version          = "0.1.0"
+  s.version          = "0.1.1"
   s.summary          = "This open-source library allows you to integrate Nest API into your iOS app."
 
   s.description      = <<-DESC

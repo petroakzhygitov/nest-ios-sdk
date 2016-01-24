@@ -107,7 +107,8 @@ SpecBegin(NestSDKFirebaseService)
 
                     NestSDKAccessToken *accessToken = [[NestSDKAccessToken alloc] initWithTokenString:@"qwerty" expirationDate:[NSDate distantFuture]];
                     NestSDKFirebaseService *firebaseService = [[NestSDKFirebaseService alloc] initWithFirebase:firebaseMock];
-                    [firebaseService observeValuesForURL:@"structures/" withBlock:^(id result, NSError *error) {}];
+                    [firebaseService observeValuesForURL:@"structures/" withBlock:^(id result, NSError *error) {
+                    }];
                     [firebaseService authenticateWithAccessToken:accessToken completionBlock:^(NSError *error) {
                         expect(error).to.equal(nil);
 
@@ -282,9 +283,12 @@ SpecBegin(NestSDKFirebaseService)
             it(@"should remove observer with handler", ^{
                 id firebaseMock = [OCMockObject mockForClass:[Firebase class]];
                 [[[firebaseMock stub] andReturn:firebaseMock] childByAppendingPath:[OCMArg any]];
+                [[[firebaseMock stub] andReturnValue:@(42)] observeEventType:FEventTypeValue withBlock:[OCMArg any] withCancelBlock:[OCMArg any]];
                 [[firebaseMock expect] removeObserverWithHandle:42];
 
                 NestSDKFirebaseService *firebaseService = [[NestSDKFirebaseService alloc] initWithFirebase:firebaseMock];
+                [firebaseService observeValuesForURL:@"someUrl" withBlock:^(id result, NSError *error) {
+                }];
                 [firebaseService removeObserverWithHandle:42];
 
                 [firebaseMock verify];
@@ -298,7 +302,8 @@ SpecBegin(NestSDKFirebaseService)
                 [[firebaseMock expect] removeObserverWithHandle:42];
 
                 NestSDKFirebaseService *firebaseService = [[NestSDKFirebaseService alloc] initWithFirebase:firebaseMock];
-                [firebaseService observeValuesForURL:@"structures/" withBlock:^(id result, NSError *error) {}];
+                [firebaseService observeValuesForURL:@"structures/" withBlock:^(id result, NSError *error) {
+                }];
 
                 [firebaseService removeAllObservers];
 

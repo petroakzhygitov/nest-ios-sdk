@@ -16,12 +16,13 @@
 #import <NestSDK/NestSDKCamera.h>
 #import <NestSDK/NestSDKThermostat.h>
 #import "ViewController.h"
-#import "NestSDKCameraLastEventDataModel.h"
-#import "NestSDKETADataModel.h"
 
 @interface ViewController ()
 
 @property(nonatomic) NestSDKDataManager *dataManager;
+@property(nonatomic) NSMutableArray *deviceObserverHandles;
+
+@property(nonatomic) NestSDKObserverHandle structuresObserverHandle;
 
 @end
 
@@ -32,6 +33,7 @@
     [super viewDidLoad];
 
     self.dataManager = [[NestSDKDataManager alloc] init];
+    self.deviceObserverHandles = [[NSMutableArray alloc] init];
 
     // Connect with Nest using NestSDKConnectWithNestButton
     self.connectWithNestButton.delegate = self;
@@ -78,14 +80,14 @@
     [self removeObservers];
 
     // Start observing structures
-    [self.dataManager structuresWithBlock:^(NSArray <NestSDKStructure> *structuresArray, NSError *error) {
+    self.structuresObserverHandle = [self.dataManager observeStructuresWithBlock:^(NSArray <NestSDKStructure> *structuresArray, NSError *error) {
         [self logMessage:@"Structures updated!"];
 
         // Structure may change while observing, so remove all current device observers and then set all new ones
         [self removeDevicesObservers];
 
         // Cycle through all structures and set observers for all devices
-        for (id<NestSDKStructure> structure in structuresArray) {
+        for (id <NestSDKStructure> structure in structuresArray) {
             [self logMessage:[NSString stringWithFormat:@"Found structure: %@!", structure.name]];
 
             [self observeThermostatsWithinStructure:structure];
@@ -96,12 +98,12 @@
 }
 
 - (void)removeStructuresObservers {
-    [self.dataManager removeAllObservers];
+    [self.dataManager removeObserverWithHandle:self.structuresObserverHandle];
 }
 
-- (void)observeThermostatsWithinStructure:(id<NestSDKStructure>)structure {
+- (void)observeThermostatsWithinStructure:(id <NestSDKStructure>)structure {
     for (NSString *thermostatId in structure.thermostats) {
-        [self.dataManager thermostatWithId:thermostatId block:^(id <NestSDKThermostat> thermostat, NSError *error) {
+        NestSDKObserverHandle handle = [self.dataManager observeThermostatWithId:thermostatId block:^(id <NestSDKThermostat> thermostat, NSError *error) {
             if (error) {
                 [self logMessage:[NSString stringWithFormat:@"Error observing thermostat: %@", error]];
 
@@ -110,12 +112,14 @@
                                                             thermostat.name, thermostat.ambientTemperatureC]];
             }
         }];
+
+        [self.deviceObserverHandles addObject:@(handle)];
     }
 }
 
-- (void)observeSmokeCOAlarmsWithinStructure:(id<NestSDKStructure>)structure {
+- (void)observeSmokeCOAlarmsWithinStructure:(id <NestSDKStructure>)structure {
     for (NSString *smokeCOAlarmId in structure.smokeCoAlarms) {
-        [self.dataManager smokeCOAlarmWithId:smokeCOAlarmId block:^(id <NestSDKSmokeCOAlarm> smokeCOAlarm, NSError *error) {
+        NestSDKObserverHandle handle = [self.dataManager observeSmokeCOAlarmWithId:smokeCOAlarmId block:^(id <NestSDKSmokeCOAlarm> smokeCOAlarm, NSError *error) {
             if (error) {
                 [self logMessage:[NSString stringWithFormat:@"Error observing smokeCOAlarm: %@", error]];
 
@@ -124,12 +128,14 @@
                                                             smokeCOAlarm.name, smokeCOAlarm.coAlarmState]];
             }
         }];
+
+        [self.deviceObserverHandles addObject:@(handle)];
     }
 }
 
-- (void)observeCamerasWithinStructure:(id<NestSDKStructure>)structure {
+- (void)observeCamerasWithinStructure:(id <NestSDKStructure>)structure {
     for (NSString *cameraId in structure.cameras) {
-        [self.dataManager cameraWithId:cameraId block:^(id <NestSDKCamera> camera, NSError *error) {
+        NestSDKObserverHandle handle = [self.dataManager observeCameraWithId:cameraId block:^(id <NestSDKCamera> camera, NSError *error) {
             if (error) {
                 [self logMessage:[NSString stringWithFormat:@"Error observing camera: %@", error]];
 
@@ -138,11 +144,17 @@
                                                             camera.name, camera.isStreaming ? @"YES" : @"NO"]];
             }
         }];
+
+        [self.deviceObserverHandles addObject:@(handle)];
     }
 }
 
 - (void)removeDevicesObservers {
-//    [self.dataManager removeAllObservers];
+    for (NSNumber *handle in self.deviceObserverHandles) {
+        [self.dataManager removeObserverWithHandle:handle.unsignedIntegerValue];
+    }
+
+    [self.deviceObserverHandles removeAllObjects];
 }
 
 - (void)removeObservers {

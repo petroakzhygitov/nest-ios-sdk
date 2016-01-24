@@ -59,6 +59,7 @@ static NSString *const kArgumentNameAccessToken = @"accessToken";
 }
 
 - (Firebase *)_firebaseWithURL:(NSString *)url {
+    if (url.length == 0) return nil;
     return [self.firebase childByAppendingPath:url];
 }
 

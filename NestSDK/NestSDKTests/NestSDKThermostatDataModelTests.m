@@ -124,6 +124,48 @@ SpecBegin(NestSDKThermostatDataModel)
                 expect(thermostat1).to.equal(thermostat2);
                 expect(thermostat1).notTo.equal(thermostat3);
             });
+
+            it(@"should filter target temperature values", ^{
+                NSError *error;
+                NestSDKThermostatDataModel *thermostat = [[NestSDKThermostatDataModel alloc] initWithData:data error:&error];
+                expect(error).to.equal(nil);
+
+                thermostat.targetTemperatureC = -2;
+                expect(thermostat.targetTemperatureC).to.equal(9);
+
+                thermostat.targetTemperatureHighC = 0;
+                expect(thermostat.targetTemperatureHighC).to.equal(9);
+
+                thermostat.targetTemperatureLowC = -15;
+                expect(thermostat.targetTemperatureLowC).to.equal(9);
+
+                thermostat.targetTemperatureF = 5;
+                expect(thermostat.targetTemperatureF).to.equal(48);
+
+                thermostat.targetTemperatureHighF = 0;
+                expect(thermostat.targetTemperatureHighF).to.equal(48);
+
+                thermostat.targetTemperatureLowF = 15;
+                expect(thermostat.targetTemperatureLowF).to.equal(48);
+
+                thermostat.targetTemperatureC = 50;
+                expect(thermostat.targetTemperatureC).to.equal(32);
+
+                thermostat.targetTemperatureHighC = 44;
+                expect(thermostat.targetTemperatureHighC).to.equal(32);
+
+                thermostat.targetTemperatureLowC = 33;
+                expect(thermostat.targetTemperatureLowC).to.equal(32);
+
+                thermostat.targetTemperatureF = 105;
+                expect(thermostat.targetTemperatureF).to.equal(90);
+
+                thermostat.targetTemperatureHighF = 100;
+                expect(thermostat.targetTemperatureHighF).to.equal(90);
+
+                thermostat.targetTemperatureLowF = 155;
+                expect(thermostat.targetTemperatureLowF).to.equal(90);
+            });
         });
     }
 SpecEnd

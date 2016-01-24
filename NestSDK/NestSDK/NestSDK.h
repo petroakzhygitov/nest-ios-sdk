@@ -42,6 +42,6 @@
 #import <NestSDK/NestSDKCamera.h>
 #import <NestSDK/NestSDKCameraLastEvent.h>
 
-#define NESTSDK_VERSION_STRING @"0.1.0"
+#define NESTSDK_VERSION_STRING @"0.1.1"
 
 

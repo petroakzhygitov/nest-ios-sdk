@@ -193,5 +193,4 @@ typedef void (^NestSDKCameraUpdateHandler)(id <NestSDKCamera> camera, NSError *e
  */
 - (void)removeAllObservers;
 
-
 @end

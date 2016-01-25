@@ -27,19 +27,17 @@
 #import <NestSDK/NestSDKThermostatDataModel.h>
 #import <NestSDK/NestSDKSmokeCOAlarmDataModel.h>
 #import <NestSDK/NestSDKCameraDataModel.h>
+#import <NestSDK/NestSDKDataManagerHelper.h>
+#import <NestSDK/NestSDKMacroses.h>
 
 #pragma mark const
 
-static NSString *const kEndpointPathRoot = @"/";
-static NSString *const kEndpointPathStructures = @"structures/";
-static NSString *const kEndpointPathDevices = @"devices/";
-static NSString *const kEndpointPathThermostats = @"thermostats/";
-static NSString *const kEndpointPathSmokeCOAlarms = @"smoke_co_alarms/";
-static NSString *const kEndpointPathCameras = @"cameras/";
+static NSString *const kArgumentNameResult = @"result";
 
 #pragma mark typedef
 
 typedef void (^NestSDKDataUpdateHandler)(id, NSError *);
+
 
 @interface NestSDKDataManager ()
 
@@ -51,42 +49,79 @@ typedef void (^NestSDKDataUpdateHandler)(id, NSError *);
 @implementation NestSDKDataManager
 #pragma mark Private
 
-- (NSString *)_rootURL {
-    return kEndpointPathRoot;
+- (void) _dataModelWithURL:(NSString *)url block:(NestSDKDataUpdateHandler)block {
+    @weakify(self)
+    [self.service valuesForURL:url withBlock:^(id result, NSError *error) {
+        @strongify(self)
+        if (!self) return;
+
+        [self _handleResult:result withURL:url block:block error:error];
+    }];
 }
 
-- (NSString *)_structuresURL {
-    return kEndpointPathStructures;
+- (NestSDKObserverHandle)_observeDataModelWithURL:(NSString *)url block:(NestSDKDataUpdateHandler)block {
+    @weakify(self)
+    return [self.service observeValuesForURL:url withBlock:^(id result, NSError *error) {
+        @strongify(self)
+        if (!self) return;
+
+        [self _handleResult:result withURL:url block:block error:error];
+    }];
 }
 
-- (NSString *)_structureURLWithStructureId:(NSString *)structureId {
-    return [NSString stringWithFormat:@"%@%@/", kEndpointPathStructures, structureId];
+- (void)_setDataModel:(id <NestSDKDataModelProtocol>)dataModel forURL:(NSString *)url block:(NestSDKDataUpdateHandler)block {
+    NSDictionary *valuesDictionary = [(NestSDKDataModel *) dataModel toWritableDataModelDictionary];
+
+    @weakify(self)
+    [self.service setValues:valuesDictionary forURL:url withBlock:^(id result, NSError *error) {
+        @strongify(self)
+        if (!self) return;
+
+        [self _handleResult:result withURL:url block:block error:error];
+    }];
 }
 
-- (NSString *)_thermostatURLWithThermostatId:(NSString *)thermostatId {
-    return [NSString stringWithFormat:@"%@%@%@/", kEndpointPathDevices, kEndpointPathThermostats, thermostatId];
-}
+- (void)_handleResult:(id)result withURL:(NSString *)url block:(NestSDKDataUpdateHandler)block error:(NSError *)error {
+    NSError *resultError = [self _errorInResult:result orError:error];
+    if (resultError) {
+        [self _returnError:resultError toBlock:block];
+        return;
+    }
 
-- (NSString *)_smokeCOAlarmURLWithSmokeCOAlarmId:(NSString *)smokeCOAlarmId {
-    return [NSString stringWithFormat:@"%@%@%@/", kEndpointPathDevices, kEndpointPathSmokeCOAlarms, smokeCOAlarmId];
-}
+    NSError *parseError;
+    id dataModel = [self _parseDataModelWithURL:url fromData:result error:&parseError];
 
-- (NSString *)_cameraURLWithCameraId:(NSString *)cameraId {
-    return [NSString stringWithFormat:@"%@%@%@/", kEndpointPathDevices, kEndpointPathCameras, cameraId];
-}
+    if (parseError) {
+        [self _returnParseError:parseError toBlock:block];
+        return;
+    }
 
-- (NSError *)_parseErrorWithUnderlyingError:(NSError *)error {
-    return error ? [NestSDKError unableToParseDataErrorWithUnderlyingError:error] : nil;
+    [self _returnDataModel:dataModel toBlock:block];
 }
 
 - (NSError *)_errorInResult:(id)result orError:(NSError *)error {
     if (error) return error;
 
     if (![result isKindOfClass:[NSDictionary class]]) {
-        return [NestSDKError unexpectedArgumentTypeErrorWithName:@"result" message:nil];
+        return [NestSDKError unexpectedArgumentTypeErrorWithName:kArgumentNameResult message:nil];
     }
 
     return nil;
+}
+
+- (id)_parseDataModelWithURL:(NSString *)url fromData:(id)data error:(NSError **)parseError {
+    Class dataModelClass = [NestSDKDataManagerHelper dataModelClassWithURL:url];
+
+    if ([self _shouldParseDataModelAsArrayWithURL:url]) {
+        return [self _parseDataModelArrayWithClass:dataModelClass fromData:data error:parseError];
+
+    } else {
+        return [self _parseDataModelWithClass:dataModelClass fromData:data error:parseError];
+    }
+}
+
+- (BOOL)_shouldParseDataModelAsArrayWithURL:(NSString *)url {
+    return [url isEqualToString:[NestSDKDataManagerHelper structuresURL]];
 }
 
 - (NSArray *)_parseDataModelArrayWithClass:(Class)dataModelClass fromData:(id)result error:(NSError **)error {
@@ -107,92 +142,21 @@ typedef void (^NestSDKDataUpdateHandler)(id, NSError *);
     return [(NestSDKDataModel *) [dataModelClass alloc] initWithDictionary:result error:error];
 }
 
-- (id)_parseDataModelWithClass:(Class)dataModelClass asArray:(BOOL)asArray fromData:(id)data parseError:(NSError **)parseError {
-    // In case we need array of models, like for example for structures
-    if (asArray) {
-        return [self _parseDataModelArrayWithClass:dataModelClass fromData:data error:parseError];
-
-    } else {
-        // In case there is only one model needed
-        return [self _parseDataModelWithClass:dataModelClass fromData:data error:parseError];
-    }
-}
-
-- (void)_executeBlock:(NestSDKDataUpdateHandler)block withDataModel:(id)dataModel parseError:(NSError *)parseError {
+- (void)_returnParseError:(NSError *)parseError toBlock:(NestSDKDataUpdateHandler)block {
     NSError *error = [self _parseErrorWithUnderlyingError:parseError];
-
-    [self _executeBlock:block withDataModel:dataModel error:error];
+    [self _returnError:error toBlock:block];
 }
 
-- (void)_executeBlock:(NestSDKDataUpdateHandler)block withDataModel:(id)dataModel error:(NSError *)error {
-    if (error) {
-        block(nil, error);
-
-    } else {
-        block(dataModel, nil);
-    }
+- (NSError *)_parseErrorWithUnderlyingError:(NSError *)error {
+    return error ? [NestSDKError unableToParseDataErrorWithUnderlyingError:error] : nil;
 }
 
-- (void)_dataModelFromURL:(NSString *)url withClass:(Class)dataModelClass block:(NestSDKDataUpdateHandler)block {
-    [self _dataModelFromURL:url withClass:dataModelClass block:block asArray:NO];
+- (void)_returnError:(NSError *)error toBlock:(NestSDKDataUpdateHandler)block {
+    block(nil, error);
 }
 
-- (void)_dataModelFromURL:(NSString *)url withClass:(Class)dataModelClass
-                    block:(NestSDKDataUpdateHandler)block asArray:(BOOL)asArray {
-
-    __weak typeof(self) weakSelf = self;
-    [self.service valuesForURL:url withBlock:^(id result, NSError *error) {
-        typeof(self) self = weakSelf;
-        if (!self) return;
-
-        [self _handleResultWithDataModelClass:dataModelClass block:block result:result error:error asArray:asArray];
-    }];
-}
-
-- (void)_setDataModel:(id <NestSDKDataModelProtocol>)dataModel forURL:(NSString *)url block:(NestSDKDataUpdateHandler)block {
-    NestSDKDataModel *currentDataModel = (NestSDKDataModel *) dataModel;
-
-    __weak typeof(self) weakSelf = self;
-    [self.service setValues:[currentDataModel toWritableDataModelDictionary] forURL:url withBlock:^(id result, NSError *error) {
-        typeof(self) self = weakSelf;
-        if (!self) return;
-
-        [self _handleResultWithDataModelClass:[currentDataModel class] block:block result:result error:error asArray:NO];
-    }];
-}
-
-- (NestSDKObserverHandle)_observeDataModelWithURL:(NSString *)url withClass:(Class)dataModelClass
-                                            block:(NestSDKDataUpdateHandler)block {
-
-    return [self _observeDataModelWithURL:url withClass:dataModelClass block:block asArray:NO];
-}
-
-- (NestSDKObserverHandle)_observeDataModelWithURL:(NSString *)url withClass:(Class)dataModelClass
-                                            block:(NestSDKDataUpdateHandler)block asArray:(BOOL)asArray {
-
-    __weak typeof(self) weakSelf = self;
-    return [self.service observeValuesForURL:url withBlock:^(id result, NSError *error) {
-        typeof(self) self = weakSelf;
-        if (!self) return;
-
-        [self _handleResultWithDataModelClass:dataModelClass block:block result:result error:error asArray:asArray];
-    }];
-}
-
-- (void)_handleResultWithDataModelClass:(Class)dataModelClass block:(NestSDKDataUpdateHandler)block
-                                 result:(id)result error:(NSError *)error asArray:(BOOL)asArray {
-
-    NSError *resultError = [self _errorInResult:result orError:error];
-    if (resultError) {
-        [self _executeBlock:block withDataModel:nil error:resultError];
-
-        return;
-    }
-
-    NSError *parseError;
-    id dataModel = [self _parseDataModelWithClass:dataModelClass asArray:asArray fromData:result parseError:&parseError];
-
-    [self _executeBlock:block withDataModel:dataModel parseError:parseError];
+- (void)_returnDataModel:(id)dataModel toBlock:(NestSDKDataUpdateHandler)block {
+    block(dataModel, nil);
 }
 
 #pragma mark Override
@@ -204,85 +168,74 @@ typedef void (^NestSDKDataUpdateHandler)(id, NSError *);
 #pragma mark Public
 
 - (void)metadataWithBlock:(NestSDKMetadataUpdateHandler)block {
-    [self _dataModelFromURL:[self _rootURL]
-                  withClass:[NestSDKMetadataDataModel class]
-                      block:block];
+    NSString *metadataURL = [NestSDKDataManagerHelper metadataURL];
+    [self _dataModelWithURL:metadataURL block:block];
 }
 
+
 - (void)structuresWithBlock:(NestSDKStructuresArrayUpdateHandler)block {
-    [self _dataModelFromURL:[self _structuresURL]
-                  withClass:[NestSDKStructureDataModel class]
-                      block:block
-                    asArray:YES];
+    NSString *structuresURL = [NestSDKDataManagerHelper structuresURL];
+    [self _dataModelWithURL:structuresURL block:block];
 }
 
 - (NestSDKObserverHandle)observeStructuresWithBlock:(NestSDKStructuresArrayUpdateHandler)block {
-    return [self _observeDataModelWithURL:[self _structuresURL]
-                                withClass:[NestSDKStructureDataModel class]
-                                    block:block
-                                  asArray:YES];
+    NSString *structuresURL = [NestSDKDataManagerHelper structuresURL];
+    return [self _observeDataModelWithURL:structuresURL block:block];
 }
 
 - (void)setStructure:(id <NestSDKStructure>)structure block:(NestSDKStructureUpdateHandler)block {
-    [self _setDataModel:structure
-                 forURL:[self _structureURLWithStructureId:structure.structureId]
-                  block:block];
+    NSString *structureURL = [NestSDKDataManagerHelper structureURLWithStructureId:structure.structureId];
+    [self _setDataModel:structure forURL:structureURL block:block];
 }
 
 
 - (void)thermostatWithId:(NSString *)thermostatId block:(NestSDKThermostatUpdateHandler)block {
-    [self _dataModelFromURL:[self _thermostatURLWithThermostatId:thermostatId]
-                  withClass:[NestSDKThermostatDataModel class]
-                      block:block];
+    NSString *thermostatURL = [NestSDKDataManagerHelper thermostatURLWithThermostatId:thermostatId];
+    [self _dataModelWithURL:thermostatURL block:block];
 }
 
 - (NestSDKObserverHandle)observeThermostatWithId:(NSString *)thermostatId block:(NestSDKThermostatUpdateHandler)block {
-    return [self _observeDataModelWithURL:[self _thermostatURLWithThermostatId:thermostatId]
-                                withClass:[NestSDKThermostatDataModel class]
-                                    block:block];
+    NSString *thermostatURL = [NestSDKDataManagerHelper thermostatURLWithThermostatId:thermostatId];
+    return [self _observeDataModelWithURL:thermostatURL block:block];
 }
 
 - (void)setThermostat:(id <NestSDKThermostat>)thermostat block:(NestSDKThermostatUpdateHandler)block {
-    [self _setDataModel:thermostat
-                 forURL:[self _thermostatURLWithThermostatId:thermostat.deviceId]
-                  block:block];
+    NSString *thermostatURL = [NestSDKDataManagerHelper thermostatURLWithThermostatId:thermostat.deviceId];
+    [self _setDataModel:thermostat forURL:thermostatURL block:block];
 }
 
+
 - (void)smokeCOAlarmWithId:(NSString *)smokeCOAlarmId block:(NestSDKSmokeCOAlarmUpdateHandler)block {
-    [self _dataModelFromURL:[self _smokeCOAlarmURLWithSmokeCOAlarmId:smokeCOAlarmId]
-                  withClass:[NestSDKSmokeCOAlarmDataModel class]
-                      block:block];
+    NSString *smokeCOAlarmURL = [NestSDKDataManagerHelper smokeCOAlarmURLWithSmokeCOAlarmId:smokeCOAlarmId];
+    [self _dataModelWithURL:smokeCOAlarmURL block:block];
 }
 
 - (NestSDKObserverHandle)observeSmokeCOAlarmWithId:(NSString *)smokeCOAlarmId block:(NestSDKSmokeCOAlarmUpdateHandler)block {
-    return [self _observeDataModelWithURL:[self _smokeCOAlarmURLWithSmokeCOAlarmId:smokeCOAlarmId]
-                                withClass:[NestSDKSmokeCOAlarmDataModel class]
-                                    block:block];
+    NSString *smokeCOAlarmURL = [NestSDKDataManagerHelper smokeCOAlarmURLWithSmokeCOAlarmId:smokeCOAlarmId];
+    return [self _observeDataModelWithURL:smokeCOAlarmURL block:block];
 }
 
 - (void)setSmokeCOAlarm:(NestSDKSmokeCOAlarmDataModel *)smokeCOAlarm block:(NestSDKSmokeCOAlarmUpdateHandler)block {
-    [self _setDataModel:smokeCOAlarm
-                 forURL:[self _smokeCOAlarmURLWithSmokeCOAlarmId:smokeCOAlarm.deviceId]
-                  block:block];
+    NSString *smokeCOAlarmURL = [NestSDKDataManagerHelper smokeCOAlarmURLWithSmokeCOAlarmId:smokeCOAlarm.deviceId];
+    [self _setDataModel:smokeCOAlarm forURL:smokeCOAlarmURL block:block];
 }
 
+
 - (void)cameraWithId:(NSString *)cameraId block:(NestSDKCameraUpdateHandler)block {
-    [self _dataModelFromURL:[self _cameraURLWithCameraId:cameraId]
-                  withClass:[NestSDKCameraDataModel class]
-                      block:block];
+    NSString *cameraURL = [NestSDKDataManagerHelper cameraURLWithCameraId:cameraId];
+    [self _dataModelWithURL:cameraURL block:block];
 }
 
 - (void)setCamera:(NestSDKCameraDataModel *)camera block:(NestSDKCameraUpdateHandler)block {
-    [self _setDataModel:camera
-                 forURL:[self _cameraURLWithCameraId:camera.deviceId]
-                  block:block];
+    NSString *cameraURL = [NestSDKDataManagerHelper cameraURLWithCameraId:camera.deviceId];
+    [self _setDataModel:camera forURL:cameraURL block:block];
 }
 
 - (NestSDKObserverHandle)observeCameraWithId:(NSString *)cameraId block:(NestSDKCameraUpdateHandler)block {
-    return [self _observeDataModelWithURL:[self _cameraURLWithCameraId:cameraId]
-                                withClass:[NestSDKCameraDataModel class]
-                                    block:block];
+    NSString *cameraURL = [NestSDKDataManagerHelper cameraURLWithCameraId:cameraId];
+    return [self _observeDataModelWithURL:cameraURL block:block];
 }
+
 
 - (void)removeObserverWithHandle:(NestSDKObserverHandle)handle {
     [self.service removeObserverWithHandle:handle];

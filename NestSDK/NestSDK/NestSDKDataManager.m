@@ -25,7 +25,6 @@
 #import <NestSDK/NestSDKError.h>
 #import <NestSDK/NestSDKStructureDataModel.h>
 #import <NestSDK/NestSDKThermostatDataModel.h>
-#import <NestSDK/NestSDKSmokeCOAlarmDataModel.h>
 #import <NestSDK/NestSDKCameraDataModel.h>
 #import <NestSDK/NestSDKDataManagerHelper.h>
 #import <NestSDK/NestSDKMacroses.h>
@@ -49,47 +48,44 @@ typedef void (^NestSDKDataUpdateHandler)(id, NSError *);
 @implementation NestSDKDataManager
 #pragma mark Private
 
-- (void) _dataModelWithURL:(NSString *)url block:(NestSDKDataUpdateHandler)block {
-    @weakify(self)
-    [self.service valuesForURL:url withBlock:^(id result, NSError *error) {
-        @strongify(self)
-        if (!self) return;
+- (void)_dataModelWithURL:(NSString *)url block:(NestSDKDataUpdateHandler)block {
+    void (^handleResultBlock)(id, NSError *) = [self _handleResultBlockWithURL:url updateBlock:block];
 
-        [self _handleResult:result withURL:url block:block error:error];
-    }];
+    [self.service valuesForURL:url withBlock:handleResultBlock];
 }
 
 - (NestSDKObserverHandle)_observeDataModelWithURL:(NSString *)url block:(NestSDKDataUpdateHandler)block {
-    @weakify(self)
-    return [self.service observeValuesForURL:url withBlock:^(id result, NSError *error) {
-        @strongify(self)
-        if (!self) return;
+    void (^handleResultBlock)(id, NSError *) = [self _handleResultBlockWithURL:url updateBlock:block];
 
-        [self _handleResult:result withURL:url block:block error:error];
-    }];
+    return [self.service observeValuesForURL:url withBlock:handleResultBlock];
 }
 
 - (void)_setDataModel:(id <NestSDKDataModelProtocol>)dataModel forURL:(NSString *)url block:(NestSDKDataUpdateHandler)block {
     NSDictionary *valuesDictionary = [(NestSDKDataModel *) dataModel toWritableDataModelDictionary];
+    void (^handleResultBlock)(id, NSError *) = [self _handleResultBlockWithURL:url updateBlock:block];
 
+    [self.service setValues:valuesDictionary forURL:url withBlock:handleResultBlock];
+}
+
+- (void (^)(id result, NSError *error))_handleResultBlockWithURL:(NSString *)url updateBlock:(NestSDKDataUpdateHandler)block {
     @weakify(self)
-    [self.service setValues:valuesDictionary forURL:url withBlock:^(id result, NSError *error) {
+    return ^(id result, NSError *error) {
         @strongify(self)
         if (!self) return;
 
         [self _handleResult:result withURL:url block:block error:error];
-    }];
+    };
 }
 
 - (void)_handleResult:(id)result withURL:(NSString *)url block:(NestSDKDataUpdateHandler)block error:(NSError *)error {
-    NSError *resultError = [self _errorInResult:result orError:error];
+    NSError *resultError = [self _resultIsNotDictionary:result orError:error];
     if (resultError) {
         [self _returnError:resultError toBlock:block];
         return;
     }
 
     NSError *parseError;
-    id dataModel = [self _parseDataModelWithURL:url fromData:result error:&parseError];
+    id dataModel = [self _parseDataModelWithURL:url fromDictionary:result error:&parseError];
 
     if (parseError) {
         [self _returnParseError:parseError toBlock:block];
@@ -99,7 +95,7 @@ typedef void (^NestSDKDataUpdateHandler)(id, NSError *);
     [self _returnDataModel:dataModel toBlock:block];
 }
 
-- (NSError *)_errorInResult:(id)result orError:(NSError *)error {
+- (NSError *)_resultIsNotDictionary:(id)result orError:(NSError *)error {
     if (error) return error;
 
     if (![result isKindOfClass:[NSDictionary class]]) {
@@ -109,14 +105,14 @@ typedef void (^NestSDKDataUpdateHandler)(id, NSError *);
     return nil;
 }
 
-- (id)_parseDataModelWithURL:(NSString *)url fromData:(id)data error:(NSError **)parseError {
+- (id)_parseDataModelWithURL:(NSString *)url fromDictionary:(NSDictionary *)dictionary error:(NSError **)parseError {
     Class dataModelClass = [NestSDKDataManagerHelper dataModelClassWithURL:url];
 
     if ([self _shouldParseDataModelAsArrayWithURL:url]) {
-        return [self _parseDataModelArrayWithClass:dataModelClass fromData:data error:parseError];
+        return [self _parseDataModelAsArrayWithClass:dataModelClass fromDictionary:dictionary error:parseError];
 
     } else {
-        return [self _parseDataModelWithClass:dataModelClass fromData:data error:parseError];
+        return [self _parseDataModelWithClass:dataModelClass fromDictionary:dictionary error:parseError];
     }
 }
 
@@ -124,12 +120,11 @@ typedef void (^NestSDKDataUpdateHandler)(id, NSError *);
     return [url isEqualToString:[NestSDKDataManagerHelper structuresURL]];
 }
 
-- (NSArray *)_parseDataModelArrayWithClass:(Class)dataModelClass fromData:(id)result error:(NSError **)error {
-    NSDictionary *resultDictionary = (NSDictionary *) result;
-    NSMutableArray *dataModelsArray = [[NSMutableArray alloc] initWithCapacity:resultDictionary.count];
+- (NSArray *)_parseDataModelAsArrayWithClass:(Class)dataModelClass fromDictionary:(NSDictionary *)dictionary error:(NSError **)error {
+    NSMutableArray *dataModelsArray = [[NSMutableArray alloc] initWithCapacity:dictionary.count];
 
-    for (NSDictionary *dictionary in resultDictionary.allValues) {
-        id dataModelInArray = [(JSONModel *) [dataModelClass alloc] initWithDictionary:dictionary error:error];
+    for (NSDictionary *subDictionary in dictionary.allValues) {
+        id dataModelInArray = [self _parseDataModelWithClass:dataModelClass fromDictionary:subDictionary error:error];
         if ((*error)) return nil;
 
         [dataModelsArray addObject:dataModelInArray];
@@ -138,8 +133,8 @@ typedef void (^NestSDKDataUpdateHandler)(id, NSError *);
     return dataModelsArray;
 }
 
-- (NestSDKDataModel *)_parseDataModelWithClass:(Class)dataModelClass fromData:(id)result error:(NSError **)error {
-    return [(NestSDKDataModel *) [dataModelClass alloc] initWithDictionary:result error:error];
+- (NestSDKDataModel *)_parseDataModelWithClass:(Class)dataModelClass fromDictionary:(NSDictionary *)dictionary error:(NSError **)error {
+    return [(NestSDKDataModel *) [dataModelClass alloc] initWithDictionary:dictionary error:error];
 }
 
 - (void)_returnParseError:(NSError *)parseError toBlock:(NestSDKDataUpdateHandler)block {
@@ -213,11 +208,6 @@ typedef void (^NestSDKDataUpdateHandler)(id, NSError *);
 - (NestSDKObserverHandle)observeSmokeCOAlarmWithId:(NSString *)smokeCOAlarmId block:(NestSDKSmokeCOAlarmUpdateHandler)block {
     NSString *smokeCOAlarmURL = [NestSDKDataManagerHelper smokeCOAlarmURLWithSmokeCOAlarmId:smokeCOAlarmId];
     return [self _observeDataModelWithURL:smokeCOAlarmURL block:block];
-}
-
-- (void)setSmokeCOAlarm:(NestSDKSmokeCOAlarmDataModel *)smokeCOAlarm block:(NestSDKSmokeCOAlarmUpdateHandler)block {
-    NSString *smokeCOAlarmURL = [NestSDKDataManagerHelper smokeCOAlarmURLWithSmokeCOAlarmId:smokeCOAlarm.deviceId];
-    [self _setDataModel:smokeCOAlarm forURL:smokeCOAlarmURL block:block];
 }
 
 

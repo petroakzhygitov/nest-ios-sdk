@@ -49,6 +49,6 @@
 #import <NestSDK/NestSDKProductResource.h>
 #import <NestSDK/NestSDKProductResourceUse.h>
 
-#define NESTSDK_VERSION_STRING @"0.1.1"
+#define NESTSDK_VERSION_STRING @"0.1.2"
 
 

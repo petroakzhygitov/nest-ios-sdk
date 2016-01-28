@@ -22,12 +22,18 @@
 #import <NestSDK/NestSDKDevice.h>
 
 #pragma mark typedef
+/**
+ * Battery health property values
+ */
 typedef NS_ENUM(NSUInteger, NestSDKSmokeCOAlarmBatteryHealth) {
     NestSDKSmokeCOAlarmBatteryHealthUndefined = 0,
     NestSDKSmokeCOAlarmBatteryHealthOk,
     NestSDKSmokeCOAlarmBatteryHealthReplace
 };
 
+/**
+ * Alarm state property values
+ */
 typedef NS_ENUM(NSUInteger, NestSDKSmokeCOAlarmAlarmState) {
     NestSDKSmokeCOAlarmAlarmStateUndefined = 0,
     NestSDKSmokeCOAlarmAlarmStateOk,
@@ -35,6 +41,9 @@ typedef NS_ENUM(NSUInteger, NestSDKSmokeCOAlarmAlarmState) {
     NestSDKSmokeCOAlarmAlarmStateEmergency
 };
 
+/**
+ * UIColor property values
+ */
 typedef NS_ENUM(NSUInteger, NestSDKSmokeCOAlarmUIColorState) {
     NestSDKSmokeCOAlarmUIColorStateUndefined = 0,
     NestSDKSmokeCOAlarmUIColorStateGray,

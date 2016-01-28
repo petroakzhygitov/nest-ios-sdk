@@ -25,6 +25,10 @@
 @protocol NestSDKWheres;
 
 #pragma mark typedef
+
+/**
+ * Structure's away property values
+ */
 typedef NS_ENUM(NSUInteger, NestSDKStructureAwayState) {
     NestSDKStructureAwayStateUndefined = 0,
     NestSDKStructureAwayStateHome,

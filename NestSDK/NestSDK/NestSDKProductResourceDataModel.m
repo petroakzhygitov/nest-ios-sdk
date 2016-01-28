@@ -1,4 +1,4 @@
-#import "NestSDKProductResource.h"
+#import "NestSDKProductResourceDataModel.h"
 
 #pragma mark macros
 
@@ -9,7 +9,7 @@
 #pragma mark typedef
 
 
-@implementation NestSDKProductResource {
+@implementation NestSDKProductResourceDataModel {
 #pragma mark Instance variables
 }
 

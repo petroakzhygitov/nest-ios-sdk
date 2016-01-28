@@ -1,5 +1,5 @@
 #import <JSONModel/JSONModel.h>
-#import "NestSDKProductIdentification.h"
+#import "NestSDKProductSoftwareDataModel.h"
 
 #pragma mark macros
 
@@ -10,7 +10,7 @@
 #pragma mark typedef
 
 
-@implementation NestSDKProductIdentification {
+@implementation NestSDKProductSoftwareDataModel {
 #pragma mark Instance variables
 }
 

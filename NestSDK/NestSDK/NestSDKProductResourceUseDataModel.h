@@ -1,6 +1,6 @@
 #import <Foundation/Foundation.h>
 
-@class NestSDKProductResource;
+@class NestSDKProductResourceDataModel;
 @protocol Optional;
 
 #pragma mark macros
@@ -13,7 +13,7 @@
 
 #pragma mark Protocol
 
-@protocol NestSDKProductResourceUse <NSObject>
+@protocol NestSDKProductResourceUseDataModel <NSObject>
 
 @end
 
@@ -21,23 +21,23 @@
 /**
  * An object containing the resource use type (electricity, gas, water), with data values and measurement timestamps.
  */
-@interface NestSDKProductResourceUse : JSONModel <NestSDKProductResourceUse>
+@interface NestSDKProductResourceUseDataModel : JSONModel <NestSDKProductResourceUseDataModel>
 #pragma mark Properties
 
 /**
  * An object that contains electricity data for the product type.
  */
-@property(nonatomic) NestSDKProductResource <Optional> *electricity;
+@property(nonatomic) NestSDKProductResourceDataModel <Optional> *electricity;
 
 /**
  * An object that contains gas data for the product type.
  */
-@property(nonatomic) NestSDKProductResource <Optional> *gas;
+@property(nonatomic) NestSDKProductResourceDataModel <Optional> *gas;
 
 /**
  * An object that contains water data for the product type.
  */
-@property(nonatomic) NestSDKProductResource <Optional> *water;
+@property(nonatomic) NestSDKProductResourceDataModel <Optional> *water;
 
 #pragma mark Methods
 

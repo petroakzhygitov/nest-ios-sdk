@@ -20,7 +20,7 @@
 
 #import <Foundation/Foundation.h>
 #import <NestSDK/NestSDKDataModel.h>
-#import "NestSDKETA.h"
+#import <NestSDK/NestSDKETA.h>
 
 @protocol Optional;
 

@@ -21,6 +21,7 @@
 #import <Foundation/Foundation.h>
 #import <NestSDK/NestSDKDataModel.h>
 #import <NestSDK/NestSDKProductResourceUse.h>
+#import <NestSDK/NestSDKProductResourceDataModel.h>
 
 @protocol Optional;
 @class NestSDKProductResourceDataModel;

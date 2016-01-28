@@ -1,0 +1,29 @@
+{
+  "identification": {
+    "device_id": "CPMEMSnC48JlSAHjQIp-kHI72IjLYHK_ul_c54UFb8CmPXNj4ixLbg",
+    "serial_number": "SN 2AZQQ01AZ423545Z7"
+  },
+  "location": {
+    "structure_id": "VqFabWH21nwVyd4RWgJgNb292wa7hG_dUwo2i2SG7j3-BOLY0BA4sw"
+  },
+  "software": {
+    "version": "v8.0.1rc3"
+  },
+  "resource_use": {
+    "electricity": {
+      "value": 50.2,
+      "measurement_reset_time": "2015-01-01T01:01:01.000Z",
+      "measurement_time": "2015-01-01T01:02:35.000Z"
+    },
+    "gas": {
+      "value": 42.7,
+      "measurement_reset_time": "2015-01-01T01:01:01.000Z",
+      "measurement_time": "2015-01-01T01:02:35.000Z"
+    },
+    "water": {
+      "value": 123.7,
+      "measurement_reset_time": "2015-01-01T01:01:01.000Z",
+      "measurement_time": "2015-01-01T01:02:35.000Z"
+    }
+  }
+}

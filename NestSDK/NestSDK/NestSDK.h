@@ -42,6 +42,13 @@
 #import <NestSDK/NestSDKCamera.h>
 #import <NestSDK/NestSDKCameraLastEvent.h>
 
+#import <NestSDK/NestSDKProduct.h>
+#import <NestSDK/NestSDKProductIdentification.h>
+#import <NestSDK/NestSDKProductLocation.h>
+#import <NestSDK/NestSDKProductSoftware.h>
+#import <NestSDK/NestSDKProductResource.h>
+#import <NestSDK/NestSDKProductResourceUse.h>
+
 #define NESTSDK_VERSION_STRING @"0.1.1"
 
 

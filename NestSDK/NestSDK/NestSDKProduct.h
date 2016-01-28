@@ -22,9 +22,9 @@
 #import <NestSDK/NestSDKDataModelProtocol.h>
 
 @protocol NestSDKProductIdentification;
-@protocol NestSDKProductLocationDataModel;
-@protocol NestSDKProductSoftwareDataModel;
-@protocol NestSDKProductResourceUseDataModel;
+@protocol NestSDKProductLocation;
+@protocol NestSDKProductSoftware;
+@protocol NestSDKProductResourceUse;
 
 /**
  * Protocol for Nest product data model.
@@ -45,16 +45,16 @@
 /**
  * An object containing the structure identifier.
  */
-@property(nonatomic) id <NestSDKProductLocationDataModel> location;
+@property(nonatomic) id <NestSDKProductLocation> location;
 
 /**
  * An object containing the software version identifier for the product.
  */
-@property(nonatomic) id <NestSDKProductSoftwareDataModel> software;
+@property(nonatomic) id <NestSDKProductSoftware> software;
 
 /**
  * An object containing the resource use type (electricity, gas, water), with data values and measurement timestamps.
  */
-@property(nonatomic) id <NestSDKProductResourceUseDataModel> resourceUse;
+@property(nonatomic) id <NestSDKProductResourceUse> resourceUse;
 
 @end

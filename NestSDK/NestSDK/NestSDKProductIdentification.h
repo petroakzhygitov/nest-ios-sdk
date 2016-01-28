@@ -19,7 +19,7 @@
 // THE SOFTWARE.
 
 #import <Foundation/Foundation.h>
-#import "NestSDKDataModelProtocol.h"
+#import <NestSDK/NestSDKDataModelProtocol.h>
 
 /**
  * Protocol for Nest product identification data model.

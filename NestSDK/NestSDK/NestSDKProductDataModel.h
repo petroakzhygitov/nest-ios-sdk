@@ -22,6 +22,9 @@
 #import <NestSDK/NestSDKDataModel.h>
 #import <NestSDK/NestSDKProduct.h>
 #import <NestSDK/NestSDKProductIdentificationDataModel.h>
+#import <NestSDK/NestSDKProductLocationDataModel.h>
+#import <NestSDK/NestSDKProductSoftwareDataModel.h>
+#import <NestSDK/NestSDKProductResourceUseDataModel.h>
 
 @class NestSDKProductIdentificationDataModel;
 @class NestSDKProductLocationDataModel;

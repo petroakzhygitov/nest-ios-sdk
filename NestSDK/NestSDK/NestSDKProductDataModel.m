@@ -1,8 +1,8 @@
 #import "NestSDKProductDataModel.h"
-#import "NestSDKProductIdentification.h"
-#import "NestSDKProductLocation.h"
-#import "NestSDKProductSoftware.h"
-#import "NestSDKProductResourceUse.h"
+#import "NestSDKProductIdentificationDataModel.h"
+#import "NestSDKProductLocationDataModel.h"
+#import "NestSDKProductSoftwareDataModel.h"
+#import "NestSDKProductResourceUseDataModel.h"
 
 #pragma mark macros
 

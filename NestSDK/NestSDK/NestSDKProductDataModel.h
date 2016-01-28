@@ -31,11 +31,7 @@
 /**
  * An object containing product type information.
  *
- * Use this object with the Resource use API to share your product's resource use data (electricity, water, or gas) with Nest.
- * Nest will add your data to the Nest Home Report and show your users how much energy your products save.
- *
- * As part of company verification, Nest will define a destination data path that is unique to your company: $company/$product_type/.
- * You'll use this storage location along with device_id to update resource use data.
+ * Use this object with the Resource use API to share the product's resource use data (electricity, water, or gas) with Nest.
  *
  * Learn more about Resource use API https://developer.nest.com/documentation/cloud/resource-use-guide
  */
@@ -43,7 +39,7 @@
 #pragma mark Properties
 
 /**
- * An object containing the device and serial number identifiers for your product.
+ * An object containing the device and serial number identifiers for the product.
  */
 @property(nonatomic) NestSDKProductIdentificationDataModel <Optional> *identification;
 
@@ -60,6 +56,6 @@
 /**
  * An object containing the resource use type (electricity, gas, water), with data values and measurement timestamps.
  */
-@property(nonatomic) NestSDKProductResourceUseDataModel <Optional> *resource_use;
+@property(nonatomic) NestSDKProductResourceUseDataModel <Optional> *resourceUse;
 
 @end

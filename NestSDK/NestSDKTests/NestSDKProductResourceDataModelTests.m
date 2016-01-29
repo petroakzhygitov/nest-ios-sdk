@@ -22,11 +22,11 @@
 #import <Expecta/Expecta.h>
 #import "SpectaDSL.h"
 #import "SPTSpec.h"
-#import "NestSDKAccessToken.h"
 #import "LSStubRequestDSL.h"
 #import "LSNocilla.h"
 #import "NestSDKMetadataDataModel.h"
-#import "NestSDKDeviceDataModel.h"
+#import "NestSDKProductResourceDataModel.h"
+#import "NestSDKProductLocationDataModel.h"
 
 SpecBegin(NestSDKProductResourceDataModel)
     {
@@ -36,65 +36,65 @@ SpecBegin(NestSDKProductResourceDataModel)
 
             beforeAll(^{
                 NSString *resourcePath = [NSBundle bundleForClass:[self class]].resourcePath;
-                NSString *dataPath = [resourcePath stringByAppendingPathComponent:@"product.json"];
+                NSString *dataPath = [resourcePath stringByAppendingPathComponent:@"product_resource.json"];
 
                 data = [NSData dataWithContentsOfFile:dataPath];
             });
 
             it(@"should deserialize/serialize data", ^{
-//                NSError *error;
-//                NestSDKDeviceDataModel *device = [[NestSDKDeviceDataModel alloc] initWithData:data error:&error];
-//                expect(error).to.equal(nil);
-//
-//                NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
-//                calendar.timeZone = [NSTimeZone timeZoneWithAbbreviation:@"UTC"];
-//
-//                NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
-//                dateComponents.timeZone = [NSTimeZone timeZoneWithAbbreviation:@"UTC"];
-//                dateComponents.year = 2015;
-//                dateComponents.month = 10;
-//                dateComponents.day = 31;
-//                dateComponents.hour = 23;
-//                dateComponents.minute = 59;
-//                dateComponents.second = 59;
-//
-//                NSDate *lastConnectionDate = [calendar dateFromComponents:dateComponents];
-//
-//                expect(device.deviceId).to.equal(@"peyiJNo0IldT2YlIVtYaGQ");
-//                expect(device.softwareVersion).to.equal(@"4.0");
-//                expect(device.structureId).to.equal(@"VqFabWH21nwVyd4RWgJgNb292wa7hG_dUwo2i2SG7j3-BOLY0BA4sw");
-//                expect(device.name).to.equal(@"Hallway (upstairs)");
-//                expect(device.nameLong).to.equal(@"Hallway Thermostat (upstairs)");
-//                expect(device.isOnline).to.equal(YES);
-//                expect(device.whereId).to.equal(@"UNCBGUnN24...");
-//
-//                NSDictionary *serializedDictionary = [NSJSONSerialization JSONObjectWithData:[device toJSONData] options:kNilOptions error:&error];
-//                expect(error).to.equal(nil);
-//
-//                NSDictionary *initialDictionary = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
-//                expect(error).to.equal(nil);
-//
-//                expect(serializedDictionary).to.equal(initialDictionary);
+                NSError *error;
+                NestSDKProductResourceDataModel *productResource = [[NestSDKProductResourceDataModel alloc] initWithData:data error:&error];
+                expect(error).to.equal(nil);
+
+                NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+                calendar.timeZone = [NSTimeZone timeZoneWithAbbreviation:@"UTC"];
+
+                NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
+                dateComponents.timeZone = [NSTimeZone timeZoneWithAbbreviation:@"UTC"];
+                dateComponents.year = 2015;
+                dateComponents.month = 01;
+                dateComponents.day = 01;
+                dateComponents.hour = 01;
+                dateComponents.minute = 01;
+                dateComponents.second = 01;
+
+                NSDate *measurementResetDate = [calendar dateFromComponents:dateComponents];
+
+                dateComponents.minute = 02;
+                dateComponents.second = 35;
+                NSDate *measurementDate = [calendar dateFromComponents:dateComponents];
+
+                expect(productResource.value).to.equal(50.2);
+                expect(productResource.measurementTime).to.equal(measurementDate);
+                expect(productResource.measurementResetTime).to.equal(measurementResetDate);
+
+                NSDictionary *serializedDictionary = [NSJSONSerialization JSONObjectWithData:[productResource toJSONData] options:kNilOptions error:&error];
+                expect(error).to.equal(nil);
+
+                NSDictionary *initialDictionary = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+                expect(error).to.equal(nil);
+
+                expect(serializedDictionary).to.equal(initialDictionary);
             });
 
             it(@"should have proper hash and equal", ^{
-//                NSError *error;
-//                NestSDKDeviceDataModel *device1 = [[NestSDKDeviceDataModel alloc] initWithData:data error:&error];
-//                expect(error).to.equal(nil);
-//
-//                NestSDKDeviceDataModel *device2 = [[NestSDKDeviceDataModel alloc] initWithData:data error:&error];
-//                expect(error).to.equal(nil);
-//
-//                NestSDKDeviceDataModel *device3 = [[NestSDKDeviceDataModel alloc] initWithData:data error:&error];
-//                expect(error).to.equal(nil);
-//
-//                device3.name = @"someName";
-//
-//                expect(device1.hash).to.equal(device2.hash);
-//                expect(device1.hash).notTo.equal(device3.hash);
-//
-//                expect(device1).to.equal(device2);
-//                expect(device1).notTo.equal(device3);
+                NSError *error;
+                NestSDKProductResourceDataModel *productResource1 = [[NestSDKProductResourceDataModel alloc] initWithData:data error:&error];
+                expect(error).to.equal(nil);
+
+                NestSDKProductResourceDataModel *productResource2 = [[NestSDKProductResourceDataModel alloc] initWithData:data error:&error];
+                expect(error).to.equal(nil);
+
+                NestSDKProductResourceDataModel *productResource3 = [[NestSDKProductResourceDataModel alloc] initWithData:data error:&error];
+                expect(error).to.equal(nil);
+
+                productResource3.value = 42.42;
+
+                expect(productResource1.hash).to.equal(productResource2.hash);
+                expect(productResource1.hash).notTo.equal(productResource3.hash);
+
+                expect(productResource1).to.equal(productResource2);
+                expect(productResource1).notTo.equal(productResource3);
             });
         });
     }

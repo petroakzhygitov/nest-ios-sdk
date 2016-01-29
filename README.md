@@ -1,12 +1,10 @@
 # NestSDK for iOS
-<!--- 
 
-[![CI Status](http://img.shields.io/travis/petroakzhygitov/NestSDK.svg?style=flat)](https://travis-ci.org/petroakzhygitov/NestSDK)
+[![CI Status](http://img.shields.io/travis/petroakzhygitov/nest-ios-sdk.svg?style=flat)](https://travis-ci.org/petroakzhygitov/nest-ios-sdk)
 [![Version](https://img.shields.io/cocoapods/v/NestSDK.svg?style=flat)](http://cocoapods.org/pods/NestSDK)
 [![License](https://img.shields.io/cocoapods/l/NestSDK.svg?style=flat)](http://cocoapods.org/pods/NestSDK)
 [![Platform](https://img.shields.io/cocoapods/p/NestSDK.svg?style=flat)](http://cocoapods.org/pods/NestSDK) 
 
--->
 This open-source library allows you to integrate Nest API into your iOS app.
 
 Learn more about Nest API at https://developer.nest.com/documentation/cloud/get-started
@@ -17,11 +15,11 @@ To run the example project, clone the repo, and run `pod install` from the NestS
 
 ## Installation
 
-NestSDK is under development so it is not publicly available through [CocoaPods](http://cocoapods.org) yet. To install
+NestSDK is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod "NestSDK", github => "https://github.com/petroakzhygitov/nest-ios-sdk.git"
+pod "NestSDK", "0.1.1"
 ```
 
 ## General Nest product setup

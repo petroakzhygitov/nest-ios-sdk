@@ -8,7 +8,7 @@ cache: cocoapods
 podfile: NestSDK/Podfile
 before_install:
 - rvm install ruby 2.2.2
-- gem install cocoapods --pre
+- gem install cocoapods
 - pod install --project-directory=NestSDK
 
 script:

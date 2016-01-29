@@ -12,7 +12,6 @@ before_install:
 - pod install --project-directory=NestSDK
 
 script:
-#- set -o pipefail && xcodebuild test -workspace NestSDK/NestSDK.xcworkspace -scheme NestSDK -sdk iphonesimulator9.2 -destination 'platform=iOS Simulator,name=iPhone 6s,OS=9.2' ONLY_ACTIVE_ARCH=NO
-- xcodebuild -workspace NestSDK/NestSDK.xcworkspace -list
+- set -o pipefail && xcodebuild test -workspace NestSDK/NestSDK.xcworkspace -scheme NestSDK -sdk iphonesimulator9.2 -destination 'platform=iOS Simulator,name=iPhone 6s,OS=9.2' ONLY_ACTIVE_ARCH=NO
 - pod lib lint
 

@@ -179,6 +179,28 @@ typedef void (^NestSDKCameraUpdateHandler)(id <NestSDKCamera> camera, NSError *e
 
 
 /**
+ * Get product data. Your block will be triggered when data is delivered.
+ *
+ * @param productId The product id to get data for.
+ * @param companyId The company of product id.
+ * @param block The block that should be called when data is delivered or error happen.
+ */
+- (void)productWithId:(NSString *)productId companyId:(NSString *)companyId block:(NestSDKCameraUpdateHandler)block;
+
+/**
+* Listen for product data changes. Your block will be triggered for the initial data and again whenever the data changes.
+*
+* Use removeObserverWithHandle: to stop receiving updates.
+*
+* @param productId The product id to get data for.
+* @param companyId The company of product id.
+* @param block The block that should be called with initial data, updates or errors happen.
+* @return A handle used to unregister this block later using removeObserverWithHandle:
+*/
+- (NestSDKObserverHandle)observeProductWithId:(NSString *)productId companyId:(NSString *)companyId block:(NestSDKCameraUpdateHandler)block;
+
+
+/**
  * Detach a block previously attached to this `NestSDKDataManager` instance with `observeStructuresWithBlock:`,
  * `observeThermostatWithId:block:`, `observeSmokeCOAlarmWithId:block:`, `observeCameraWithId:block:`.
  *

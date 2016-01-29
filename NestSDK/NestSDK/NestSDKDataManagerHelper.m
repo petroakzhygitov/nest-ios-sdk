@@ -24,6 +24,7 @@
 #import "NestSDKSmokeCOAlarmDataModel.h"
 #import "NestSDKCameraDataModel.h"
 #import "NestSDKStructureDataModel.h"
+#import "NestSDKProductDataModel.h"
 
 #pragma mark const
 
@@ -74,6 +75,10 @@ static NSString *const kEndpointPathCameras = @"cameras/";
     return [NSString stringWithFormat:@"%@%@", kEndpointPathDevices, kEndpointPathCameras];
 }
 
++ (NSString *)productURLWithProductTypeId:(NSString *)productTypeId caompanyId:(NSString *)companyId {
+    return [NSString stringWithFormat:@"%@/%@/", companyId, productTypeId];
+}
+
 + (Class)dataModelClassWithURL:(NSString *)url {
     if ([url isEqualToString:[self metadataURL]]) {
         return [NestSDKMetadataDataModel class];
@@ -89,6 +94,9 @@ static NSString *const kEndpointPathCameras = @"cameras/";
 
     } else if ([url hasPrefix:[self cameraURL]]) {
         return [NestSDKCameraDataModel class];
+
+    } else //if ([url ]) {
+        return [NestSDKProductDataModel class];
     }
 
     return nil;

@@ -216,14 +216,25 @@ typedef void (^NestSDKDataUpdateHandler)(id, NSError *);
     [self _dataModelWithURL:cameraURL block:block];
 }
 
+- (NestSDKObserverHandle)observeCameraWithId:(NSString *)cameraId block:(NestSDKCameraUpdateHandler)block {
+    NSString *cameraURL = [NestSDKDataManagerHelper cameraURLWithCameraId:cameraId];
+    return [self _observeDataModelWithURL:cameraURL block:block];
+}
+
 - (void)setCamera:(NestSDKCameraDataModel *)camera block:(NestSDKCameraUpdateHandler)block {
     NSString *cameraURL = [NestSDKDataManagerHelper cameraURLWithCameraId:camera.deviceId];
     [self _setDataModel:camera forURL:cameraURL block:block];
 }
 
-- (NestSDKObserverHandle)observeCameraWithId:(NSString *)cameraId block:(NestSDKCameraUpdateHandler)block {
-    NSString *cameraURL = [NestSDKDataManagerHelper cameraURLWithCameraId:cameraId];
-    return [self _observeDataModelWithURL:cameraURL block:block];
+
+- (void)productWithId:(NSString *)productId companyId:(NSString *)companyId block:(NestSDKCameraUpdateHandler)block {
+    NSString *productURL = [NestSDKDataManagerHelper productURLWithProductTypeId:productId caompanyId:companyId];
+    [self _dataModelWithURL:productURL block:block];
+}
+
+- (NestSDKObserverHandle)observeProductWithId:(NSString *)productId companyId:(NSString *)companyId block:(NestSDKCameraUpdateHandler)block {
+    NSString *productURL = [NestSDKDataManagerHelper productURLWithProductTypeId:productId caompanyId:companyId];
+    return [self _observeDataModelWithURL:productURL block:block];
 }
 
 

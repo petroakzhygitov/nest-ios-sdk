@@ -28,6 +28,7 @@
 #import "NestSDKStructureDataModel.h"
 #import "NestSDKCameraDataModel.h"
 #import "NestSDKSmokeCOAlarmDataModel.h"
+#import "NestSDKProductDataModel.h"
 
 
 SpecBegin(NestSDKDataManagerHelper)
@@ -40,6 +41,7 @@ SpecBegin(NestSDKDataManagerHelper)
             __block NSString *_thermostatURL;
             __block NSString *_smokeCOAlarmURL;
             __block NSString *_cameraURL;
+            __block NSString *_productURL;
 
             beforeAll(^{
                 _metadataURL = [NestSDKDataManagerHelper metadataURL];
@@ -48,6 +50,7 @@ SpecBegin(NestSDKDataManagerHelper)
                 _thermostatURL = [NestSDKDataManagerHelper thermostatURLWithThermostatId:@"t42"];
                 _smokeCOAlarmURL = [NestSDKDataManagerHelper smokeCOAlarmURLWithSmokeCOAlarmId:@"s42"];
                 _cameraURL = [NestSDKDataManagerHelper cameraURLWithCameraId:@"c42"];
+                _productURL = [NestSDKDataManagerHelper productURLWithProductId:@"myproduct" caompanyId:@"mycompany"];
             });
 
             it(@"should return proper URLs", ^{
@@ -57,6 +60,7 @@ SpecBegin(NestSDKDataManagerHelper)
                 expect(_thermostatURL).to.equal(@"devices/thermostats/t42/");
                 expect(_smokeCOAlarmURL).to.equal(@"devices/smoke_co_alarms/s42/");
                 expect(_cameraURL).to.equal(@"devices/cameras/c42/");
+                expect(_productURL).to.equal(@"mycompany/myproduct/");
             });
 
             it(@"should return proper data model class", ^{
@@ -66,6 +70,7 @@ SpecBegin(NestSDKDataManagerHelper)
                 expect([NestSDKDataManagerHelper dataModelClassWithURL:_thermostatURL]).to.equal([NestSDKThermostatDataModel class]);
                 expect([NestSDKDataManagerHelper dataModelClassWithURL:_smokeCOAlarmURL]).to.equal([NestSDKSmokeCOAlarmDataModel class]);
                 expect([NestSDKDataManagerHelper dataModelClassWithURL:_cameraURL]).to.equal([NestSDKCameraDataModel class]);
+                expect([NestSDKDataManagerHelper dataModelClassWithURL:_productURL]).to.equal([NestSDKProductDataModel class]);
             });
         });
     }

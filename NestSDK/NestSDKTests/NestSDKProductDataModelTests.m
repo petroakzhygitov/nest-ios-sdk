@@ -47,11 +47,13 @@ SpecBegin(NestSDKProductDataModel)
                 NestSDKProductDataModel *product = [[NestSDKProductDataModel alloc] initWithData:data error:&error];
                 expect(error).to.equal(nil);
 
-                expect(product.identification.deviceId).to.equal(@"peyiJNo0IldT2YlIVtYaGQ");
-                expect(product.identification.serialNumber).to.equal(@"peyiJNo0IldT2YlIVtYaGQ");
-                expect(product.software.version).to.equal(@);
-                expect(product.location).to.equal(@"VqFabWH21nwVyd4RWgJgNb292wa7hG_dUwo2i2SG7j3-BOLY0BA4sw");
-                expect(product.resourceUse).to.equal(@"Hallway (upstairs)");
+                expect(product.identification.deviceId).to.equal(@"CPMEMSnC48JlSAHjQIp-kHI72IjLYHK_ul_c54UFb8CmPXNj4ixLbg");
+                expect(product.identification.serialNumber).to.equal(@"SN 2AZQQ01AZ423545Z7");
+                expect(product.software.version).to.equal(@"v8.0.1rc3");
+                expect(product.location.structureId).to.equal(@"VqFabWH21nwVyd4RWgJgNb292wa7hG_dUwo2i2SG7j3-BOLY0BA4sw");
+                expect(product.resourceUse.electricity.value).to.equal(50.2);
+                expect(product.resourceUse.gas.value).to.equal(42.7);
+                expect(product.resourceUse.water.value).to.equal(123.7);
 
                 NSDictionary *serializedDictionary = [NSJSONSerialization JSONObjectWithData:[product toJSONData] options:kNilOptions error:&error];
                 expect(error).to.equal(nil);

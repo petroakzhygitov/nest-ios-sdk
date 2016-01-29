@@ -22,11 +22,10 @@
 #import <Expecta/Expecta.h>
 #import "SpectaDSL.h"
 #import "SPTSpec.h"
-#import "NestSDKAccessToken.h"
 #import "LSStubRequestDSL.h"
 #import "LSNocilla.h"
 #import "NestSDKMetadataDataModel.h"
-#import "NestSDKDeviceDataModel.h"
+#import "NestSDKProductIdentificationDataModel.h"
 
 SpecBegin(NestSDKProductIdentificationDataModel)
     {
@@ -36,65 +35,46 @@ SpecBegin(NestSDKProductIdentificationDataModel)
 
             beforeAll(^{
                 NSString *resourcePath = [NSBundle bundleForClass:[self class]].resourcePath;
-                NSString *dataPath = [resourcePath stringByAppendingPathComponent:@"product.json"];
+                NSString *dataPath = [resourcePath stringByAppendingPathComponent:@"product_identification.json"];
 
                 data = [NSData dataWithContentsOfFile:dataPath];
             });
 
             it(@"should deserialize/serialize data", ^{
-//                NSError *error;
-//                NestSDKDeviceDataModel *device = [[NestSDKDeviceDataModel alloc] initWithData:data error:&error];
-//                expect(error).to.equal(nil);
-//
-//                NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
-//                calendar.timeZone = [NSTimeZone timeZoneWithAbbreviation:@"UTC"];
-//
-//                NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
-//                dateComponents.timeZone = [NSTimeZone timeZoneWithAbbreviation:@"UTC"];
-//                dateComponents.year = 2015;
-//                dateComponents.month = 10;
-//                dateComponents.day = 31;
-//                dateComponents.hour = 23;
-//                dateComponents.minute = 59;
-//                dateComponents.second = 59;
-//
-//                NSDate *lastConnectionDate = [calendar dateFromComponents:dateComponents];
-//
-//                expect(device.deviceId).to.equal(@"peyiJNo0IldT2YlIVtYaGQ");
-//                expect(device.softwareVersion).to.equal(@"4.0");
-//                expect(device.structureId).to.equal(@"VqFabWH21nwVyd4RWgJgNb292wa7hG_dUwo2i2SG7j3-BOLY0BA4sw");
-//                expect(device.name).to.equal(@"Hallway (upstairs)");
-//                expect(device.nameLong).to.equal(@"Hallway Thermostat (upstairs)");
-//                expect(device.isOnline).to.equal(YES);
-//                expect(device.whereId).to.equal(@"UNCBGUnN24...");
-//
-//                NSDictionary *serializedDictionary = [NSJSONSerialization JSONObjectWithData:[device toJSONData] options:kNilOptions error:&error];
-//                expect(error).to.equal(nil);
-//
-//                NSDictionary *initialDictionary = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
-//                expect(error).to.equal(nil);
-//
-//                expect(serializedDictionary).to.equal(initialDictionary);
+                NSError *error;
+                NestSDKProductIdentificationDataModel *productIdentification = [[NestSDKProductIdentificationDataModel alloc] initWithData:data error:&error];
+                expect(error).to.equal(nil);
+
+                expect(productIdentification.deviceId).to.equal(@"CPMEMSnC48JlSAHjQIp-kHI72IjLYHK_ul_c54UFb8CmPXNj4ixLbg");
+                expect(productIdentification.serialNumber).to.equal(@"SN 2AZQQ01AZ423545Z7");
+
+                NSDictionary *serializedDictionary = [NSJSONSerialization JSONObjectWithData:[productIdentification toJSONData] options:kNilOptions error:&error];
+                expect(error).to.equal(nil);
+
+                NSDictionary *initialDictionary = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+                expect(error).to.equal(nil);
+
+                expect(serializedDictionary).to.equal(initialDictionary);
             });
 
             it(@"should have proper hash and equal", ^{
-//                NSError *error;
-//                NestSDKDeviceDataModel *device1 = [[NestSDKDeviceDataModel alloc] initWithData:data error:&error];
-//                expect(error).to.equal(nil);
-//
-//                NestSDKDeviceDataModel *device2 = [[NestSDKDeviceDataModel alloc] initWithData:data error:&error];
-//                expect(error).to.equal(nil);
-//
-//                NestSDKDeviceDataModel *device3 = [[NestSDKDeviceDataModel alloc] initWithData:data error:&error];
-//                expect(error).to.equal(nil);
-//
-//                device3.name = @"someName";
-//
-//                expect(device1.hash).to.equal(device2.hash);
-//                expect(device1.hash).notTo.equal(device3.hash);
-//
-//                expect(device1).to.equal(device2);
-//                expect(device1).notTo.equal(device3);
+                NSError *error;
+                NestSDKProductIdentificationDataModel *productIdentification1 = [[NestSDKProductIdentificationDataModel alloc] initWithData:data error:&error];
+                expect(error).to.equal(nil);
+
+                NestSDKProductIdentificationDataModel *productIdentification2 = [[NestSDKProductIdentificationDataModel alloc] initWithData:data error:&error];
+                expect(error).to.equal(nil);
+
+                NestSDKProductIdentificationDataModel *productIdentification3 = [[NestSDKProductIdentificationDataModel alloc] initWithData:data error:&error];
+                expect(error).to.equal(nil);
+
+                productIdentification3.deviceId = @"someName";
+
+                expect(productIdentification1.hash).to.equal(productIdentification2.hash);
+                expect(productIdentification1.hash).notTo.equal(productIdentification3.hash);
+
+                expect(productIdentification1).to.equal(productIdentification2);
+                expect(productIdentification1).notTo.equal(productIdentification3);
             });
         });
     }

@@ -1,0 +1,17 @@
+{
+  "electricity": {
+    "value": 50.2,
+    "measurement_reset_time": "2015-01-01T01:01:01.000Z",
+    "measurement_time": "2015-01-01T01:02:35.000Z"
+  },
+  "gas": {
+    "value": 42.7,
+    "measurement_reset_time": "2015-01-01T01:01:01.000Z",
+    "measurement_time": "2015-01-01T01:02:35.000Z"
+  },
+  "water": {
+    "value": 123.7,
+    "measurement_reset_time": "2015-01-01T01:01:01.000Z",
+    "measurement_time": "2015-01-01T01:02:35.000Z"
+  }
+}

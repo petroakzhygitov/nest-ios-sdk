@@ -95,7 +95,7 @@ static NSString *const kEndpointPathCameras = @"cameras/";
     } else if ([url hasPrefix:[self cameraURL]]) {
         return [NestSDKCameraDataModel class];
 
-    } else //if ([url ]) {
+    } else {//if ([url ]) {
         return [NestSDKProductDataModel class];
     }
 

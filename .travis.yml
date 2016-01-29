@@ -6,8 +6,8 @@ language: objective-c
 cache: cocoapods
 podfile: NestSDK/Podfile
 before_install:
-- rvm use system
-- gem install cocoapods # Since Travis is not always on latest version
+#- rvm use system
+#- gem install cocoapods # Since Travis is not always on latest version
 - pod install --project-directory=NestSDK
 
 script:

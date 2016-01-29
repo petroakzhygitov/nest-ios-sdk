@@ -75,7 +75,7 @@ static NSString *const kEndpointPathCameras = @"cameras/";
     return [NSString stringWithFormat:@"%@%@", kEndpointPathDevices, kEndpointPathCameras];
 }
 
-+ (NSString *)productURLWithProductTypeId:(NSString *)productTypeId caompanyId:(NSString *)companyId {
++ (NSString *)productURLWithProductId:(NSString *)productTypeId caompanyId:(NSString *)companyId {
     return [NSString stringWithFormat:@"%@/%@/", companyId, productTypeId];
 }
 

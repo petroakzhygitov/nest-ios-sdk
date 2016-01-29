@@ -228,12 +228,12 @@ typedef void (^NestSDKDataUpdateHandler)(id, NSError *);
 
 
 - (void)productWithId:(NSString *)productId companyId:(NSString *)companyId block:(NestSDKCameraUpdateHandler)block {
-    NSString *productURL = [NestSDKDataManagerHelper productURLWithProductTypeId:productId caompanyId:companyId];
+    NSString *productURL = [NestSDKDataManagerHelper productURLWithProductId:productId caompanyId:companyId];
     [self _dataModelWithURL:productURL block:block];
 }
 
 - (NestSDKObserverHandle)observeProductWithId:(NSString *)productId companyId:(NSString *)companyId block:(NestSDKCameraUpdateHandler)block {
-    NSString *productURL = [NestSDKDataManagerHelper productURLWithProductTypeId:productId caompanyId:companyId];
+    NSString *productURL = [NestSDKDataManagerHelper productURLWithProductId:productId caompanyId:companyId];
     return [self _observeDataModelWithURL:productURL block:block];
 }
 

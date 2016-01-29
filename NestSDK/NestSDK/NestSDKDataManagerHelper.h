@@ -35,7 +35,7 @@
 
 + (NSString *)cameraURLWithCameraId:(NSString *)cameraId;
 
-+ (NSString *)productURLWithProductTypeId:(NSString *)productTypeId caompanyId:(NSString *)companyId;
++ (NSString *)productURLWithProductId:(NSString *)productTypeId caompanyId:(NSString *)companyId;
 
 + (Class)dataModelClassWithURL:(NSString *)url;
 

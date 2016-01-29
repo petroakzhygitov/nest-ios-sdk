@@ -24,6 +24,22 @@
 @implementation NestSDKProductResourceDataModel
 #pragma mark Override
 
+- (void)setMeasurementTimeWithNSString:(NSString *)measurementTimeString {
+    self.measurementTime = [NestSDKUtils dateWithISO8601FormatDateString:measurementTimeString];
+}
+
+- (id)JSONObjectForMeasurementTime {
+    return [NestSDKUtils iso8601FormatDateStringWithDate:self.measurementTime];
+}
+
+- (void)setMeasurementResetTimeWithNSString:(NSString *)measurementResetTimeString {
+    self.measurementResetTime = [NestSDKUtils dateWithISO8601FormatDateString:measurementResetTimeString];
+}
+
+- (id)JSONObjectForMeasurementResetTime {
+    return [NestSDKUtils iso8601FormatDateStringWithDate:self.measurementResetTime];
+}
+
 - (NSUInteger)hash {
     NSUInteger prime = 31;
     NSUInteger result = 1;

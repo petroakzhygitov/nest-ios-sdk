@@ -42,11 +42,11 @@
  * Timestamp that identifies the start of the measurement time period, in ISO 8601 format.
  * Generally you won't change this value, except in the rare case that connectivity or power to the device is lost.
  */
-@property(nonatomic, copy) NSString *measurementResetTime;
+@property(nonatomic, copy) NSDate *measurementResetTime;
 
 /**
  * Timestamp that identifies the measurement time (the time when the resource use data was measured), in ISO 8601 format.
  */
-@property(nonatomic, copy) NSString *measurementTime;
+@property(nonatomic, copy) NSDate *measurementTime;
 
 @end

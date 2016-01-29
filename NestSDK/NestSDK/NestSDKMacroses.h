@@ -2,13 +2,13 @@
 #define metamacro_concat(A, B) A ## B
 #endif
 
-#ifndef weakify(VAR)
+#ifndef weakify
 #define weakify(VAR) \
   autoreleasepool {} \
   __weak __typeof__(VAR) metamacro_concat(VAR, _weak_) = (VAR);
 #endif
 
-#ifndef strongify(VAR)
+#ifndef strongify
 #define strongify(VAR) \
   autoreleasepool {} \
   _Pragma("clang diagnostic push") \

@@ -31,11 +31,11 @@
 /**
  * Structure unique identifier, used in the Resource use API.
  */
-@property(nonatomic, copy) NSString *structureId;
+@property(nonatomic, copy, readonly) NSString *structureId;
 
 /**
  * A unique, Nest-generated identifier that represents name, the display name of the device.
  */
-@property(nonatomic, copy) NSString *whereId;
+@property(nonatomic, copy, readonly) NSString *whereId;
 
 @end

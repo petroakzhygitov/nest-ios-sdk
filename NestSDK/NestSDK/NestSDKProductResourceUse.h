@@ -33,16 +33,16 @@
 /**
  * An object that contains electricity data for the product type.
  */
-@property(nonatomic) id <NestSDKProductResource> electricity;
+@property(nonatomic, readonly) id <NestSDKProductResource> electricity;
 
 /**
  * An object that contains gas data for the product type.
  */
-@property(nonatomic) id <NestSDKProductResource> gas;
+@property(nonatomic, readonly) id <NestSDKProductResource> gas;
 
 /**
  * An object that contains water data for the product type.
  */
-@property(nonatomic) id <NestSDKProductResource> water;
+@property(nonatomic, readonly) id <NestSDKProductResource> water;
 
 @end

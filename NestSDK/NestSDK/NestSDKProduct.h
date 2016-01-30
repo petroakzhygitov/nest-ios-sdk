@@ -40,21 +40,21 @@
 /**
  * An object containing the device and serial number identifiers for the product.
  */
-@property(nonatomic) id <NestSDKProductIdentification> identification;
+@property(nonatomic, readonly) id <NestSDKProductIdentification> identification;
 
 /**
  * An object containing the structure identifier.
  */
-@property(nonatomic) id <NestSDKProductLocation> location;
+@property(nonatomic, readonly) id <NestSDKProductLocation> location;
 
 /**
  * An object containing the software version identifier for the product.
  */
-@property(nonatomic) id <NestSDKProductSoftware> software;
+@property(nonatomic, readonly) id <NestSDKProductSoftware> software;
 
 /**
  * An object containing the resource use type (electricity, gas, water), with data values and measurement timestamps.
  */
-@property(nonatomic) id <NestSDKProductResourceUse> resourceUse;
+@property(nonatomic, readonly) id <NestSDKProductResourceUse> resourceUse;
 
 @end

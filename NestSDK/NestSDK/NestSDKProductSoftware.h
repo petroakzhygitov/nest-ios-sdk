@@ -31,6 +31,6 @@
 /**
  * Software version number of your product or device.
  */
-@property(nonatomic, copy) NSString *version;
+@property(nonatomic, copy, readonly) NSString *version;
 
 @end

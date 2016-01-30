@@ -34,13 +34,13 @@
  *
  * Learn more about Resource use API https://developer.nest.com/documentation/cloud/resource-use-guide
  */
-@property(nonatomic, copy) NSString *deviceId;
+@property(nonatomic, copy, readonly) NSString *deviceId;
 
 /**
  * Serial number of the product or device, used in the Resource use API. Must be unique within the company and product type path.
  *
  * Learn more about Resource use API https://developer.nest.com/documentation/cloud/resource-use-guide
  */
-@property(nonatomic, copy) NSString *serialNumber;
+@property(nonatomic, copy, readonly) NSString *serialNumber;
 
 @end

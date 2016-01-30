@@ -72,6 +72,13 @@ SpecBegin(NestSDKDataManagerHelper)
                 expect([NestSDKDataManagerHelper dataModelClassWithURL:_cameraURL]).to.equal([NestSDKCameraDataModel class]);
                 expect([NestSDKDataManagerHelper dataModelClassWithURL:_productURL]).to.equal([NestSDKProductDataModel class]);
             });
+
+            it(@"should match product URL", ^{
+                expect([NestSDKDataManagerHelper matchesProductURL:@"someproduct/somecompany/"]).to.equal(YES);
+
+                expect([NestSDKDataManagerHelper matchesProductURL:@"someproductsomecompany/"]).to.equal(NO);
+                expect([NestSDKDataManagerHelper matchesProductURL:@"someproduct/somecompany"]).to.equal(NO);
+            });
         });
     }
 SpecEnd

@@ -35,8 +35,21 @@ static NSString *const kEndpointPathThermostats = @"thermostats/";
 static NSString *const kEndpointPathSmokeCOAlarms = @"smoke_co_alarms/";
 static NSString *const kEndpointPathCameras = @"cameras/";
 
+static NSString *const kEndpointPathPatternProductURL = @"\\w*/\\w*/";
 
 @implementation NestSDKDataManagerHelper
+#pragma mark Private
+
++ (NSUInteger)numberOfProductURLPatternMatchesWithURL:(NSString *)url {
+    NSError *error;
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:kEndpointPathPatternProductURL
+                                                                           options:NSRegularExpressionCaseInsensitive
+                                                                             error:&error];
+
+    if (error) return 0;
+    return [regex numberOfMatchesInString:url options:NSMatchingReportCompletion range:NSMakeRange(0, url.length)];
+}
+
 #pragma mark Public
 
 + (NSString *)metadataURL {
@@ -79,6 +92,10 @@ static NSString *const kEndpointPathCameras = @"cameras/";
     return [NSString stringWithFormat:@"%@/%@/", companyId, productTypeId];
 }
 
++ (BOOL)matchesProductURL:(NSString *)url {
+    return ([self numberOfProductURLPatternMatchesWithURL:url] > 0);
+}
+
 + (Class)dataModelClassWithURL:(NSString *)url {
     if ([url isEqualToString:[self metadataURL]]) {
         return [NestSDKMetadataDataModel class];
@@ -95,7 +112,7 @@ static NSString *const kEndpointPathCameras = @"cameras/";
     } else if ([url hasPrefix:[self cameraURL]]) {
         return [NestSDKCameraDataModel class];
 
-    } else {//if ([url ]) {
+    } else if ([self matchesProductURL:url]) {
         return [NestSDKProductDataModel class];
     }
 

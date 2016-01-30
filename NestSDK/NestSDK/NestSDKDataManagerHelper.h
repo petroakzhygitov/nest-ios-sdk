@@ -37,6 +37,8 @@
 
 + (NSString *)productURLWithProductId:(NSString *)productTypeId caompanyId:(NSString *)companyId;
 
++ (BOOL)matchesProductURL:(NSString *)url;
+
 + (Class)dataModelClassWithURL:(NSString *)url;
 
 @end

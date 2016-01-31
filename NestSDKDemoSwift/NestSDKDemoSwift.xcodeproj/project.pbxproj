@@ -1,0 +1,484 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		916EEE071C5E0B4B00AA25DA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916EEE061C5E0B4B00AA25DA /* AppDelegate.swift */; };
+		916EEE091C5E0B4B00AA25DA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916EEE081C5E0B4B00AA25DA /* ViewController.swift */; };
+		916EEE0C1C5E0B4B00AA25DA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 916EEE0A1C5E0B4B00AA25DA /* Main.storyboard */; };
+		916EEE0E1C5E0B4B00AA25DA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 916EEE0D1C5E0B4B00AA25DA /* Assets.xcassets */; };
+		916EEE111C5E0B4B00AA25DA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 916EEE0F1C5E0B4B00AA25DA /* LaunchScreen.storyboard */; };
+		916EEE1C1C5E0B4B00AA25DA /* NestSDKDemoSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916EEE1B1C5E0B4B00AA25DA /* NestSDKDemoSwiftTests.swift */; };
+		CA904C4ACE69E388C7B53F5D /* Pods_NestSDKDemoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53428808F7DFCF246BB83F30 /* Pods_NestSDKDemoSwift.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		916EEE181C5E0B4B00AA25DA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 916EEDFB1C5E0B4B00AA25DA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 916EEE021C5E0B4B00AA25DA;
+			remoteInfo = NestSDKDemoSwift;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		53428808F7DFCF246BB83F30 /* Pods_NestSDKDemoSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NestSDKDemoSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		916EEE031C5E0B4B00AA25DA /* NestSDKDemoSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NestSDKDemoSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		916EEE061C5E0B4B00AA25DA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		916EEE081C5E0B4B00AA25DA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		916EEE0B1C5E0B4B00AA25DA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		916EEE0D1C5E0B4B00AA25DA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		916EEE101C5E0B4B00AA25DA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		916EEE121C5E0B4B00AA25DA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		916EEE171C5E0B4B00AA25DA /* NestSDKDemoSwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NestSDKDemoSwiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		916EEE1B1C5E0B4B00AA25DA /* NestSDKDemoSwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NestSDKDemoSwiftTests.swift; sourceTree = "<group>"; };
+		916EEE1D1C5E0B4B00AA25DA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A3A577712AD761AFA3306A0B /* Pods-NestSDKDemoSwift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NestSDKDemoSwift.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NestSDKDemoSwift/Pods-NestSDKDemoSwift.debug.xcconfig"; sourceTree = "<group>"; };
+		BADABDFC84DD50B2E2B9ABA4 /* Pods-NestSDKDemoSwift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NestSDKDemoSwift.release.xcconfig"; path = "Pods/Target Support Files/Pods-NestSDKDemoSwift/Pods-NestSDKDemoSwift.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		916EEE001C5E0B4B00AA25DA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CA904C4ACE69E388C7B53F5D /* Pods_NestSDKDemoSwift.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		916EEE141C5E0B4B00AA25DA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		44D0DE354665EA68E30FAD6B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				53428808F7DFCF246BB83F30 /* Pods_NestSDKDemoSwift.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		776DE29B1341D39B3186334C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A3A577712AD761AFA3306A0B /* Pods-NestSDKDemoSwift.debug.xcconfig */,
+				BADABDFC84DD50B2E2B9ABA4 /* Pods-NestSDKDemoSwift.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		916EEDFA1C5E0B4B00AA25DA = {
+			isa = PBXGroup;
+			children = (
+				916EEE051C5E0B4B00AA25DA /* NestSDKDemoSwift */,
+				916EEE1A1C5E0B4B00AA25DA /* NestSDKDemoSwiftTests */,
+				916EEE041C5E0B4B00AA25DA /* Products */,
+				776DE29B1341D39B3186334C /* Pods */,
+				44D0DE354665EA68E30FAD6B /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		916EEE041C5E0B4B00AA25DA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				916EEE031C5E0B4B00AA25DA /* NestSDKDemoSwift.app */,
+				916EEE171C5E0B4B00AA25DA /* NestSDKDemoSwiftTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		916EEE051C5E0B4B00AA25DA /* NestSDKDemoSwift */ = {
+			isa = PBXGroup;
+			children = (
+				916EEE061C5E0B4B00AA25DA /* AppDelegate.swift */,
+				916EEE081C5E0B4B00AA25DA /* ViewController.swift */,
+				916EEE0A1C5E0B4B00AA25DA /* Main.storyboard */,
+				916EEE0D1C5E0B4B00AA25DA /* Assets.xcassets */,
+				916EEE0F1C5E0B4B00AA25DA /* LaunchScreen.storyboard */,
+				916EEE121C5E0B4B00AA25DA /* Info.plist */,
+			);
+			path = NestSDKDemoSwift;
+			sourceTree = "<group>";
+		};
+		916EEE1A1C5E0B4B00AA25DA /* NestSDKDemoSwiftTests */ = {
+			isa = PBXGroup;
+			children = (
+				916EEE1B1C5E0B4B00AA25DA /* NestSDKDemoSwiftTests.swift */,
+				916EEE1D1C5E0B4B00AA25DA /* Info.plist */,
+			);
+			path = NestSDKDemoSwiftTests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		916EEE021C5E0B4B00AA25DA /* NestSDKDemoSwift */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 916EEE201C5E0B4B00AA25DA /* Build configuration list for PBXNativeTarget "NestSDKDemoSwift" */;
+			buildPhases = (
+				43AF0214C82FCB97B853A4E2 /* Check Pods Manifest.lock */,
+				916EEDFF1C5E0B4B00AA25DA /* Sources */,
+				916EEE001C5E0B4B00AA25DA /* Frameworks */,
+				916EEE011C5E0B4B00AA25DA /* Resources */,
+				468FE6598005C2838C393329 /* Embed Pods Frameworks */,
+				A57DBE5EBCB9E533EE25A6CF /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NestSDKDemoSwift;
+			productName = NestSDKDemoSwift;
+			productReference = 916EEE031C5E0B4B00AA25DA /* NestSDKDemoSwift.app */;
+			productType = "com.apple.product-type.application";
+		};
+		916EEE161C5E0B4B00AA25DA /* NestSDKDemoSwiftTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 916EEE231C5E0B4B00AA25DA /* Build configuration list for PBXNativeTarget "NestSDKDemoSwiftTests" */;
+			buildPhases = (
+				916EEE131C5E0B4B00AA25DA /* Sources */,
+				916EEE141C5E0B4B00AA25DA /* Frameworks */,
+				916EEE151C5E0B4B00AA25DA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				916EEE191C5E0B4B00AA25DA /* PBXTargetDependency */,
+			);
+			name = NestSDKDemoSwiftTests;
+			productName = NestSDKDemoSwiftTests;
+			productReference = 916EEE171C5E0B4B00AA25DA /* NestSDKDemoSwiftTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		916EEDFB1C5E0B4B00AA25DA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0720;
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = "Petro Akzhygitov";
+				TargetAttributes = {
+					916EEE021C5E0B4B00AA25DA = {
+						CreatedOnToolsVersion = 7.2;
+					};
+					916EEE161C5E0B4B00AA25DA = {
+						CreatedOnToolsVersion = 7.2;
+						TestTargetID = 916EEE021C5E0B4B00AA25DA;
+					};
+				};
+			};
+			buildConfigurationList = 916EEDFE1C5E0B4B00AA25DA /* Build configuration list for PBXProject "NestSDKDemoSwift" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 916EEDFA1C5E0B4B00AA25DA;
+			productRefGroup = 916EEE041C5E0B4B00AA25DA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				916EEE021C5E0B4B00AA25DA /* NestSDKDemoSwift */,
+				916EEE161C5E0B4B00AA25DA /* NestSDKDemoSwiftTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		916EEE011C5E0B4B00AA25DA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				916EEE111C5E0B4B00AA25DA /* LaunchScreen.storyboard in Resources */,
+				916EEE0E1C5E0B4B00AA25DA /* Assets.xcassets in Resources */,
+				916EEE0C1C5E0B4B00AA25DA /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		916EEE151C5E0B4B00AA25DA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		43AF0214C82FCB97B853A4E2 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		468FE6598005C2838C393329 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NestSDKDemoSwift/Pods-NestSDKDemoSwift-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A57DBE5EBCB9E533EE25A6CF /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NestSDKDemoSwift/Pods-NestSDKDemoSwift-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		916EEDFF1C5E0B4B00AA25DA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				916EEE091C5E0B4B00AA25DA /* ViewController.swift in Sources */,
+				916EEE071C5E0B4B00AA25DA /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		916EEE131C5E0B4B00AA25DA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				916EEE1C1C5E0B4B00AA25DA /* NestSDKDemoSwiftTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		916EEE191C5E0B4B00AA25DA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 916EEE021C5E0B4B00AA25DA /* NestSDKDemoSwift */;
+			targetProxy = 916EEE181C5E0B4B00AA25DA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		916EEE0A1C5E0B4B00AA25DA /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				916EEE0B1C5E0B4B00AA25DA /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		916EEE0F1C5E0B4B00AA25DA /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				916EEE101C5E0B4B00AA25DA /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		916EEE1E1C5E0B4B00AA25DA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_BITCODE = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		916EEE1F1C5E0B4B00AA25DA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_BITCODE = NO;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		916EEE211C5E0B4B00AA25DA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A3A577712AD761AFA3306A0B /* Pods-NestSDKDemoSwift.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ENABLE_BITCODE = NO;
+				INFOPLIST_FILE = NestSDKDemoSwift/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = NestSDK.NestSDKDemoSwift;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		916EEE221C5E0B4B00AA25DA /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BADABDFC84DD50B2E2B9ABA4 /* Pods-NestSDKDemoSwift.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ENABLE_BITCODE = NO;
+				INFOPLIST_FILE = NestSDKDemoSwift/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = NestSDK.NestSDKDemoSwift;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		916EEE241C5E0B4B00AA25DA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = NestSDKDemoSwiftTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = NestSDK.NestSDKDemoSwiftTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NestSDKDemoSwift.app/NestSDKDemoSwift";
+			};
+			name = Debug;
+		};
+		916EEE251C5E0B4B00AA25DA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = NestSDKDemoSwiftTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = NestSDK.NestSDKDemoSwiftTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NestSDKDemoSwift.app/NestSDKDemoSwift";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		916EEDFE1C5E0B4B00AA25DA /* Build configuration list for PBXProject "NestSDKDemoSwift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				916EEE1E1C5E0B4B00AA25DA /* Debug */,
+				916EEE1F1C5E0B4B00AA25DA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		916EEE201C5E0B4B00AA25DA /* Build configuration list for PBXNativeTarget "NestSDKDemoSwift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				916EEE211C5E0B4B00AA25DA /* Debug */,
+				916EEE221C5E0B4B00AA25DA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		916EEE231C5E0B4B00AA25DA /* Build configuration list for PBXNativeTarget "NestSDKDemoSwiftTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				916EEE241C5E0B4B00AA25DA /* Debug */,
+				916EEE251C5E0B4B00AA25DA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 916EEDFB1C5E0B4B00AA25DA /* Project object */;
+}

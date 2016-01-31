@@ -19,7 +19,6 @@
 // THE SOFTWARE.
 
 #import <Foundation/Foundation.h>
-#import "JSONModel.h"
 #import "NestSDKDataModel.h"
 #import "NestSDKCameraLastEvent.h"
 

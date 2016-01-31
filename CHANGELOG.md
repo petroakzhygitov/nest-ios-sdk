@@ -2,17 +2,17 @@
 
 ## 0.1.2
 
-- New: product data models read/observe
+- New: product data models reading/observing
 - New: swift support
 - New: swift demo
 - New: changelog
-- Improved: Documentation
+- Improved: documentation
 
 ## 0.1.1
 
 - New: filtering allowable range for thermostat temperatures
 - Fixed: removing data observers
-- Improved: Documentation
+- Improved: documentation
 
 ## 0.1.0
 

@@ -161,7 +161,6 @@ if ([NestSDKAccessToken currentToken]) {
 } else {
 	NSLog(@"Not authorized!);
 }
-
 ```
 
 `Swift`
@@ -178,6 +177,7 @@ if (NestSDKAccessToken.currentAccessToken() != nil) {
 
 Instead of using the predefined `Connect with Nest` button (explained in Add Connect with Nest button code) you may want to design a custom layout and behavior. In the following code example we invoke the authorization dialog using the authorization manager class (`NestSDKAuthorizationManager`) and a custom button (`UIButton`). You can use any other custom user interface or event handling to invoke the authorization dialog.
 
+`Objective-C`
 ```objective-c
 // Add this to the header of your file
 #import "ViewController.h"
@@ -225,6 +225,52 @@ Instead of using the predefined `Connect with Nest` button (explained in Add Con
     
 @end
 ```
+
+`Swift`
+```swift
+// Add this to the top of your file, e.g. in ViewController.swift 
+import UIKit
+import NestSDK
+
+// Add this to the class body
+override func viewDidLoad() {
+	super.viewDidLoad()
+    
+	// Add a custom connect with button to your app
+	let customConnectWithNestButton = UIButton(type: .Custom)
+	customConnectWithNestButton.backgroundColor = UIColor.darkGrayColor()
+	customConnectWithNestButton.frame = CGRectMake(0, 0, 240, 40)
+    
+	// Optional: Place the button in the center of your view.
+	customConnectWithNestButton.center = self.view.center
+	customConnectWithNestButton.setTitle("Custom Connect Button", forState:.Normal)
+    
+	// Handle clicks on the button
+	customConnectWithNestButton.addTarget(self, action: "customConnectWithNestButtonClicked:", forControlEvents: .TouchUpInside)
+    
+	// Add the button to the view
+	self.view.addSubview(customConnectWithNestButton)
+}
+
+// Once the button is clicked, show the auth dialog
+func customConnectWithNestButtonClicked(sender:UIButton!) {
+	let authorizationManager = NestSDKAuthorizationManager()
+	authorizationManager.authorizeWithNestAccountFromViewController(self, handler:{
+		result, error in
+
+		if (error == nil) {
+			print("Process error: \(error)")
+
+		} else if (result.isCancelled) {
+			print("Cancelled")
+
+		} else {
+			print("Authorized!")
+		}
+	})
+}
+```
+
 ## Accessing structures
 
 All Nest devices belong to a structure. Structure can have many devices. 
@@ -337,7 +383,7 @@ dataManager.setStructure(structure, block:{
 })
 ```
 
-## Devices
+## Accessing devices
 
 There are three types of Nest devices available to read/observe/update:
 - Thermostat ([more information](https://developer.nest.com/documentation/cloud/thermostat-guide))
@@ -349,6 +395,8 @@ There are three types of Nest devices available to read/observe/update:
 ### Observing devices
 
 To observe devices use `NestSDKDataManager`:
+
+`Objective-C`
 ```objective-c
 NestSDKDataManager *dataManager = [[NestSDKDataManager alloc] init];
 
@@ -362,7 +410,7 @@ NSString *thermostatId = structure.thermostats[someIndex];
 	NSLog(@"Updated thermostat with name: %@", thermostat.name);
 }];
 
-NSString *smokeCOAlarmId = structure.smoke_co_alarms[someIndex];
+NSString *smokeCOAlarmId = structure.smokeCoAlarms[someIndex];
 [self.dataManager observeSmokeCOAlarmWithId:smokeCOAlarmId block:^(id <NestSDKSmokeCOAlarm> smokeCOAlarm, NSError *error) {
     	if (error) {
 		NSLog(@"Error occurred while observing smoke CO alarm: %@", error);
@@ -383,11 +431,54 @@ NSString *cameraId = structure.cameras[someIndex];
 }];
 ```
 
+`Swift`
+```swift
+let dataManager = NestSDKDataManager()
+
+let thermostatId = structure.thermostats[someIndex] as! String
+dataManager.observeThermostatWithId(thermostatId, block:{
+	thermostat, error in
+	
+	if (error == nil) {
+		print("Error occurred while observing thermostat \(error)")
+		return
+	}
+	
+	print("Updated thermostat with name \(thermostat.name)")
+})
+
+let smokeCOAlarmId = structure.smokeCoAlarms[someIndex] as! String
+dataManager.observeSmokeCOAlarmWithId(smokeCOAlarmId, block:{
+    	smokeCOAlarm, error in
+    	
+    	if (error == nil) {
+		print("Error occurred while observing smoke CO alarm \(error)")
+		return
+	}
+	
+	print("Updated smoke+CO Alarm with name \(smokeCOAlarm.name)")
+})
+ 
+let cameraId = structure.cameras[someIndex] as! String
+dataManager.observeCameraWithId(cameraId, block:{
+	camera, error in
+	
+	if (error == nil) {
+		print("Error occurred while observing camera \(error)")
+		return
+	}
+	
+	print("Updated camera with name \(camera.name)")
+})
+```
+
 ### Reading devices
 
 In general it is better to observe devices rather than read them, since you will be updated with any changes happen. 
 
 In case you want simply read devices use `NestSDKDataManager`:
+
+`Objective-C`
 ```objective-c
 NestSDKDataManager *dataManager = [[NestSDKDataManager alloc] init];
 
@@ -401,7 +492,7 @@ NSString *thermostatId = structure.thermostats[someIndex];
 	NSLog(@"Read thermostat with name: %@", thermostat.name);
 }];
 
-NSString *smokeCOAlarmId = structure.smoke_co_alarms[someIndex];
+NSString *smokeCOAlarmId = structure.smokeCoAlarms[someIndex];
 [self.dataManager smokeCOAlarmWithId:smokeCOAlarmId block:^(id <NestSDKSmokeCOAlarm> smokeCOAlarm, NSError *error) {
     	if (error) {
 		NSLog(@"Error occurred while reading smoke CO alarm: %@", error);
@@ -422,6 +513,47 @@ NSString *cameraId = structure.cameras[someIndex];
 }];
 ```
 
+`Swift`
+```swift
+let dataManager = NestSDKDataManager()
+
+let thermostatId = structure.thermostats[someIndex] as! String
+dataManager.thermostatWithId(thermostatId, block:{
+	thermostat, error in
+    
+	if (error == nil) {
+		print("Error occurred while reading thermostat \(error)")
+		return
+	}
+    
+	print("Read thermostat with name \(thermostat.name)")
+})
+
+let smokeCOAlarmId = structure.smokeCoAlarms[someIndex] as! String
+dataManager.smokeCOAlarmWithId(smokeCOAlarmId, block:{
+	smokeCOAlarm, error in
+    
+	if (error == nil) {
+		print("Error occurred while reading smoke CO alarm \(error)")
+		return
+	}
+    
+	print("Read smoke+CO Alarm with name \(smokeCOAlarm.name)")
+})
+
+let cameraId = structure.cameras[someIndex] as! String
+dataManager.cameraWithId(cameraId, block:{
+	camera, error in
+    
+	if (error == nil) {
+		print("Error occurred while reading camera \(error)")
+		return
+	}
+    
+	print("Read camera with name \(camera.name)")
+})
+```
+
 ### Updating devices
 
 - It is possible to update thermostat's `fanTimerActive`, `fanTimerTimeout`, `targetTemperatureF`, `targetTemperatureC`, `targetTemperatureHighF`, `targetTemperatureHighC`, `targetTemperatureLowF`, `targetTemperatureLowC` and `hvacMode` values.
@@ -429,6 +561,8 @@ NSString *cameraId = structure.cameras[someIndex];
 - It is **not possible** to update satuses/values for **smoke+CO alarm** device.
 
 To update devices use `NestSDKDataManager`:
+
+`Objective-C`
 ```objective-c
 NestSDKDataManager *dataManager = [[NestSDKDataManager alloc] init];
 
@@ -451,13 +585,42 @@ NestSDKDataManager *dataManager = [[NestSDKDataManager alloc] init];
 }];
 ```
 
-## Metadata
+`Swift`
+```swift
+let dataManager = NestSDKDataManager()
+
+dataManager.setThermostat(thermostat, block:{
+	thermostat, error in
+	
+	if (error == nil) {
+		print("Error occurred while updating thermostat \(error)")
+		return
+	}
+	
+	print("Updated thermostat with name \(thermostat.name)")
+})
+
+dataManager.setCamera(camera, block:{
+	camera, error in
+	
+	if (error == nil) {
+		print("Error occurred while updating camera \(error)")
+		return
+	}
+	
+	print("Updated camera with name \(camera.name)")
+})
+```
+
+## Accessing metadata
 
 Data about the data. Metadata values cannot be accessed directly and have no associated permissions.
 
 ### Reading metadata
 
 To read metadata use `NestSDKDataManager`:
+
+`Objective-C`
 ```objective-c
 NestSDKDataManager *dataManager = [[NestSDKDataManager alloc] init];
 
@@ -469,6 +632,22 @@ NestSDKDataManager *dataManager = [[NestSDKDataManager alloc] init];
 	
 	NSLog(@"Read metadata: %@", metadata);
 }];
+```
+
+`Swift`
+```swift
+let dataManager = NestSDKDataManager()
+
+dataManager.metadataWithBlock({
+	metadata, error in
+	
+	if (error == nil) {
+		print("Error occurred while reading metadata \(error)")
+		return
+	}
+	
+	print("Read metadata \(metadata)")
+})
 ```
 
 ## Author

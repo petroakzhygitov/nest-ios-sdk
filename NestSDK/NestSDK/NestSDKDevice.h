@@ -53,9 +53,9 @@
 @property(nonatomic, copy, readonly) NSString *name;
 
 /**
- * Long display name of the device. This data value is selected by the user and presented in labels in the Nest app.
- * Similar to name.
-* Learn more about where names for
+ * Long display name of the device. This data value is selected by the user and presented in labels in the Nest app. Similar to name.
+ *
+ * Learn more about where names for
  *      Nest Thermostats: https://nest.com/support/article/How-do-I-change-the-name-of-my-Nest-Learning-Thermostat
  *      Nest Protects: https://nest.com/support/article/Learn-more-about-Nest-Protect-locations-names-and-labels
  *      Nest Cams: https://nest.com/support/article/How-do-I-change-the-name-of-my-Nest-Cam

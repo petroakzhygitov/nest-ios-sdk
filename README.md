@@ -169,6 +169,7 @@ if ([NestSDKAccessToken currentToken]) {
 
 if (NestSDKAccessToken.currentAccessToken() != nil) {
 	print("Authorized!")
+	
 } else {
 	print("Not authorized!")
 }

@@ -19,7 +19,7 @@ NestSDK is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod "NestSDK", "0.1.1"
+pod "NestSDK", "0.1.2"
 ```
 
 ## General Nest product setup
@@ -62,15 +62,27 @@ Any iOS project should be properly setup in order to use NestSDK. Follow these s
 3. Connect Application Delegate
 
   Conenct your `AppDelegate` to the `NestSDKApplicationDelegate`. In your `AppDelegate.m` add:
-
+  
+  `Objective-C`
   ```objective-c
   //  AppDelegate.m
-  #import <FBSDKCoreKit/FBSDKCoreKit.h>
+  #import <NestSDK/NestSDK.h>
 
   - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 	  [[NestSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
   
 	  return YES;
+  }
+  ```
+  `Swift`
+  ```swift
+  //  AppDelegate.swift
+  import NestSDK
+
+  func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject:AnyObject]?) -> Bool {
+	  NestSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+
+	  return true
   }
   ```
 
@@ -96,6 +108,7 @@ you can retrieve and modify information on their behalf.
 
 To add a `Connect with Nest` button to your app add the following code snippet to a view controller:
 
+`Objective-C`
 ```objective-c
 // Add this to the header of your file, e.g. in ViewController.m 
 // after #import "ViewController.h"
@@ -118,8 +131,28 @@ To add a `Connect with Nest` button to your app add the following code snippet t
 @end
 ```
 
+`Swift`
+```swift
+// Add this to the top of your file, e.g. in ViewController.swift 
+// after import UIKit
+import NestSDK
+
+// Add this to the class body
+override func viewDidLoad() {
+	super.viewDidLoad()
+      
+	let connectWithNestButton = NestSDKConnectWithNestButton(frame: CGRectMake(0, 0, 200, 44))
+  
+	// Optional: Place the button in the center of your view.
+	connectWithNestButton.center = self.view.center
+  
+	view.addSubview(connectWithNestButton)
+}
+```
+
 To know whether user is already authorized check the result of `[NestSDKAccessToken currentToken]` before starting authorization process:
 
+`Objective-C`
 ```objective-c
 
 if ([NestSDKAccessToken currentToken]) {
@@ -131,6 +164,15 @@ if ([NestSDKAccessToken currentToken]) {
 
 ```
 
+`Swift`
+```swift
+
+if (NestSDKAccessToken.currentAccessToken() != nil) {
+	print("Authorized!")
+} else {
+	print("Not authorized!")
+}
+```
 ### Custom Connect with Nest button
 
 Instead of using the predefined `Connect with Nest` button (explained in Add Connect with Nest button code) you may want to design a custom layout and behavior. In the following code example we invoke the authorization dialog using the authorization manager class (`NestSDKAuthorizationManager`) and a custom button (`UIButton`). You can use any other custom user interface or event handling to invoke the authorization dialog.
@@ -182,8 +224,7 @@ Instead of using the predefined `Connect with Nest` button (explained in Add Con
     
 @end
 ```
-
-## Structures
+## Accessing structures
 
 All Nest devices belong to a structure. Structure can have many devices. 
 
@@ -194,6 +235,8 @@ It's possible that user has more than one structure attached to their Nest Accou
 ### Observing structures
 
 To observe structures use `NestSDKDataManager`:
+
+`Objective-C`
 ```objective-c
 NestSDKDataManager *dataManager = [[NestSDKDataManager alloc] init];
 [dataManager observeStructuresWithBlock:^(NSArray <NestSDKStructure> *structuresArray, NSError *error) {
@@ -208,11 +251,29 @@ NestSDKDataManager *dataManager = [[NestSDKDataManager alloc] init];
 }];
 ```
 
+`Swift`
+```swift
+let dataManager = NestSDKDataManager()
+dataManager.observeStructuresWithBlock({
+	structuresArray, error in
+	
+	if (error == nil) {
+		print("Error occurred while observing structures: \(error)")
+		return
+	}
+	
+	for structure in structuresArray as! [NestSDKStructure] {
+		print("Updated structure with name: \(structure.name)")
+	}
+})
+```
 ### Reading structures
 
 In general it is better to observe structures rather than read them, since you will be updated with any changes happen. 
 
 In case you want simply read structures use `NestSDKDataManager`:
+
+`Objective-C`
 ```objective-c
 NestSDKDataManager *dataManager = [[NestSDKDataManager alloc] init];
 [dataManager structuresWithBlock:^(NSArray <NestSDKStructure> *structuresArray, NSError *error) {
@@ -227,9 +288,27 @@ NestSDKDataManager *dataManager = [[NestSDKDataManager alloc] init];
 }];
 ```
 
+`Swift`
+```swift
+let dataManager = NestSDKDataManager()
+dataManager.structuresWithBlock({
+	structuresArray, error in
+	
+	if (error == nil) {
+		print("Error occurred while reading structures: \(error)")
+		return
+	}
+	
+	for structure in structuresArray as! [NestSDKStructure] {
+		print("Read structure with name: \(structure.name)")
+	}
+})
+```
 ### Updating structures
 
 It is possible to update structure's `away` status and set `eta`. To update a structure use `NestSDKDataManager`:
+
+`Objective-C`
 ```objective-c
 NestSDKDataManager *dataManager = [[NestSDKDataManager alloc] init];
 [dataManager setStructure:structure block:^(id <NestSDKStructure> structure, NSError *) {
@@ -242,6 +321,20 @@ NestSDKDataManager *dataManager = [[NestSDKDataManager alloc] init];
 }];
 ```
 
+`Swift`
+```swift
+let dataManager = NestSDKDataManager()
+dataManager.setStructure(structure, block:{
+	structure, error in
+	
+	if (error == nil) {
+		print("Error occurred while updating structures: \(error)")
+		return
+	}
+	
+	print("Updated structure with name: \(structure.name)")
+})
+```
 
 ## Devices
 

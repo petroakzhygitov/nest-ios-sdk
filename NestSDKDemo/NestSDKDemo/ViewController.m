@@ -34,12 +34,6 @@
 
     self.dataManager = [[NestSDKDataManager alloc] init];
     self.deviceObserverHandles = [[NSMutableArray alloc] init];
-
-    // Connect with Nest using NestSDKConnectWithNestButton
-    self.connectWithNestButton.delegate = self;
-
-    // Connect with Nest using your custom button
-//    [self createCustomConnectWithNestButton];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -54,25 +48,6 @@
     [super viewWillDisappear:animated];
 
     [self removeObservers];
-}
-
-
-- (void)createCustomConnectWithNestButton {
-    // Add a custom connect with button to your app
-    UIButton *customConnectWithNestButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    customConnectWithNestButton.backgroundColor = [UIColor darkGrayColor];
-    customConnectWithNestButton.frame = CGRectMake(0, 0, 240, 40);
-
-    // Optional: Place the button in the center of your view.
-    customConnectWithNestButton.center = self.view.center;
-    [customConnectWithNestButton setTitle:@"Custom Connect Button" forState:UIControlStateNormal];
-
-    // Handle clicks on the button
-    [customConnectWithNestButton addTarget:self action:@selector(customConnectWithNestButtonClicked)
-                          forControlEvents:UIControlEventTouchUpInside];
-
-    // Add the button to the view
-    [self.view addSubview:customConnectWithNestButton];
 }
 
 - (void)observeStructures {
@@ -95,10 +70,6 @@
             [self observeCamerasWithinStructure:structure];
         }
     }];
-}
-
-- (void)removeStructuresObservers {
-    [self.dataManager removeObserverWithHandle:self.structuresObserverHandle];
 }
 
 - (void)observeThermostatsWithinStructure:(id <NestSDKStructure>)structure {
@@ -149,6 +120,11 @@
     }
 }
 
+- (void)removeObservers {
+    [self removeDevicesObservers];
+    [self removeStructuresObservers];
+}
+
 - (void)removeDevicesObservers {
     for (NSNumber *handle in self.deviceObserverHandles) {
         [self.dataManager removeObserverWithHandle:handle.unsignedIntegerValue];
@@ -157,16 +133,19 @@
     [self.deviceObserverHandles removeAllObjects];
 }
 
-- (void)removeObservers {
-    [self removeDevicesObservers];
-    [self removeStructuresObservers];
+- (void)removeStructuresObservers {
+    [self.dataManager removeObserverWithHandle:self.structuresObserverHandle];
 }
 
 - (void)logMessage:(NSString *)message {
     self.nestInfoTextView.text = [self.nestInfoTextView.text stringByAppendingFormat:@"%@\n", message];
 }
 
-- (void)handleAuthorizationResult:(NestSDKAuthorizationManagerAuthorizationResult *)result error:(NSError *)error {
+#pragma mark - NestSDKConnectWithNestButtonDelegate
+
+- (void)connectWithNestButton:(NestSDKConnectWithNestButton *)connectWithNestButton
+       didAuthorizeWithResult:(NestSDKAuthorizationManagerAuthorizationResult *)result error:(NSError *)error {
+
     if (error) {
         NSLog(@"Process error: %@", error);
 
@@ -178,21 +157,6 @@
 
         [self observeStructures];
     }
-}
-
-// Once the button is clicked, show the auth dialog
-- (void)customConnectWithNestButtonClicked {
-    NestSDKAuthorizationManager *authorizationManager = [[NestSDKAuthorizationManager alloc] init];
-    [authorizationManager authorizeWithNestAccountFromViewController:self
-                                                             handler:^(NestSDKAuthorizationManagerAuthorizationResult *result, NSError *error) {
-                                                                 [self handleAuthorizationResult:result error:error];
-                                                             }];
-}
-
-- (void)connectWithNestButton:(NestSDKConnectWithNestButton *)connectWithNestButton
-       didAuthorizeWithResult:(NestSDKAuthorizationManagerAuthorizationResult *)result error:(NSError *)error {
-
-    [self handleAuthorizationResult:result error:error];
 }
 
 - (void)connectWithNestButtonDidUnauthorize:(NestSDKConnectWithNestButton *)connectWithNestButton {

@@ -11,7 +11,7 @@ Learn more about Nest API at https://developer.nest.com/documentation/cloud/get-
 
 ## Example
 
-To run the example project, clone the repo, and run `pod install` from the NestSDKDemo directory first.
+To run the example project, clone the repo, and run `pod install` from the `NestSDKDemo` or `NestSDKDemoSwift` directory first.
 
 ## Installation
 

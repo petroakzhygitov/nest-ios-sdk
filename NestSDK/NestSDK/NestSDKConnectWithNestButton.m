@@ -98,7 +98,6 @@ static NSString *const kStringCancel = @"Cancel";
 
     [self setTitle:kStringConnectWithNest forState:UIControlStateNormal];
     [self setTitle:kStringDisconnect forState:UIControlStateSelected];
-    [self setTitle:kStringDisconnect forState:UIControlStateHighlighted];
 
     UILabel *titleLabel = self.titleLabel;
     titleLabel.lineBreakMode = NSLineBreakByClipping;

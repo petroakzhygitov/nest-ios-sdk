@@ -7,6 +7,10 @@ NestSDKDemo/.idea
 NestSDKDemo/Pods
 NestSDKDemo/Podfile.lock
 NestSDKDemo/NestSDKDemo.xcworkspace
+NestSDKDemoSwift/.idea
+NestSDKDemoSwift/Pods
+NestSDKDemoSwift/Podfile.lock
+NestSDKDemoSwift/NestSDKDemoSwift.xcworkspace
 NestSDKDemoAdvanced/.idea
 NestSDKDemoAdvanced/Pods
 NestSDKDemoAdvanced/Podfile.lock

@@ -34,6 +34,35 @@
 
 #pragma mark Public
 
++ (UIImage *)imageWithColor:(UIColor *)color cornerRadius:(CGFloat)cornerRadius scale:(CGFloat)scale {
+    CGFloat size = (CGFloat) (1.0 + 2 * cornerRadius);
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(size, size), NO, scale);
+
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetFillColorWithColor(context, color.CGColor);
+
+    CGMutablePathRef path = CGPathCreateMutable();
+    CGPathMoveToPoint(path, NULL, (CGFloat) (cornerRadius + 1.0), 0.0);
+    CGPathAddArcToPoint(path, NULL, size, 0.0, size, cornerRadius, cornerRadius);
+    CGPathAddLineToPoint(path, NULL, size, (CGFloat) (cornerRadius + 1.0));
+    CGPathAddArcToPoint(path, NULL, size, size, (CGFloat) (cornerRadius + 1.0), size, cornerRadius);
+    CGPathAddLineToPoint(path, NULL, cornerRadius, size);
+    CGPathAddArcToPoint(path, NULL, 0.0, size, 0.0, (CGFloat) (cornerRadius + 1.0), cornerRadius);
+    CGPathAddLineToPoint(path, NULL, 0.0, cornerRadius);
+    CGPathAddArcToPoint(path, NULL, 0.0, 0.0, cornerRadius, 0.0, cornerRadius);
+    CGPathCloseSubpath(path);
+
+    CGContextAddPath(context, path);
+    CGPathRelease(path);
+
+    CGContextFillPath(context);
+
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+
+    return [image stretchableImageWithLeftCapWidth:(NSInteger) cornerRadius topCapHeight:(NSInteger) cornerRadius];
+}
+
 + (UIViewController *)viewControllerForView:(UIView *)view {
     UIResponder *responder = view.nextResponder;
 

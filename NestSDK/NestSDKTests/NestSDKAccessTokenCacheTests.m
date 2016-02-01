@@ -33,6 +33,8 @@ SpecBegin(NestSDKAccessTokenCache)
 
             it(@"should cache, fetch and clear access token cache", ^{
                 NestSDKAccessTokenCache *cache = [[NestSDKAccessTokenCache alloc] init];
+                [cache clearCache];
+
                 expect(cache.fetchAccessToken).to.equal(nil);
 
                 NestSDKAccessToken *accessToken = [[NestSDKAccessToken alloc] initWithTokenString:@"someToken"

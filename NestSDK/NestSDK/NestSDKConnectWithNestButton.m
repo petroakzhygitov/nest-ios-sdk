@@ -142,7 +142,8 @@ static NSString *const kStringCancel = @"Cancel";
 }
 
 - (void)_setTitleForNormalState {
-    [self setTitle:kStringConnectWithNest forState:UIControlStateNormal];
+    [self setTitle:self.selected ? kStringDisconnect : kStringConnectWithNest forState:UIControlStateNormal];
+//    [self setTitle:kStringConnectWithNest forState:UIControlStateNormal];
 }
 
 - (void)_setTitleForSelectedState {
@@ -229,6 +230,7 @@ static NSString *const kStringCancel = @"Cancel";
 - (void)setSelected:(BOOL)selected {
     [super setSelected:selected];
 
+    [self _setTitleForNormalState];
     [self _setTitleForHighlightedState];
 }
 

@@ -1,5 +1,9 @@
 # NestSDK Changelog
 
+## 0.1.3
+
+- Improved: connect with Nest button appearance
+
 ## 0.1.2
 
 - New: product data models reading/observing

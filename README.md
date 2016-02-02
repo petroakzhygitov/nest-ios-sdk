@@ -1,6 +1,6 @@
 # NestSDK for iOS
 
-[![CI Status](http://img.shields.io/travis/petroakzhygitov/nest-ios-sdk.svg?style=flat)](https://travis-ci.org/petroakzhygitov/nest-ios-sdk)
+[![CI Status](https://travis-ci.org/petroakzhygitov/nest-ios-sdk.svg?branch=master&style=flat)](https://travis-ci.org/petroakzhygitov/nest-ios-sdk)
 [![Version](https://img.shields.io/cocoapods/v/NestSDK.svg?style=flat)](http://cocoapods.org/pods/NestSDK)
 [![License](https://img.shields.io/cocoapods/l/NestSDK.svg?style=flat)](http://cocoapods.org/pods/NestSDK)
 [![Platform](https://img.shields.io/cocoapods/p/NestSDK.svg?style=flat)](http://cocoapods.org/pods/NestSDK) 

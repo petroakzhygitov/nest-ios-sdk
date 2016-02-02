@@ -19,12 +19,12 @@
 // THE SOFTWARE.
 
 #import <Foundation/Foundation.h>
-#import <NestSDK/NestSDKDataModel.h>
 #import <NestSDK/NestSDKProduct.h>
-#import <NestSDK/NestSDKProductIdentificationDataModel.h>
-#import <NestSDK/NestSDKProductLocationDataModel.h>
-#import <NestSDK/NestSDKProductSoftwareDataModel.h>
-#import <NestSDK/NestSDKProductResourceUseDataModel.h>
+#import "NestSDKDataModel.h"
+#import "NestSDKProductIdentificationDataModel.h"
+#import "NestSDKProductLocationDataModel.h"
+#import "NestSDKProductSoftwareDataModel.h"
+#import "NestSDKProductResourceUseDataModel.h"
 
 @class NestSDKProductIdentificationDataModel;
 @class NestSDKProductLocationDataModel;

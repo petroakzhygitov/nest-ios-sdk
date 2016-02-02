@@ -19,6 +19,7 @@
 // THE SOFTWARE.
 
 #import <Foundation/Foundation.h>
+#import <NestSDK/NestSDKDataModelProtocol.h>
 
 /**
  * ETA is an object, set on a structure. Use eta to give Nest information so we can prepare a house for your arrival.

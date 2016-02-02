@@ -20,6 +20,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreGraphics/CGBase.h>
+#import <NestSDK/NestSDKDataModelProtocol.h>
 
 /**
  * Protocol for Nest product resource data model.

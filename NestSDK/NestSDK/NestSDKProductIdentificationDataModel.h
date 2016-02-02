@@ -19,8 +19,8 @@
 // THE SOFTWARE.
 
 #import <Foundation/Foundation.h>
-#import <NestSDK/NestSDKDataModel.h>
 #import <NestSDK/NestSDKProductIdentification.h>
+#import "NestSDKDataModel.h"
 
 @protocol Optional;
 

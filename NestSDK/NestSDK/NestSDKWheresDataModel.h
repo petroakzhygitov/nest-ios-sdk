@@ -20,8 +20,8 @@
 
 #import <Foundation/Foundation.h>
 #import <JSONModel/JSONModel.h>
-#import <NestSDK/NestSDKDataModel.h>
-#import "NestSDKWheres.h"
+#import <NestSDK/NestSDKWheres.h>
+#import "NestSDKDataModel.h"
 
 @protocol Optional;
 

@@ -48,10 +48,19 @@ static const int kHeightForRow = 88;
 
     if ([NestSDKAccessToken currentAccessToken]) {
         [self observeStructures];
+    }
+}
 
-    } else {
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+
+    if (![NestSDKAccessToken currentAccessToken]) {
         [self _showConnectWithNestView];
     }
+}
+
+- (void)dealloc {
+    [self removeObservers];
 }
 
 - (void)_initDeviceUpdateHandlerBlock {
@@ -67,23 +76,6 @@ static const int kHeightForRow = 88;
 
         [self _addDevice:device];
     };
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-
-//    if ([NestSDKAccessToken currentAccessToken]) {
-//        [self observeStructures];
-//
-//    } else {
-//        [self _showConnectWithNestView];
-//    }
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-
-//    [self removeObservers];
 }
 
 - (void)_initUI {

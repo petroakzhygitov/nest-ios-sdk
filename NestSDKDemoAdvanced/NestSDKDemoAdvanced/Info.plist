@@ -43,5 +43,11 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NestProductID</key>
+	<string>06aca082-0282-4258-a2f9-e15446e504b0</string>
+	<key>NestProductSecret</key>
+	<string>jiicVsgR5Mu3y34JW2NxtrQS4</string>
+	<key>NestRedirectURL</key>
+	<string>https://example.com</string>
 </dict>
 </plist>

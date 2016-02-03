@@ -9,31 +9,26 @@
 #import <NestSDK/NestSDK.h>
 #import <NestSDK/NestSDKMacroses.h>
 #import "DevicesViewController.h"
-#import "ThermostatViewCell.h"
-#import "SmokeCOAlarmViewCell.h"
-#import "CameraViewCell.h"
-#import "SmokeCOAlarmIconView.h"
-#import "ThermostatIconView.h"
-#import "CameraIconView.h"
-
-static NSString *const kViewCellIdentifierThermostat = @"ThermostatViewCellIdentifier";
-static NSString *const kViewCellIdentifierSmokeCOAlarm = @"SmokeCOAlarmViewCellIdentifier";
-static NSString *const kViewCellIdentifierCamera = @"CameraViewCellIdentifier";
+#import "DevicesViewControllerHelper.h"
+#import "DeviceDetailsViewController.h"
 
 static const int kHeightForRow = 88;
+static const int kHeightForHeaderInSection = 30;
 
 
 @interface DevicesViewController ()
 
 @property(nonatomic) NestSDKDataManager *dataManager;
-@property(nonatomic) NSMutableArray *deviceObserverHandles;
 
+@property(nonatomic) NSMutableArray *deviceObserverHandles;
 @property(nonatomic) NestSDKObserverHandle structuresObserverHandle;
 
-@property(nonatomic, strong) NSArray <NestSDKStructure> *structuresArray;
-@property(nonatomic, strong) NSMutableDictionary *devicesDictionary;
+@property(nonatomic) NSArray <NestSDKStructure> *structuresArray;
+@property(nonatomic) NSMutableDictionary *devicesDictionary;
 
 @property(nonatomic, copy) void (^deviceUpdateHandlerBlock)(id <NestSDKDevice>, NSError *);
+
+@property(nonatomic) id <NestSDKDevice> selectedDevice;
 
 @end
 
@@ -43,24 +38,40 @@ static const int kHeightForRow = 88;
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    [self _initDeviceUpdateHandlerBlock];
-    [self _initUI];
+    [self _init];
 
-    if ([NestSDKAccessToken currentAccessToken]) {
-        [self observeStructures];
+    if ([self _isAuthorized]) {
+        [self _observeStructures];
     }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 
-    if (![NestSDKAccessToken currentAccessToken]) {
+    if (![self _isAuthorized]) {
         [self _showConnectWithNestView];
     }
 }
 
 - (void)dealloc {
-    [self removeObservers];
+    [self _removeObservers];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    [DevicesViewControllerHelper passDevice:self.selectedDevice toViewController:[segue destinationViewController]];
+}
+
+- (void)_init {
+    [self _initProperties];
+    [self _initDeviceUpdateHandlerBlock];
+    [self _initTableView];
+}
+
+- (void)_initProperties {
+    self.dataManager = [[NestSDKDataManager alloc] init];
+    self.deviceObserverHandles = [[NSMutableArray alloc] init];
+
+    self.title = @"Devices";
 }
 
 - (void)_initDeviceUpdateHandlerBlock {
@@ -74,26 +85,18 @@ static const int kHeightForRow = 88;
             return;
         }
 
-        [self _addDevice:device];
+        [self _updateDevice:device];
     };
 }
 
-- (void)_initUI {
-    self.title = @"Devices";
-
-    [self _initTableView];
-
-    self.dataManager = [[NestSDKDataManager alloc] init];
-    self.deviceObserverHandles = [[NSMutableArray alloc] init];
+- (void)_initTableView {
+    self.tableView.rowHeight = kHeightForRow;
+    self.tableView.sectionHeaderHeight = kHeightForHeaderInSection;
+    self.tableView.sectionFooterHeight = 0;
 }
 
-- (void)_initTableView {
-    self.tableView.estimatedRowHeight = kHeightForRow;
-    self.tableView.estimatedSectionHeaderHeight = 30;
-    self.tableView.estimatedSectionFooterHeight = 0;
-
-//    self.tableView.allowsSelection = NO;
-    self.tableView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0);
+- (BOOL)_isAuthorized {
+    return [NestSDKAccessToken currentAccessToken] != nil;
 }
 
 - (void)_showConnectWithNestView {
@@ -106,14 +109,14 @@ static const int kHeightForRow = 88;
     self.connectWithNestView.hidden = YES;
 }
 
-- (void)observeStructures {
+- (void)_observeStructures {
     // Clean up previous observers
-    [self removeObservers];
+    [self _removeObservers];
 
     // Start observing structures
     self.structuresObserverHandle = [self.dataManager observeStructuresWithBlock:^(NSArray <NestSDKStructure> *structuresArray, NSError *error) {
         // Structure may change while observing, so remove all current device observers and then set all new ones
-        [self removeDevicesObservers];
+        [self _removeDevicesObservers];
 
         self.structuresArray = structuresArray;
         self.devicesDictionary = [[NSMutableDictionary alloc] init];
@@ -147,7 +150,7 @@ static const int kHeightForRow = 88;
     }
 }
 
-- (void)_addDevice:(id <NestSDKDevice>)device {
+- (void)_updateDevice:(id <NestSDKDevice>)device {
     self.devicesDictionary[device.deviceId] = device;
 
     [self _reloadData];
@@ -157,12 +160,12 @@ static const int kHeightForRow = 88;
     [self.tableView reloadData];
 }
 
-- (void)removeObservers {
-    [self removeDevicesObservers];
+- (void)_removeObservers {
+    [self _removeDevicesObservers];
     [self removeStructuresObservers];
 }
 
-- (void)removeDevicesObservers {
+- (void)_removeDevicesObservers {
     for (NSNumber *handle in self.deviceObserverHandles) {
         [self.dataManager removeObserverWithHandle:handle.unsignedIntegerValue];
     }
@@ -174,170 +177,20 @@ static const int kHeightForRow = 88;
     [self.dataManager removeObserverWithHandle:self.structuresObserverHandle];
 }
 
-- (NSUInteger)_devicesForStructure:(id <NestSDKStructure>)structure {
-    return structure.thermostats.count + structure.smokeCoAlarms.count + structure.cameras.count;
-}
-
 - (NSString *)_cellIdentifierWithIndexPath:(NSIndexPath *)indexPath {
     id <NestSDKStructure> structure = [self _structureWithSection:(NSUInteger) indexPath.section];
-    NSString *cellIdentifier = [self _cellIdentifierWithStructure:structure deviceIndex:(NSUInteger) indexPath.row];
 
-    return cellIdentifier;
+    return [DevicesViewControllerHelper cellIdentifierWithStructure:structure deviceIndex:(NSUInteger) indexPath.row];
 }
 
 - (id <NestSDKStructure>)_structureWithSection:(NSUInteger)section {
-    id <NestSDKStructure> structure = self.structuresArray[section];
-
-    return structure;
+    return self.structuresArray[section];
 }
 
-- (NSString *)_cellIdentifierWithStructure:(id <NestSDKStructure>)structure deviceIndex:(NSUInteger)deviceIndex {
-    if ([self _isThermostatIndex:deviceIndex forStructure:structure]) {
-        return kViewCellIdentifierThermostat;
-
-    } else if ([self _isSmokeCOAlarmIndex:deviceIndex forStructure:structure]) {
-        return kViewCellIdentifierSmokeCOAlarm;
-
-    } else if ([self _isCameraIndex:deviceIndex forStructure:structure]) {
-        return kViewCellIdentifierCamera;
-    }
-
-    return nil;
-}
-
-- (NSString *)_segueIdentifierWithStructure:(id <NestSDKStructure>)structure deviceIndex:(NSUInteger)deviceIndex {
-    if ([self _isThermostatIndex:deviceIndex forStructure:structure]) {
-        return @"ThermostatDetailsSegueIdentifier";
-
-    } else if ([self _isSmokeCOAlarmIndex:deviceIndex forStructure:structure]) {
-        return @"SmokeCOAlarmDetailsSegueIdentifier";
-
-    } else if ([self _isCameraIndex:deviceIndex forStructure:structure]) {
-        return @"CameraDetailsSegueIdentifier";
-    }
-
-    return nil;
-}
-
-- (id <NestSDKSmokeCOAlarm>)_deviceWithIndex:(NSUInteger)deviceIndex forStructure:(id <NestSDKStructure>)structure {
-    NSString *deviceId = nil;
-
-    if ([self _isThermostatIndex:deviceIndex forStructure:structure]) {
-        deviceId = structure.thermostats[(NSUInteger) deviceIndex];
-
-    } else if ([self _isSmokeCOAlarmIndex:deviceIndex forStructure:structure]) {
-        deviceIndex = [self _smokeCOAlarmIndexWithDeviceIndex:deviceIndex forStructure:structure];
-        deviceId = structure.smokeCoAlarms[(NSUInteger) deviceIndex];
-
-    } else if ([self _isCameraIndex:deviceIndex forStructure:structure]) {
-        deviceIndex -= structure.thermostats.count + structure.smokeCoAlarms.count;
-        deviceId = structure.cameras[(NSUInteger) deviceIndex];
-    }
+- (id <NestSDKDevice>)_deviceWithIndex:(NSUInteger)deviceIndex forStructure:(id <NestSDKStructure>)structure {
+    NSString *deviceId = [DevicesViewControllerHelper deviceIdWithIndex:deviceIndex forStructure:structure];
 
     return self.devicesDictionary[deviceId];
-}
-
-- (BOOL)_isThermostatIndex:(NSInteger)index forStructure:(id <NestSDKStructure>)structure {
-    return index >= 0 && index < structure.thermostats.count;
-}
-
-- (BOOL)_isSmokeCOAlarmIndex:(NSInteger)index forStructure:(id <NestSDKStructure>)structure {
-    index = [self _smokeCOAlarmIndexWithDeviceIndex:index forStructure:structure];
-    return index >= 0 && index < structure.smokeCoAlarms.count;
-}
-
-- (BOOL)_isCameraIndex:(NSInteger)index forStructure:(id <NestSDKStructure>)structure {
-    index = [self _cameraIndexWithDeviceIndex:index forStructure:structure];
-    return index >= 0 && index < structure.cameras.count;
-}
-
-- (NSUInteger)_smokeCOAlarmIndexWithDeviceIndex:(NSInteger)deviceIndex forStructure:(id <NestSDKStructure>)structure {
-    return deviceIndex - structure.thermostats.count;
-}
-
-- (NSUInteger)_cameraIndexWithDeviceIndex:(NSInteger)deviceIndex forStructure:(id <NestSDKStructure>)structure {
-    return deviceIndex - structure.thermostats.count - structure.smokeCoAlarms.count;
-}
-
-- (UIColor *)_colorWithUIColorState:(NestSDKSmokeCOAlarmUIColorState)state {
-    switch (state) {
-        case NestSDKSmokeCOAlarmUIColorStateUndefined:
-            return nil;
-
-        case NestSDKSmokeCOAlarmUIColorStateGray:
-            return [UIColor grayColor];
-
-        case NestSDKSmokeCOAlarmUIColorStateGreen:
-            return [UIColor greenColor];
-
-        case NestSDKSmokeCOAlarmUIColorStateYellow:
-            return [UIColor yellowColor];
-
-        case NestSDKSmokeCOAlarmUIColorStateRed:
-            return [UIColor redColor];
-    }
-
-    return nil;
-}
-
-- (CGFloat)_targetTemperatureWithThermostat:(id <NestSDKThermostat>)thermostat {
-    switch (thermostat.temperatureScale) {
-        case NestSDKThermostatTemperatureScaleC:
-            return thermostat.targetTemperatureC;
-
-        case NestSDKThermostatTemperatureScaleF:
-            return thermostat.targetTemperatureF;
-
-        case NestSDKThermostatTemperatureScaleUndefined:
-            return 0;
-    }
-
-    return 0;
-}
-
-- (NSString *)_energySavingStringWithThermostat:(id <NestSDKThermostat>)thermostat {
-    return [NSString stringWithFormat:@"Energy saving: %@", thermostat.hasLeaf ? @"Yes" : @"No"];
-}
-
-- (NSString *)_statusStringWithCamera:(id <NestSDKCamera>)camera {
-    return [NSString stringWithFormat:@"Status: %@", camera.isOnline ? @"Online" : @"Offline"];
-}
-
-- (NSString *)_batteryHealthStringWithSmokeCOAlarm:(id <NestSDKSmokeCOAlarm>)smokeCOAlarm {
-    NSString *batteryHealthString = @"Undefined";
-
-    switch (smokeCOAlarm.batteryHealth) {
-        case NestSDKSmokeCOAlarmBatteryHealthUndefined:
-            batteryHealthString = @"Undefined";
-
-            break;
-        case NestSDKSmokeCOAlarmBatteryHealthOk:
-            batteryHealthString = @"OK";
-
-            break;
-        case NestSDKSmokeCOAlarmBatteryHealthReplace:
-            batteryHealthString = @"Replace";
-
-            break;
-    }
-
-    return [NSString stringWithFormat:@"Battery health: %@", batteryHealthString];
-}
-
-- (ThermostatIconViewState)_thermostatIconViewStateWithThermostat:(id <NestSDKThermostat>)thermostat {
-    switch (thermostat.hvacState) {
-        case NestSDKThermostatHVACStateUndefined:
-        case NestSDKThermostatHVACStateOff:
-            return ThermostatIconViewStateOff;
-
-        case NestSDKThermostatHVACStateHeating:
-            return ThermostatIconViewStateHeating;
-
-        case NestSDKThermostatHVACStateCooling:
-            return ThermostatIconViewStateCooling;
-    }
-
-    return ThermostatIconViewStateOff;
 }
 
 #pragma mark Delegate <UITableViewDataSource>
@@ -347,7 +200,7 @@ static const int kHeightForRow = 88;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self _devicesForStructure:self.structuresArray[(NSUInteger) section]];
+    return [DevicesViewControllerHelper devicesForStructure:self.structuresArray[(NSUInteger) section]];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -364,53 +217,27 @@ static const int kHeightForRow = 88;
 
 #pragma mark Delegate <UITableViewDelegate>
 
-- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-    return [[UIView alloc] initWithFrame:CGRectZero];
-}
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return kHeightForRow;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 30;
+    return kHeightForHeaderInSection;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     id <NestSDKStructure> structure = [self _structureWithSection:(NSUInteger) indexPath.section];
     id <NestSDKDevice> device = [self _deviceWithIndex:(NSUInteger) indexPath.row forStructure:structure];
 
-    if ([cell isKindOfClass:[ThermostatViewCell class]]) {
-        id <NestSDKThermostat> thermostat = (id <NestSDKThermostat>) device;
-
-        ThermostatViewCell *thermostatViewCell = (ThermostatViewCell *) cell;
-        thermostatViewCell.nameLabel.text = thermostat.nameLong;
-        thermostatViewCell.energySavingLabel.text = [self _energySavingStringWithThermostat:thermostat];
-        thermostatViewCell.iconView.state = [self _thermostatIconViewStateWithThermostat:thermostat];
-        thermostatViewCell.iconView.targetTemperature = [self _targetTemperatureWithThermostat:thermostat];
-
-    } else if ([cell isKindOfClass:[SmokeCOAlarmViewCell class]]) {
-        id <NestSDKSmokeCOAlarm> smokeCOAlarm = (id <NestSDKSmokeCOAlarm>) device;
-
-        SmokeCOAlarmViewCell *smokeCOAlarmViewCell = (SmokeCOAlarmViewCell *) cell;
-        smokeCOAlarmViewCell.nameLabel.text = smokeCOAlarm.nameLong;
-        smokeCOAlarmViewCell.batteryStatusLabel.text = [self _batteryHealthStringWithSmokeCOAlarm:smokeCOAlarm];
-        smokeCOAlarmViewCell.iconView.color = SmokeCOAlarmIconViewColorGreen;
-
-    } else if ([cell isKindOfClass:[CameraViewCell class]]) {
-        id <NestSDKCamera> camera = (id <NestSDKCamera>) device;
-
-        CameraViewCell *cameraViewCell = (CameraViewCell *) cell;
-        cameraViewCell.nameLabel.text = camera.nameLong;
-        cameraViewCell.statusLabel.text = [self _statusStringWithCamera:camera];
-        cameraViewCell.iconView.streaming = camera.isStreaming;
-    }
+    [DevicesViewControllerHelper populateCell:cell withDevice:device];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     id <NestSDKStructure> structure = [self _structureWithSection:(NSUInteger) indexPath.section];
-    NSString *segueIdentifier = [self _segueIdentifierWithStructure:structure deviceIndex:(NSUInteger) indexPath.row];
 
+    self.selectedDevice = [self _deviceWithIndex:(NSUInteger) indexPath.row forStructure:structure];
+
+    NSString *segueIdentifier = [DevicesViewControllerHelper segueIdentifierWithStructure:structure deviceIndex:(NSUInteger) indexPath.row];
     [self performSegueWithIdentifier:segueIdentifier sender:self];
 }
 
@@ -430,12 +257,14 @@ static const int kHeightForRow = 88;
             [self _hideConnectWithNestView];
         });
 
-        [self observeStructures];
+        [self _observeStructures];
     }
 }
 
 - (void)connectWithNestButtonDidUnauthorize:(NestSDKConnectWithNestButton *)connectWithNestButton {
+    NSLog(@"Unauthorized!");
 
+    [self _removeObservers];
 }
 
 @end

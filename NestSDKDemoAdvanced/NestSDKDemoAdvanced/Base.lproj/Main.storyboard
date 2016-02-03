@@ -273,10 +273,10 @@
             </objects>
             <point key="canvasLocation" x="1897" y="387"/>
         </scene>
-        <!--View Controller-->
+        <!--Thermostat Details View Controller-->
         <scene sceneID="sGQ-eV-eue">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="kFT-Of-QfK" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="kFT-Of-QfK" customClass="ThermostatDetailsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="FPl-Gm-bpI"/>
                         <viewControllerLayoutGuide type="bottom" id="ElM-XB-sgB"/>
@@ -293,7 +293,7 @@
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wVs-GD-Lnb" customClass="ThermostatIconView">
-                                            <rect key="frame" x="218" y="15" width="123.5" height="123.5"/>
+                                            <rect key="frame" x="238.5" y="15" width="123.5" height="123.5"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="wVs-GD-Lnb" secondAttribute="height" multiplier="1:1" id="guy-eE-Ksu"/>
@@ -336,6 +336,10 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="kFT-Of-QfK" id="Uv8-sx-6ad"/>
+                                    <outlet property="delegate" destination="kFT-Of-QfK" id="wVq-9c-npI"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -346,15 +350,18 @@
                             <constraint firstItem="ElM-XB-sgB" firstAttribute="top" secondItem="wJj-5L-6HZ" secondAttribute="bottom" id="xMe-zo-lgX"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="wJj-5L-6HZ" id="lez-tL-xUf"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8cx-BL-M3b" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2711" y="-344"/>
         </scene>
-        <!--View Controller-->
+        <!--Device Details View Controller-->
         <scene sceneID="5GR-ne-Jpx">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="f2B-fG-idp" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="f2B-fG-idp" customClass="DeviceDetailsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="qNJ-W2-XA2"/>
                         <viewControllerLayoutGuide type="bottom" id="rLb-WQ-YwY"/>
@@ -429,10 +436,10 @@
             </objects>
             <point key="canvasLocation" x="2711" y="387"/>
         </scene>
-        <!--View Controller-->
+        <!--Device Details View Controller-->
         <scene sceneID="5d2-cZ-Dpm">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="YPs-fe-3gI" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="YPs-fe-3gI" customClass="DeviceDetailsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="lTO-Yw-waq"/>
                         <viewControllerLayoutGuide type="bottom" id="NfD-sQ-fL5"/>

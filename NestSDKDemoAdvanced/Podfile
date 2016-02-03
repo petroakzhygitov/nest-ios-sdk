@@ -3,4 +3,5 @@ use_frameworks!
 target 'NestSDKDemoAdvanced' do
   #pod 'NestSDK', :github => 'https://github.com/petroakzhygitov/nest-ios-sdk'
   pod 'NestSDK', :path => './..'
+  pod 'XLForm'
 end

@@ -1,18 +1,33 @@
 #import <Foundation/Foundation.h>
+#import <NestSDK/NestSDKDevice.h>
 
-#pragma mark macros
+@protocol NestSDKDevice;
 
-#pragma mark const
-
-#pragma mark enum
-
-#pragma mark typedef
-
-#pragma mark Protocol
-
-@interface DeviceViewModel : NSObject
+@protocol DeviceViewModel <NSObject>
 #pragma mark Properties
 
+@property(nonatomic) id <NestSDKDevice> device;
+
+@property(nonatomic, readonly, copy) NSString *deviceIdText;
+@property(nonatomic, readonly, copy) NSString *softwareVersionText;
+@property(nonatomic, readonly, copy) NSString *structureIdText;
+@property(nonatomic, readonly, copy) NSString *nameText;
+@property(nonatomic, readonly, copy) NSString *nameLongText;
+@property(nonatomic, readonly, copy) NSString *isOnlineText;
+@property(nonatomic, readonly, copy) NSString *whereIdText;
+
+@end
+
+
+@interface DeviceViewModel : NSObject <DeviceViewModel>
+#pragma mark Properties
+
+@property(nonatomic) id <NestSDKDevice> device;
+
 #pragma mark Methods
+
++ (id <DeviceViewModel>)viewModelWithDevice:(id <NestSDKDevice>)device;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end

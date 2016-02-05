@@ -1,27 +1,27 @@
 #import <Foundation/Foundation.h>
+#import <NestSDK/NestSDKSmokeCOAlarm.h>
+#import "DeviceViewModel.h"
 #import "SmokeCOAlarmIconView.h"
 
-#pragma mark macros
+@protocol NestSDKSmokeCOAlarm;
 
-#pragma mark const
-
-#pragma mark enum
-
-#pragma mark typedef
-
-#pragma mark Protocol
-
-@interface SmokeCOAlarmViewModel : NSObject
+@protocol SmokeCOAlarmViewModel <DeviceViewModel>
 #pragma mark Properties
 
-@property(nonatomic, copy) NSString *nameLongText;
+@property(nonatomic) id <NestSDKSmokeCOAlarm> device;
 
 @property(nonatomic, copy) NSString *batteryStatusText;
 
-@property(nonatomic) enum SmokeCOAlarmIconViewColor iconViewColor;
+@property(nonatomic) SmokeCOAlarmIconViewColor iconViewColor;
 
-+ (instancetype)viewModelWithSmokeCOAlarm:(id <NestSDKSmokeCOAlarm>)alarm;
+@end
 
-#pragma mark Methods
 
+@interface SmokeCOAlarmViewModel : DeviceViewModel <SmokeCOAlarmViewModel>
+#pragma mark Properties
+
+@property(nonatomic) id <NestSDKSmokeCOAlarm> device;
+
+@property(nonatomic, copy) NSString *lastConnectionText;
+@property(nonatomic, copy) NSString *localeText;
 @end

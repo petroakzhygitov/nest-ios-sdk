@@ -113,10 +113,10 @@ static const int kInsetMultiplierTemperatureLabelRect = 10;
     self.displayLayer.fillColor = color.CGColor;
 }
 
-- (void)setTargetTemperature:(CGFloat)targetTemperature {
-    _targetTemperature = targetTemperature;
+- (void)setTargetTemperatureValue:(NSNumber *)targetTemperatureValue {
+    _targetTemperatureValue = targetTemperatureValue;
 
-    self.temperatureLabel.text = @(targetTemperature).stringValue;
+    self.temperatureLabel.text = targetTemperatureValue.stringValue;
 }
 
 

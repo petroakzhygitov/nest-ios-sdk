@@ -1,32 +1,75 @@
+#import <NestSDK/NestSDKDevice.h>
+#import <NestSDK/NestSDKThermostat.h>
+#import <NestSDK/NestSDKSmokeCOAlarm.h>
+#import <NestSDK/NestSDKCamera.h>
 #import "DeviceViewModel.h"
-
-#pragma mark macros
-
-#pragma mark const
-
-#pragma mark enum
-
-#pragma mark typedef
+#import "ThermostatViewModel.h"
+#import "CameraViewModel.h"
+#import "SmokeCOAlarmViewModel.h"
 
 
-@implementation DeviceViewModel {
-#pragma mark Instance variables
-}
-
+@implementation DeviceViewModel
 #pragma mark Initializer
+
++ (Class)_viewModelClassWithDevice:(id <NestSDKDevice>)device {
+    if ([device conformsToProtocol:@protocol(NestSDKThermostat)]) {
+        return [ThermostatViewModel class];
+
+    } else if ([device conformsToProtocol:@protocol(NestSDKSmokeCOAlarm)]) {
+        return [SmokeCOAlarmViewModel class];
+
+    } else if ([device conformsToProtocol:@protocol(NestSDKCamera)]) {
+        return [CameraViewModel class];
+    }
+
+    return nil;
+}
 
 #pragma mark Private
 
-#pragma mark Notification selectors
++ (id <DeviceViewModel>)viewModelWithDevice:(id <NestSDKDevice>)device {
+    Class viewModelClass = [self _viewModelClassWithDevice:device];
 
-#pragma mark Override
+    id <DeviceViewModel> deviceViewModel = (id <DeviceViewModel>) [[viewModelClass alloc] init];
+    deviceViewModel.device = device;
+
+    return deviceViewModel;
+}
 
 #pragma mark Public
 
-#pragma mark IBAction
+- (NSString *)textWithBoolValue:(BOOL)value {
+    return value ? @"Yes" : @"No";
+}
 
-#pragma mark Protocol @protocol-name
+#pragma mark Override
 
-#pragma mark Delegate @delegate-name
+- (NSString *)deviceIdText {
+    return self.device.deviceId;
+}
+
+- (NSString *)softwareVersionText {
+    return self.device.softwareVersion;
+}
+
+- (NSString *)structureIdText {
+    return self.device.structureId;
+}
+
+- (NSString *)nameText {
+    return self.device.name;
+}
+
+- (NSString *)nameLongText {
+    return self.device.nameLong;
+}
+
+- (NSString *)isOnlineText {
+    return [self textWithBoolValue:self.device.isOnline];
+}
+
+- (NSString *)whereIdText {
+    return self.device.whereId;
+}
 
 @end

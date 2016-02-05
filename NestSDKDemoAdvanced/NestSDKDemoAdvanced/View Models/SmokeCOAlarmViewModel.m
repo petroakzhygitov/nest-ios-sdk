@@ -1,27 +1,36 @@
 #import <NestSDK/NestSDKSmokeCOAlarm.h>
 #import "SmokeCOAlarmViewModel.h"
 
-#pragma mark macros
 
-#pragma mark const
+@implementation SmokeCOAlarmViewModel
+#pragma mark Override
 
-#pragma mark enum
+- (SmokeCOAlarmIconViewColor)iconViewColor {
+    switch (self.device.uiColorState) {
+        case NestSDKSmokeCOAlarmUIColorStateUndefined:
+            return nil;
 
-#pragma mark typedef
+        case NestSDKSmokeCOAlarmUIColorStateGray:
+            return SmokeCOAlarmIconViewColorGray;
 
+        case NestSDKSmokeCOAlarmUIColorStateGreen:
+            return SmokeCOAlarmIconViewColorGreen;
 
-@implementation SmokeCOAlarmViewModel {
-#pragma mark Instance variables
+        case NestSDKSmokeCOAlarmUIColorStateYellow:
+            return SmokeCOAlarmIconViewColorYellow;
+
+        case NestSDKSmokeCOAlarmUIColorStateRed:
+            return SmokeCOAlarmIconViewColorRed;
+    }
+
+    return nil;
+
 }
 
-#pragma mark Initializer
-
-#pragma mark Private
-
-- (NSString *)_batteryHealthStringWithSmokeCOAlarm:(id <NestSDKSmokeCOAlarm>)smokeCOAlarm {
+- (NSString *)batteryStatusText {
     NSString *batteryHealthString = @"Undefined";
 
-    switch (smokeCOAlarm.batteryHealth) {
+    switch (self.device.batteryHealth) {
         case NestSDKSmokeCOAlarmBatteryHealthUndefined:
             batteryHealthString = @"Undefined";
 
@@ -38,42 +47,5 @@
 
     return [NSString stringWithFormat:@"Battery health: %@", batteryHealthString];
 }
-
-+ (instancetype)viewModelWithSmokeCOAlarm:(id <NestSDKSmokeCOAlarm>)alarm {
-    return nil;
-}
-
-- (UIColor *)_colorWithUIColorState:(NestSDKSmokeCOAlarmUIColorState)state {
-    switch (state) {
-        case NestSDKSmokeCOAlarmUIColorStateUndefined:
-            return nil;
-
-        case NestSDKSmokeCOAlarmUIColorStateGray:
-            return [UIColor grayColor];
-
-        case NestSDKSmokeCOAlarmUIColorStateGreen:
-            return [UIColor greenColor];
-
-        case NestSDKSmokeCOAlarmUIColorStateYellow:
-            return [UIColor yellowColor];
-
-        case NestSDKSmokeCOAlarmUIColorStateRed:
-            return [UIColor redColor];
-    }
-
-    return nil;
-}
-
-#pragma mark Notification selectors
-
-#pragma mark Override
-
-#pragma mark Public
-
-#pragma mark IBAction
-
-#pragma mark Protocol @protocol-name
-
-#pragma mark Delegate @delegate-name
 
 @end

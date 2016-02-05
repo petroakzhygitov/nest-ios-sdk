@@ -351,6 +351,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="iconView" destination="wVs-GD-Lnb" id="bxq-e9-xWY"/>
+                        <outlet property="nameLabel" destination="eYU-Q0-csv" id="TiH-wj-1KM"/>
                         <outlet property="tableView" destination="wJj-5L-6HZ" id="lez-tL-xUf"/>
                     </connections>
                 </viewController>
@@ -358,10 +360,10 @@
             </objects>
             <point key="canvasLocation" x="2711" y="-344"/>
         </scene>
-        <!--Device Details View Controller-->
+        <!--SmokeCO Alarm Details View Controller-->
         <scene sceneID="5GR-ne-Jpx">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="f2B-fG-idp" customClass="DeviceDetailsViewController" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="f2B-fG-idp" customClass="SmokeCOAlarmDetailsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="qNJ-W2-XA2"/>
                         <viewControllerLayoutGuide type="bottom" id="rLb-WQ-YwY"/>
@@ -421,6 +423,10 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="f2B-fG-idp" id="7jX-u8-nRH"/>
+                                    <outlet property="delegate" destination="f2B-fG-idp" id="tT6-ZC-6PL"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -431,15 +437,20 @@
                             <constraint firstItem="byK-gD-Jd2" firstAttribute="leading" secondItem="vaS-wn-gK0" secondAttribute="leading" id="x9J-qL-U9W"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="iconView" destination="CBc-9H-b5f" id="pGW-Ve-Xwm"/>
+                        <outlet property="nameLabel" destination="OI5-cd-xzo" id="A6s-ge-vyf"/>
+                        <outlet property="tableView" destination="byK-gD-Jd2" id="cOO-Ns-LhZ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mrr-E5-6xN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2711" y="387"/>
         </scene>
-        <!--Device Details View Controller-->
+        <!--Camera Details View Controller-->
         <scene sceneID="5d2-cZ-Dpm">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="YPs-fe-3gI" customClass="DeviceDetailsViewController" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="YPs-fe-3gI" customClass="CameraDetailsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="lTO-Yw-waq"/>
                         <viewControllerLayoutGuide type="bottom" id="NfD-sQ-fL5"/>
@@ -499,6 +510,10 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="YPs-fe-3gI" id="OqG-Ml-Kld"/>
+                                    <outlet property="delegate" destination="YPs-fe-3gI" id="Xoi-zj-M1K"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -509,6 +524,11 @@
                             <constraint firstItem="NfD-sQ-fL5" firstAttribute="top" secondItem="fq7-nX-YED" secondAttribute="bottom" id="j2P-ZZ-HOh"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="iconView" destination="Wia-mD-uba" id="vcD-SJ-EA5"/>
+                        <outlet property="nameLabel" destination="LPP-ha-KWA" id="i5g-Xv-NTf"/>
+                        <outlet property="tableView" destination="fq7-nX-YED" id="lqh-Y7-OHr"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iWY-am-UXf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

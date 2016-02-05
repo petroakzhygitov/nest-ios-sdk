@@ -28,16 +28,16 @@ static NSString *const kSegueIdentifierCameraDetails = @"CameraDetailsSegueIdent
 #pragma mark Private
 
 + (void)_populateThermostatCell:(ThermostatViewCell *)cell withThermostat:(id <NestSDKThermostat>)thermostat {
-    ThermostatViewModel *viewModel = [ThermostatViewModel viewModelWithThermostat:thermostat];
+    ThermostatViewModel *viewModel = [DeviceViewModel viewModelWithDevice:thermostat];
 
     cell.nameLabel.text = viewModel.nameLongText;
     cell.energySavingLabel.text = viewModel.energySavingText;
     cell.iconView.state = viewModel.iconViewState;
-    cell.iconView.targetTemperature = viewModel.iconViewTargetTemperature;
+    cell.iconView.targetTemperatureValue = viewModel.targetTemperatureValue;
 }
 
 + (void)_populateSmokeCOAlarmCell:(SmokeCOAlarmViewCell *)cell withSmokeCOAlarm:(id <NestSDKSmokeCOAlarm>)smokeCOAlarm {
-    SmokeCOAlarmViewModel *viewModel = [SmokeCOAlarmViewModel viewModelWithSmokeCOAlarm:smokeCOAlarm];
+    SmokeCOAlarmViewModel *viewModel = [DeviceViewModel viewModelWithDevice:smokeCOAlarm];
 
     cell.nameLabel.text = viewModel.nameLongText;
     cell.batteryStatusLabel.text = viewModel.batteryStatusText;
@@ -45,7 +45,7 @@ static NSString *const kSegueIdentifierCameraDetails = @"CameraDetailsSegueIdent
 }
 
 + (void)_populateCameraCell:(CameraViewCell *)cell withCamera:(id <NestSDKCamera>)camera {
-    CameraViewModel *viewModel = [CameraViewModel viewModelWithCamera:camera];
+    CameraViewModel *viewModel = [DeviceViewModel viewModelWithDevice:camera];
 
     cell.nameLabel.text = viewModel.nameLongText;
     cell.statusLabel.text = viewModel.connectionStatusText;
@@ -74,10 +74,6 @@ static NSString *const kSegueIdentifierCameraDetails = @"CameraDetailsSegueIdent
     return deviceIndex - structure.thermostats.count - structure.smokeCoAlarms.count;
 }
 
-+ (BOOL)_device:(id <NestSDKDevice>)device conformsProtocol:(Protocol *)aProtocol {
-    return [[device class] conformsToProtocol:aProtocol];
-}
-
 #pragma mark Public
 
 + (void)populateCell:(UITableViewCell *)cell withDevice:(id <NestSDKDevice>)device {
@@ -93,7 +89,9 @@ static NSString *const kSegueIdentifierCameraDetails = @"CameraDetailsSegueIdent
 }
 
 + (void)passDevice:(id <NestSDKDevice>)device toViewController:(UIViewController *)controller {
-    ((DeviceDetailsViewController *) controller).device = device;
+    DeviceViewModel *deviceViewModel = [DeviceViewModel viewModelWithDevice:device];
+
+    ((DeviceDetailsViewController *) controller).deviceViewModel = deviceViewModel;
 }
 
 + (NSUInteger)devicesForStructure:(id <NestSDKStructure>)structure {

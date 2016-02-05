@@ -1,37 +1,16 @@
 #import <NestSDK/NestSDKCamera.h>
 #import "CameraViewModel.h"
 
-#pragma mark macros
 
-#pragma mark const
-
-#pragma mark enum
-
-#pragma mark typedef
-
-
-@implementation CameraViewModel {
-#pragma mark Instance variables
-}
-
-#pragma mark Initializer
-
-+ (instancetype)viewModelWithCamera:(id <NestSDKCamera>)camera {
-    return nil;
-}
-
-#pragma mark Private
-
-#pragma mark Notification selectors
-
+@implementation CameraViewModel
 #pragma mark Override
 
-#pragma mark Public
+- (BOOL)streaming {
+    return self.device.isStreaming;
+}
 
-#pragma mark IBAction
-
-#pragma mark Protocol @protocol-name
-
-#pragma mark Delegate @delegate-name
+- (NSString *)connectionStatusText {
+    return [NSString stringWithFormat:@"Connection status: %@", self.device.isOnline ? @"Online" : @"Offline"];
+}
 
 @end

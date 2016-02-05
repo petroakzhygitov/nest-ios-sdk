@@ -1,17 +1,19 @@
 #import <Foundation/Foundation.h>
+#import "DeviceViewModel.h"
 
 
-@interface CameraViewModel : NSObject
+@protocol CameraViewModel <DeviceViewModel>
 #pragma mark Properties
 
-@property(nonatomic, copy) NSString *nameLongText;
+@property(nonatomic) id <NestSDKCamera> device;
 
 @property(nonatomic, copy) NSString *connectionStatusText;
 
 @property(nonatomic) BOOL streaming;
 
-#pragma mark Methods
+@end
 
-+ (instancetype)viewModelWithCamera:(id <NestSDKCamera>)camera;
+
+@interface CameraViewModel : DeviceViewModel <CameraViewModel>
 
 @end

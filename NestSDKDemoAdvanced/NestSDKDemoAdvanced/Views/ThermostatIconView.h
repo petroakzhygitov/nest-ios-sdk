@@ -14,6 +14,6 @@ typedef NS_ENUM(NSUInteger, ThermostatIconViewState) {
 #pragma mark Properties
 
 @property(nonatomic) ThermostatIconViewState state;
-@property(nonatomic) CGFloat targetTemperature;
+@property(nonatomic) NSNumber *targetTemperatureValue;
 
 @end

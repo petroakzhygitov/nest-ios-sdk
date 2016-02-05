@@ -22,6 +22,14 @@
 #import <CoreGraphics/CGBase.h>
 #import <NestSDK/NestSDKDevice.h>
 
+#pragma mark const
+FOUNDATION_EXPORT const NSUInteger NestSDKThermostatTemperatureCAllowableMin;
+FOUNDATION_EXPORT const NSUInteger NestSDKThermostatTemperatureCAllowableMax;
+
+FOUNDATION_EXPORT const NSUInteger NestSDKThermostatTemperatureFAllowableMin;
+FOUNDATION_EXPORT const NSUInteger NestSDKThermostatTemperatureFAllowableMax;
+
+
 #pragma mark typedef
 typedef NS_ENUM(NSUInteger, NestSDKThermostatTemperatureScale) {
     NestSDKThermostatTemperatureScaleUndefined = 0,

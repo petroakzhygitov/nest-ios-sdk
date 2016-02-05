@@ -35,11 +35,11 @@ static NSString *const kHVACModeStringCool = @"cool";
 static NSString *const kHVACModeStringHeatCool = @"heat-cool";
 static NSString *const kHVACModeStringOff = @"off";
 
-static const NSUInteger kTemperatureCAllowableMin = 9;
-static const NSUInteger kTemperatureCAllowableMax = 32;
+const NSUInteger NestSDKThermostatTemperatureCAllowableMin = 9;
+const NSUInteger NestSDKThermostatTemperatureCAllowableMax = 32;
 
-static const NSUInteger kTemperatureFAllowableMin = 48;
-static const NSUInteger kTemperatureFAllowableMax = 90;
+const NSUInteger NestSDKThermostatTemperatureFAllowableMin = 48;
+const NSUInteger NestSDKThermostatTemperatureFAllowableMax = 90;
 
 
 @implementation NestSDKThermostatDataModel
@@ -57,14 +57,14 @@ static const NSUInteger kTemperatureFAllowableMax = 90;
 
 - (CGFloat)_temperatureInAllowableRangeWithTemperatureC:(CGFloat)temperatureC {
     return [self _temperatureInAllowableRangeWithTemperature:temperatureC
-                                                allowableMin:kTemperatureCAllowableMin
-                                                allowableMax:kTemperatureCAllowableMax];
+                                                allowableMin:NestSDKThermostatTemperatureCAllowableMin
+                                                allowableMax:NestSDKThermostatTemperatureCAllowableMax];
 }
 
 - (NSUInteger)_temperatureInAllowableRangeWithTemperatureF:(NSUInteger)temperatureF {
     return (NSUInteger) [self _temperatureInAllowableRangeWithTemperature:temperatureF
-                                                       allowableMin:kTemperatureFAllowableMin
-                                                       allowableMax:kTemperatureFAllowableMax];
+                                                       allowableMin:NestSDKThermostatTemperatureFAllowableMin
+                                                       allowableMax:NestSDKThermostatTemperatureFAllowableMax];
 }
 
 #pragma mark Override

@@ -20,14 +20,14 @@
 
 #import <JSONModel/JSONModel.h>
 #import <NestSDK/NestSDKDataManager.h>
-#import <NestSDK/NestSDKMetadataDataModel.h>
 #import <NestSDK/NestSDKApplicationDelegate.h>
 #import <NestSDK/NestSDKError.h>
-#import <NestSDK/NestSDKStructureDataModel.h>
-#import <NestSDK/NestSDKThermostatDataModel.h>
-#import <NestSDK/NestSDKCameraDataModel.h>
-#import <NestSDK/NestSDKDataManagerHelper.h>
 #import <NestSDK/NestSDKMacroses.h>
+#import "NestSDKMetadataDataModel.h"
+#import "NestSDKStructureDataModel.h"
+#import "NestSDKThermostatDataModel.h"
+#import "NestSDKCameraDataModel.h"
+#import "NestSDKDataManagerHelper.h"
 
 #pragma mark const
 

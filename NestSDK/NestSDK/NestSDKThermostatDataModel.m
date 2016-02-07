@@ -63,8 +63,47 @@ const NSUInteger NestSDKThermostatTemperatureFAllowableMax = 90;
 
 - (NSUInteger)_temperatureInAllowableRangeWithTemperatureF:(NSUInteger)temperatureF {
     return (NSUInteger) [self _temperatureInAllowableRangeWithTemperature:temperatureF
-                                                       allowableMin:NestSDKThermostatTemperatureFAllowableMin
-                                                       allowableMax:NestSDKThermostatTemperatureFAllowableMax];
+                                                             allowableMin:NestSDKThermostatTemperatureFAllowableMin
+                                                             allowableMax:NestSDKThermostatTemperatureFAllowableMax];
+}
+
+- (NSArray *)_writablePropertyNamesArraySatisfyingTemperatureScaleWithArray:(NSArray *)array {
+    NSString *suffix;
+
+    switch (self.temperatureScale) {
+        case NestSDKThermostatTemperatureScaleUndefined:
+            break;
+
+        case NestSDKThermostatTemperatureScaleC:
+            suffix = @"F";
+
+            break;
+        case NestSDKThermostatTemperatureScaleF:
+            suffix = @"C";
+
+            break;
+    }
+
+    NSArray *propertyNamesToRemoveArray = [self _writableTemperaturePropertyNameWithSuffix:suffix];
+
+    NSMutableArray *mutableArray = [array mutableCopy];
+    [mutableArray removeObjectsInArray:propertyNamesToRemoveArray];
+
+    return mutableArray;
+}
+
+- (NSArray *)_writableTemperaturePropertyNameWithSuffix:(NSString *)suffix {
+    if (suffix.length == 0) return @[];
+
+    NSString *targetTemperature = [self _temperaturePropertyWithName:@"targetTemperature" suffix:suffix];
+    NSString *targetTemperatureHigh = [self _temperaturePropertyWithName:@"targetTemperatureHigh" suffix:suffix];
+    NSString *targetTemperatureLow = [self _temperaturePropertyWithName:@"targetTemperatureLow" suffix:suffix];
+
+    return @[targetTemperature, targetTemperatureHigh, targetTemperatureLow];
+}
+
+- (NSString *)_temperaturePropertyWithName:(NSString *)propertyName suffix:(NSString *)suffix {
+    return [NSString stringWithFormat:@"%@%@", propertyName, suffix];
 }
 
 #pragma mark Override
@@ -214,6 +253,13 @@ const NSUInteger NestSDKThermostatTemperatureFAllowableMax = 90;
     }
 
     return nil;
+}
+
+- (NSArray *)writablePropertyNamesArrayWithProtocol:(Protocol *)aProtocol {
+    NSArray *array = [super writablePropertyNamesArrayWithProtocol:aProtocol];
+    array = [self _writablePropertyNamesArraySatisfyingTemperatureScaleWithArray:array];
+
+    return array;
 }
 
 - (void)copyPropertiesToDataModelCopy:(id <NestSDKDataModelProtocol>)copy {

@@ -216,6 +216,37 @@ const NSUInteger NestSDKThermostatTemperatureFAllowableMax = 90;
     return nil;
 }
 
+- (void)copyPropertiesToDataModelCopy:(id <NestSDKDataModelProtocol>)copy {
+    [super copyPropertiesToDataModelCopy:copy];
+
+    NestSDKThermostatDataModel *thermostatDataModelCopy = (NestSDKThermostatDataModel *) copy;
+    thermostatDataModelCopy.locale = self.locale;
+    thermostatDataModelCopy.lastConnection = self.lastConnection;
+    thermostatDataModelCopy.canCool = self.canCool;
+    thermostatDataModelCopy.canHeat = self.canHeat;
+    thermostatDataModelCopy.isUsingEmergencyHeat = self.isUsingEmergencyHeat;
+    thermostatDataModelCopy.hasFan = self.hasFan;
+    thermostatDataModelCopy.fanTimerActive = self.fanTimerActive;
+    thermostatDataModelCopy.fanTimerTimeout = self.fanTimerTimeout;
+    thermostatDataModelCopy.hasLeaf = self.hasLeaf;
+    thermostatDataModelCopy.temperatureScale = self.temperatureScale;
+    thermostatDataModelCopy.targetTemperatureF = self.targetTemperatureF;
+    thermostatDataModelCopy.targetTemperatureC = self.targetTemperatureC;
+    thermostatDataModelCopy.targetTemperatureHighF = self.targetTemperatureHighF;
+    thermostatDataModelCopy.targetTemperatureHighC = self.targetTemperatureHighC;
+    thermostatDataModelCopy.targetTemperatureLowF = self.targetTemperatureLowF;
+    thermostatDataModelCopy.targetTemperatureLowC = self.targetTemperatureLowC;
+    thermostatDataModelCopy.awayTemperatureHighF = self.awayTemperatureHighF;
+    thermostatDataModelCopy.awayTemperatureHighC = self.awayTemperatureHighC;
+    thermostatDataModelCopy.awayTemperatureLowF = self.awayTemperatureLowF;
+    thermostatDataModelCopy.awayTemperatureLowC = self.awayTemperatureLowC;
+    thermostatDataModelCopy.hvacMode = self.hvacMode;
+    thermostatDataModelCopy.ambientTemperatureC = self.ambientTemperatureC;
+    thermostatDataModelCopy.ambientTemperatureF = self.ambientTemperatureF;
+    thermostatDataModelCopy.humidity = self.humidity;
+    thermostatDataModelCopy.hvacState = self.hvacState;
+}
+
 - (NSUInteger)hash {
     NSUInteger intValueForYes = 1231;
     NSUInteger intValueForNo = 1237;

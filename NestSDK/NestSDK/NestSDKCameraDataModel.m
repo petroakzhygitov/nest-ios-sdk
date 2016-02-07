@@ -32,6 +32,19 @@
     return [NestSDKUtils iso8601FormatDateStringWithDate:self.lastIsOnlineChange];
 }
 
+- (void)copyPropertiesToDataModelCopy:(id <NestSDKDataModelProtocol>)copy {
+    [super copyPropertiesToDataModelCopy:copy];
+
+    NestSDKCameraDataModel *cameraDataModelCopy = (NestSDKCameraDataModel *) copy;
+    cameraDataModelCopy.isStreaming = self.isStreaming;
+    cameraDataModelCopy.isAudioInputEnabled = self.isAudioInputEnabled;
+    cameraDataModelCopy.lastIsOnlineChange = self.lastIsOnlineChange;
+    cameraDataModelCopy.isVideoHistoryEnabled = self.isVideoHistoryEnabled;
+    cameraDataModelCopy.webUrl = self.webUrl;
+    cameraDataModelCopy.appUrl = self.appUrl;
+    cameraDataModelCopy.lastEvent = self.lastEvent;
+}
+
 - (NSUInteger)hash {
     NSUInteger intValueForYes = 1231;
     NSUInteger intValueForNo = 1237;

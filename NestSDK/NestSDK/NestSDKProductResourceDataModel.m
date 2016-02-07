@@ -40,6 +40,14 @@
     return [NestSDKUtils iso8601FormatDateStringWithDate:self.measurementResetTime];
 }
 
+- (void)copyPropertiesToDataModelCopy:(id <NestSDKDataModelProtocol>)copy {
+    [super copyPropertiesToDataModelCopy:copy];
+
+    NestSDKProductResourceDataModel *productResourceDataModelCopy = (NestSDKProductResourceDataModel *) copy;
+    productResourceDataModelCopy.measurementTime = self.measurementTime;
+    productResourceDataModelCopy.measurementResetTime = self.measurementResetTime;
+}
+
 - (NSUInteger)hash {
     NSUInteger prime = 31;
     NSUInteger result = 1;

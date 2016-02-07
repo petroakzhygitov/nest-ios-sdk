@@ -78,6 +78,26 @@ static NSString *const kAwayStringAutoAway = @"auto-away";
     return nil;
 }
 
+- (void)copyPropertiesToDataModelCopy:(id <NestSDKDataModelProtocol>)copy {
+    [super copyPropertiesToDataModelCopy:copy];
+
+    NestSDKStructureDataModel *structureDataModelCopy = (NestSDKStructureDataModel *) copy;
+    structureDataModelCopy.structureId = self.structureId;
+    structureDataModelCopy.thermostats = self.thermostats;
+    structureDataModelCopy.smokeCoAlarms = self.smokeCoAlarms;
+    structureDataModelCopy.cameras = self.cameras;
+    structureDataModelCopy.devices = self.devices;
+    structureDataModelCopy.away = self.away;
+    structureDataModelCopy.name = self.name;
+    structureDataModelCopy.countryCode = self.countryCode;
+    structureDataModelCopy.postalCode = self.postalCode;
+    structureDataModelCopy.peakPeriodStartTime = self.peakPeriodStartTime;
+    structureDataModelCopy.peakPeriodEndTime = self.peakPeriodEndTime;
+    structureDataModelCopy.timeZone = self.timeZone;
+    structureDataModelCopy.eta = self.eta;
+    structureDataModelCopy.rhrEnrollment = self.rhrEnrollment;
+    structureDataModelCopy.wheres = self.wheres;
+}
 
 - (NSUInteger)hash {
     NSUInteger intValueForYes = 1231;

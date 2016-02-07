@@ -43,6 +43,36 @@ static NSString *const kReadOnlyAttributeString = @",R";
     return propertyNames;
 }
 
+#pragma mark Override
+
++ (BOOL)propertyIsOptional:(NSString *)propertyName {
+    // All primitives are optional
+    return YES;
+}
+
++ (JSONKeyMapper *)keyMapper {
+    return [JSONKeyMapper mapperFromUnderscoreCaseToCamelCase];
+}
+
+- (id)copyWithZone:(NSZone *)zone {
+    id <NestSDKDataModelProtocol> copy = (id <NestSDKDataModelProtocol>) [[[self class] allocWithZone:zone] init];
+
+    if (copy) {
+        [self copyPropertiesToDataModelCopy:copy];
+    }
+
+    return copy;
+}
+
+#pragma mark Public
+
+- (id)copy {
+    return [self copyWithZone:nil];
+}
+
+- (void)copyPropertiesToDataModelCopy:(id <NestSDKDataModelProtocol>)copy {
+}
+
 - (NSArray *)writablePropertyNamesArrayWithProtocol:(Protocol *)aProtocol {
     unsigned int propertyCount = 0;
     objc_property_t *properties = protocol_copyPropertyList(aProtocol, &propertyCount);
@@ -65,21 +95,6 @@ static NSString *const kReadOnlyAttributeString = @",R";
 
     return propertyNames;
 }
-
-
-#pragma mark Override
-
-+ (BOOL)propertyIsOptional:(NSString *)propertyName {
-    // All primitives are optional
-    return YES;
-}
-
-+ (JSONKeyMapper *)keyMapper {
-    return [JSONKeyMapper mapperFromUnderscoreCaseToCamelCase];
-}
-
-
-#pragma mark Public
 
 - (NSDictionary *)toWritableDataModelDictionary {
     return [self toDictionaryWithKeys:[self writablePropertiesArrayFromConformedProtocols]];

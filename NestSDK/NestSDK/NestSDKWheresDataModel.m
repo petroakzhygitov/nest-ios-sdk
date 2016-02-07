@@ -26,6 +26,14 @@
 @implementation NestSDKWheresDataModel
 #pragma mark Override
 
+- (void)copyPropertiesToDataModelCopy:(id <NestSDKDataModelProtocol>)copy {
+    [super copyPropertiesToDataModelCopy:copy];
+
+    NestSDKWheresDataModel *wheresDataModelCopy = (NestSDKWheresDataModel *) copy;
+    wheresDataModelCopy.whereId = self.whereId;
+    wheresDataModelCopy.name = self.name;
+}
+
 - (NSUInteger)hash {
     NSUInteger prime = 31;
     NSUInteger result = 1;

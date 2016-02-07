@@ -28,6 +28,10 @@
 @interface NestSDKDataModel : JSONModel <NestSDKDataModelProtocol>
 #pragma mark Methods
 
+- (void)copyPropertiesToDataModelCopy:(id <NestSDKDataModelProtocol>)copy;
+
+- (NSArray *)writablePropertyNamesArrayWithProtocol:(Protocol *)aProtocol;
+
 - (NSDictionary *)toWritableDataModelDictionary;
 
 @end

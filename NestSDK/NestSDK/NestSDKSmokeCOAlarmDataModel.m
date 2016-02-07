@@ -176,6 +176,19 @@ static NSString *const kUIColorStateRed = @"red";
     return nil;
 }
 
+- (void)copyPropertiesToDataModelCopy:(id <NestSDKDataModelProtocol>)copy {
+    [super copyPropertiesToDataModelCopy:copy];
+
+    NestSDKSmokeCOAlarmDataModel *smokeCOAlarmDataModelCopy = (NestSDKSmokeCOAlarmDataModel *) copy;
+    smokeCOAlarmDataModelCopy.locale = self.locale;
+    smokeCOAlarmDataModelCopy.lastConnection = self.lastConnection;
+    smokeCOAlarmDataModelCopy.batteryHealth = self.batteryHealth;
+    smokeCOAlarmDataModelCopy.coAlarmState = self.coAlarmState;
+    smokeCOAlarmDataModelCopy.smokeAlarmState = self.smokeAlarmState;
+    smokeCOAlarmDataModelCopy.isManualTestActive = self.isManualTestActive;
+    smokeCOAlarmDataModelCopy.lastManualTestTime = self.lastManualTestTime;
+    smokeCOAlarmDataModelCopy.uiColorState = self.uiColorState;
+}
 
 - (NSUInteger)hash {
     NSUInteger intValueForYes = 1231;

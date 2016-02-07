@@ -121,6 +121,16 @@ SpecBegin(NestSDKStructureDataModel)
                 expect(structure1).to.equal(structure2);
                 expect(structure1).notTo.equal(structure3);
             });
+
+            it(@"should convert to writable dictionary", ^{
+                NSError *error;
+                NestSDKStructureDataModel *structure = [[NestSDKStructureDataModel alloc] initWithData:data error:&error];
+                expect(error).to.equal(nil);
+
+                NSDictionary *structureDictionary = [structure toWritableDataModelDictionary];
+                expect(structureDictionary.allKeys.count).to.equal(2);
+                expect(structureDictionary[@"eta"]).notTo.equal(nil);
+            });
         });
     }
 SpecEnd

@@ -110,6 +110,16 @@ SpecBegin(NestSDKCameraDataModel)
                 expect(camera1).to.equal(camera2);
                 expect(camera1).notTo.equal(camera3);
             });
+
+            it(@"should convert to writable dictionary", ^{
+                NSError *error;
+                NestSDKCameraDataModel *camera = [[NestSDKCameraDataModel alloc] initWithData:data error:&error];
+                expect(error).to.equal(nil);
+
+                NSDictionary *cameraDictionary = [camera toWritableDataModelDictionary];
+                expect(cameraDictionary.allKeys.count).to.equal(1);
+                expect(cameraDictionary[@"is_streaming"]).to.equal(YES);
+            });
         });
     }
 SpecEnd

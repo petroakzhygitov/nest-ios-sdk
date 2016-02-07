@@ -109,6 +109,15 @@ SpecBegin(NestSDKSmokeCOAlarmDataModel)
                 expect(smokeCOAlarm1).to.equal(smokeCOAlarm2);
                 expect(smokeCOAlarm1).notTo.equal(smokeCOAlarm3);
             });
+
+            it(@"should convert to writable dictionary", ^{
+                NSError *error;
+                NestSDKSmokeCOAlarmDataModel *smokeCOAlarm = [[NestSDKSmokeCOAlarmDataModel alloc] initWithData:data error:&error];
+                expect(error).to.equal(nil);
+
+                NSDictionary *smokeCOAlarmDictionary = [smokeCOAlarm toWritableDataModelDictionary];
+                expect(smokeCOAlarmDictionary.allKeys.count).to.equal(0);
+            });
         });
     }
 SpecEnd

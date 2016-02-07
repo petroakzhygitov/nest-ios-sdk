@@ -165,6 +165,34 @@ SpecBegin(NestSDKThermostatDataModel)
                 thermostat.targetTemperatureLowF = 155;
                 expect(thermostat.targetTemperatureLowF).to.equal(90);
             });
+
+            it(@"should convert to writable dictionary", ^{
+                NSError *error;
+                NestSDKThermostatDataModel *thermostat = [[NestSDKThermostatDataModel alloc] initWithData:data error:&error];
+                expect(error).to.equal(nil);
+
+                thermostat.temperatureScale = NestSDKThermostatTemperatureScaleC;
+                NSDictionary *thermostatDictionary = [thermostat toWritableDataModelDictionary];
+
+                expect(thermostatDictionary.allKeys.count).to.equal(6);
+                expect(thermostatDictionary[@"fan_timer_active"]).to.equal(YES);
+                expect(thermostatDictionary[@"fan_timer_timeout"]).to.equal(@"2015-10-31T23:59:59.000Z");
+                expect(thermostatDictionary[@"hvac_mode"]).to.equal(@"heat");
+                expect(thermostatDictionary[@"target_temperature_c"]).to.equal(21.5);
+                expect(thermostatDictionary[@"target_temperature_high_c"]).to.equal(21.5);
+                expect(thermostatDictionary[@"target_temperature_low_c"]).to.equal(17.5);
+
+                thermostat.temperatureScale = NestSDKThermostatTemperatureScaleF;
+                thermostatDictionary = [thermostat toWritableDataModelDictionary];
+
+                expect(thermostatDictionary.allKeys.count).to.equal(6);
+                expect(thermostatDictionary[@"fan_timer_active"]).to.equal(YES);
+                expect(thermostatDictionary[@"fan_timer_timeout"]).to.equal(@"2015-10-31T23:59:59.000Z");
+                expect(thermostatDictionary[@"hvac_mode"]).to.equal(@"heat");
+                expect(thermostatDictionary[@"target_temperature_f"]).to.equal(72);
+                expect(thermostatDictionary[@"target_temperature_high_f"]).to.equal(72);
+                expect(thermostatDictionary[@"target_temperature_low_f"]).to.equal(64);
+            });
         });
     }
 SpecEnd

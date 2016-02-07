@@ -22,13 +22,11 @@
 #import <Expecta/Expecta.h>
 #import "SpectaDSL.h"
 #import "SPTSpec.h"
-#import "NestSDKAccessToken.h"
 #import "LSStubRequestDSL.h"
 #import "LSNocilla.h"
 #import "NestSDKMetadataDataModel.h"
 #import "NestSDKDeviceDataModel.h"
 #import "NestSDKCameraDataModel.h"
-#import "NestSDKCameraLastEventDataModel.h"
 
 SpecBegin(NestSDKCameraDataModel)
     {

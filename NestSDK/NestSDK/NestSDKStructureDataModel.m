@@ -18,10 +18,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import <NestSDK/NestSDKDataModel.h>
+#import "NestSDKDataModel.h"
 #import "NestSDKStructureDataModel.h"
-#import "NestSDKETADataModel.h"
-#import <NestSDK/NestSDKUtils.h>
+#import "NestSDKUtils.h"
 
 #pragma mark const
 

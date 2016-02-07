@@ -18,7 +18,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import <NestSDK/NestSDKUtils.h>
+#import "NestSDKUtils.h"
 #import "NestSDKCameraDataModel.h"
 
 @implementation NestSDKCameraDataModel

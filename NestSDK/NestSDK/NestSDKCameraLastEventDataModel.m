@@ -64,7 +64,6 @@
 
     result = prime * result + (self.hasSound ? intValueForYes : intValueForNo);
     result = prime * result + (self.hasMotion ? intValueForYes : intValueForNo);
-
     result = prime * result + self.startTime.hash;
     result = prime * result + self.endTime.hash;
     result = prime * result + self.webUrl.hash;

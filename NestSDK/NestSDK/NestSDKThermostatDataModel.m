@@ -302,19 +302,14 @@ const NSUInteger NestSDKThermostatTemperatureFAllowableMax = 90;
 
     result = prime * result + self.lastConnection.hash;
     result = prime * result + self.locale.hash;
-
     result = prime * result + (self.canCool ? intValueForYes : intValueForNo);
     result = prime * result + (self.canHeat ? intValueForYes : intValueForNo);
     result = prime * result + (self.isUsingEmergencyHeat ? intValueForYes : intValueForNo);
     result = prime * result + (self.hasFan ? intValueForYes : intValueForNo);
     result = prime * result + (self.fanTimerActive ? intValueForYes : intValueForNo);
-
     result = prime * result + self.fanTimerTimeout.hash;
-
     result = prime * result + (self.hasLeaf ? intValueForYes : intValueForNo);
-
     result = prime * result + self.temperatureScale;
-
     result = prime * result + self.targetTemperatureF;
     result = (NSUInteger) (prime * result + self.targetTemperatureC);
     result = prime * result + self.targetTemperatureHighF;
@@ -325,14 +320,10 @@ const NSUInteger NestSDKThermostatTemperatureFAllowableMax = 90;
     result = (NSUInteger) (prime * result + self.awayTemperatureHighC);
     result = prime * result + self.awayTemperatureLowF;
     result = (NSUInteger) (prime * result + self.awayTemperatureLowC);
-
     result = prime * result + self.hvacMode;
-
     result = (NSUInteger) (prime * result + self.ambientTemperatureC);
     result = prime * result + self.ambientTemperatureF;
-
     result = prime * result + self.humidity;
-
     result = prime * result + self.hvacState;
 
     return result;

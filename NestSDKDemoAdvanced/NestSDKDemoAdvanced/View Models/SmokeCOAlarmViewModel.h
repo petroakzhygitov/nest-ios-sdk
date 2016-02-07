@@ -10,7 +10,18 @@
 
 @property(nonatomic) id <NestSDKSmokeCOAlarm> device;
 
-@property(nonatomic, copy) NSString *batteryStatusText;
+@property(nonatomic, readonly, copy) NSString *batteryHealthText;
+
+@property(nonatomic, readonly, copy) NSString *lastConnectionText;
+@property(nonatomic, readonly, copy) NSString *localeText;
+
+@property(nonatomic, readonly, copy) NSString *coAlarmStateText;
+@property(nonatomic, readonly, copy) NSString *smokeAlarmStateText;
+
+@property(nonatomic, readonly, copy) NSString *isManualStateActiveText;
+@property(nonatomic, readonly, copy) NSString *lastManualTestTimeText;
+
+@property(nonatomic, readonly, copy) NSString *uiColorStateText;
 
 @property(nonatomic) SmokeCOAlarmIconViewColor iconViewColor;
 
@@ -22,6 +33,4 @@
 
 @property(nonatomic) id <NestSDKSmokeCOAlarm> device;
 
-@property(nonatomic, copy) NSString *lastConnectionText;
-@property(nonatomic, copy) NSString *localeText;
 @end

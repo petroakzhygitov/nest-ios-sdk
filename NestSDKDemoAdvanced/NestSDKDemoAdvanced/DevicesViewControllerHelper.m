@@ -40,7 +40,7 @@ static NSString *const kSegueIdentifierCameraDetails = @"CameraDetailsSegueIdent
     SmokeCOAlarmViewModel *viewModel = [DeviceViewModel viewModelWithDevice:smokeCOAlarm];
 
     cell.nameLabel.text = viewModel.nameLongText;
-    cell.batteryStatusLabel.text = viewModel.batteryStatusText;
+    cell.batteryStatusLabel.text = viewModel.batteryHealthText;
     cell.iconView.color = viewModel.iconViewColor;
 }
 
@@ -48,8 +48,8 @@ static NSString *const kSegueIdentifierCameraDetails = @"CameraDetailsSegueIdent
     CameraViewModel *viewModel = [DeviceViewModel viewModelWithDevice:camera];
 
     cell.nameLabel.text = viewModel.nameLongText;
-    cell.statusLabel.text = viewModel.connectionStatusText;
-    cell.iconView.streaming = viewModel.streaming;
+    cell.statusLabel.text = viewModel.lastEventText;
+    cell.iconView.streaming = viewModel.streamingStatusValue;
 }
 
 + (BOOL)_isThermostatIndex:(NSInteger)index forStructure:(id <NestSDKStructure>)structure {

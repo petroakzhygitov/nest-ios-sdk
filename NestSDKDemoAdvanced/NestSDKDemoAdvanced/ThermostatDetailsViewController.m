@@ -12,28 +12,27 @@ static NSString *const kTemperatureSliderViewCell = @"TemperatureSliderViewCell"
 #pragma mark Private
 
 - (void)_addLocaleRow {
-    self.localeRow = [self addReadOnlyTextRowWithTitle:@"Locale:" text:self.deviceViewModel.localeText];
+    self.localeRow = [self addReadOnlyTextRowWithText:self.deviceViewModel.localeText];
 }
 
 - (void)_addLasConnectionRow {
-    self.lastConnectionRow = [self addReadOnlyTextRowWithTitle:@"Last connection:" text:self.deviceViewModel.lastConnectionText];
+    self.lastConnectionRow = [self addReadOnlyTextRowWithText:self.deviceViewModel.lastConnectionText];
 }
 
 - (void)_addCanCoolRow {
-    self.canCoolRow = [self addReadOnlyTextRowWithTitle:@"Is cooling:" text:self.deviceViewModel.isCoolingText];
+    self.canCoolRow = [self addReadOnlyTextRowWithText:self.deviceViewModel.isCoolingText];
 }
 
 - (void)_addCanHeatRow {
-    self.canHeatRow = [self addReadOnlyTextRowWithTitle:@"Is heating:" text:self.deviceViewModel.isHeatingText];
+    self.canHeatRow = [self addReadOnlyTextRowWithText:self.deviceViewModel.isHeatingText];
 }
 
 - (void)_addIsUsingEmergencyHeatRow {
-    self.isUsingEmergencyHeatRow = [self addReadOnlyTextRowWithTitle:@"Is using emergency heat:"
-                                                                text:self.deviceViewModel.isUsingEmergencyHeatText];
+    self.isUsingEmergencyHeatRow = [self addReadOnlyTextRowWithText:self.deviceViewModel.isUsingEmergencyHeatText];
 }
 
 - (void)_addHasFanRow {
-    self.hadFanRow = [self addReadOnlyTextRowWithTitle:@"Fan status:" text:self.deviceViewModel.fanStatusText];
+    self.hadFanRow = [self addReadOnlyTextRowWithText:self.deviceViewModel.fanStatusText];
 }
 
 - (void)addTargetTemperatureHighRow {
@@ -52,38 +51,35 @@ static NSString *const kTemperatureSliderViewCell = @"TemperatureSliderViewCell"
 }
 
 - (void)addFanTimerActive {
-    self.fanTimerActiveRow = [self addReadWriteTextRowWithTitle:@"Fan timer active:" boolValue:self.deviceViewModel.fanTimerActiveValue];
+    self.fanTimerActiveRow = [self addReadWriteSwitchRowWithTitle:@"Fan timer active:" boolValue:self.deviceViewModel.fanTimerActiveValue];
 }
 
 - (void)addTemperatureScaleRow {
-    self.temperatureScaleRow = [self addReadOnlyTextRowWithTitle:@"Temperature scale:" text:self.deviceViewModel.temperatureScaleText];
+    self.temperatureScaleRow = [self addReadOnlyTextRowWithText:self.deviceViewModel.temperatureScaleText];
 }
 
 - (void)addHasLeafRow {
-    self.hasLeafRow = [self addReadOnlyTextRowWithTitle:@"Has leaf:" text:self.deviceViewModel.hasLeafText];
+    self.hasLeafRow = [self addReadOnlyTextRowWithText:self.deviceViewModel.hasLeafText];
 }
 
 - (void)addAwayTemperatureHighRow {
-    self.awayTemperatureHighRow = [self addReadOnlyTextRowWithTitle:@"Away temperature high:"
-                                                               text:self.deviceViewModel.awayTemperatureHighText];
+    self.awayTemperatureHighRow = [self addReadOnlyTextRowWithText:self.deviceViewModel.awayTemperatureHighText];
 }
 
 - (void)addAwayTemperatureLowRow {
-    self.awayTemperatureLowRow = [self addReadOnlyTextRowWithTitle:@"Away temperature low:"
-                                                              text:self.deviceViewModel.awayTemperatureLowText];
+    self.awayTemperatureLowRow = [self addReadOnlyTextRowWithText:self.deviceViewModel.awayTemperatureLowText];
 }
 
 - (void)addAmbientTemperatureRow {
-    self.ambientTemperatureRow = [self addReadOnlyTextRowWithTitle:@"Ambient temperature:"
-                                                              text:self.deviceViewModel.ambientTemperatureText];
+    self.ambientTemperatureRow = [self addReadOnlyTextRowWithText:self.deviceViewModel.ambientTemperatureText];
 }
 
 - (void)addHumidityRow {
-    self.humidityRow = [self addReadOnlyTextRowWithTitle:@"Humidity:" text:self.deviceViewModel.humidityText];
+    self.humidityRow = [self addReadOnlyTextRowWithText:self.deviceViewModel.humidityText];
 }
 
 - (void)addHVACStateRow {
-    self.hvacStateRow = [self addReadOnlyTextRowWithTitle:@"HVAC state:" text:self.deviceViewModel.hvacStateText];
+    self.hvacStateRow = [self addReadOnlyTextRowWithText:self.deviceViewModel.hvacStateText];
 }
 
 - (void)addHVACModeRow {
@@ -120,6 +116,17 @@ static NSString *const kTemperatureSliderViewCell = @"TemperatureSliderViewCell"
     return row;
 }
 
+- (ThermostatViewModel *)_thermostatUpdateViewModel {
+    ThermostatViewModel *thermostatUpdateViewModel = [self.deviceViewModel copy];
+
+    thermostatUpdateViewModel.hvacModeText = self.hvacModeRow.value;
+    thermostatUpdateViewModel.targetTemperatureValue = self.targetTemperatureRow.value;
+    thermostatUpdateViewModel.targetTemperatureHighValue = self.targetTemperatureHighRow.value;
+    thermostatUpdateViewModel.targetTemperatureLowValue = self.targetTemperatureLowRow.value;
+
+    return thermostatUpdateViewModel;
+}
+
 #pragma mark Override
 
 - (void)addTitle {
@@ -137,15 +144,11 @@ static NSString *const kTemperatureSliderViewCell = @"TemperatureSliderViewCell"
                                         block:(NestSDKThermostatUpdateHandler) self.deviceUpdateHandlerBlock];
 }
 
-- (void)updateDeviceViewModelData {
-//    [self _setDeviceHVACMode:[self _hvacModeWithString:self.hvacModeRow.value]];
-    self.deviceViewModel.targetTemperatureValue = self.targetTemperatureRow.value;
-    self.deviceViewModel.targetTemperatureHighValue = self.targetTemperatureHighRow.value;
-    self.deviceViewModel.targetTemperatureLowValue = self.targetTemperatureLowRow.value;
-}
+- (void)updateDeviceData {
+    // Updating device data using temporary viewModel, since if update fails we'll revert data to original from deviceViewModel
+    ThermostatViewModel *thermostatUpdateViewModel = [self _thermostatUpdateViewModel];
 
-- (void)setDeviceViewModelData {
-    [self.dataManager setThermostat:self.deviceViewModel.device
+    [self.dataManager setThermostat:thermostatUpdateViewModel.device
                               block:(NestSDKThermostatUpdateHandler) self.deviceUpdateHandlerBlock];
 }
 

@@ -2,24 +2,53 @@
 #import "CameraIconView.h"
 #import "CameraViewModel.h"
 
-#pragma mark macros
+@interface CameraDetailsViewController ()
 
-#pragma mark const
+@property(nonatomic, strong) XLFormRowDescriptor *isStreamingRow;
 
-#pragma mark enum
+@property(nonatomic, strong) XLFormRowDescriptor *isAudioInputEnabledRow;
+@property(nonatomic, strong) XLFormRowDescriptor *isVideoHistoryEnabledRow;
 
-#pragma mark typedef
+@property(nonatomic, strong) XLFormRowDescriptor *lastIsOnlineChangeRow;
 
+@property(nonatomic, strong) XLFormRowDescriptor *webURLRow;
+@property(nonatomic, strong) XLFormRowDescriptor *appURLRow;
 
-@implementation CameraDetailsViewController {
-#pragma mark Instance variables
-}
+@property(nonatomic, strong) XLFormRowDescriptor *lastEventRow;
 
-#pragma mark Initializer
+@end
 
+@implementation CameraDetailsViewController
 #pragma mark Private
 
-#pragma mark Notification selectors
+- (void)_addIsStreamingRow {
+    self.isStreamingRow = [self addReadWriteSwitchRowWithTitle:self.deviceViewModel.streamingStatusTitle
+                                                     boolValue:self.deviceViewModel.streamingStatusValue.boolValue];
+}
+
+- (void)_addIsAudioInputEnabled {
+    self.isAudioInputEnabledRow = [self addReadOnlyTextRowWithText:self.deviceViewModel.isAudioInputEnabledText];
+}
+
+- (void)_addLastIsOnlineChangeRow {
+    self.lastIsOnlineChangeRow = [self addReadOnlyTextRowWithText:self.deviceViewModel.lastIsOnlineChangeText];
+}
+
+- (void)_addIsVideoHistoryEnabledRow {
+    self.isVideoHistoryEnabledRow = [self addReadOnlyTextRowWithText:self.deviceViewModel.isVideoHistoryEnabledText];
+}
+
+- (void)_addWebUrlRow {
+    self.webURLRow = [self addReadOnlyTextRowWithText:self.deviceViewModel.webURLText];
+}
+
+- (void)_addAppUrlRow {
+    self.appURLRow = [self addReadOnlyTextRowWithText:self.deviceViewModel.appURLText];
+}
+
+- (void)_addLastEventRow {
+    self.lastEventRow = [self addReadOnlyTextRowWithText:self.deviceViewModel.lastEventText];
+}
 
 #pragma mark Override
 
@@ -32,20 +61,55 @@
                                     block:(NestSDKCameraUpdateHandler) self.deviceUpdateHandlerBlock];
 }
 
+- (void)updateDeviceViewModelData {
+    self.deviceViewModel.streamingStatusValue = self.isStreamingRow.value;
+}
+
+- (void)updateDeviceData {
+    [self.dataManager setCamera:self.deviceViewModel.device
+                          block:(NestSDKCameraUpdateHandler) self.deviceUpdateHandlerBlock];
+}
+
 - (void)updateTableViewHeader {
     [super updateTableViewHeader];
 
     self.nameLabel.text = self.deviceViewModel.nameLongText;
 
-    self.iconView.streaming = self.deviceViewModel.streaming;
+    self.iconView.streaming = self.deviceViewModel.streamingStatusValue.boolValue;
 }
 
-#pragma mark Public
+- (void)updateTableViewData {
+    self.updatingTableViewData = YES;
 
-#pragma mark IBAction
+    self.isStreamingRow.value = self.deviceViewModel.streamingStatusValue;
 
-#pragma mark Protocol @protocol-name
+    self.isAudioInputEnabledRow.value = self.deviceViewModel.isAudioInputEnabledText;
+    self.isVideoHistoryEnabledRow.value = self.deviceViewModel.isVideoHistoryEnabledText;
 
-#pragma mark Delegate @delegate-name
+    self.lastIsOnlineChangeRow.value = self.deviceViewModel.lastIsOnlineChangeText;
+
+    self.webURLRow.value = self.deviceViewModel.webURLText;
+    self.appURLRow.value = self.deviceViewModel.appURLText;
+
+    self.lastEventRow.value = self.deviceViewModel.lastEventText;
+
+    [super updateTableViewData];
+}
+
+- (void)addRows {
+    [super addRows];
+
+    [self _addIsStreamingRow];
+
+    [self _addIsAudioInputEnabled];
+
+    [self _addLastIsOnlineChangeRow];
+    [self _addIsVideoHistoryEnabledRow];
+
+    [self _addWebUrlRow];
+    [self _addAppUrlRow];
+
+    [self _addLastEventRow];
+}
 
 @end

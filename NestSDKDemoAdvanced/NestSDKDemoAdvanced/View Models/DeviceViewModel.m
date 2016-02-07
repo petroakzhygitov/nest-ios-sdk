@@ -36,40 +36,70 @@
     return deviceViewModel;
 }
 
-#pragma mark Public
-
-- (NSString *)textWithBoolValue:(BOOL)value {
-    return value ? @"Yes" : @"No";
-}
-
 #pragma mark Override
 
+- (id)copyWithZone:(NSZone *)zone {
+    id <DeviceViewModel> copy = (id <DeviceViewModel>) [[[self class] alloc] init];
+
+    if (copy) {
+        copy.device = [self.device copy];
+    }
+
+    return copy;
+}
+
 - (NSString *)deviceIdText {
-    return self.device.deviceId;
+    return [self stringWithTitle:@"Device ID:" stringValue:self.device.deviceId];
 }
 
 - (NSString *)softwareVersionText {
-    return self.device.softwareVersion;
+    return [self stringWithTitle:@"Software version:" stringValue:self.device.softwareVersion];
 }
 
 - (NSString *)structureIdText {
-    return self.device.structureId;
+    return [self stringWithTitle:@"Structure ID:" stringValue:self.device.structureId];
 }
 
 - (NSString *)nameText {
-    return self.device.name;
+    return [self stringWithTitle:@"Name:" stringValue:self.device.name];
 }
 
 - (NSString *)nameLongText {
-    return self.device.nameLong;
+    return [self stringWithTitle:@"Long name:" stringValue:self.device.nameLong];
 }
 
 - (NSString *)isOnlineText {
-    return [self textWithBoolValue:self.device.isOnline];
+    return [self stringWithTitle:@"Online:" boolValue:self.device.isOnline];
 }
 
 - (NSString *)whereIdText {
-    return self.device.whereId;
+    return [self stringWithTitle:@"Where ID:" stringValue:self.device.whereId];
+}
+
+#pragma mark Public
+
+- (id)copy {
+    return [self copyWithZone:nil];
+}
+
+- (NSString *)stringWithTitle:(NSString *)title dateValue:(NSDate *)date {
+    return [self stringWithTitle:title stringValue:[self stringWithDate:date]];
+}
+
+- (NSString *)stringWithTitle:(NSString *)title boolValue:(BOOL)value {
+    return [self stringWithTitle:title stringValue:[self stringWithBool:value]];
+}
+
+- (NSString *)stringWithTitle:(NSString *)title stringValue:(NSString *)value {
+    return [NSString stringWithFormat:@"%@ %@", title, value];
+}
+
+- (NSString *)stringWithBool:(BOOL)value {
+    return value ? @"Yes" : @"No";
+}
+
+- (NSString *)stringWithDate:(NSDate *)date {
+    return [NSDateFormatter localizedStringFromDate:date dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterFullStyle];
 }
 
 @end

@@ -3,7 +3,6 @@
 #pragma mark const
 static const int kInsetMultiplierDeviceCircle = 4;
 
-
 @interface SmokeCOAlarmIconView ()
 
 @property(nonatomic) CAGradientLayer *outlineColorGradientLayer;
@@ -13,13 +12,6 @@ static const int kInsetMultiplierDeviceCircle = 4;
 
 @implementation SmokeCOAlarmIconView
 #pragma mark Private
-
-- (void)_addOutlineColorStrokeCircleLayer {
-    CGFloat inset = [self baseInset];
-    CGRect circleRect = [self rectWithInset:inset];
-
-    [self addCircleLayerWithRect:circleRect fillColor:[UIColor clearColor] strokeColor:[self _darkGreenColor] lineWidth:1];
-}
 
 - (void)_addOutlineColorGradientCircleLayer {
     CGFloat inset = [self baseInset];
@@ -41,10 +33,49 @@ static const int kInsetMultiplierDeviceCircle = 4;
     [self addLayer:layer];
 }
 
+- (NSArray *)_greenColorsArray {
+    return @[[self _lightGreenColor], [self _darkGreenColor]];
+}
+
+- (NSArray *)_yellowColorsArray {
+    return @[[self _lightYellowColor], [self _darkYellowColor]];
+}
+
+- (NSArray *)_redColorsArray {
+    return @[[self _lightRedColor], [self _darkRedColor]];
+}
+
+- (NSArray *)_grayColorsArray {
+    return @[[UIColor lightGrayColor], [UIColor darkGrayColor]];
+}
+
+- (UIColor *)_lightGreenColor {
+    return [UIColor colorWithRed:131.0f / 255.0f green:233.0f / 255.0f blue:54.0f / 255.0f alpha:1];
+}
+
+- (UIColor *)_darkGreenColor {
+    return [UIColor colorWithRed:0 green:212.0f / 255.0f blue:0 alpha:1];
+}
+
+- (UIColor *)_lightYellowColor {
+    return [UIColor colorWithRed:255.0f / 255.0f green:215.0f / 255.0f blue:0.0f / 255.0f alpha:1];
+}
+
+- (UIColor *)_darkYellowColor {
+    return [UIColor colorWithRed:255.0f / 255.0f green:189.0f / 255.0f blue:0.0f / 255.0f alpha:1];
+}
+
+- (UIColor *)_lightRedColor {
+    return [UIColor colorWithRed:244.0f / 255.0f green:80.0f / 255.0f blue:0.0f / 255.0f alpha:1];
+}
+
+- (UIColor *)_darkRedColor {
+    return [UIColor colorWithRed:215.0f / 255.0f green:40.0f / 255.0f blue:0.0f / 255.0f alpha:1];
+}
+
 #pragma mark Override
 
 - (void)createSublayers {
-    [self _addOutlineColorStrokeCircleLayer];
     [self _addOutlineColorGradientCircleLayer];
     [self _addDeviceCircleLayer];
 }
@@ -74,46 +105,6 @@ static const int kInsetMultiplierDeviceCircle = 4;
     }
 
     self.outlineColorGradientLayer.colors = [self cgColorsArrayWithColorsArray:colorsArray];
-}
-
-- (NSArray *)_greenColorsArray {
-    return @[[self _lightGreenColor], [self _darkGreenColor]];
-}
-
-- (NSArray *)_yellowColorsArray {
-    return @[[self _lightYellowColor], [self _darkYellowColor]];
-}
-
-- (NSArray *)_redColorsArray {
-    return @[[self _lightRedColor], [self _darkRedColor]];
-}
-
-- (NSArray *)_grayColorsArray {
-    return @[[UIColor lightGrayColor], [UIColor darkGrayColor]];
-}
-
-- (UIColor *)_lightGreenColor {
-    return [UIColor colorWithRed:131.0f / 255.0f green:233.0f / 255.0f blue:54.0f / 255.0f alpha:1];
-}
-
-- (UIColor *)_darkGreenColor {
-    return [UIColor colorWithRed:0 green:212.0f / 255.0f blue:0 alpha:1];
-}
-
-- (UIColor *)_lightYellowColor {
-    return [UIColor colorWithRed:131.0f / 255.0f green:233.0f / 255.0f blue:54.0f / 255.0f alpha:1];
-}
-
-- (UIColor *)_darkYellowColor {
-    return [UIColor colorWithRed:0 green:212.0f / 255.0f blue:0 alpha:1];
-}
-
-- (UIColor *)_lightRedColor {
-    return [UIColor colorWithRed:131.0f / 255.0f green:233.0f / 255.0f blue:54.0f / 255.0f alpha:1];
-}
-
-- (UIColor *)_darkRedColor {
-    return [UIColor colorWithRed:0 green:212.0f / 255.0f blue:0 alpha:1];
 }
 
 @end

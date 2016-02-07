@@ -10,7 +10,6 @@
 #import <NestSDK/NestSDKMacroses.h>
 #import "DevicesViewController.h"
 #import "DevicesViewControllerHelper.h"
-#import "DeviceDetailsViewController.h"
 
 static const int kHeightForRow = 88;
 static const int kHeightForHeaderInSection = 30;
@@ -162,7 +161,7 @@ static const int kHeightForHeaderInSection = 30;
 
 - (void)_removeObservers {
     [self _removeDevicesObservers];
-    [self removeStructuresObservers];
+    [self _removeStructuresObservers];
 }
 
 - (void)_removeDevicesObservers {
@@ -173,7 +172,7 @@ static const int kHeightForHeaderInSection = 30;
     [self.deviceObserverHandles removeAllObjects];
 }
 
-- (void)removeStructuresObservers {
+- (void)_removeStructuresObservers {
     [self.dataManager removeObserverWithHandle:self.structuresObserverHandle];
 }
 

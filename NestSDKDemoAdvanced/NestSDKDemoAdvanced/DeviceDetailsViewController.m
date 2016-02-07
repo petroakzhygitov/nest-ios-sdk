@@ -18,31 +18,31 @@
 #pragma mark Private
 
 - (void)addDeviceIdRow {
-    self.deviceIdRow = [self addReadOnlyTextRowWithTitle:@"Device ID:" text:self.deviceViewModel.deviceIdText];
+    self.deviceIdRow = [self addReadOnlyTextRowWithText:self.deviceViewModel.deviceIdText];
 }
 
 - (void)addSoftwareVersionRow {
-    self.softwareVersionRow = [self addReadOnlyTextRowWithTitle:@"Software version:" text:self.deviceViewModel.softwareVersionText];
+    self.softwareVersionRow = [self addReadOnlyTextRowWithText:self.deviceViewModel.softwareVersionText];
 }
 
 - (void)addStructureIdRow {
-    self.structureIdRow = [self addReadOnlyTextRowWithTitle:@"Structure ID:" text:self.deviceViewModel.structureIdText];
+    self.structureIdRow = [self addReadOnlyTextRowWithText:self.deviceViewModel.structureIdText];
 }
 
 - (void)addNameRow {
-    self.nameIdRow = [self addReadOnlyTextRowWithTitle:@"Name:" text:self.deviceViewModel.nameText];
+    self.nameIdRow = [self addReadOnlyTextRowWithText:self.deviceViewModel.nameText];
 }
 
 - (void)addLongNameRow {
-    self.nameLongIdRow = [self addReadOnlyTextRowWithTitle:@"Long name:" text:self.deviceViewModel.nameLongText];
+    self.nameLongIdRow = [self addReadOnlyTextRowWithText:self.deviceViewModel.nameLongText];
 }
 
 - (void)addIsOnlineRow {
-    self.isOnlineIdRow = [self addReadOnlyTextRowWithTitle:@"Online:" text:self.deviceViewModel.isOnlineText];
+    self.isOnlineIdRow = [self addReadOnlyTextRowWithText:self.deviceViewModel.isOnlineText];
 }
 
 - (void)addWhereIdRow {
-    self.whereIdRow = [self addReadOnlyTextRowWithTitle:@"Where ID:" text:self.deviceViewModel.whereIdText];
+    self.whereIdRow = [self addReadOnlyTextRowWithText:self.deviceViewModel.whereIdText];
 }
 
 #pragma mark Override
@@ -91,11 +91,12 @@
 
         if (error) {
             NSLog(@"Error updating device: %@", error);
-            return;
+
+        } else {
+            self.deviceViewModel.device = device;
         }
 
-        self.deviceViewModel.device = device;
-
+        // Update table view in any case, to set new data or to revert on existing one
         [self updateTableView];
     };
 }
@@ -108,7 +109,7 @@
 }
 
 - (void)addForm {
-    self.form = [XLFormDescriptor formDescriptorWithTitle:@"Add Event"];
+    self.form = [XLFormDescriptor formDescriptorWithTitle:@"Device details"];
     self.form.delegate = self;
 }
 
@@ -139,10 +140,7 @@
     [self addWhereIdRow];
 }
 
-- (void)updateDeviceViewModelData {
-}
-
-- (void)setDeviceViewModelData {
+- (void)updateDeviceData {
 }
 
 - (void)updateTableView {
@@ -170,18 +168,9 @@
 }
 
 
-- (XLFormRowDescriptor *)addReadOnlyTextRowWithTitle:(NSString *)title text:(NSString *)text {
-    XLFormRowDescriptor *row = [XLFormRowDescriptor formRowDescriptorWithTag:title rowType:XLFormRowDescriptorTypeText title:title];
+- (XLFormRowDescriptor *)addReadOnlyTextRowWithText:(NSString *)text {
+    XLFormRowDescriptor *row = [XLFormRowDescriptor formRowDescriptorWithTag:nil rowType:XLFormRowDescriptorTypeText title:nil];
     row.value = text;
-
-    [self addReadOnlyRow:row];
-
-    return row;
-}
-
-- (XLFormRowDescriptor *)addReadOnlyDateTimeRowWithTitle:(NSString *)title date:(NSDate *)date {
-    XLFormRowDescriptor *row = [XLFormRowDescriptor formRowDescriptorWithTag:title rowType:XLFormRowDescriptorTypeDateTimeInline title:title];
-    row.value = date;
 
     [self addReadOnlyRow:row];
 
@@ -194,7 +183,7 @@
     [self.readOnlySection addFormRow:row];
 }
 
-- (XLFormRowDescriptor *)addReadWriteTextRowWithTitle:(NSString *)title boolValue:(BOOL)value {
+- (XLFormRowDescriptor *)addReadWriteSwitchRowWithTitle:(NSString *)title boolValue:(BOOL)value {
     XLFormRowDescriptor *row = [XLFormRowDescriptor formRowDescriptorWithTag:title rowType:XLFormRowDescriptorTypeBooleanSwitch title:title];
     row.value = @(value);
 
@@ -218,8 +207,7 @@
 
     if ([oldValue isEqual:newValue]) return;
 
-    [self updateDeviceViewModelData];
-    [self setDeviceViewModelData];
+    [self updateDeviceData];
 }
 
 @end

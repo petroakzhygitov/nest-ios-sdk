@@ -40,19 +40,15 @@
 
 - (void)updateTableViewHeader;
 
-- (void)updateDeviceViewModelData;
-
-- (void)setDeviceViewModelData;
+- (void)updateDeviceData;
 
 - (void)updateTableView;
 
 - (void)updateTableViewData;
 
-- (XLFormRowDescriptor *)addReadOnlyTextRowWithTitle:(NSString *)title text:(NSString *)text;
+- (XLFormRowDescriptor *)addReadOnlyTextRowWithText:(NSString *)text;
 
-- (XLFormRowDescriptor *)addReadOnlyDateTimeRowWithTitle:(NSString *)title date:(NSDate *)date;
-
-- (XLFormRowDescriptor *)addReadWriteTextRowWithTitle:(NSString *)title boolValue:(BOOL)value;
+- (XLFormRowDescriptor *)addReadWriteSwitchRowWithTitle:(NSString *)title boolValue:(BOOL)value;
 
 - (void)addReadWriteRow:(XLFormRowDescriptor *)row;
 

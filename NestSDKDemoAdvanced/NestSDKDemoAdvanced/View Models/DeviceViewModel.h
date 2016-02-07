@@ -3,7 +3,7 @@
 
 @protocol NestSDKDevice;
 
-@protocol DeviceViewModel <NSObject>
+@protocol DeviceViewModel <NSObject, NSCopying>
 #pragma mark Properties
 
 @property(nonatomic) id <NestSDKDevice> device;
@@ -15,6 +15,14 @@
 @property(nonatomic, readonly, copy) NSString *nameLongText;
 @property(nonatomic, readonly, copy) NSString *isOnlineText;
 @property(nonatomic, readonly, copy) NSString *whereIdText;
+
+#pragma mark Methods
+
+- (id)copy;
+
+- (NSString *)stringWithBool:(BOOL)value;
+
+- (NSString *)stringWithDate:(NSDate *)date;
 
 @end
 
@@ -29,5 +37,11 @@
 + (id <DeviceViewModel>)viewModelWithDevice:(id <NestSDKDevice>)device;
 
 - (instancetype)init NS_UNAVAILABLE;
+
+- (NSString *)stringWithTitle:(NSString *)title dateValue:(NSDate *)date;
+
+- (NSString *)stringWithTitle:(NSString *)title boolValue:(BOOL)value;
+
+- (NSString *)stringWithTitle:(NSString *)title stringValue:(NSString *)value;
 
 @end

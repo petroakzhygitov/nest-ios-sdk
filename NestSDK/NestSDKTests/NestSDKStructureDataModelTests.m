@@ -31,19 +31,21 @@ SpecBegin(NestSDKStructureDataModel)
     {
         describe(@"NestSDKStructureDataModel", ^{
 
+            __block NSData *data;
             __block NSString *resourcePath;
+
+            __block NSDate *lastIsOnlineChangeDate;
 
             beforeAll(^{
                 resourcePath = [NSBundle bundleForClass:[self class]].resourcePath;
+                NSString *dataPath = [resourcePath stringByAppendingPathComponent:@"structure.json"];
+
+                data = [NSData dataWithContentsOfFile:dataPath];
             });
 
             it(@"should deserialize/serialize data", ^{
                 NSError *error;
-
-                NSString *structureJSONPath = [resourcePath stringByAppendingPathComponent:@"structure.json"];
-                NSData *structureData = [NSData dataWithContentsOfFile:structureJSONPath];
-
-                NestSDKStructureDataModel *structure = [[NestSDKStructureDataModel alloc] initWithData:structureData error:&error];
+                NestSDKStructureDataModel *structure = [[NestSDKStructureDataModel alloc] initWithData:data error:&error];
                 expect(error).to.equal(nil);
 
                 NSString *wheresJSONPath = [resourcePath stringByAppendingPathComponent:@"wheres.json"];
@@ -93,7 +95,7 @@ SpecBegin(NestSDKStructureDataModel)
                 NSDictionary *serializedDictionary = [NSJSONSerialization JSONObjectWithData:[structure toJSONData] options:kNilOptions error:&error];
                 expect(error).to.equal(nil);
 
-                NSDictionary *initialDictionary = [NSJSONSerialization JSONObjectWithData:structureData options:kNilOptions error:&error];
+                NSDictionary *initialDictionary = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
                 expect(error).to.equal(nil);
 
                 expect(serializedDictionary).to.equal(initialDictionary);

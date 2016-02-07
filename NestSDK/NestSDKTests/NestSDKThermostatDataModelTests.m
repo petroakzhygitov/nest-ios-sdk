@@ -34,20 +34,14 @@ SpecBegin(NestSDKThermostatDataModel)
 
             __block NSData *data;
 
+            __block NSDate *lastConnectionDate;
+            __block NSDate *fanTimerTimeoutDate;
+
             beforeAll(^{
                 NSString *resourcePath = [NSBundle bundleForClass:[self class]].resourcePath;
                 NSString *dataPath = [resourcePath stringByAppendingPathComponent:@"thermostat.json"];
 
                 data = [NSData dataWithContentsOfFile:dataPath];
-            });
-
-            it(@"should deserialize/serialize data", ^{
-                NSError *error;
-                NestSDKThermostatDataModel *thermostat = [[NestSDKThermostatDataModel alloc] initWithData:data error:&error];
-                expect(error).to.equal(nil);
-
-                NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
-                calendar.timeZone = [NSTimeZone timeZoneWithAbbreviation:@"UTC"];
 
                 NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
                 dateComponents.timeZone = [NSTimeZone timeZoneWithAbbreviation:@"UTC"];
@@ -58,7 +52,17 @@ SpecBegin(NestSDKThermostatDataModel)
                 dateComponents.minute = 59;
                 dateComponents.second = 59;
 
-                NSDate *lastConnectionDate = [calendar dateFromComponents:dateComponents];
+                NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+                calendar.timeZone = [NSTimeZone timeZoneWithAbbreviation:@"UTC"];
+
+                lastConnectionDate = [calendar dateFromComponents:dateComponents];
+                fanTimerTimeoutDate = [calendar dateFromComponents:dateComponents];
+            });
+
+            it(@"should deserialize/serialize data", ^{
+                NSError *error;
+                NestSDKThermostatDataModel *thermostat = [[NestSDKThermostatDataModel alloc] initWithData:data error:&error];
+                expect(error).to.equal(nil);
 
                 expect(thermostat.deviceId).to.equal(@"peyiJNo0IldT2YlIVtYaGQ");
                 expect(thermostat.locale).to.equal(@"en-US");
@@ -69,8 +73,6 @@ SpecBegin(NestSDKThermostatDataModel)
                 expect(thermostat.lastConnection).to.equal(lastConnectionDate);
                 expect(thermostat.isOnline).to.equal(YES);
                 expect(thermostat.whereId).to.equal(@"UNCBGUnN24...");
-
-                NSDate *fanTimerTimeoutDate = [calendar dateFromComponents:dateComponents];
                 expect(thermostat.canCool).to.equal(YES);
                 expect(thermostat.canHeat).to.equal(YES);
                 expect(thermostat.isUsingEmergencyHeat).to.equal(YES);

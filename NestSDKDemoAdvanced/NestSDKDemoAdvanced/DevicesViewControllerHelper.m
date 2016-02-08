@@ -30,16 +30,18 @@ static NSString *const kSegueIdentifierCameraDetails = @"CameraDetailsSegueIdent
 + (void)_populateThermostatCell:(ThermostatViewCell *)cell withThermostat:(id <NestSDKThermostat>)thermostat {
     ThermostatViewModel *viewModel = [DeviceViewModel viewModelWithDevice:thermostat];
 
-    cell.nameLabel.text = viewModel.nameLongText;
+    cell.nameLabel.text = viewModel.nameLongValue;
     cell.energySavingLabel.text = viewModel.energySavingText;
     cell.iconView.state = viewModel.iconViewState;
     cell.iconView.targetTemperatureValue = viewModel.targetTemperatureValue;
+    cell.iconView.hasFan = viewModel.hasFanValue;
+    cell.iconView.hasLeaf = viewModel.hasLeafValue;
 }
 
 + (void)_populateSmokeCOAlarmCell:(SmokeCOAlarmViewCell *)cell withSmokeCOAlarm:(id <NestSDKSmokeCOAlarm>)smokeCOAlarm {
     SmokeCOAlarmViewModel *viewModel = [DeviceViewModel viewModelWithDevice:smokeCOAlarm];
 
-    cell.nameLabel.text = viewModel.nameLongText;
+    cell.nameLabel.text = viewModel.nameLongValue;
     cell.batteryStatusLabel.text = viewModel.batteryHealthText;
     cell.iconView.color = viewModel.iconViewColor;
 }
@@ -47,9 +49,9 @@ static NSString *const kSegueIdentifierCameraDetails = @"CameraDetailsSegueIdent
 + (void)_populateCameraCell:(CameraViewCell *)cell withCamera:(id <NestSDKCamera>)camera {
     CameraViewModel *viewModel = [DeviceViewModel viewModelWithDevice:camera];
 
-    cell.nameLabel.text = viewModel.nameLongText;
+    cell.nameLabel.text = viewModel.nameLongValue;
     cell.statusLabel.text = viewModel.lastEventText;
-    cell.iconView.streaming = viewModel.streamingStatusValue;
+    cell.iconView.streaming = viewModel.streamingStatusValue.boolValue;
 }
 
 + (BOOL)_isThermostatIndex:(NSInteger)index forStructure:(id <NestSDKStructure>)structure {

@@ -76,7 +76,9 @@
 - (void)setStreaming:(BOOL)streaming {
     _streaming = streaming;
 
-    self.streamingLEDLayer.hidden = !streaming;
+    dispatch_async(dispatch_get_main_queue(), ^(void) {
+        self.streamingLEDLayer.hidden = !streaming;
+    });
 }
 
 @end

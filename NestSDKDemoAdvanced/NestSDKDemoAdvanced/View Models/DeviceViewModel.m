@@ -68,6 +68,10 @@
     return [self stringWithTitle:@"Long name:" stringValue:self.device.nameLong];
 }
 
+- (NSString *)nameLongValue {
+    return self.device.nameLong;
+}
+
 - (NSString *)isOnlineText {
     return [self stringWithTitle:@"Online:" boolValue:self.device.isOnline];
 }
@@ -99,7 +103,9 @@
 }
 
 - (NSString *)stringWithDate:(NSDate *)date {
-    return [NSDateFormatter localizedStringFromDate:date dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterFullStyle];
+    if (!date) return @"";
+
+    return [NSDateFormatter localizedStringFromDate:date dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle];
 }
 
 @end

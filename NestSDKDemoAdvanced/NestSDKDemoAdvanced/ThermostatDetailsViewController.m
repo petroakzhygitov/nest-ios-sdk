@@ -155,10 +155,12 @@ static NSString *const kTemperatureSliderViewCell = @"TemperatureSliderViewCell"
 - (void)updateTableViewHeader {
     [super updateTableViewHeader];
 
-    self.nameLabel.text = self.deviceViewModel.nameLongText;
+    self.nameLabel.text = self.deviceViewModel.nameLongValue;
 
     self.iconView.state = self.deviceViewModel.iconViewState;
     self.iconView.targetTemperatureValue = self.deviceViewModel.targetTemperatureValue;
+    self.iconView.hasFan = self.deviceViewModel.hasFanValue;
+    self.iconView.hasLeaf = self.deviceViewModel.hasLeafValue;
 }
 
 - (void)updateTableViewData {
@@ -167,9 +169,9 @@ static NSString *const kTemperatureSliderViewCell = @"TemperatureSliderViewCell"
 //    self.deviceIdRow.value = self.deviceViewModel.deviceId;
 //    self.softwareVersionRow.value = self.deviceViewModel.softwareVersion;
 //    self.structureIdRow.value = self.deviceViewModel.structureId;
-//    self.nameIdRow.value = self.deviceViewModel.name;
-//    self.nameLongIdRow.value = self.deviceViewModel.nameLong;
-//    self.isOnlineIdRow.value = @(self.deviceViewModel.isOnline);
+//    self.nameRow.value = self.deviceViewModel.name;
+//    self.nameLongRow.value = self.deviceViewModel.nameLong;
+//    self.isOnlineRow.value = @(self.deviceViewModel.isOnline);
 //    self.whereIdRow.value = self.deviceViewModel.whereId;
 
     self.targetTemperatureRow.value = self.deviceViewModel.targetTemperatureValue;

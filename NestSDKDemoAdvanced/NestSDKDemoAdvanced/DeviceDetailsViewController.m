@@ -30,15 +30,15 @@
 }
 
 - (void)addNameRow {
-    self.nameIdRow = [self addReadOnlyTextRowWithText:self.deviceViewModel.nameText];
+    self.nameRow = [self addReadOnlyTextRowWithText:self.deviceViewModel.nameText];
 }
 
 - (void)addLongNameRow {
-    self.nameLongIdRow = [self addReadOnlyTextRowWithText:self.deviceViewModel.nameLongText];
+    self.nameLongRow = [self addReadOnlyTextRowWithText:self.deviceViewModel.nameLongText];
 }
 
 - (void)addIsOnlineRow {
-    self.isOnlineIdRow = [self addReadOnlyTextRowWithText:self.deviceViewModel.isOnlineText];
+    self.isOnlineRow = [self addReadOnlyTextRowWithText:self.deviceViewModel.isOnlineText];
 }
 
 - (void)addWhereIdRow {
@@ -154,9 +154,9 @@
     self.deviceIdRow.value = self.deviceViewModel.deviceIdText;
     self.softwareVersionRow.value = self.deviceViewModel.softwareVersionText;
     self.structureIdRow.value = self.deviceViewModel.structureIdText;
-    self.nameIdRow.value = self.deviceViewModel.nameText;
-    self.nameLongIdRow.value = self.deviceViewModel.nameLongText;
-    self.isOnlineIdRow.value = self.deviceViewModel.isOnlineText;
+    self.nameRow.value = self.deviceViewModel.nameText;
+    self.nameLongRow.value = self.deviceViewModel.nameLongText;
+    self.isOnlineRow.value = self.deviceViewModel.isOnlineText;
     self.whereIdRow.value = self.deviceViewModel.whereIdText;
 
     [self.tableView reloadData];

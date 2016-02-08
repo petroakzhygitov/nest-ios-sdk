@@ -23,6 +23,9 @@
 
 @property(nonatomic) BOOL fanTimerActiveValue;
 
+@property(nonatomic) BOOL hasFanValue;
+@property(nonatomic) BOOL hasLeafValue;
+
 @property(nonatomic, readonly, copy) NSString *temperatureScaleText;
 
 @property(nonatomic, readonly, copy) NSString *isCoolingText;

@@ -23,9 +23,9 @@
 @property(nonatomic) XLFormRowDescriptor *deviceIdRow;
 @property(nonatomic) XLFormRowDescriptor *softwareVersionRow;
 @property(nonatomic) XLFormRowDescriptor *structureIdRow;
-@property(nonatomic) XLFormRowDescriptor *nameIdRow;
-@property(nonatomic) XLFormRowDescriptor *nameLongIdRow;
-@property(nonatomic) XLFormRowDescriptor *isOnlineIdRow;
+@property(nonatomic) XLFormRowDescriptor *nameRow;
+@property(nonatomic) XLFormRowDescriptor *nameLongRow;
+@property(nonatomic) XLFormRowDescriptor *isOnlineRow;
 @property(nonatomic) XLFormRowDescriptor *whereIdRow;
 
 #pragma mark Methods

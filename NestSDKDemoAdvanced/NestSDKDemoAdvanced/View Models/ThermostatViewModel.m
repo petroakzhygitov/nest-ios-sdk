@@ -173,6 +173,14 @@
     return self.device.fanTimerActive;
 }
 
+- (BOOL)hasFanValue {
+    return self.device.hasFan;
+}
+
+- (BOOL)hasLeafValue {
+    return self.device.hasLeaf;
+}
+
 - (NSString *)temperatureScaleText {
     return [self _valueGrantingTemperatureScaleWithValueForC:@"C" valueForF:@"F"];
 }

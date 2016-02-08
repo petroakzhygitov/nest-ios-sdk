@@ -16,4 +16,7 @@ typedef NS_ENUM(NSUInteger, ThermostatIconViewState) {
 @property(nonatomic) ThermostatIconViewState state;
 @property(nonatomic) NSNumber *targetTemperatureValue;
 
+@property(nonatomic) BOOL hasLeaf;
+@property(nonatomic) BOOL hasFan;
+
 @end

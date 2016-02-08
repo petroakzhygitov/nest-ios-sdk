@@ -1,16 +1,25 @@
 #import "ThermostatIconView.h"
 
+#define DEGREES_TO_RADIANS(degrees)(CGFloat)((M_PI * degrees)/180)
+
 #pragma mark const
 static const int kInsetMultiplierBlackMiddleRect = 2;
 static const int kInsetMultiplierDisplayRect = 8;
 static const int kInsetMultiplierScaleRect = 6;
-static const int kInsetMultiplierTemperatureLabelRect = 10;
+static const int kInsetMultiplierTemperatureLabelRect = 11;
+static const int kInsetMultiplierCircleDotRect = 15;
+static const int kInsetMultiplierCircleDotShift = 7;
 
 
 @interface ThermostatIconView ()
 
 @property(nonatomic, weak) UILabel *temperatureLabel;
+
 @property(nonatomic) CAShapeLayer *displayLayer;
+@property(nonatomic) CAShapeLayer *displayBackgroundLayer;
+
+@property(nonatomic) CAShapeLayer *leafLayer;
+@property(nonatomic) CAShapeLayer *fanLayer;
 
 @end
 
@@ -57,11 +66,44 @@ static const int kInsetMultiplierTemperatureLabelRect = 10;
     [self addGradientCircleLayerWithRect:circleRect colors:@[[UIColor darkGrayColor], [UIColor blackColor]]];
 }
 
+- (void)_addDisplayBackgroundCircleLayer {
+    CGFloat inset = [self baseInset] * kInsetMultiplierScaleRect;
+    CGRect circleRect = [self rectWithInset:inset];
+
+    CAShapeLayer *circleLayer = [self circleLayerWithRect:circleRect fillColor:[UIColor blackColor]];
+    [self addLayer:circleLayer];
+
+    self.displayBackgroundLayer = circleLayer;
+}
+
 - (void)_addScaleCircleLayer {
     CGFloat inset = [self baseInset] * kInsetMultiplierScaleRect;
     CGRect circleRect = [self rectWithInset:inset];
 
-    [self addCircleLayerWithRect:circleRect fillColor:[UIColor darkGrayColor]];
+    UIColor *grayColor = [UIColor colorWithRed:128.0f / 255.0f green:128.0f / 255.0f blue:128.0f / 255.0f alpha:.5];
+    [self _addArcLayerWithRect:circleRect fillColor:grayColor];
+}
+
+- (void)_addArcLayerWithRect:(CGRect)rect fillColor:(UIColor *)fillColor {
+    CAShapeLayer *arcLayer = [self _arcLayerWithRect:rect fillColor:fillColor];
+
+    [self addLayer:arcLayer];
+}
+
+- (CAShapeLayer *)_arcLayerWithRect:(CGRect)rect fillColor:(UIColor *)color {
+    CGMutablePathRef arc = CGPathCreateMutable();
+    CGFloat centerX = (CGFloat) (rect.origin.x + rect.size.width * .5);
+    CGFloat centerY = (CGFloat) (rect.origin.y + rect.size.height * .5);
+    CGPathMoveToPoint(arc, NULL, centerX, centerY);
+
+    CGFloat radius = (CGFloat) (rect.size.width * .5);
+    CGPathAddArc(arc, NULL, centerX, centerY, radius, DEGREES_TO_RADIANS(60), DEGREES_TO_RADIANS(120), YES);
+
+    CAShapeLayer *arcLayer = [CAShapeLayer layer];
+    arcLayer.fillColor = color.CGColor;
+    arcLayer.path = arc;
+
+    return arcLayer;
 }
 
 - (void)_addDisplayCircleLayer {
@@ -74,6 +116,31 @@ static const int kInsetMultiplierTemperatureLabelRect = 10;
     self.displayLayer = circleLayer;
 }
 
+- (void)_addLeafLayer {
+    CAShapeLayer *leafLayer = [self _addCircleDotLayerWithColor:[UIColor greenColor]];
+
+    self.leafLayer = leafLayer;
+}
+
+- (void)_addFanLayer {
+    CAShapeLayer *fanLayer = [self _addCircleDotLayerWithColor:[UIColor whiteColor]];
+
+    self.fanLayer = fanLayer;
+}
+
+- (CAShapeLayer *)_addCircleDotLayerWithColor:(UIColor *)color {
+    CGFloat inset = [self baseInset] * kInsetMultiplierCircleDotRect;
+    CGRect circleRect = [self rectWithInset:inset];
+    circleRect.origin.y += [self baseInset] * kInsetMultiplierCircleDotShift;
+
+    CAShapeLayer *circleDotLayer = [self circleLayerWithRect:circleRect fillColor:color];
+    circleDotLayer.hidden = YES;
+
+    [self addLayer:circleDotLayer];
+
+    return circleDotLayer;
+}
+
 #pragma mark Override
 
 - (void)createSubviews {
@@ -83,8 +150,11 @@ static const int kInsetMultiplierTemperatureLabelRect = 10;
 - (void)createSublayers {
     [self _addGrayOutlineCircleLayer];
     [self _addBlackMiddleCircleLayer];
+    [self _addDisplayBackgroundCircleLayer];
     [self _addScaleCircleLayer];
     [self _addDisplayCircleLayer];
+    [self _addLeafLayer];
+    [self _addFanLayer];
 }
 
 - (void)resizeSubviews {
@@ -110,6 +180,7 @@ static const int kInsetMultiplierTemperatureLabelRect = 10;
             break;
     }
 
+    self.displayBackgroundLayer.fillColor = color.CGColor;
     self.displayLayer.fillColor = color.CGColor;
 }
 
@@ -117,6 +188,22 @@ static const int kInsetMultiplierTemperatureLabelRect = 10;
     _targetTemperatureValue = targetTemperatureValue;
 
     self.temperatureLabel.text = targetTemperatureValue.stringValue;
+}
+
+- (void)setHasLeaf:(BOOL)hasLeaf {
+    _hasLeaf = hasLeaf;
+
+    dispatch_async(dispatch_get_main_queue(), ^(void) {
+        self.leafLayer.hidden = !hasLeaf;
+    });
+}
+
+- (void)setHasFan:(BOOL)hasFan {
+    _hasFan = hasFan;
+
+    dispatch_async(dispatch_get_main_queue(), ^(void) {
+        self.fanLayer.hidden = !hasFan;
+    });
 }
 
 

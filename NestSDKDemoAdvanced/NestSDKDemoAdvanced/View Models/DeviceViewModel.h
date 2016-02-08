@@ -13,6 +13,7 @@
 @property(nonatomic, readonly, copy) NSString *structureIdText;
 @property(nonatomic, readonly, copy) NSString *nameText;
 @property(nonatomic, readonly, copy) NSString *nameLongText;
+@property(nonatomic, readonly, copy) NSString *nameLongValue;
 @property(nonatomic, readonly, copy) NSString *isOnlineText;
 @property(nonatomic, readonly, copy) NSString *whereIdText;
 

@@ -53,7 +53,7 @@
 - (void)updateTableViewHeader {
     [super updateTableViewHeader];
 
-    self.nameLabel.text = self.deviceViewModel.nameLongText;
+    self.nameLabel.text = self.deviceViewModel.nameLongValue;
 
     self.iconView.color = self.deviceViewModel.iconViewColor;
 }

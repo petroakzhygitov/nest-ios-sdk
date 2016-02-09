@@ -23,6 +23,9 @@
 /**
  * Base protocol for all data models in NestSDK.
  */
-@protocol NestSDKDataModelProtocol <NSObject>
+@protocol NestSDKDataModelProtocol <NSObject, NSCopying>
+#pragma mark Methods
+
+- (id)copy;
 
 @end

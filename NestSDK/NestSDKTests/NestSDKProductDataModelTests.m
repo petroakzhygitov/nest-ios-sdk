@@ -22,11 +22,9 @@
 #import <Expecta/Expecta.h>
 #import "SpectaDSL.h"
 #import "SPTSpec.h"
-#import "NestSDKAccessToken.h"
 #import "LSStubRequestDSL.h"
 #import "LSNocilla.h"
 #import "NestSDKMetadataDataModel.h"
-#import "NestSDKDeviceDataModel.h"
 #import "NestSDKProductDataModel.h"
 
 SpecBegin(NestSDKProductDataModel)
@@ -82,6 +80,15 @@ SpecBegin(NestSDKProductDataModel)
 
                 expect(product1).to.equal(product2);
                 expect(product1).notTo.equal(product3);
+            });
+
+            it(@"should copy", ^{
+                NSError *error;
+                NestSDKProductDataModel *product = [[NestSDKProductDataModel alloc] initWithData:data error:&error];
+                expect(error).to.equal(nil);
+
+                NestSDKProductDataModel *product2 = [product copy];
+                expect(product).to.equal(product2);
             });
         });
     }

@@ -22,13 +22,11 @@
 #import <Expecta/Expecta.h>
 #import "SpectaDSL.h"
 #import "SPTSpec.h"
-#import "NestSDKAccessToken.h"
 #import "LSStubRequestDSL.h"
 #import "LSNocilla.h"
 #import "NestSDKMetadataDataModel.h"
 #import "NestSDKDeviceDataModel.h"
 #import "NestSDKCameraDataModel.h"
-#import "NestSDKCameraLastEventDataModel.h"
 
 SpecBegin(NestSDKCameraLastEventDataModel)
     {
@@ -103,6 +101,15 @@ SpecBegin(NestSDKCameraLastEventDataModel)
 
                 expect(lastEvent1).to.equal(lastEvent2);
                 expect(lastEvent1).notTo.equal(lastEvent3);
+            });
+
+            it(@"should copy", ^{
+                NSError *error;
+                NestSDKCameraLastEventDataModel *lastEvent = [[NestSDKCameraLastEventDataModel alloc] initWithData:data error:&error];
+                expect(error).to.equal(nil);
+
+                NestSDKCameraLastEventDataModel *lastEvent2 = [lastEvent copy];
+                expect(lastEvent).to.equal(lastEvent2);
             });
         });
     }

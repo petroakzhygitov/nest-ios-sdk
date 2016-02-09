@@ -20,14 +20,14 @@
 
 #import <JSONModel/JSONModel.h>
 #import <NestSDK/NestSDKDataManager.h>
-#import <NestSDK/NestSDKMetadataDataModel.h>
 #import <NestSDK/NestSDKApplicationDelegate.h>
 #import <NestSDK/NestSDKError.h>
-#import <NestSDK/NestSDKStructureDataModel.h>
-#import <NestSDK/NestSDKThermostatDataModel.h>
-#import <NestSDK/NestSDKCameraDataModel.h>
-#import <NestSDK/NestSDKDataManagerHelper.h>
 #import <NestSDK/NestSDKMacroses.h>
+#import "NestSDKMetadataDataModel.h"
+#import "NestSDKStructureDataModel.h"
+#import "NestSDKThermostatDataModel.h"
+#import "NestSDKCameraDataModel.h"
+#import "NestSDKDataManagerHelper.h"
 
 #pragma mark const
 
@@ -42,10 +42,24 @@ typedef void (^NestSDKDataUpdateHandler)(id, NSError *);
 
 @property(nonatomic, readonly) id <NestSDKService> service;
 
+@property(nonatomic) NSMutableArray *observerHandles;
+
 @end
 
 
 @implementation NestSDKDataManager
+#pragma mark Initializer
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        self.observerHandles = [[NSMutableArray alloc] init];
+    }
+
+    return self;
+}
+
+
 #pragma mark Private
 
 - (void)_dataModelWithURL:(NSString *)url block:(NestSDKDataUpdateHandler)block {
@@ -154,6 +168,10 @@ typedef void (^NestSDKDataUpdateHandler)(id, NSError *);
     block(dataModel, nil);
 }
 
+- (void)_addHandle:(NestSDKObserverHandle)handle {
+    [self.observerHandles addObject:@(handle)];
+}
+
 #pragma mark Override
 
 - (id <NestSDKService>)service {
@@ -175,7 +193,11 @@ typedef void (^NestSDKDataUpdateHandler)(id, NSError *);
 
 - (NestSDKObserverHandle)observeStructuresWithBlock:(NestSDKStructuresArrayUpdateHandler)block {
     NSString *structuresURL = [NestSDKDataManagerHelper structuresURL];
-    return [self _observeDataModelWithURL:structuresURL block:block];
+
+    NestSDKObserverHandle handle = [self _observeDataModelWithURL:structuresURL block:block];
+    [self _addHandle:handle];
+
+    return handle;
 }
 
 - (void)setStructure:(id <NestSDKStructure>)structure block:(NestSDKStructureUpdateHandler)block {
@@ -191,7 +213,11 @@ typedef void (^NestSDKDataUpdateHandler)(id, NSError *);
 
 - (NestSDKObserverHandle)observeThermostatWithId:(NSString *)thermostatId block:(NestSDKThermostatUpdateHandler)block {
     NSString *thermostatURL = [NestSDKDataManagerHelper thermostatURLWithThermostatId:thermostatId];
-    return [self _observeDataModelWithURL:thermostatURL block:block];
+
+    NestSDKObserverHandle handle = [self _observeDataModelWithURL:thermostatURL block:block];
+    [self _addHandle:handle];
+
+    return handle;
 }
 
 - (void)setThermostat:(id <NestSDKThermostat>)thermostat block:(NestSDKThermostatUpdateHandler)block {
@@ -207,7 +233,11 @@ typedef void (^NestSDKDataUpdateHandler)(id, NSError *);
 
 - (NestSDKObserverHandle)observeSmokeCOAlarmWithId:(NSString *)smokeCOAlarmId block:(NestSDKSmokeCOAlarmUpdateHandler)block {
     NSString *smokeCOAlarmURL = [NestSDKDataManagerHelper smokeCOAlarmURLWithSmokeCOAlarmId:smokeCOAlarmId];
-    return [self _observeDataModelWithURL:smokeCOAlarmURL block:block];
+
+    NestSDKObserverHandle handle = [self _observeDataModelWithURL:smokeCOAlarmURL block:block];
+    [self _addHandle:handle];
+
+    return handle;
 }
 
 
@@ -218,7 +248,11 @@ typedef void (^NestSDKDataUpdateHandler)(id, NSError *);
 
 - (NestSDKObserverHandle)observeCameraWithId:(NSString *)cameraId block:(NestSDKCameraUpdateHandler)block {
     NSString *cameraURL = [NestSDKDataManagerHelper cameraURLWithCameraId:cameraId];
-    return [self _observeDataModelWithURL:cameraURL block:block];
+
+    NestSDKObserverHandle handle = [self _observeDataModelWithURL:cameraURL block:block];
+    [self _addHandle:handle];
+
+    return handle;
 }
 
 - (void)setCamera:(NestSDKCameraDataModel *)camera block:(NestSDKCameraUpdateHandler)block {
@@ -234,7 +268,11 @@ typedef void (^NestSDKDataUpdateHandler)(id, NSError *);
 
 - (NestSDKObserverHandle)observeProductWithId:(NSString *)productId companyId:(NSString *)companyId block:(NestSDKCameraUpdateHandler)block {
     NSString *productURL = [NestSDKDataManagerHelper productURLWithProductId:productId caompanyId:companyId];
-    return [self _observeDataModelWithURL:productURL block:block];
+
+    NestSDKObserverHandle handle = [self _observeDataModelWithURL:productURL block:block];
+    [self _addHandle:handle];
+
+    return handle;
 }
 
 
@@ -243,7 +281,11 @@ typedef void (^NestSDKDataUpdateHandler)(id, NSError *);
 }
 
 - (void)removeAllObservers {
-    [self.service removeAllObservers];
+    for (NSNumber *handle in self.observerHandles) {
+        [self removeObserverWithHandle:handle.unsignedIntegerValue];
+    }
+
+    [self.observerHandles removeAllObjects];
 }
 
 @end

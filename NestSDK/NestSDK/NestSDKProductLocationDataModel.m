@@ -24,6 +24,14 @@
 @implementation NestSDKProductLocationDataModel
 #pragma mark Override
 
+- (void)copyPropertiesToDataModelCopy:(id <NestSDKDataModelProtocol>)copy {
+    [super copyPropertiesToDataModelCopy:copy];
+
+    NestSDKProductLocationDataModel *productLocationDataModelCopy = (NestSDKProductLocationDataModel *) copy;
+    productLocationDataModelCopy.structureId = self.structureId;
+    productLocationDataModelCopy.whereId = self.whereId;
+}
+
 - (NSUInteger)hash {
     NSUInteger prime = 31;
     NSUInteger result = 1;

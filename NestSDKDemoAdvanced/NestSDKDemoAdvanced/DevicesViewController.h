@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  DevicesViewController.h
 //  NestSDKDemoAdvanced
 //
 //  Created by Petro Akzhygitov on 14/01/16.
@@ -11,7 +11,7 @@
 @class NestSDKDataManager;
 @class NestSDKConnectWithNestButton;
 
-@interface ViewController : UIViewController <NestSDKConnectWithNestButtonDelegate>
+@interface DevicesViewController : UIViewController <NestSDKConnectWithNestButtonDelegate, UITableViewDataSource, UITableViewDelegate>
 
 @property(weak, nonatomic) IBOutlet UITableView *tableView;
 
@@ -21,4 +21,3 @@
 @property(weak, nonatomic) IBOutlet NestSDKConnectWithNestButton *connectWithNestButton;
 
 @end
-

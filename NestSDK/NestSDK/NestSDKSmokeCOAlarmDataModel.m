@@ -29,14 +29,11 @@ static NSString *const kAlarmStateStringOk = @"ok";
 static NSString *const kAlarmStateStringWarning = @"warning";
 static NSString *const kAlarmStateStringEmergency = @"emergency";
 
-
 static NSString *const kUIColorStateGray = @"gray";
-
 static NSString *const kUIColorStateGreen = @"green";
-
 static NSString *const kUIColorStateYellow = @"yellow";
-
 static NSString *const kUIColorStateRed = @"red";
+
 
 @implementation NestSDKSmokeCOAlarmDataModel
 #pragma mark Private
@@ -176,6 +173,19 @@ static NSString *const kUIColorStateRed = @"red";
     return nil;
 }
 
+- (void)copyPropertiesToDataModelCopy:(id <NestSDKDataModelProtocol>)copy {
+    [super copyPropertiesToDataModelCopy:copy];
+
+    NestSDKSmokeCOAlarmDataModel *smokeCOAlarmDataModelCopy = (NestSDKSmokeCOAlarmDataModel *) copy;
+    smokeCOAlarmDataModelCopy.locale = self.locale;
+    smokeCOAlarmDataModelCopy.lastConnection = self.lastConnection;
+    smokeCOAlarmDataModelCopy.batteryHealth = self.batteryHealth;
+    smokeCOAlarmDataModelCopy.coAlarmState = self.coAlarmState;
+    smokeCOAlarmDataModelCopy.smokeAlarmState = self.smokeAlarmState;
+    smokeCOAlarmDataModelCopy.isManualTestActive = self.isManualTestActive;
+    smokeCOAlarmDataModelCopy.lastManualTestTime = self.lastManualTestTime;
+    smokeCOAlarmDataModelCopy.uiColorState = self.uiColorState;
+}
 
 - (NSUInteger)hash {
     NSUInteger intValueForYes = 1231;
@@ -186,15 +196,11 @@ static NSString *const kUIColorStateRed = @"red";
 
     result = prime * result + self.lastConnection.hash;
     result = prime * result + self.locale.hash;
-
     result = prime * result + self.batteryHealth;
     result = prime * result + self.coAlarmState;
     result = prime * result + self.smokeAlarmState;
-
     result = prime * result + (self.isManualTestActive ? intValueForYes : intValueForNo);
-
     result = prime * result + self.lastManualTestTime.hash;
-
     result = prime * result + self.uiColorState;
 
     return result;

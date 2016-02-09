@@ -22,31 +22,30 @@
 #import <Expecta/Expecta.h>
 #import "SpectaDSL.h"
 #import "SPTSpec.h"
-#import "NestSDKAccessToken.h"
 #import "LSStubRequestDSL.h"
 #import "LSNocilla.h"
 #import "NestSDKMetadataDataModel.h"
 #import "NestSDKStructureDataModel.h"
-#import "NestSDKWheresDataModel.h"
-#import "NestSDKETADataModel.h"
 
 SpecBegin(NestSDKStructureDataModel)
     {
         describe(@"NestSDKStructureDataModel", ^{
 
+            __block NSData *data;
             __block NSString *resourcePath;
+
+            __block NSDate *lastIsOnlineChangeDate;
 
             beforeAll(^{
                 resourcePath = [NSBundle bundleForClass:[self class]].resourcePath;
+                NSString *dataPath = [resourcePath stringByAppendingPathComponent:@"structure.json"];
+
+                data = [NSData dataWithContentsOfFile:dataPath];
             });
 
             it(@"should deserialize/serialize data", ^{
                 NSError *error;
-
-                NSString *structureJSONPath = [resourcePath stringByAppendingPathComponent:@"structure.json"];
-                NSData *structureData = [NSData dataWithContentsOfFile:structureJSONPath];
-
-                NestSDKStructureDataModel *structure = [[NestSDKStructureDataModel alloc] initWithData:structureData error:&error];
+                NestSDKStructureDataModel *structure = [[NestSDKStructureDataModel alloc] initWithData:data error:&error];
                 expect(error).to.equal(nil);
 
                 NSString *wheresJSONPath = [resourcePath stringByAppendingPathComponent:@"wheres.json"];
@@ -96,7 +95,7 @@ SpecBegin(NestSDKStructureDataModel)
                 NSDictionary *serializedDictionary = [NSJSONSerialization JSONObjectWithData:[structure toJSONData] options:kNilOptions error:&error];
                 expect(error).to.equal(nil);
 
-                NSDictionary *initialDictionary = [NSJSONSerialization JSONObjectWithData:structureData options:kNilOptions error:&error];
+                NSDictionary *initialDictionary = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
                 expect(error).to.equal(nil);
 
                 expect(serializedDictionary).to.equal(initialDictionary);
@@ -123,6 +122,25 @@ SpecBegin(NestSDKStructureDataModel)
 
                 expect(structure1).to.equal(structure2);
                 expect(structure1).notTo.equal(structure3);
+            });
+
+            it(@"should convert to writable dictionary", ^{
+                NSError *error;
+                NestSDKStructureDataModel *structure = [[NestSDKStructureDataModel alloc] initWithData:data error:&error];
+                expect(error).to.equal(nil);
+
+                NSDictionary *structureDictionary = [structure toWritableDataModelDictionary];
+                expect(structureDictionary.allKeys.count).to.equal(2);
+                expect(structureDictionary[@"eta"]).notTo.equal(nil);
+            });
+
+            it(@"should copy", ^{
+                NSError *error;
+                NestSDKStructureDataModel *structure = [[NestSDKStructureDataModel alloc] initWithData:data error:&error];
+                expect(error).to.equal(nil);
+
+                NestSDKStructureDataModel *structure2 = [structure copy];
+                expect(structure).to.equal(structure2);
             });
         });
     }

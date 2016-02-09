@@ -19,6 +19,7 @@
 // THE SOFTWARE.
 
 #import <Foundation/Foundation.h>
+#import <NestSDK/NestSDKDataModelProtocol.h>
 
 /**
  * Protocol for product location data model.

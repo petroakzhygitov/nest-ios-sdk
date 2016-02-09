@@ -589,7 +589,11 @@ SpecBegin(NestSDKDataManager)
                 [[[firebaseServiceMock stub] andReturnValue:@(4)] observeValuesForURL:@"devices/cameras/c1/" withBlock:[OCMArg any]];
                 [[[firebaseServiceMock stub] andReturnValue:@(5)] observeValuesForURL:@"devices/cameras/c2/" withBlock:[OCMArg any]];
 
-                [[firebaseServiceMock expect] removeAllObservers];
+                [[firebaseServiceMock expect] removeObserverWithHandle:1];
+                [[firebaseServiceMock expect] removeObserverWithHandle:2];
+                [[firebaseServiceMock expect] removeObserverWithHandle:3];
+                [[firebaseServiceMock expect] removeObserverWithHandle:4];
+                [[firebaseServiceMock expect] removeObserverWithHandle:5];
 
                 NestSDKDataManager *dataManager = [[NestSDKDataManager alloc] init];
 
@@ -605,7 +609,41 @@ SpecBegin(NestSDKDataManager)
                     [dataManager observeCameraWithId:@"c2" block:^(id <NestSDKCamera> camera, NSError *error) {
                     }];
 
-                    [firebaseServiceMock removeAllObservers];
+                    [dataManager removeAllObservers];
+
+                    [firebaseServiceMock verify];
+
+                    done();
+                });
+            });
+
+            it(@"should remove all observers for specific instance", ^{
+                [[[firebaseServiceMock stub] andReturnValue:@(1)] observeValuesForURL:@"structures/" withBlock:[OCMArg any]];
+                [[[firebaseServiceMock stub] andReturnValue:@(2)] observeValuesForURL:@"devices/thermostats/t1/" withBlock:[OCMArg any]];
+                [[[firebaseServiceMock stub] andReturnValue:@(3)] observeValuesForURL:@"devices/smoke_co_alarms/s1/" withBlock:[OCMArg any]];
+                [[[firebaseServiceMock stub] andReturnValue:@(4)] observeValuesForURL:@"devices/cameras/c1/" withBlock:[OCMArg any]];
+                [[[firebaseServiceMock stub] andReturnValue:@(5)] observeValuesForURL:@"devices/cameras/c2/" withBlock:[OCMArg any]];
+
+                [[firebaseServiceMock expect] removeObserverWithHandle:1];
+                [[firebaseServiceMock expect] removeObserverWithHandle:3];
+                [[firebaseServiceMock expect] removeObserverWithHandle:5];
+
+                NestSDKDataManager *dataManager1 = [[NestSDKDataManager alloc] init];
+                NestSDKDataManager *dataManager2 = [[NestSDKDataManager alloc] init];
+
+                waitUntil(^(DoneCallback done) {
+                    [dataManager1 observeStructuresWithBlock:^(NSArray <NestSDKStructure> *structuresArray, NSError *error) {
+                    }];
+                    [dataManager2 observeThermostatWithId:@"t1" block:^(id <NestSDKThermostat> thermostat, NSError *error) {
+                    }];
+                    [dataManager1 observeSmokeCOAlarmWithId:@"s1" block:^(id <NestSDKSmokeCOAlarm> smokeCOAlarm, NSError *error) {
+                    }];
+                    [dataManager2 observeCameraWithId:@"c1" block:^(id <NestSDKCamera> camera, NSError *error) {
+                    }];
+                    [dataManager1 observeCameraWithId:@"c2" block:^(id <NestSDKCamera> camera, NSError *error) {
+                    }];
+
+                    [dataManager1 removeAllObservers];
 
                     [firebaseServiceMock verify];
 

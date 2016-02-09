@@ -35,11 +35,11 @@ static NSString *const kHVACModeStringCool = @"cool";
 static NSString *const kHVACModeStringHeatCool = @"heat-cool";
 static NSString *const kHVACModeStringOff = @"off";
 
-static const NSUInteger kTemperatureCAllowableMin = 9;
-static const NSUInteger kTemperatureCAllowableMax = 32;
+const NSUInteger NestSDKThermostatTemperatureCAllowableMin = 9;
+const NSUInteger NestSDKThermostatTemperatureCAllowableMax = 32;
 
-static const NSUInteger kTemperatureFAllowableMin = 48;
-static const NSUInteger kTemperatureFAllowableMax = 90;
+const NSUInteger NestSDKThermostatTemperatureFAllowableMin = 48;
+const NSUInteger NestSDKThermostatTemperatureFAllowableMax = 90;
 
 
 @implementation NestSDKThermostatDataModel
@@ -57,14 +57,53 @@ static const NSUInteger kTemperatureFAllowableMax = 90;
 
 - (CGFloat)_temperatureInAllowableRangeWithTemperatureC:(CGFloat)temperatureC {
     return [self _temperatureInAllowableRangeWithTemperature:temperatureC
-                                                allowableMin:kTemperatureCAllowableMin
-                                                allowableMax:kTemperatureCAllowableMax];
+                                                allowableMin:NestSDKThermostatTemperatureCAllowableMin
+                                                allowableMax:NestSDKThermostatTemperatureCAllowableMax];
 }
 
 - (NSUInteger)_temperatureInAllowableRangeWithTemperatureF:(NSUInteger)temperatureF {
     return (NSUInteger) [self _temperatureInAllowableRangeWithTemperature:temperatureF
-                                                       allowableMin:kTemperatureFAllowableMin
-                                                       allowableMax:kTemperatureFAllowableMax];
+                                                             allowableMin:NestSDKThermostatTemperatureFAllowableMin
+                                                             allowableMax:NestSDKThermostatTemperatureFAllowableMax];
+}
+
+- (NSArray *)_writablePropertyNamesArraySatisfyingTemperatureScaleWithArray:(NSArray *)array {
+    NSString *suffix;
+
+    switch (self.temperatureScale) {
+        case NestSDKThermostatTemperatureScaleUndefined:
+            break;
+
+        case NestSDKThermostatTemperatureScaleC:
+            suffix = @"F";
+
+            break;
+        case NestSDKThermostatTemperatureScaleF:
+            suffix = @"C";
+
+            break;
+    }
+
+    NSArray *propertyNamesToRemoveArray = [self _writableTemperaturePropertyNameWithSuffix:suffix];
+
+    NSMutableArray *mutableArray = [array mutableCopy];
+    [mutableArray removeObjectsInArray:propertyNamesToRemoveArray];
+
+    return mutableArray;
+}
+
+- (NSArray *)_writableTemperaturePropertyNameWithSuffix:(NSString *)suffix {
+    if (suffix.length == 0) return @[];
+
+    NSString *targetTemperature = [self _temperaturePropertyWithName:@"targetTemperature" suffix:suffix];
+    NSString *targetTemperatureHigh = [self _temperaturePropertyWithName:@"targetTemperatureHigh" suffix:suffix];
+    NSString *targetTemperatureLow = [self _temperaturePropertyWithName:@"targetTemperatureLow" suffix:suffix];
+
+    return @[targetTemperature, targetTemperatureHigh, targetTemperatureLow];
+}
+
+- (NSString *)_temperaturePropertyWithName:(NSString *)propertyName suffix:(NSString *)suffix {
+    return [NSString stringWithFormat:@"%@%@", propertyName, suffix];
 }
 
 #pragma mark Override
@@ -216,6 +255,44 @@ static const NSUInteger kTemperatureFAllowableMax = 90;
     return nil;
 }
 
+- (NSArray *)writablePropertyNamesArrayWithProtocol:(Protocol *)aProtocol {
+    NSArray *array = [super writablePropertyNamesArrayWithProtocol:aProtocol];
+    array = [self _writablePropertyNamesArraySatisfyingTemperatureScaleWithArray:array];
+
+    return array;
+}
+
+- (void)copyPropertiesToDataModelCopy:(id <NestSDKDataModelProtocol>)copy {
+    [super copyPropertiesToDataModelCopy:copy];
+
+    NestSDKThermostatDataModel *thermostatDataModelCopy = (NestSDKThermostatDataModel *) copy;
+    thermostatDataModelCopy.locale = self.locale;
+    thermostatDataModelCopy.lastConnection = self.lastConnection;
+    thermostatDataModelCopy.canCool = self.canCool;
+    thermostatDataModelCopy.canHeat = self.canHeat;
+    thermostatDataModelCopy.isUsingEmergencyHeat = self.isUsingEmergencyHeat;
+    thermostatDataModelCopy.hasFan = self.hasFan;
+    thermostatDataModelCopy.fanTimerActive = self.fanTimerActive;
+    thermostatDataModelCopy.fanTimerTimeout = self.fanTimerTimeout;
+    thermostatDataModelCopy.hasLeaf = self.hasLeaf;
+    thermostatDataModelCopy.temperatureScale = self.temperatureScale;
+    thermostatDataModelCopy.targetTemperatureF = self.targetTemperatureF;
+    thermostatDataModelCopy.targetTemperatureC = self.targetTemperatureC;
+    thermostatDataModelCopy.targetTemperatureHighF = self.targetTemperatureHighF;
+    thermostatDataModelCopy.targetTemperatureHighC = self.targetTemperatureHighC;
+    thermostatDataModelCopy.targetTemperatureLowF = self.targetTemperatureLowF;
+    thermostatDataModelCopy.targetTemperatureLowC = self.targetTemperatureLowC;
+    thermostatDataModelCopy.awayTemperatureHighF = self.awayTemperatureHighF;
+    thermostatDataModelCopy.awayTemperatureHighC = self.awayTemperatureHighC;
+    thermostatDataModelCopy.awayTemperatureLowF = self.awayTemperatureLowF;
+    thermostatDataModelCopy.awayTemperatureLowC = self.awayTemperatureLowC;
+    thermostatDataModelCopy.hvacMode = self.hvacMode;
+    thermostatDataModelCopy.ambientTemperatureC = self.ambientTemperatureC;
+    thermostatDataModelCopy.ambientTemperatureF = self.ambientTemperatureF;
+    thermostatDataModelCopy.humidity = self.humidity;
+    thermostatDataModelCopy.hvacState = self.hvacState;
+}
+
 - (NSUInteger)hash {
     NSUInteger intValueForYes = 1231;
     NSUInteger intValueForNo = 1237;
@@ -225,19 +302,14 @@ static const NSUInteger kTemperatureFAllowableMax = 90;
 
     result = prime * result + self.lastConnection.hash;
     result = prime * result + self.locale.hash;
-
     result = prime * result + (self.canCool ? intValueForYes : intValueForNo);
     result = prime * result + (self.canHeat ? intValueForYes : intValueForNo);
     result = prime * result + (self.isUsingEmergencyHeat ? intValueForYes : intValueForNo);
     result = prime * result + (self.hasFan ? intValueForYes : intValueForNo);
     result = prime * result + (self.fanTimerActive ? intValueForYes : intValueForNo);
-
     result = prime * result + self.fanTimerTimeout.hash;
-
     result = prime * result + (self.hasLeaf ? intValueForYes : intValueForNo);
-
     result = prime * result + self.temperatureScale;
-
     result = prime * result + self.targetTemperatureF;
     result = (NSUInteger) (prime * result + self.targetTemperatureC);
     result = prime * result + self.targetTemperatureHighF;
@@ -248,14 +320,10 @@ static const NSUInteger kTemperatureFAllowableMax = 90;
     result = (NSUInteger) (prime * result + self.awayTemperatureHighC);
     result = prime * result + self.awayTemperatureLowF;
     result = (NSUInteger) (prime * result + self.awayTemperatureLowC);
-
     result = prime * result + self.hvacMode;
-
     result = (NSUInteger) (prime * result + self.ambientTemperatureC);
     result = prime * result + self.ambientTemperatureF;
-
     result = prime * result + self.humidity;
-
     result = prime * result + self.hvacState;
 
     return result;

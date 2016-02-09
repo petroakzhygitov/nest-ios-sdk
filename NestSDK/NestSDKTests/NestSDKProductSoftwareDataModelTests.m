@@ -77,6 +77,15 @@ SpecBegin(NestSDKProductSoftwareDataModel)
                 expect(productSoftware1).to.equal(productSoftware2);
                 expect(productSoftware1).notTo.equal(productSoftware3);
             });
+
+            it(@"should copy", ^{
+                NSError *error;
+                NestSDKProductSoftwareDataModel *productSoftware = [[NestSDKProductSoftwareDataModel alloc] initWithData:data error:&error];
+                expect(error).to.equal(nil);
+
+                NestSDKProductSoftwareDataModel *productSoftware2 = [productSoftware copy];
+                expect(productSoftware).to.equal(productSoftware2);
+            });
         });
     }
 SpecEnd

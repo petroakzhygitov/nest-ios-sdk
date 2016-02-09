@@ -22,16 +22,14 @@
 #import <Expecta/Expecta.h>
 #import "SpectaDSL.h"
 #import "SPTSpec.h"
-#import "NestSDKAccessToken.h"
 #import "LSStubRequestDSL.h"
 #import "LSNocilla.h"
 #import "NestSDKMetadataDataModel.h"
-#import "NestSDKWheresDataModel.h"
 
 SpecBegin(NestSDKMetadataDataModel)
     {
         describe(@"NestSDKMetadataDataModel", ^{
-            
+
             __block NSData *data;
 
             beforeAll(^{
@@ -76,6 +74,15 @@ SpecBegin(NestSDKMetadataDataModel)
 
                 expect(metadata1).to.equal(metadata2);
                 expect(metadata1).notTo.equal(metadata3);
+            });
+
+            it(@"should copy", ^{
+                NSError *error;
+                NestSDKMetadataDataModel *metadata = [[NestSDKMetadataDataModel alloc] initWithData:data error:&error];
+                expect(error).to.equal(nil);
+
+                NestSDKMetadataDataModel *metadata2 = [metadata copy];
+                expect(metadata).to.equal(metadata2);
             });
         });
     }

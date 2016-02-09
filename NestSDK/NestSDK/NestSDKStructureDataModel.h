@@ -20,12 +20,12 @@
 
 #import <Foundation/Foundation.h>
 #import <JSONModel/JSONModel.h>
-#import <NestSDK/NestSDKDataModel.h>
 #import <NestSDK/NestSDKETA.h>
-#import <NestSDK/NestSDKETADataModel.h>
 #import <NestSDK/NestSDKWheres.h>
-#import <NestSDK/NestSDKWheresDataModel.h>
 #import "NestSDKStructure.h"
+#import "NestSDKDataModel.h"
+#import "NestSDKETADataModel.h"
+#import "NestSDKWheresDataModel.h"
 
 @class NestSDKETADataModel;
 @protocol NestSDKWheresDataModel;

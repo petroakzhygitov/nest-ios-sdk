@@ -22,7 +22,6 @@
 #import <Expecta/Expecta.h>
 #import "SpectaDSL.h"
 #import "SPTSpec.h"
-#import "NestSDKAccessToken.h"
 #import "LSStubRequestDSL.h"
 #import "LSNocilla.h"
 #import "NestSDKMetadataDataModel.h"
@@ -35,20 +34,14 @@ SpecBegin(NestSDKThermostatDataModel)
 
             __block NSData *data;
 
+            __block NSDate *lastConnectionDate;
+            __block NSDate *fanTimerTimeoutDate;
+
             beforeAll(^{
                 NSString *resourcePath = [NSBundle bundleForClass:[self class]].resourcePath;
                 NSString *dataPath = [resourcePath stringByAppendingPathComponent:@"thermostat.json"];
 
                 data = [NSData dataWithContentsOfFile:dataPath];
-            });
-
-            it(@"should deserialize/serialize data", ^{
-                NSError *error;
-                NestSDKThermostatDataModel *thermostat = [[NestSDKThermostatDataModel alloc] initWithData:data error:&error];
-                expect(error).to.equal(nil);
-
-                NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
-                calendar.timeZone = [NSTimeZone timeZoneWithAbbreviation:@"UTC"];
 
                 NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
                 dateComponents.timeZone = [NSTimeZone timeZoneWithAbbreviation:@"UTC"];
@@ -59,7 +52,17 @@ SpecBegin(NestSDKThermostatDataModel)
                 dateComponents.minute = 59;
                 dateComponents.second = 59;
 
-                NSDate *lastConnectionDate = [calendar dateFromComponents:dateComponents];
+                NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+                calendar.timeZone = [NSTimeZone timeZoneWithAbbreviation:@"UTC"];
+
+                lastConnectionDate = [calendar dateFromComponents:dateComponents];
+                fanTimerTimeoutDate = [calendar dateFromComponents:dateComponents];
+            });
+
+            it(@"should deserialize/serialize data", ^{
+                NSError *error;
+                NestSDKThermostatDataModel *thermostat = [[NestSDKThermostatDataModel alloc] initWithData:data error:&error];
+                expect(error).to.equal(nil);
 
                 expect(thermostat.deviceId).to.equal(@"peyiJNo0IldT2YlIVtYaGQ");
                 expect(thermostat.locale).to.equal(@"en-US");
@@ -70,8 +73,6 @@ SpecBegin(NestSDKThermostatDataModel)
                 expect(thermostat.lastConnection).to.equal(lastConnectionDate);
                 expect(thermostat.isOnline).to.equal(YES);
                 expect(thermostat.whereId).to.equal(@"UNCBGUnN24...");
-
-                NSDate *fanTimerTimeoutDate = [calendar dateFromComponents:dateComponents];
                 expect(thermostat.canCool).to.equal(YES);
                 expect(thermostat.canHeat).to.equal(YES);
                 expect(thermostat.isUsingEmergencyHeat).to.equal(YES);
@@ -165,6 +166,41 @@ SpecBegin(NestSDKThermostatDataModel)
 
                 thermostat.targetTemperatureLowF = 155;
                 expect(thermostat.targetTemperatureLowF).to.equal(90);
+            });
+
+            it(@"should convert to writable dictionary", ^{
+                NSError *error;
+                NestSDKThermostatDataModel *thermostat = [[NestSDKThermostatDataModel alloc] initWithData:data error:&error];
+                expect(error).to.equal(nil);
+
+                thermostat.temperatureScale = NestSDKThermostatTemperatureScaleC;
+                NSDictionary *thermostatDictionary = [thermostat toWritableDataModelDictionary];
+
+                expect(thermostatDictionary.allKeys.count).to.equal(5);
+                expect(thermostatDictionary[@"fan_timer_active"]).to.equal(YES);
+                expect(thermostatDictionary[@"hvac_mode"]).to.equal(@"heat");
+                expect(thermostatDictionary[@"target_temperature_c"]).to.equal(21.5);
+                expect(thermostatDictionary[@"target_temperature_high_c"]).to.equal(21.5);
+                expect(thermostatDictionary[@"target_temperature_low_c"]).to.equal(17.5);
+
+                thermostat.temperatureScale = NestSDKThermostatTemperatureScaleF;
+                thermostatDictionary = [thermostat toWritableDataModelDictionary];
+
+                expect(thermostatDictionary.allKeys.count).to.equal(5);
+                expect(thermostatDictionary[@"fan_timer_active"]).to.equal(YES);
+                expect(thermostatDictionary[@"hvac_mode"]).to.equal(@"heat");
+                expect(thermostatDictionary[@"target_temperature_f"]).to.equal(72);
+                expect(thermostatDictionary[@"target_temperature_high_f"]).to.equal(72);
+                expect(thermostatDictionary[@"target_temperature_low_f"]).to.equal(64);
+            });
+
+            it(@"should copy", ^{
+                NSError *error;
+                NestSDKThermostatDataModel *thermostat = [[NestSDKThermostatDataModel alloc] initWithData:data error:&error];
+                expect(error).to.equal(nil);
+
+                NestSDKThermostatDataModel *thermostat2 = [thermostat copy];
+                expect(thermostat).to.equal(thermostat2);
             });
         });
     }

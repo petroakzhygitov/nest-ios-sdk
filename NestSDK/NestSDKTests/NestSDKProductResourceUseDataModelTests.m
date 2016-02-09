@@ -95,6 +95,15 @@ SpecBegin(NestSDKProductResourceUseDataModel)
                 expect(productResourceUse1).to.equal(productResourceUse2);
                 expect(productResourceUse1).notTo.equal(productResourceUse3);
             });
+
+            it(@"should copy", ^{
+                NSError *error;
+                NestSDKProductResourceUseDataModel *productResourceUse = [[NestSDKProductResourceUseDataModel alloc] initWithData:data error:&error];
+                expect(error).to.equal(nil);
+
+                NestSDKProductResourceUseDataModel *productResourceUse2 = [productResourceUse copy];
+                expect(productResourceUse).to.equal(productResourceUse2);
+            });
         });
     }
 SpecEnd

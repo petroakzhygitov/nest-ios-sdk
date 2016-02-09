@@ -21,8 +21,8 @@
 #import <Foundation/Foundation.h>
 #import <JSONModel/JSONModel.h>
 #import <CoreGraphics/CGBase.h>
-#import <NestSDK/NestSDKDataModel.h>
 #import <NestSDK/NestSDKProductResource.h>
+#import "NestSDKDataModel.h"
 
 /**
  * An object containing the resource use type (electricity, gas, water), with data values and measurement timestamps.

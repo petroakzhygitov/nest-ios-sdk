@@ -76,6 +76,15 @@ SpecBegin(NestSDKProductLocationDataModel)
                 expect(productLocation1).to.equal(productLocation2);
                 expect(productLocation1).notTo.equal(productLocation3);
             });
+
+            it(@"should copy", ^{
+                NSError *error;
+                NestSDKProductLocationDataModel *productLocation = [[NestSDKProductLocationDataModel alloc] initWithData:data error:&error];
+                expect(error).to.equal(nil);
+
+                NestSDKProductLocationDataModel *productLocation2 = [productLocation copy];
+                expect(productLocation).to.equal(productLocation2);
+            });
         });
     }
 SpecEnd

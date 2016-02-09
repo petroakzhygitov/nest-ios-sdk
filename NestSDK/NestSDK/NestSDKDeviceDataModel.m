@@ -24,6 +24,19 @@
 @implementation NestSDKDeviceDataModel
 #pragma mark Override
 
+- (void)copyPropertiesToDataModelCopy:(id <NestSDKDataModelProtocol>)copy {
+    [super copyPropertiesToDataModelCopy:copy];
+
+    NestSDKDeviceDataModel *deviceDataModelCopy = (NestSDKDeviceDataModel *) copy;
+    deviceDataModelCopy.deviceId = self.deviceId;
+    deviceDataModelCopy.softwareVersion = self.softwareVersion;
+    deviceDataModelCopy.structureId = self.structureId;
+    deviceDataModelCopy.name = self.name;
+    deviceDataModelCopy.nameLong = self.nameLong;
+    deviceDataModelCopy.isOnline = self.isOnline;
+    deviceDataModelCopy.whereId = self.whereId;
+}
+
 - (NSUInteger)hash {
     NSUInteger intValueForYes = 1231;
     NSUInteger intValueForNo = 1237;

@@ -25,6 +25,14 @@
 @implementation NestSDKMetadataDataModel
 #pragma mark Override
 
+- (void)copyPropertiesToDataModelCopy:(id <NestSDKDataModelProtocol>)copy {
+    [super copyPropertiesToDataModelCopy:copy];
+
+    NestSDKMetadataDataModel *metadataDataModelCopy = (NestSDKMetadataDataModel *) copy;
+    metadataDataModelCopy.accessToken = self.accessToken;
+    metadataDataModelCopy.clientVersion = self.clientVersion;
+}
+
 - (NSUInteger)hash {
     NSUInteger prime = 31;
     NSUInteger result = 1;

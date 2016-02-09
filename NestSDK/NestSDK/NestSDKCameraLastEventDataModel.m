@@ -41,6 +41,20 @@
     return [NestSDKUtils iso8601FormatDateStringWithDate:self.endTime];
 }
 
+- (void)copyPropertiesToDataModelCopy:(id <NestSDKDataModelProtocol>)copy {
+    [super copyPropertiesToDataModelCopy:copy];
+
+    NestSDKCameraLastEventDataModel *cameraLastEventDataModelCopy = (NestSDKCameraLastEventDataModel *) copy;
+    cameraLastEventDataModelCopy.hasSound = self.hasSound;
+    cameraLastEventDataModelCopy.hasMotion = self.hasMotion;
+    cameraLastEventDataModelCopy.startTime = self.startTime;
+    cameraLastEventDataModelCopy.endTime = self.endTime;
+    cameraLastEventDataModelCopy.webUrl = self.webUrl;
+    cameraLastEventDataModelCopy.appUrl = self.appUrl;
+    cameraLastEventDataModelCopy.imageUrl = self.imageUrl;
+    cameraLastEventDataModelCopy.animatedImageUrl = self.animatedImageUrl;
+}
+
 - (NSUInteger)hash {
     NSUInteger intValueForYes = 1231;
     NSUInteger intValueForNo = 1237;
@@ -50,7 +64,6 @@
 
     result = prime * result + (self.hasSound ? intValueForYes : intValueForNo);
     result = prime * result + (self.hasMotion ? intValueForYes : intValueForNo);
-
     result = prime * result + self.startTime.hash;
     result = prime * result + self.endTime.hash;
     result = prime * result + self.webUrl.hash;

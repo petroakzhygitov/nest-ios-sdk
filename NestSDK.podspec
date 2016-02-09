@@ -1,8 +1,8 @@
 Pod::Spec.new do |s|
 
-  s.name             = "NestSDK"
-  s.version          = "0.1.2"
-  s.summary          = "This open-source library allows you to integrate Nest API into your iOS app."
+  s.name             = 'NestSDK'
+  s.version          = '0.1.3'
+  s.summary          = 'This open-source library allows you to integrate Nest API into your iOS app.'
 
   s.description      = <<-DESC
                        NestSDK for iOS.
@@ -12,15 +12,14 @@ Pod::Spec.new do |s|
                        Learn more about Nest API at https://developer.nest.com/documentation/cloud/get-started
                        DESC
 
-  s.homepage         = "https://github.com/petroakzhygitov/NestSDK"
+  s.homepage         = 'https://github.com/petroakzhygitov/NestSDK'
   s.license          = 'MIT'
-  s.author           = { "petroakzhygitov" => "petro.akzhygitov@gmail.com" }
+  s.author           = { 'petroakzhygitov' => 'petro.akzhygitov@gmail.com' }
 
-  s.platform     = :ios, "9.0"
-  s.ios.deployment_target = "7.0"
+  s.platform     = :ios, '9.0'
+  s.ios.deployment_target = '7.0'
 
-  s.source           = { :git => "https://github.com/petroakzhygitov/NestSDK.git", :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+  s.source           = { :git => 'https://github.com/petroakzhygitov/NestSDK.git', :tag => s.version.to_s }
 
   s.requires_arc = true
 

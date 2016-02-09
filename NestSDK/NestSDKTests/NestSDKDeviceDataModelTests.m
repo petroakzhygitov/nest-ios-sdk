@@ -96,6 +96,15 @@ SpecBegin(NestSDKDeviceDataModel)
                 expect(device1).to.equal(device2);
                 expect(device1).notTo.equal(device3);
             });
+
+            it(@"should copy", ^{
+                NSError *error;
+                NestSDKDeviceDataModel *device = [[NestSDKDeviceDataModel alloc] initWithData:data error:&error];
+                expect(error).to.equal(nil);
+
+                NestSDKDeviceDataModel *device2 = [device copy];
+                expect(device).to.equal(device2);
+            });
         });
     }
 SpecEnd

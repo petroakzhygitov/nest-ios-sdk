@@ -18,7 +18,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import <NestSDK/NestSDKUtils.h>
+#import "NestSDKUtils.h"
 #import "NestSDKCameraDataModel.h"
 
 @implementation NestSDKCameraDataModel
@@ -30,6 +30,19 @@
 
 - (id)JSONObjectForLastIsOnlineChange {
     return [NestSDKUtils iso8601FormatDateStringWithDate:self.lastIsOnlineChange];
+}
+
+- (void)copyPropertiesToDataModelCopy:(id <NestSDKDataModelProtocol>)copy {
+    [super copyPropertiesToDataModelCopy:copy];
+
+    NestSDKCameraDataModel *cameraDataModelCopy = (NestSDKCameraDataModel *) copy;
+    cameraDataModelCopy.isStreaming = self.isStreaming;
+    cameraDataModelCopy.isAudioInputEnabled = self.isAudioInputEnabled;
+    cameraDataModelCopy.lastIsOnlineChange = self.lastIsOnlineChange;
+    cameraDataModelCopy.isVideoHistoryEnabled = self.isVideoHistoryEnabled;
+    cameraDataModelCopy.webUrl = self.webUrl;
+    cameraDataModelCopy.appUrl = self.appUrl;
+    cameraDataModelCopy.lastEvent = self.lastEvent;
 }
 
 - (NSUInteger)hash {

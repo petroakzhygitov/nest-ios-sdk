@@ -22,13 +22,11 @@
 #import <Expecta/Expecta.h>
 #import "SpectaDSL.h"
 #import "SPTSpec.h"
-#import "NestSDKAccessToken.h"
 #import "LSStubRequestDSL.h"
 #import "LSNocilla.h"
 #import "NestSDKMetadataDataModel.h"
 #import "NestSDKDeviceDataModel.h"
 #import "NestSDKCameraDataModel.h"
-#import "NestSDKCameraLastEventDataModel.h"
 
 SpecBegin(NestSDKCameraDataModel)
     {
@@ -37,23 +35,13 @@ SpecBegin(NestSDKCameraDataModel)
             __block NSData *data;
             __block NSString *resourcePath;
 
+            __block NSDate *lastIsOnlineChangeDate;
+
             beforeAll(^{
                 resourcePath = [NSBundle bundleForClass:[self class]].resourcePath;
                 NSString *dataPath = [resourcePath stringByAppendingPathComponent:@"camera.json"];
 
                 data = [NSData dataWithContentsOfFile:dataPath];
-            });
-
-            it(@"should deserialize/serialize data", ^{
-                NSError *error;
-                NestSDKCameraDataModel *camera = [[NestSDKCameraDataModel alloc] initWithData:data error:&error];
-                expect(error).to.equal(nil);
-
-                NSString *lastEventJSONPath = [resourcePath stringByAppendingPathComponent:@"camera_last_event.json"];
-                NSData *lastEventData = [NSData dataWithContentsOfFile:lastEventJSONPath];
-
-                NestSDKCameraLastEventDataModel *lastEvent = [[NestSDKCameraLastEventDataModel alloc] initWithData:lastEventData error:&error];
-                expect(error).to.equal(nil);
 
                 NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
                 calendar.timeZone = [NSTimeZone timeZoneWithAbbreviation:@"UTC"];
@@ -66,7 +54,19 @@ SpecBegin(NestSDKCameraDataModel)
                 dateComponents.minute = 42;
                 dateComponents.second = 00;
 
-                NSDate *lastIsOnlineChangeDate = [calendar dateFromComponents:dateComponents];
+                lastIsOnlineChangeDate = [calendar dateFromComponents:dateComponents];
+            });
+
+            it(@"should deserialize/serialize data", ^{
+                NSError *error;
+                NestSDKCameraDataModel *camera = [[NestSDKCameraDataModel alloc] initWithData:data error:&error];
+                expect(error).to.equal(nil);
+
+                NSString *lastEventJSONPath = [resourcePath stringByAppendingPathComponent:@"camera_last_event.json"];
+                NSData *lastEventData = [NSData dataWithContentsOfFile:lastEventJSONPath];
+
+                NestSDKCameraLastEventDataModel *lastEvent = [[NestSDKCameraLastEventDataModel alloc] initWithData:lastEventData error:&error];
+                expect(error).to.equal(nil);
 
                 expect(camera.deviceId).to.equal(@"awJo6rH...");
                 expect(camera.softwareVersion).to.equal(@"4.0");
@@ -111,6 +111,25 @@ SpecBegin(NestSDKCameraDataModel)
 
                 expect(camera1).to.equal(camera2);
                 expect(camera1).notTo.equal(camera3);
+            });
+
+            it(@"should convert to writable dictionary", ^{
+                NSError *error;
+                NestSDKCameraDataModel *camera = [[NestSDKCameraDataModel alloc] initWithData:data error:&error];
+                expect(error).to.equal(nil);
+
+                NSDictionary *cameraDictionary = [camera toWritableDataModelDictionary];
+                expect(cameraDictionary.allKeys.count).to.equal(1);
+                expect(cameraDictionary[@"is_streaming"]).to.equal(YES);
+            });
+
+            it(@"should copy", ^{
+                NSError *error;
+                NestSDKCameraDataModel *camera = [[NestSDKCameraDataModel alloc] initWithData:data error:&error];
+                expect(error).to.equal(nil);
+
+                NestSDKCameraDataModel *camera2 = [camera copy];
+                expect(camera).to.equal(camera2);
             });
         });
     }

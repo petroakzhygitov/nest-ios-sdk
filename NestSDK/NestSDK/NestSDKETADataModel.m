@@ -41,6 +41,15 @@
     return [NestSDKUtils iso8601FormatDateStringWithDate:self.estimatedArrivalWindowEnd];
 }
 
+- (void)copyPropertiesToDataModelCopy:(id <NestSDKDataModelProtocol>)copy {
+    [super copyPropertiesToDataModelCopy:copy];
+
+    NestSDKETADataModel *etaDataModelCopy = (NestSDKETADataModel *) copy;
+    etaDataModelCopy.tripId = self.tripId;
+    etaDataModelCopy.estimatedArrivalWindowBegin = self.estimatedArrivalWindowBegin;
+    etaDataModelCopy.estimatedArrivalWindowEnd = self.estimatedArrivalWindowEnd;
+}
+
 - (NSUInteger)hash {
     NSUInteger prime = 31;
     NSUInteger result = 1;

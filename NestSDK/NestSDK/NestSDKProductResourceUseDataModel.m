@@ -24,6 +24,15 @@
 @implementation NestSDKProductResourceUseDataModel
 #pragma mark Override
 
+- (void)copyPropertiesToDataModelCopy:(id <NestSDKDataModelProtocol>)copy {
+    [super copyPropertiesToDataModelCopy:copy];
+
+    NestSDKProductResourceUseDataModel *productResourceUseDataModelCopy = (NestSDKProductResourceUseDataModel *) copy;
+    productResourceUseDataModelCopy.electricity = self.electricity;
+    productResourceUseDataModelCopy.water = self.water;
+    productResourceUseDataModelCopy.gas = self.gas;
+}
+
 - (NSUInteger)hash {
     NSUInteger prime = 31;
     NSUInteger result = 1;

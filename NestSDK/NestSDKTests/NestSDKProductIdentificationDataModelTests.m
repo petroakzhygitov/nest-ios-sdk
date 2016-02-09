@@ -76,6 +76,15 @@ SpecBegin(NestSDKProductIdentificationDataModel)
                 expect(productIdentification1).to.equal(productIdentification2);
                 expect(productIdentification1).notTo.equal(productIdentification3);
             });
+
+            it(@"should copy", ^{
+                NSError *error;
+                NestSDKProductIdentificationDataModel *productIdentification = [[NestSDKProductIdentificationDataModel alloc] initWithData:data error:&error];
+                expect(error).to.equal(nil);
+
+                NestSDKProductIdentificationDataModel *productIdentification2 = [productIdentification copy];
+                expect(productIdentification).to.equal(productIdentification2);
+            });
         });
     }
 SpecEnd

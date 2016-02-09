@@ -24,6 +24,8 @@
 @interface NestSDKUtils : NSObject
 #pragma mark Methods
 
++ (UIImage *)imageWithColor:(UIColor *)color cornerRadius:(CGFloat)cornerRadius scale:(CGFloat)scale;
+
 + (UIViewController *)viewControllerForView:(UIView *)view;
 
 + (NSDictionary *)queryParametersDictionaryFromQueryString:(NSString *)queryString;

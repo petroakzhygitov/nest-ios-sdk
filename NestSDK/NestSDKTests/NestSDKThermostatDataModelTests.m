@@ -195,6 +195,15 @@ SpecBegin(NestSDKThermostatDataModel)
                 expect(thermostatDictionary[@"target_temperature_high_f"]).to.equal(72);
                 expect(thermostatDictionary[@"target_temperature_low_f"]).to.equal(64);
             });
+
+            it(@"should copy", ^{
+                NSError *error;
+                NestSDKThermostatDataModel *thermostat = [[NestSDKThermostatDataModel alloc] initWithData:data error:&error];
+                expect(error).to.equal(nil);
+
+                NestSDKThermostatDataModel *thermostat2 = [thermostat copy];
+                expect(thermostat).to.equal(thermostat2);
+            });
         });
     }
 SpecEnd

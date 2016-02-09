@@ -133,6 +133,15 @@ SpecBegin(NestSDKStructureDataModel)
                 expect(structureDictionary.allKeys.count).to.equal(2);
                 expect(structureDictionary[@"eta"]).notTo.equal(nil);
             });
+
+            it(@"should copy", ^{
+                NSError *error;
+                NestSDKStructureDataModel *structure = [[NestSDKStructureDataModel alloc] initWithData:data error:&error];
+                expect(error).to.equal(nil);
+
+                NestSDKStructureDataModel *structure2 = [structure copy];
+                expect(structure).to.equal(structure2);
+            });
         });
     }
 SpecEnd

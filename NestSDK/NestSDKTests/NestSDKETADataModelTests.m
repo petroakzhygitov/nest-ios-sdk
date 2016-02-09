@@ -22,7 +22,6 @@
 #import <Expecta/Expecta.h>
 #import "SpectaDSL.h"
 #import "SPTSpec.h"
-#import "NestSDKAccessToken.h"
 #import "LSStubRequestDSL.h"
 #import "LSNocilla.h"
 #import "NestSDKMetadataDataModel.h"
@@ -95,6 +94,15 @@ SpecBegin(NestSDKETADataModel)
 
                 expect(eta1).to.equal(eta2);
                 expect(eta1).notTo.equal(eta3);
+            });
+
+            it(@"should copy", ^{
+                NSError *error;
+                NestSDKETADataModel *eta = [[NestSDKETADataModel alloc] initWithData:data error:&error];
+                expect(error).to.equal(nil);
+
+                NestSDKETADataModel *eta2 = [eta copy];
+                expect(eta).to.equal(eta2);
             });
         });
     }

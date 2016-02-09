@@ -77,6 +77,15 @@ SpecBegin(NestSDKWheresDataModel)
                 expect(wheres1).to.equal(wheres2);
                 expect(wheres1).notTo.equal(wheres3);
             });
+
+            it(@"should copy", ^{
+                NSError *error;
+                NestSDKWheresDataModel *wheres = [[NestSDKWheresDataModel alloc] initWithData:data error:&error];
+                expect(error).to.equal(nil);
+
+                NestSDKWheresDataModel *wheres2 = [wheres copy];
+                expect(wheres).to.equal(wheres2);
+            });
         });
     }
 SpecEnd

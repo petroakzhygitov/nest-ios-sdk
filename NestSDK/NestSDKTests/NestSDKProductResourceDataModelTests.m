@@ -26,7 +26,6 @@
 #import "LSNocilla.h"
 #import "NestSDKMetadataDataModel.h"
 #import "NestSDKProductResourceDataModel.h"
-#import "NestSDKProductLocationDataModel.h"
 
 SpecBegin(NestSDKProductResourceDataModel)
     {
@@ -95,6 +94,15 @@ SpecBegin(NestSDKProductResourceDataModel)
 
                 expect(productResource1).to.equal(productResource2);
                 expect(productResource1).notTo.equal(productResource3);
+            });
+
+            it(@"should copy", ^{
+                NSError *error;
+                NestSDKProductResourceDataModel *productResource = [[NestSDKProductResourceDataModel alloc] initWithData:data error:&error];
+                expect(error).to.equal(nil);
+
+                NestSDKProductResourceDataModel *productResource2 = [productResource copy];
+                expect(productResource).to.equal(productResource2);
             });
         });
     }

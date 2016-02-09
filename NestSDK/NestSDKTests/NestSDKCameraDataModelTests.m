@@ -122,6 +122,15 @@ SpecBegin(NestSDKCameraDataModel)
                 expect(cameraDictionary.allKeys.count).to.equal(1);
                 expect(cameraDictionary[@"is_streaming"]).to.equal(YES);
             });
+
+            it(@"should copy", ^{
+                NSError *error;
+                NestSDKCameraDataModel *camera = [[NestSDKCameraDataModel alloc] initWithData:data error:&error];
+                expect(error).to.equal(nil);
+
+                NestSDKCameraDataModel *camera2 = [camera copy];
+                expect(camera).to.equal(camera2);
+            });
         });
     }
 SpecEnd

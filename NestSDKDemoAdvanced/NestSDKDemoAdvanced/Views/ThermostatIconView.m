@@ -190,19 +190,19 @@ static const int kInsetMultiplierCircleDotShift = 7;
     self.temperatureLabel.text = targetTemperatureValue.stringValue;
 }
 
-- (void)setHasLeaf:(BOOL)hasLeaf {
+- (void)setHasLeaf:(NSNumber *)hasLeaf {
     _hasLeaf = hasLeaf;
 
     dispatch_async(dispatch_get_main_queue(), ^(void) {
-        self.leafLayer.hidden = !hasLeaf;
+        self.leafLayer.hidden = !hasLeaf.boolValue;
     });
 }
 
-- (void)setHasFan:(BOOL)hasFan {
+- (void)setHasFan:(NSNumber *)hasFan {
     _hasFan = hasFan;
 
     dispatch_async(dispatch_get_main_queue(), ^(void) {
-        self.fanLayer.hidden = !hasFan;
+        self.fanLayer.hidden = !hasFan.boolValue;
     });
 }
 

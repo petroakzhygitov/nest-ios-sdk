@@ -16,7 +16,7 @@
 }
 
 - (void)_addBatteryHealthRow {
-    self.batteryHealthRow = [self addReadOnlyTextRowWithText:self.deviceViewModel.batteryHealthText];
+    self.batteryHealthRow = [self addReadOnlyTextRowWithText:self.deviceViewModel.batteryStatusText];
 }
 
 - (void)_addCOAlarmStateRow {
@@ -64,7 +64,7 @@
     self.localeRow.value = self.deviceViewModel.localeText;
     self.lastConnectionRow.value = self.deviceViewModel.lastConnectionText;
 
-    self.batteryHealthRow.value = self.deviceViewModel.batteryHealthText;
+    self.batteryHealthRow.value = self.deviceViewModel.batteryStatusText;
 
     self.coAlarmStateRow.value = self.deviceViewModel.coAlarmStateText;
     self.smokeAlarmStateRow.value = self.deviceViewModel.smokeAlarmStateText;

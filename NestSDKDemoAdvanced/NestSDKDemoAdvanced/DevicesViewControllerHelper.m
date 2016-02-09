@@ -31,7 +31,7 @@ static NSString *const kSegueIdentifierCameraDetails = @"CameraDetailsSegueIdent
     ThermostatViewModel *viewModel = [DeviceViewModel viewModelWithDevice:thermostat];
 
     cell.nameLabel.text = viewModel.nameLongValue;
-    cell.energySavingLabel.text = viewModel.energySavingText;
+    cell.statusLabel.text = viewModel.lastConnectionText;
     cell.iconView.state = viewModel.iconViewState;
     cell.iconView.targetTemperatureValue = viewModel.targetTemperatureValue;
     cell.iconView.hasFan = viewModel.hasFanValue;
@@ -42,7 +42,7 @@ static NSString *const kSegueIdentifierCameraDetails = @"CameraDetailsSegueIdent
     SmokeCOAlarmViewModel *viewModel = [DeviceViewModel viewModelWithDevice:smokeCOAlarm];
 
     cell.nameLabel.text = viewModel.nameLongValue;
-    cell.batteryStatusLabel.text = viewModel.batteryHealthText;
+    cell.statusLabel.text = viewModel.batteryStatusText;
     cell.iconView.color = viewModel.iconViewColor;
 }
 

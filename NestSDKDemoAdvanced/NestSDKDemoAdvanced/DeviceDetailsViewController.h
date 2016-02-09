@@ -48,7 +48,7 @@
 
 - (XLFormRowDescriptor *)addReadOnlyTextRowWithText:(NSString *)text;
 
-- (XLFormRowDescriptor *)addReadWriteSwitchRowWithTitle:(NSString *)title boolValue:(BOOL)value;
+- (XLFormRowDescriptor *)addReadWriteSwitchRowWithTitle:(NSString *)title boolValue:(NSNumber *)value;
 
 - (void)addReadWriteRow:(XLFormRowDescriptor *)row;
 

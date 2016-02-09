@@ -17,7 +17,7 @@
 #pragma mark Properties
 
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *energySavingLabel;
+@property (weak, nonatomic) IBOutlet UILabel *statusLabel;
 
 @property (weak, nonatomic) IBOutlet ThermostatIconView *iconView;
 

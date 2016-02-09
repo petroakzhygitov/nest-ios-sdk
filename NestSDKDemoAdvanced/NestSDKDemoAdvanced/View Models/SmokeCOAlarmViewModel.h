@@ -10,10 +10,10 @@
 
 @property(nonatomic) id <NestSDKSmokeCOAlarm> device;
 
-@property(nonatomic, readonly, copy) NSString *batteryHealthText;
-
 @property(nonatomic, readonly, copy) NSString *lastConnectionText;
 @property(nonatomic, readonly, copy) NSString *localeText;
+
+@property(nonatomic, readonly, copy) NSString *batteryStatusText;
 
 @property(nonatomic, readonly, copy) NSString *coAlarmStateText;
 @property(nonatomic, readonly, copy) NSString *smokeAlarmStateText;

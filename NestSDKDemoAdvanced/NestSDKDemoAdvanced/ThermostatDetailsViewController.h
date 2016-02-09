@@ -24,7 +24,7 @@
 @property(nonatomic) XLFormRowDescriptor *canCoolRow;
 @property(nonatomic) XLFormRowDescriptor *canHeatRow;
 @property(nonatomic) XLFormRowDescriptor *isUsingEmergencyHeatRow;
-@property(nonatomic) XLFormRowDescriptor *hadFanRow;
+@property(nonatomic) XLFormRowDescriptor *hasFanRow;
 @property(nonatomic) XLFormRowDescriptor *hasLeafRow;
 @property(nonatomic) XLFormRowDescriptor *temperatureScaleRow;
 
@@ -42,5 +42,6 @@
 @property(nonatomic) XLFormRowDescriptor *hvacModeRow;
 
 @property(nonatomic) XLFormRowDescriptor *fanTimerActiveRow;
+@property(nonatomic) XLFormRowDescriptor *fanTimerTimeoutRow;
 
 @end

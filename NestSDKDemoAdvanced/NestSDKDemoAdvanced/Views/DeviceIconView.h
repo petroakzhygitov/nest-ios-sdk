@@ -1,7 +1,6 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-IB_DESIGNABLE
 @interface DeviceIconView : UIView
 #pragma mark Methods
 

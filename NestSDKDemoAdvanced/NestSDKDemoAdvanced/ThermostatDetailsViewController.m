@@ -32,61 +32,65 @@ static NSString *const kTemperatureSliderViewCell = @"TemperatureSliderViewCell"
 }
 
 - (void)_addHasFanRow {
-    self.hadFanRow = [self addReadOnlyTextRowWithText:self.deviceViewModel.fanStatusText];
+    self.hasFanRow = [self addReadOnlyTextRowWithText:self.deviceViewModel.hasFanText];
 }
 
-- (void)addTargetTemperatureHighRow {
-    self.targetTemperatureHighRow = [self _addReadWriteTemperatureSliderRowWithTitle:@"Target temperature high:"
-                                                                               value:self.deviceViewModel.targetTemperatureHighValue];
-}
-
-- (void)addTargetTemperatureLowRow {
-    self.targetTemperatureLowRow = [self _addReadWriteTemperatureSliderRowWithTitle:@"Target temperature low:"
-                                                                              value:self.deviceViewModel.targetTemperatureLowValue];
-}
-
-- (void)addTargetTemperatureRow {
-    self.targetTemperatureRow = [self _addReadWriteTemperatureSliderRowWithTitle:@"Target temperature:"
-                                                                           value:self.deviceViewModel.targetTemperatureValue];
-}
-
-- (void)addFanTimerActive {
-    self.fanTimerActiveRow = [self addReadWriteSwitchRowWithTitle:@"Fan timer active:" boolValue:self.deviceViewModel.fanTimerActiveValue];
-}
-
-- (void)addTemperatureScaleRow {
-    self.temperatureScaleRow = [self addReadOnlyTextRowWithText:self.deviceViewModel.temperatureScaleText];
-}
-
-- (void)addHasLeafRow {
+- (void)_addHasLeafRow {
     self.hasLeafRow = [self addReadOnlyTextRowWithText:self.deviceViewModel.hasLeafText];
 }
 
-- (void)addAwayTemperatureHighRow {
+- (void)_addTemperatureScaleRow {
+    self.temperatureScaleRow = [self addReadOnlyTextRowWithText:self.deviceViewModel.temperatureScaleText];
+}
+
+- (void)_addAwayTemperatureHighRow {
     self.awayTemperatureHighRow = [self addReadOnlyTextRowWithText:self.deviceViewModel.awayTemperatureHighText];
 }
 
-- (void)addAwayTemperatureLowRow {
+- (void)_addAwayTemperatureLowRow {
     self.awayTemperatureLowRow = [self addReadOnlyTextRowWithText:self.deviceViewModel.awayTemperatureLowText];
 }
 
-- (void)addAmbientTemperatureRow {
+- (void)_addAmbientTemperatureRow {
     self.ambientTemperatureRow = [self addReadOnlyTextRowWithText:self.deviceViewModel.ambientTemperatureText];
 }
 
-- (void)addHumidityRow {
+- (void)_addFanTimerTimeoutRow {
+    self.fanTimerTimeoutRow = [self addReadOnlyTextRowWithText:self.deviceViewModel.fanTimerTimeoutText];
+}
+
+- (void)_addHumidityRow {
     self.humidityRow = [self addReadOnlyTextRowWithText:self.deviceViewModel.humidityText];
 }
 
-- (void)addHVACStateRow {
+- (void)_addHVACStateRow {
     self.hvacStateRow = [self addReadOnlyTextRowWithText:self.deviceViewModel.hvacStateText];
 }
 
-- (void)addHVACModeRow {
-    NSArray *options = self.deviceViewModel.hvacModeOptionsText;
-    NSString *value = self.deviceViewModel.hvacModeText;
+- (void)_addHVACModeRow {
+    self.hvacModeRow = [self _addReadWriteInlinePickerRowWithTitle:self.deviceViewModel.hvacModeTitle
+                                                           options:self.deviceViewModel.hvacModeOptionsText
+                                                             value:self.deviceViewModel.hvacModeText];
+}
 
-    self.hvacModeRow = [self _addReadWriteInlinePickerRowWithTitle:@"HVAC Mode:" options:options value:value];
+- (void)_addTargetTemperatureHighRow {
+    self.targetTemperatureHighRow = [self _addReadWriteTemperatureSliderRowWithTitle:self.deviceViewModel.targetTemperatureHighTitle
+                                                                               value:self.deviceViewModel.targetTemperatureHighValue];
+}
+
+- (void)_addTargetTemperatureLowRow {
+    self.targetTemperatureLowRow = [self _addReadWriteTemperatureSliderRowWithTitle:self.deviceViewModel.targetTemperatureLowTitle
+                                                                              value:self.deviceViewModel.targetTemperatureLowValue];
+}
+
+- (void)_addTargetTemperatureRow {
+    self.targetTemperatureRow = [self _addReadWriteTemperatureSliderRowWithTitle:self.deviceViewModel.targetTemperatureTitle
+                                                                           value:self.deviceViewModel.targetTemperatureValue];
+}
+
+- (void)_addFanTimerActive {
+    self.fanTimerActiveRow = [self addReadWriteSwitchRowWithTitle:self.deviceViewModel.fanTimerActiveTitle
+                                                        boolValue:self.deviceViewModel.fanTimerActiveValue];
 }
 
 - (XLFormRowDescriptor *)_addReadWriteInlinePickerRowWithTitle:(NSString *)title options:(NSArray *)options value:(NSString *)value {
@@ -123,6 +127,7 @@ static NSString *const kTemperatureSliderViewCell = @"TemperatureSliderViewCell"
     thermostatUpdateViewModel.targetTemperatureValue = self.targetTemperatureRow.value;
     thermostatUpdateViewModel.targetTemperatureHighValue = self.targetTemperatureHighRow.value;
     thermostatUpdateViewModel.targetTemperatureLowValue = self.targetTemperatureLowRow.value;
+    thermostatUpdateViewModel.fanTimerActiveValue = self.fanTimerActiveRow.value;
 
     return thermostatUpdateViewModel;
 }
@@ -166,17 +171,32 @@ static NSString *const kTemperatureSliderViewCell = @"TemperatureSliderViewCell"
 - (void)updateTableViewData {
     self.updatingTableViewData = YES;
 
-//    self.deviceIdRow.value = self.deviceViewModel.deviceId;
-//    self.softwareVersionRow.value = self.deviceViewModel.softwareVersion;
-//    self.structureIdRow.value = self.deviceViewModel.structureId;
-//    self.nameRow.value = self.deviceViewModel.name;
-//    self.nameLongRow.value = self.deviceViewModel.nameLong;
-//    self.isOnlineRow.value = @(self.deviceViewModel.isOnline);
-//    self.whereIdRow.value = self.deviceViewModel.whereId;
+    self.localeRow.value = self.deviceViewModel.localeText;
+    self.lastConnectionRow.value = self.deviceViewModel.lastConnectionText;
+
+    self.hasFanRow.value = self.deviceViewModel.hasFanText;
+    self.hasLeafRow.value = self.deviceViewModel.hasLeafText;
+
+    self.temperatureScaleRow.value = self.deviceViewModel.temperatureScaleText;
+
+    self.canCoolRow.value = self.deviceViewModel.isCoolingText;
+    self.canHeatRow.value = self.deviceViewModel.isHeatingText;
+    self.isUsingEmergencyHeatRow.value = self.deviceViewModel.isUsingEmergencyHeatText;
+
+    self.awayTemperatureHighRow.value = self.deviceViewModel.awayTemperatureHighText;
+    self.awayTemperatureLowRow.value = self.deviceViewModel.awayTemperatureLowText;
+
+    self.ambientTemperatureRow.value = self.deviceViewModel.ambientTemperatureText;
+    self.humidityRow.value = self.deviceViewModel.humidityText;
+    self.hvacStateRow.value = self.deviceViewModel.hvacStateText;
+
+    self.hvacModeRow.value = self.deviceViewModel.hvacModeText;
 
     self.targetTemperatureRow.value = self.deviceViewModel.targetTemperatureValue;
     self.targetTemperatureHighRow.value = self.deviceViewModel.targetTemperatureHighValue;
     self.targetTemperatureLowRow.value = self.deviceViewModel.targetTemperatureLowValue;
+
+    self.fanTimerActiveRow.value = self.deviceViewModel.fanTimerActiveValue;
 
     [super updateTableViewData];
 }
@@ -191,26 +211,26 @@ static NSString *const kTemperatureSliderViewCell = @"TemperatureSliderViewCell"
     [self _addCanHeatRow];
     [self _addIsUsingEmergencyHeatRow];
     [self _addHasFanRow];
+    [self _addHasLeafRow];
 
-    [self addFanTimerActive];
-//    @property(nonatomic) NSDate *fanTimerTimeout;
+    [self _addTemperatureScaleRow];
 
-    [self addHasLeafRow];
+    [self _addAwayTemperatureHighRow];
+    [self _addAwayTemperatureLowRow];
 
-    [self addTemperatureScaleRow];
+    [self _addAmbientTemperatureRow];
+    [self _addFanTimerTimeoutRow];
+    [self _addHumidityRow];
 
-    [self addTargetTemperatureRow];
-    [self addTargetTemperatureHighRow];
-    [self addTargetTemperatureLowRow];
+    [self _addHVACStateRow];
 
-    [self addAwayTemperatureHighRow];
-    [self addAwayTemperatureLowRow];
+    [self _addHVACModeRow];
 
-    [self addAmbientTemperatureRow];
-    [self addHumidityRow];
+    [self _addTargetTemperatureRow];
+    [self _addTargetTemperatureHighRow];
+    [self _addTargetTemperatureLowRow];
 
-    [self addHVACStateRow];
-    [self addHVACModeRow];
+    [self _addFanTimerActive];
 }
 
 @end

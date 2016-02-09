@@ -183,9 +183,9 @@
     [self.readOnlySection addFormRow:row];
 }
 
-- (XLFormRowDescriptor *)addReadWriteSwitchRowWithTitle:(NSString *)title boolValue:(BOOL)value {
+- (XLFormRowDescriptor *)addReadWriteSwitchRowWithTitle:(NSString *)title boolValue:(NSNumber *)value {
     XLFormRowDescriptor *row = [XLFormRowDescriptor formRowDescriptorWithTag:title rowType:XLFormRowDescriptorTypeBooleanSwitch title:title];
-    row.value = @(value);
+    row.value = value;
 
     [self addReadWriteRow:row];
 

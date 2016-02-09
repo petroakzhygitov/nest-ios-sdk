@@ -5,6 +5,17 @@
 @implementation ThermostatViewModel
 #pragma mark Private
 
+- (NSString *)_stringWithTitle:(NSString *)title temperatureValue:(NSNumber *)value {
+    NSString *temperatureString = [NSString stringWithFormat:@"%@ %@", value.stringValue, [self temperatureScaleText]];
+    [self stringWithTitle:value.stringValue stringValue:temperatureString];
+
+    return [self stringWithTitle:title stringValue:temperatureString];
+}
+
+- (NSString *)_temperatureScaleString {
+    return [self _valueGrantingTemperatureScaleWithValueForC:@"C" valueForF:@"F"];
+}
+
 - (NSNumber *)_temperatureValueWithTemperatureC:(CGFloat)temperatureC temperatureF:(NSUInteger)temperatureF {
     return [self _valueGrantingTemperatureScaleWithValueForC:@(temperatureC) valueForF:@(temperatureF)];
 }
@@ -63,6 +74,10 @@
     }
 }
 
+- (NSString *)_hvacStateString {
+    return [self _hvacStateStringWithHVACState:self.device.hvacState];
+}
+
 - (NSString *)_hvacStateStringWithHVACState:(NestSDKThermostatHVACState)hvacState {
     switch (hvacState) {
         case NestSDKThermostatHVACStateUndefined:
@@ -81,29 +96,19 @@
     return nil;
 }
 
-- (NSString *)_temperatureStringWithTemperatureC:(CGFloat)temperatureC temperatureF:(NSUInteger)temperatureF {
-    switch (self.device.temperatureScale) {
-        case NestSDKThermostatTemperatureScaleUndefined:
-            return nil;
-
-        case NestSDKThermostatTemperatureScaleC:
-            return [NSString stringWithFormat:@"%.1f C", temperatureC];
-
-        case NestSDKThermostatTemperatureScaleF:
-            return [NSString stringWithFormat:@"%d F", temperatureF];
-    }
-
-    return nil;
-}
 
 #pragma mark Override
 
 - (NSString *)localeText {
-    return self.device.locale;
+    return [self stringWithTitle:@"Locale:" stringValue:self.device.locale];
 }
 
 - (NSString *)lastConnectionText {
-    return self.device.lastConnection;
+    return [self stringWithTitle:@"Last connection:" dateValue:self.device.lastConnection];
+}
+
+- (NSString *)targetTemperatureHighTitle {
+    return @"Target temperature high:";
 }
 
 - (NSNumber *)targetTemperatureHighValue {
@@ -127,6 +132,10 @@
     }
 }
 
+- (NSString *)targetTemperatureLowTitle {
+    return @"Target temperature low:";
+}
+
 - (NSNumber *)targetTemperatureLowValue {
     return [self _temperatureValueWithTemperatureC:self.device.targetTemperatureLowC
                                       temperatureF:self.device.targetTemperatureLowF];
@@ -146,6 +155,10 @@
 
             break;
     }
+}
+
+- (NSString *)targetTemperatureTitle {
+    return @"Target temperature:";
 }
 
 - (NSNumber *)targetTemperatureValue {
@@ -169,72 +182,93 @@
     }
 }
 
-- (BOOL)fanTimerActiveValue {
-    return self.device.fanTimerActive;
+- (NSString *)fanTimerActiveTitle {
+    return @"Fan timer active:";
 }
 
-- (BOOL)hasFanValue {
-    return self.device.hasFan;
+- (NSNumber *)fanTimerActiveValue {
+    return @(self.device.fanTimerActive);
 }
 
-- (BOOL)hasLeafValue {
-    return self.device.hasLeaf;
+- (void)setFanTimerActiveValue:(NSNumber *)value {
+    self.device.fanTimerActive = value.boolValue;
 }
 
-- (NSString *)temperatureScaleText {
-    return [self _valueGrantingTemperatureScaleWithValueForC:@"C" valueForF:@"F"];
+- (NSString *)fanTimerTimeoutText {
+    return [self stringWithTitle:@"Fan timer timeout:" dateValue:self.device.fanTimerTimeout];
 }
 
-- (NSString *)isCoolingText {
-    return nil;
+- (NSString *)hasFanText {
+    return [self stringWithTitle:@"Fan is on:" boolValue:self.device.hasFan];
 }
 
-- (NSString *)isHeatingText {
-    return nil;
-}
-
-- (NSString *)isUsingEmergencyHeatText {
-    return nil;
-}
-
-- (NSString *)fanStatusText {
-    return nil;
-}
-
-- (NSString *)awayTemperatureHighText {
-    return nil;
-}
-
-- (NSString *)awayTemperatureLowText {
-    return nil;
-}
-
-- (NSString *)ambientTemperatureText {
-    return nil;
+- (NSNumber *)hasFanValue {
+    return @(self.device.hasFan);
 }
 
 - (NSString *)hasLeafText {
-    return nil;
+    return [self stringWithTitle:@"Energy saving mode:" boolValue:self.device.hasLeaf];
+}
+
+- (NSNumber *)hasLeafValue {
+    return @(self.device.hasLeaf);
+}
+
+- (NSString *)temperatureScaleText {
+    return [self stringWithTitle:@"Temperature scale:" stringValue:[self _temperatureScaleString]];
+}
+
+- (NSString *)isCoolingText {
+    return [self stringWithTitle:@"Is cooling:" boolValue:self.device.canCool];
+}
+
+- (NSString *)isHeatingText {
+    return [self stringWithTitle:@"Is heating:" boolValue:self.device.canHeat];
+}
+
+- (NSString *)isUsingEmergencyHeatText {
+    return [self stringWithTitle:@"Is using emergency heat:" boolValue:self.device.isUsingEmergencyHeat];
+}
+
+- (NSString *)awayTemperatureHighText {
+    NSNumber *temperatureValue = [self _temperatureValueWithTemperatureC:self.device.awayTemperatureHighC
+                                                            temperatureF:self.device.awayTemperatureHighF];
+
+    return [self _stringWithTitle:@"Away temperature high:" temperatureValue:temperatureValue];
+}
+
+- (NSString *)awayTemperatureLowText {
+    NSNumber *temperatureValue = [self _temperatureValueWithTemperatureC:self.device.awayTemperatureLowC
+                                                            temperatureF:self.device.awayTemperatureLowF];
+
+    return [self _stringWithTitle:@"Away temperature low:" temperatureValue:temperatureValue];
+}
+
+- (NSString *)ambientTemperatureText {
+    NSNumber *temperatureValue = [self _temperatureValueWithTemperatureC:self.device.ambientTemperatureC
+                                                            temperatureF:self.device.ambientTemperatureF];
+
+    return [self _stringWithTitle:@"Ambient temperature:" temperatureValue:temperatureValue];
 }
 
 - (NSString *)humidityText {
-    return nil;
+    return [self stringWithTitle:@"Humidity:" stringValue:@(self.device.humidity).stringValue];
 }
 
 - (NSString *)hvacStateText {
-    return [self _hvacStateStringWithHVACState:self.device.hvacState];
+    return [self stringWithTitle:@"HVAC State:" stringValue:[self _hvacStateString]];
 }
 
 - (NSString *)hvacModeText {
     return [self _hvacModeStringWithHVACMode:self.device.hvacMode];
 }
 
-- (void)setHvacModeText:(NSString *)hvacModeText {
-    self.device.hvacMode = [self _hvacModeWithString:hvacModeText];
+- (NSString *)hvacModeTitle {
+    return @"HVAC Mode:";
 }
 
-- (NSString *)energySavingText {
-    return [NSString stringWithFormat:@"Energy saving: %@", self.device.hasLeaf ? @"Yes" : @"No"];
+- (void)setHvacModeText:(NSString *)hvacModeText {
+    self.device.hvacMode = [self _hvacModeWithString:hvacModeText];
 }
 
 - (ThermostatIconViewState)iconViewState {

@@ -23,7 +23,7 @@
 
 - (void)_addIsStreamingRow {
     self.isStreamingRow = [self addReadWriteSwitchRowWithTitle:self.deviceViewModel.streamingStatusTitle
-                                                     boolValue:self.deviceViewModel.streamingStatusValue.boolValue];
+                                                     boolValue:self.deviceViewModel.streamingStatusValue];
 }
 
 - (void)_addIsAudioInputEnabled {

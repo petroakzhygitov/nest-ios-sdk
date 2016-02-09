@@ -9,6 +9,9 @@
 
 
 @implementation DeviceViewModel
+
+@dynamic device;
+
 #pragma mark Initializer
 
 + (Class)_viewModelClassWithDevice:(id <NestSDKDevice>)device {

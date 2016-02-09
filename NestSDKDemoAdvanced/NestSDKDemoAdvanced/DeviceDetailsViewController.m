@@ -15,6 +15,9 @@
 
 
 @implementation DeviceDetailsViewController
+
+@dynamic tableView;
+
 #pragma mark Private
 
 - (void)addDeviceIdRow {

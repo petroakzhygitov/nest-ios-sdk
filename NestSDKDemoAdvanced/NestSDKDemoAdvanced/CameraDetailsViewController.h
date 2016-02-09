@@ -1,8 +1,9 @@
 #import <Foundation/Foundation.h>
 #import "DeviceDetailsViewController.h"
+#import "CameraViewModel.h"
 
 @class CameraIconView;
-@class CameraViewModel;
+@protocol CameraViewModel;
 
 #pragma mark macros
 
@@ -22,7 +23,7 @@
 @property(weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property(weak, nonatomic) IBOutlet CameraIconView *iconView;
 
-@property(nonatomic) CameraViewModel *deviceViewModel;
+@property(nonatomic) id <CameraViewModel> deviceViewModel;
 
 #pragma mark Methods
 

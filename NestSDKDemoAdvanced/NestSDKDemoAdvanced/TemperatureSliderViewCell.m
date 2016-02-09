@@ -52,8 +52,8 @@
     [self valueDidChange:nil];
 }
 
-- (void)sliderDidEndSliding:(UISlider *)_slider {
-    [self valueDidChange:_slider];
+- (void)sliderDidEndSliding:(UISlider *)slider {
+    [self valueDidChange:slider];
 
     self.rowDescriptor.value = @(self.slider.value);
 }

@@ -28,7 +28,7 @@ static NSString *const kSegueIdentifierCameraDetails = @"CameraDetailsSegueIdent
 #pragma mark Private
 
 + (void)_populateThermostatCell:(ThermostatViewCell *)cell withThermostat:(id <NestSDKThermostat>)thermostat {
-    ThermostatViewModel *viewModel = [DeviceViewModel viewModelWithDevice:thermostat];
+    id <ThermostatViewModel> viewModel = (id <ThermostatViewModel>) [DeviceViewModel viewModelWithDevice:thermostat];
 
     cell.nameLabel.text = viewModel.nameLongValue;
     cell.statusLabel.text = viewModel.lastConnectionText;
@@ -39,7 +39,7 @@ static NSString *const kSegueIdentifierCameraDetails = @"CameraDetailsSegueIdent
 }
 
 + (void)_populateSmokeCOAlarmCell:(SmokeCOAlarmViewCell *)cell withSmokeCOAlarm:(id <NestSDKSmokeCOAlarm>)smokeCOAlarm {
-    SmokeCOAlarmViewModel *viewModel = [DeviceViewModel viewModelWithDevice:smokeCOAlarm];
+    id <SmokeCOAlarmViewModel> viewModel = (id <SmokeCOAlarmViewModel>) [DeviceViewModel viewModelWithDevice:smokeCOAlarm];
 
     cell.nameLabel.text = viewModel.nameLongValue;
     cell.statusLabel.text = viewModel.batteryStatusText;
@@ -47,7 +47,7 @@ static NSString *const kSegueIdentifierCameraDetails = @"CameraDetailsSegueIdent
 }
 
 + (void)_populateCameraCell:(CameraViewCell *)cell withCamera:(id <NestSDKCamera>)camera {
-    CameraViewModel *viewModel = [DeviceViewModel viewModelWithDevice:camera];
+    id <CameraViewModel> viewModel = (id <CameraViewModel>) [DeviceViewModel viewModelWithDevice:camera];
 
     cell.nameLabel.text = viewModel.nameLongValue;
     cell.statusLabel.text = viewModel.lastEventText;

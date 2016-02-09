@@ -1,8 +1,9 @@
 #import <Foundation/Foundation.h>
 #import "DeviceDetailsViewController.h"
+#import "SmokeCOAlarmViewModel.h"
 
 @class SmokeCOAlarmIconView;
-@class SmokeCOAlarmViewModel;
+@protocol SmokeCOAlarmViewModel;
 
 #pragma mark macros
 
@@ -22,7 +23,7 @@
 @property(weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property(weak, nonatomic) IBOutlet SmokeCOAlarmIconView *iconView;
 
-@property(nonatomic) SmokeCOAlarmViewModel *deviceViewModel;
+@property(nonatomic) id <SmokeCOAlarmViewModel> deviceViewModel;
 
 @property(nonatomic, strong) XLFormRowDescriptor *localeRow;
 @property(nonatomic, strong) XLFormRowDescriptor *lastConnectionRow;
@@ -32,6 +33,7 @@
 @property(nonatomic, strong) XLFormRowDescriptor *isManualTestActiveRow;
 @property(nonatomic, strong) XLFormRowDescriptor *lastManualTestTimeRow;
 @property(nonatomic, strong) XLFormRowDescriptor *uiColorStateRow;
+
 #pragma mark Methods
 
 @end

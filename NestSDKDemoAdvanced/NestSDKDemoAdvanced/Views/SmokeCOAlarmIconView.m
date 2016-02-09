@@ -86,6 +86,9 @@ static const int kInsetMultiplierDeviceCircle = 4;
     NSArray *colorsArray = @[];
 
     switch (color) {
+        case SmokeCOAlarmIconViewColorUndefined:
+            
+            break;
         case SmokeCOAlarmIconViewColorGreen:
             colorsArray = [self _greenColorsArray];
 

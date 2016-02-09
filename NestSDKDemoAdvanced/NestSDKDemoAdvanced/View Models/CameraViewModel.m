@@ -4,6 +4,9 @@
 
 
 @implementation CameraViewModel
+
+@dynamic device;
+
 #pragma mark Override
 
 - (NSString *)streamingStatusTitle {

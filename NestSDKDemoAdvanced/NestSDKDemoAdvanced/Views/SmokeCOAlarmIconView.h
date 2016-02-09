@@ -5,6 +5,7 @@
 #pragma mark typedef
 
 typedef NS_ENUM(NSUInteger, SmokeCOAlarmIconViewColor) {
+    SmokeCOAlarmIconViewColorUndefined,
     SmokeCOAlarmIconViewColorGreen,
     SmokeCOAlarmIconViewColorYellow,
     SmokeCOAlarmIconViewColorRed,

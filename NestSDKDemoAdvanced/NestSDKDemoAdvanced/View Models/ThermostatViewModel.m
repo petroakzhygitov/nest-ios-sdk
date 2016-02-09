@@ -3,6 +3,9 @@
 
 
 @implementation ThermostatViewModel
+
+@dynamic device;
+
 #pragma mark Private
 
 - (NSString *)_stringWithTitle:(NSString *)title temperatureValue:(NSNumber *)value {

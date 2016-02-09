@@ -5,6 +5,10 @@
 
 
 @implementation SmokeCOAlarmDetailsViewController
+
+@dynamic tableView;
+@dynamic deviceViewModel;
+
 #pragma mark Private
 
 - (void)_addLocaleRow {

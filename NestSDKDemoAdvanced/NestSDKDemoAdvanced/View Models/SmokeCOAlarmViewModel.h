@@ -33,4 +33,6 @@
 
 @property(nonatomic) id <NestSDKSmokeCOAlarm> device;
 
+@property(nonatomic) SmokeCOAlarmIconViewColor iconViewColor;
+
 @end

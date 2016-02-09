@@ -9,6 +9,9 @@ static NSString *const kTemperatureSliderViewCell = @"TemperatureSliderViewCell"
 
 
 @implementation ThermostatDetailsViewController
+
+@dynamic tableView;
+
 #pragma mark Private
 
 - (void)_addLocaleRow {

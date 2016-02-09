@@ -3,6 +3,9 @@
 
 
 @implementation SmokeCOAlarmViewModel
+
+@dynamic device;
+
 #pragma mark Private
 
 - (NSString *)_stringWithTitle:(NSString *)title alarmStateValue:(NestSDKSmokeCOAlarmAlarmState)value {
@@ -106,7 +109,7 @@
 - (SmokeCOAlarmIconViewColor)iconViewColor {
     switch (self.device.uiColorState) {
         case NestSDKSmokeCOAlarmUIColorStateUndefined:
-            return nil;
+            return SmokeCOAlarmIconViewColorUndefined;
 
         case NestSDKSmokeCOAlarmUIColorStateGray:
             return SmokeCOAlarmIconViewColorGray;
@@ -121,7 +124,7 @@
             return SmokeCOAlarmIconViewColorRed;
     }
 
-    return nil;
+    return SmokeCOAlarmIconViewColorUndefined;
 }
 
 @end

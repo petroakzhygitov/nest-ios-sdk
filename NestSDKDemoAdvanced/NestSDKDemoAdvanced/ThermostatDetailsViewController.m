@@ -11,6 +11,7 @@ static NSString *const kTemperatureSliderViewCell = @"TemperatureSliderViewCell"
 @implementation ThermostatDetailsViewController
 
 @dynamic tableView;
+@dynamic deviceViewModel;
 
 #pragma mark Private
 

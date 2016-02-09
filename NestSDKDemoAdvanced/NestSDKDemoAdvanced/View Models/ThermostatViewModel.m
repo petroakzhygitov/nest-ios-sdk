@@ -4,7 +4,7 @@
 
 @implementation ThermostatViewModel
 
-@dynamic device;
+@synthesize device;
 
 #pragma mark Private
 

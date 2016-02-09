@@ -5,7 +5,7 @@
 
 @implementation CameraViewModel
 
-@dynamic device;
+@synthesize device;
 
 #pragma mark Override
 

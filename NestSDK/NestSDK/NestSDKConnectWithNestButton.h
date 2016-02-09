@@ -74,7 +74,6 @@
  * Like `NestSDKAuthorizationManager`, you should make sure your app delegate is connected to
  * `NestSDKApplicationDelegate` in order for the button's delegate to receive messages.
  */
-IB_DESIGNABLE
 @interface NestSDKConnectWithNestButton : UIButton <UIActionSheetDelegate>
 #pragma mark Properties
 

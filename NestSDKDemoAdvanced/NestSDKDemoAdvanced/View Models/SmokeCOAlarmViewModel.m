@@ -4,7 +4,7 @@
 
 @implementation SmokeCOAlarmViewModel
 
-@dynamic device;
+@synthesize device;
 
 #pragma mark Private
 

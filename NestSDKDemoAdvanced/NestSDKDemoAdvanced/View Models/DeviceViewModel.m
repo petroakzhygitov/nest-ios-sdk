@@ -10,7 +10,7 @@
 
 @implementation DeviceViewModel
 
-@dynamic device;
+@synthesize device;
 
 #pragma mark Initializer
 

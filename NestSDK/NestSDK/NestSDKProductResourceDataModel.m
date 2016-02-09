@@ -44,6 +44,7 @@
     [super copyPropertiesToDataModelCopy:copy];
 
     NestSDKProductResourceDataModel *productResourceDataModelCopy = (NestSDKProductResourceDataModel *) copy;
+    productResourceDataModelCopy.value = self.value;
     productResourceDataModelCopy.measurementTime = self.measurementTime;
     productResourceDataModelCopy.measurementResetTime = self.measurementResetTime;
 }

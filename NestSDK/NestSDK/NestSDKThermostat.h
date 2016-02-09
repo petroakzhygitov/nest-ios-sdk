@@ -96,7 +96,7 @@ typedef NS_ENUM(NSUInteger, NestSDKThermostatHVACState) {
 /**
  * Timestamp showing when the fan timer reaches 0 (stop time).
  */
-@property(nonatomic) NSDate *fanTimerTimeout;
+@property(nonatomic, readonly) NSDate *fanTimerTimeout;
 
 /**
  * Displayed when the thermostat is set to an energy-saving temperature.

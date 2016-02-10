@@ -22,6 +22,8 @@
 
 /* Begin PBXBuildFile section */
 		57527223071378CFF0013B4E /* libPods-NestSDKTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58AA15B9FDBA869034B97045 /* libPods-NestSDKTests.a */; };
+		9125F7001C6B82DC00866856 /* NestSDKIntegrationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9125F6FF1C6B82DC00866856 /* NestSDKIntegrationTests.m */; };
+		9125F7021C6B82DC00866856 /* NestSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91DC3D361C3F103100A61B61 /* NestSDK.framework */; };
 		913AF11F1C4267B50079E5CA /* NestSDKApplicationDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 91DC3D541C3F123C00A61B61 /* NestSDKApplicationDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		91DC3D3A1C3F103100A61B61 /* NestSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 91DC3D391C3F103100A61B61 /* NestSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		91DC3D411C3F103100A61B61 /* NestSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91DC3D361C3F103100A61B61 /* NestSDK.framework */; };
@@ -149,6 +151,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		9125F7031C6B82DC00866856 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 91DC3D2D1C3F103100A61B61 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 91DC3D351C3F103100A61B61;
+			remoteInfo = NestSDK;
+		};
 		91DC3D421C3F103100A61B61 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 91DC3D2D1C3F103100A61B61 /* Project object */;
@@ -165,6 +174,9 @@
 		48C09388F598ADF046C53C82 /* Pods-NestSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NestSDK.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NestSDK/Pods-NestSDK.debug.xcconfig"; sourceTree = "<group>"; };
 		5091C3934F818825EFCA5F61 /* libPods-NestSDK.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-NestSDK.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		58AA15B9FDBA869034B97045 /* libPods-NestSDKTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-NestSDKTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9125F6FD1C6B82DC00866856 /* NestSDKIntegrationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NestSDKIntegrationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9125F6FF1C6B82DC00866856 /* NestSDKIntegrationTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NestSDKIntegrationTests.m; sourceTree = "<group>"; };
+		9125F7011C6B82DC00866856 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		91DC3D361C3F103100A61B61 /* NestSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NestSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		91DC3D391C3F103100A61B61 /* NestSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NestSDK.h; sourceTree = "<group>"; };
 		91DC3D3B1C3F103100A61B61 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -295,6 +307,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		9125F6FA1C6B82DC00866856 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9125F7021C6B82DC00866856 /* NestSDK.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		91DC3D321C3F103100A61B61 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -335,11 +355,21 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		9125F6FE1C6B82DC00866856 /* NestSDKIntegrationTests */ = {
+			isa = PBXGroup;
+			children = (
+				9125F6FF1C6B82DC00866856 /* NestSDKIntegrationTests.m */,
+				9125F7011C6B82DC00866856 /* Info.plist */,
+			);
+			path = NestSDKIntegrationTests;
+			sourceTree = "<group>";
+		};
 		91DC3D2C1C3F103100A61B61 = {
 			isa = PBXGroup;
 			children = (
 				91DC3D381C3F103100A61B61 /* NestSDK */,
 				91DC3D441C3F103100A61B61 /* NestSDKTests */,
+				9125F6FE1C6B82DC00866856 /* NestSDKIntegrationTests */,
 				91DC3D371C3F103100A61B61 /* Products */,
 				3EE72BF9BE30128ED593087A /* Pods */,
 				7BBC4CBCDA2B8794182D252A /* Frameworks */,
@@ -351,6 +381,7 @@
 			children = (
 				91DC3D361C3F103100A61B61 /* NestSDK.framework */,
 				91DC3D401C3F103100A61B61 /* NestSDKTests.xctest */,
+				9125F6FD1C6B82DC00866856 /* NestSDKIntegrationTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -821,6 +852,25 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		9125F6FC1C6B82DC00866856 /* NestSDKIntegrationTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9125F7051C6B82DC00866856 /* Build configuration list for PBXNativeTarget "NestSDKIntegrationTests" */;
+			buildPhases = (
+				9125F6F91C6B82DC00866856 /* Sources */,
+				9125F6FA1C6B82DC00866856 /* Frameworks */,
+				9125F6FB1C6B82DC00866856 /* Resources */,
+				9125F7081C6B83A000866856 /* Set NestSDK AccessToken */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9125F7041C6B82DC00866856 /* PBXTargetDependency */,
+			);
+			name = NestSDKIntegrationTests;
+			productName = NestSDKIntegrationTests;
+			productReference = 9125F6FD1C6B82DC00866856 /* NestSDKIntegrationTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		91DC3D351C3F103100A61B61 /* NestSDK */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 91DC3D4A1C3F103100A61B61 /* Build configuration list for PBXNativeTarget "NestSDK" */;
@@ -871,6 +921,9 @@
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "Petro Akzhygitov";
 				TargetAttributes = {
+					9125F6FC1C6B82DC00866856 = {
+						CreatedOnToolsVersion = 7.2.1;
+					};
 					913AF1201C42A48B0079E5CA = {
 						CreatedOnToolsVersion = 7.2;
 					};
@@ -896,12 +949,20 @@
 			targets = (
 				91DC3D351C3F103100A61B61 /* NestSDK */,
 				91DC3D3F1C3F103100A61B61 /* NestSDKTests */,
+				9125F6FC1C6B82DC00866856 /* NestSDKIntegrationTests */,
 				913AF1201C42A48B0079E5CA /* Documentation */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		9125F6FB1C6B82DC00866856 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		91DC3D341C3F103100A61B61 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -965,6 +1026,20 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NestSDKTests/Pods-NestSDKTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		9125F7081C6B83A000866856 /* Set NestSDK AccessToken */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Set NestSDK AccessToken";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/libexec/PlistBuddy -c \"Set :NestSDKAccessToken 123\" \"${SRCROOT}/NestSDKIntegrationTests/Info.plist\"";
+		};
 		913AF1241C42A4900079E5CA /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1026,6 +1101,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		9125F6F91C6B82DC00866856 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9125F7001C6B82DC00866856 /* NestSDKIntegrationTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		91DC3D311C3F103100A61B61 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1099,6 +1182,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		9125F7041C6B82DC00866856 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 91DC3D351C3F103100A61B61 /* NestSDK */;
+			targetProxy = 9125F7031C6B82DC00866856 /* PBXContainerItemProxy */;
+		};
 		91DC3D431C3F103100A61B61 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 91DC3D351C3F103100A61B61 /* NestSDK */;
@@ -1107,6 +1195,28 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		9125F7061C6B82DC00866856 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				INFOPLIST_FILE = NestSDKIntegrationTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = NestSDK.NestSDKIntegrationTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		9125F7071C6B82DC00866856 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				INFOPLIST_FILE = NestSDKIntegrationTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = NestSDK.NestSDKIntegrationTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		913AF1211C42A48C0079E5CA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1306,6 +1416,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		9125F7051C6B82DC00866856 /* Build configuration list for PBXNativeTarget "NestSDKIntegrationTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9125F7061C6B82DC00866856 /* Debug */,
+				9125F7071C6B82DC00866856 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		913AF1231C42A48C0079E5CA /* Build configuration list for PBXAggregateTarget "Documentation" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

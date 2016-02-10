@@ -859,7 +859,6 @@
 				9125F6F91C6B82DC00866856 /* Sources */,
 				9125F6FA1C6B82DC00866856 /* Frameworks */,
 				9125F6FB1C6B82DC00866856 /* Resources */,
-				9125F7081C6B83A000866856 /* Set NestSDK AccessToken */,
 			);
 			buildRules = (
 			);
@@ -1025,20 +1024,6 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NestSDKTests/Pods-NestSDKTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
-		};
-		9125F7081C6B83A000866856 /* Set NestSDK AccessToken */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Set NestSDK AccessToken";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/libexec/PlistBuddy -c \"Set :NestSDKAccessToken 123\" \"${SRCROOT}/NestSDKIntegrationTests/Info.plist\"";
 		};
 		913AF1241C42A4900079E5CA /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;

@@ -23,19 +23,6 @@
             </ActionContent>
          </ExecutionAction>
       </PostActions>
-      <BuildActionEntries>
-         <BuildActionEntry
-            buildForRunning = "YES"
-            buildForTesting = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "9125F6FC1C6B82DC00866856"
-               BuildableName = "NestSDKIntegrationTests.xctest"
-               BlueprintName = "NestSDKIntegrationTests"
-               ReferencedContainer = "container:NestSDK.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-      </BuildActionEntries>
    </BuildAction>
    <TestAction
       buildConfiguration = "Debug"

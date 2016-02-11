@@ -20,6 +20,9 @@
 
 #import "NestSDKUtils.h"
 
+static const int kCelsiusToFahrenheitTemperatureShift = 32;
+static const float kCelsiusToFahrenheitTemperatureMultiplier = 1.8f;
+
 @implementation NestSDKUtils
 #pragma mark Private
 
@@ -32,7 +35,21 @@
     return formatter;
 }
 
++ (CGFloat)_roundToHalfDegree:(float)degree {
+    NSUInteger floatPart = (NSUInteger) (floor(degree * 10)) % 10;
+
+    return (CGFloat) floor(degree) + (floatPart < .5f ? 0 : .5f);
+}
+
 #pragma mark Public
+
++ (NSUInteger)celsiusToFahrenheit:(CGFloat)celsius {
+    return (NSUInteger) (roundf(celsius * kCelsiusToFahrenheitTemperatureMultiplier) + kCelsiusToFahrenheitTemperatureShift);
+}
+
++ (CGFloat)fahrenheitToCelsius:(NSUInteger)fahrenheit {
+    return [self _roundToHalfDegree:(fahrenheit - kCelsiusToFahrenheitTemperatureShift) / kCelsiusToFahrenheitTemperatureMultiplier];
+}
 
 + (UIImage *)imageWithColor:(UIColor *)color cornerRadius:(CGFloat)cornerRadius scale:(CGFloat)scale {
     CGFloat size = (CGFloat) (1.0 + 2 * cornerRadius);
@@ -79,7 +96,7 @@
 
 + (NSDictionary *)queryParametersDictionaryFromQueryString:(NSString *)queryString {
     NSMutableDictionary *queryParametersDictionary = [[NSMutableDictionary alloc] init];
-    
+
     for (NSString *parameter in [queryString componentsSeparatedByString:@"&"]) {
         NSArray *parameterArray = [parameter componentsSeparatedByString:@"="];
         if (parameterArray.count != 2) continue;
@@ -113,6 +130,5 @@
 
     return [object isEqual:other];
 }
-
 
 @end

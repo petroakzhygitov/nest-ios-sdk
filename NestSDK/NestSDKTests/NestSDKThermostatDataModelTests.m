@@ -141,13 +141,13 @@ SpecBegin(NestSDKThermostatDataModel)
                 expect(thermostat.targetTemperatureLowC).to.equal(9);
 
                 thermostat.targetTemperatureF = 5;
-                expect(thermostat.targetTemperatureF).to.equal(48);
+                expect(thermostat.targetTemperatureF).to.equal(50);
 
                 thermostat.targetTemperatureHighF = 0;
-                expect(thermostat.targetTemperatureHighF).to.equal(48);
+                expect(thermostat.targetTemperatureHighF).to.equal(50);
 
                 thermostat.targetTemperatureLowF = 15;
-                expect(thermostat.targetTemperatureLowF).to.equal(48);
+                expect(thermostat.targetTemperatureLowF).to.equal(50);
 
                 thermostat.targetTemperatureC = 50;
                 expect(thermostat.targetTemperatureC).to.equal(32);

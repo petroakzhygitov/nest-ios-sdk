@@ -1,5 +1,9 @@
 # NestSDK Changelog
 
+## 0.1.4
+
+- Fixed: Data manager observers removal for multiple instances
+
 ## 0.1.3
 
 - New: Data models made copyable

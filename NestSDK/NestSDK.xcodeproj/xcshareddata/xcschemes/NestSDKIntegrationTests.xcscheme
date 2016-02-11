@@ -23,6 +23,22 @@
             </ActionContent>
          </ExecutionAction>
       </PostActions>
+      <BuildActionEntries>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "9125F6FC1C6B82DC00866856"
+               BuildableName = "NestSDKIntegrationTests.xctest"
+               BlueprintName = "NestSDKIntegrationTests"
+               ReferencedContainer = "container:NestSDK.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+      </BuildActionEntries>
    </BuildAction>
    <TestAction
       buildConfiguration = "Debug"
@@ -54,6 +70,15 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "9125F6FC1C6B82DC00866856"
+            BuildableName = "NestSDKIntegrationTests.xctest"
+            BlueprintName = "NestSDKIntegrationTests"
+            ReferencedContainer = "container:NestSDK.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>

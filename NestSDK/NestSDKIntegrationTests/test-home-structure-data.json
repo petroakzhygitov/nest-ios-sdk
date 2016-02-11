@@ -1,0 +1,81 @@
+{
+  "wheres": {
+    "O7_aj3s0GyQJzpn0Ut920KzR1G9ShFZZanklgAnGSlj8jaopiDNv0A": {
+      "where_id": "O7_aj3s0GyQJzpn0Ut920KzR1G9ShFZZanklgAnGSlj8jaopiDNv0A",
+      "name": "Bedroom"
+    },
+    "O7_aj3s0GyQJzpn0Ut920KzR1G9ShFZZanklgAnGSlhHUDRsm1bCGw": {
+      "where_id": "O7_aj3s0GyQJzpn0Ut920KzR1G9ShFZZanklgAnGSlhHUDRsm1bCGw",
+      "name": "Kids Room"
+    },
+    "O7_aj3s0GyQJzpn0Ut920KzR1G9ShFZZanklgAnGSljykV_qqmMcrg": {
+      "where_id": "O7_aj3s0GyQJzpn0Ut920KzR1G9ShFZZanklgAnGSljykV_qqmMcrg",
+      "name": "Upstairs"
+    },
+    "O7_aj3s0GyQJzpn0Ut920KzR1G9ShFZZanklgAnGSlgr2etIBsD8Xw": {
+      "where_id": "O7_aj3s0GyQJzpn0Ut920KzR1G9ShFZZanklgAnGSlgr2etIBsD8Xw",
+      "name": "Den"
+    },
+    "O7_aj3s0GyQJzpn0Ut920KzR1G9ShFZZanklgAnGSlipNhjxe4Th4g": {
+      "where_id": "O7_aj3s0GyQJzpn0Ut920KzR1G9ShFZZanklgAnGSlipNhjxe4Th4g",
+      "name": "Master Bedroom"
+    },
+    "O7_aj3s0GyQJzpn0Ut920KzR1G9ShFZZanklgAnGSlienqW6xCWvnA": {
+      "where_id": "O7_aj3s0GyQJzpn0Ut920KzR1G9ShFZZanklgAnGSlienqW6xCWvnA",
+      "name": "Living Room"
+    },
+    "O7_aj3s0GyQJzpn0Ut920KzR1G9ShFZZanklgAnGSliMzSCpFJefbA": {
+      "where_id": "O7_aj3s0GyQJzpn0Ut920KzR1G9ShFZZanklgAnGSliMzSCpFJefbA",
+      "name": "Family Room"
+    },
+    "O7_aj3s0GyQJzpn0Ut920KzR1G9ShFZZanklgAnGSlhbnbSA1Nrp7g": {
+      "where_id": "O7_aj3s0GyQJzpn0Ut920KzR1G9ShFZZanklgAnGSlhbnbSA1Nrp7g",
+      "name": "Basement"
+    },
+    "O7_aj3s0GyQJzpn0Ut920KzR1G9ShFZZanklgAnGSlgvdVK51lUQAw": {
+      "where_id": "O7_aj3s0GyQJzpn0Ut920KzR1G9ShFZZanklgAnGSlgvdVK51lUQAw",
+      "name": "Office"
+    },
+    "O7_aj3s0GyQJzpn0Ut920KzR1G9ShFZZanklgAnGSlgnBJ6Wl9TnEg": {
+      "where_id": "O7_aj3s0GyQJzpn0Ut920KzR1G9ShFZZanklgAnGSlgnBJ6Wl9TnEg",
+      "name": "Dining Room"
+    },
+    "O7_aj3s0GyQJzpn0Ut920KzR1G9ShFZZanklgAnGSlgkL_Y8gA4L8A": {
+      "where_id": "O7_aj3s0GyQJzpn0Ut920KzR1G9ShFZZanklgAnGSlgkL_Y8gA4L8A",
+      "name": "Entryway"
+    },
+    "O7_aj3s0GyQJzpn0Ut920KzR1G9ShFZZanklgAnGSlieB58O-TtZgA": {
+      "where_id": "O7_aj3s0GyQJzpn0Ut920KzR1G9ShFZZanklgAnGSlieB58O-TtZgA",
+      "name": "Kitchen"
+    },
+    "O7_aj3s0GyQJzpn0Ut920KzR1G9ShFZZanklgAnGSljL9_6KEIHILA": {
+      "where_id": "O7_aj3s0GyQJzpn0Ut920KzR1G9ShFZZanklgAnGSljL9_6KEIHILA",
+      "name": "Downstairs"
+    },
+    "O7_aj3s0GyQJzpn0Ut920KzR1G9ShFZZanklgAnGSljd1BgJu2a1hA": {
+      "where_id": "O7_aj3s0GyQJzpn0Ut920KzR1G9ShFZZanklgAnGSljd1BgJu2a1hA",
+      "name": "Hallway"
+    }
+  },
+  "away": "home",
+  "postal_code": "94012",
+  "smoke_co_alarms": [
+    "CVRjKfVlTrnrgeGQTaAo5nSa7y9rOYE0",
+    "CVRjKfVlTrkTVZ9wJbEdanSa7y9rOYE0",
+    "CVRjKfVlTrlE48RFqzY4OnSa7y9rOYE0"
+  ],
+  "rhr_enrollment": true,
+  "cameras": [
+    "k0vlBF_RK3S67h21c7IKPrgI8d9x2Rt6ZiATySab06gl7Jlp59mb0g",
+    "qewrFbhxXs4p54xcKEg-K3VIwrcy-oxcf-3BRxAMJw6Ybv1ll7t4vg",
+    "XOYtxuPQQ-EZP01ZNE14PUXNsDePK7YssIQ-yjS-_8pN0uykNiT_qQ"
+  ],
+  "thermostats": [
+    "OL3mkXXPwBol8iT_NtmW2nSa7y9rOYE0",
+    "OL3mkXXPwBr-ZgLJ4DofXXSa7y9rOYE0",
+    "OL3mkXXPwBo3eOg2StD2FXSa7y9rOYE0"
+  ],
+  "structure_id": "uF1xZgyi0Wg3oW8PMpBHLX47pfNDTNtmilAv19OKSnO9-hEGmHqjAg",
+  "country_code": "US",
+  "name": "Test Home"
+}

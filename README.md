@@ -1,4 +1,4 @@
-# NestSDK for iOS
+# SDK for the Nest API on iOS [Unofficial]
 
 [![CI Status](https://travis-ci.org/petroakzhygitov/nest-ios-sdk.svg?branch=master&style=flat)](https://travis-ci.org/petroakzhygitov/nest-ios-sdk)
 [![Version](https://img.shields.io/cocoapods/v/NestSDK.svg?style=flat)](http://cocoapods.org/pods/NestSDK)

@@ -19,7 +19,7 @@ NestSDK is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod "NestSDK", "0.1.3"
+pod "NestSDK", "0.1.4"
 ```
 
 ## General Nest product setup

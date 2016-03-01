@@ -38,7 +38,7 @@ static NSString *const kHVACModeStringOff = @"off";
 const NSUInteger NestSDKThermostatTemperatureCAllowableMin = 9;
 const NSUInteger NestSDKThermostatTemperatureCAllowableMax = 32;
 
-const NSUInteger NestSDKThermostatTemperatureFAllowableMin = 48;
+const NSUInteger NestSDKThermostatTemperatureFAllowableMin = 50;
 const NSUInteger NestSDKThermostatTemperatureFAllowableMax = 90;
 
 

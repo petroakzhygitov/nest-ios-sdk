@@ -42,7 +42,7 @@ typedef void (^NestSDKDataUpdateHandler)(id, NSError *);
 
 @property(nonatomic, readonly) id <NestSDKService> service;
 
-@property(nonatomic) NSMutableArray *observerHandles;
+@property(nonatomic) NSMutableDictionary *observerHandles;
 
 @end
 
@@ -53,7 +53,7 @@ typedef void (^NestSDKDataUpdateHandler)(id, NSError *);
 - (instancetype)init {
     self = [super init];
     if (self) {
-        self.observerHandles = [[NSMutableArray alloc] init];
+        self.observerHandles = [[NSMutableDictionary alloc] init];
     }
 
     return self;
@@ -169,7 +169,7 @@ typedef void (^NestSDKDataUpdateHandler)(id, NSError *);
 }
 
 - (void)_addHandle:(NestSDKObserverHandle)handle {
-    [self.observerHandles addObject:@(handle)];
+    self.observerHandles[@(handle)] = @(0);
 }
 
 #pragma mark Override
@@ -277,11 +277,13 @@ typedef void (^NestSDKDataUpdateHandler)(id, NSError *);
 
 
 - (void)removeObserverWithHandle:(NestSDKObserverHandle)handle {
+    self.observerHandles[@(handle)] = nil;
+
     [self.service removeObserverWithHandle:handle];
 }
 
 - (void)removeAllObservers {
-    for (NSNumber *handle in self.observerHandles) {
+    for (NSNumber *handle in self.observerHandles.allKeys) {
         [self removeObserverWithHandle:handle.unsignedIntegerValue];
     }
 

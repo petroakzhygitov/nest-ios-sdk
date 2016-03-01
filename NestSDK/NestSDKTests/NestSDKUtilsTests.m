@@ -22,7 +22,6 @@
 #import <Expecta/Expecta.h>
 #import "SpectaDSL.h"
 #import "SPTSpec.h"
-#import "NestSDKAccessToken.h"
 #import "LSStubRequestDSL.h"
 #import "LSNocilla.h"
 #import "NestSDKUtils.h"
@@ -97,11 +96,25 @@ SpecBegin(NestSDKUtils)
                 expect([NestSDKUtils object:string1 isEqualToObject:nil]).to.equal(NO);
                 expect([NestSDKUtils object:nil isEqualToObject:nil]).to.equal(YES);
             });
-            
+
             it(@"should parse url query", ^{
                 NSDictionary *dictionary = [NestSDKUtils queryParametersDictionaryFromQueryString:@"state=someState&code=someCode"];
                 expect(dictionary[@"state"]).to.equal(@"someState");
                 expect(dictionary[@"code"]).to.equal(@"someCode");
+            });
+
+            it(@"should convert celsius to fahrenheit", ^{
+                expect([NestSDKUtils celsiusToFahrenheit:13]).to.equal(55);
+                expect([NestSDKUtils celsiusToFahrenheit:20]).to.equal(68);
+                expect([NestSDKUtils celsiusToFahrenheit:22.5]).to.equal(73);
+                expect([NestSDKUtils celsiusToFahrenheit:27.5]).to.equal(82);
+            });
+
+            it(@"should fahrenheit to celsius", ^{
+                expect([NestSDKUtils fahrenheitToCelsius:55]).to.equal(12.5);
+                expect([NestSDKUtils fahrenheitToCelsius:68]).to.equal(20);
+                expect([NestSDKUtils fahrenheitToCelsius:73]).to.equal(22.5);
+                expect([NestSDKUtils fahrenheitToCelsius:82]).to.equal(27.5);
             });
         });
     }

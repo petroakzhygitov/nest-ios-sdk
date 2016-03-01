@@ -36,4 +36,8 @@
 
 + (BOOL)object:(id)object isEqualToObject:(id)other;
 
++ (NSUInteger)celsiusToFahrenheit:(CGFloat)celsius;
+
++ (CGFloat)fahrenheitToCelsius:(NSUInteger)fahrenheit;
+
 @end

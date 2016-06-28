@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="syt-JH-XOw">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="syt-JH-XOw">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Devices View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="DevicesViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -94,9 +94,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="Krl-Ov-xwg"/>
                     <connections>
-                        <outlet property="connectWithNestButton" destination="cNe-Wt-8Nq" id="sh4-e3-LP0"/>
-                        <outlet property="connectWithNestView" destination="faa-eT-VPK" id="fbA-8R-IF9"/>
-                        <outlet property="faderView" destination="jGU-It-fFc" id="vnb-Y9-nh1"/>
+                        <outlet property="connectWithNestButton" destination="cNe-Wt-8Nq" id="UhO-EZ-B9Q"/>
+                        <outlet property="connectWithNestView" destination="faa-eT-VPK" id="3Q3-cn-anH"/>
+                        <outlet property="faderView" destination="jGU-It-fFc" id="q2X-QU-8y8"/>
                         <outlet property="tableView" destination="Elf-hv-JMC" id="V0d-I0-OF9"/>
                     </connections>
                 </viewController>

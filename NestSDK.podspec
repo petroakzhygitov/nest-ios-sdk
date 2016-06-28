@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name             = 'NestSDK'
-  s.version          = '0.1.4'
+  s.version          = '0.1.5'
   s.summary          = 'SDK for the Nest API on iOS [Unofficial]'
 
   s.description      = <<-DESC
@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
   s.author           = { 'petroakzhygitov' => 'petro.akzhygitov@gmail.com' }
 
   s.platform     = :ios, '9.0'
-  s.ios.deployment_target = '7.0'
+  s.ios.deployment_target = '8.0'
 
   s.source           = { :git => 'https://github.com/petroakzhygitov/NestSDK.git', :tag => s.version.to_s }
 
@@ -30,6 +30,11 @@ Pod::Spec.new do |s|
   s.dependency 'JSONModel', '1.2.0'
   s.dependency 'SSKeychain', '1.3.1'
   
-  s.pod_target_xcconfig = { 'FRAMEWORK_SEARCH_PATHS' => '${PODS_ROOT}/Firebase', 'MACH_O_TYPE' => 'staticlib' }
+  s.weak_framework = 'Firebase'
+
+  s.frameworks = 'Security', 'CFNetwork', 'SystemConfiguration'
+  s.libraries = 'c++', 'icucore'
+
+  s.pod_target_xcconfig = { 'FRAMEWORK_SEARCH_PATHS' => '${PODS_ROOT}/Firebase', 'ENABLE_BITCODE' => 'NO', 'OTHER_LDFLAGS' => '-ObjC' }
 
 end

@@ -2,5 +2,5 @@ source 'https://github.com/CocoaPods/Specs.git'
 xcodeproj 'NestSDKDemo.xcodeproj'
 
 target 'NestSDKDemo' do
-  pod 'NestSDK', '0.1.2'
+  pod 'NestSDK', '0.1.5'
 end

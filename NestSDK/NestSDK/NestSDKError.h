@@ -83,4 +83,5 @@ typedef NS_ENUM(NSInteger, NestSDKErrorCode) {
 + (NSError *)unableToParseDataErrorWithUnderlyingError:(NSError *)error;
 
 + (NSError *)invalidURLParameterWithName:(NSString *)name;
+
 @end

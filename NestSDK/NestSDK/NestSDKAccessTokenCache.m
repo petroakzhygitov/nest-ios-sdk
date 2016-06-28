@@ -33,7 +33,7 @@ static NSString *const kAccountName = @"default";
 
 - (NestSDKAccessToken *)fetchAccessToken {
     NSData *archivedTokenData = [SSKeychain passwordDataForService:kServiceName account:kAccountName];
-    if (!archivedTokenData.length) return nil;
+    if (archivedTokenData.length == 0) return nil;
 
     return [NSKeyedUnarchiver unarchiveObjectWithData:archivedTokenData];
 }
@@ -41,7 +41,7 @@ static NSString *const kAccountName = @"default";
 - (void)cacheAccessToken:(NestSDKAccessToken *)token {
     NSData *archivedTokenData = [NSKeyedArchiver archivedDataWithRootObject:token];
 
-    if (!archivedTokenData.length) {
+    if (archivedTokenData.length == 0) {
         [self clearCache];
 
     } else {

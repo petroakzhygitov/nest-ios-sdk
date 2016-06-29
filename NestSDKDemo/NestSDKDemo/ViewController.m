@@ -95,8 +95,8 @@
                 [self logMessage:[NSString stringWithFormat:@"Error observing smokeCOAlarm: %@", error]];
 
             } else {
-                [self logMessage:[NSString stringWithFormat:@"smokeCOAlarm %@ updated! Current state: %ul",
-                                                            smokeCOAlarm.name, smokeCOAlarm.coAlarmState]];
+                [self logMessage:[NSString stringWithFormat:@"smokeCOAlarm %@ updated! Current state: %lul",
+                                  smokeCOAlarm.name, (unsigned long)smokeCOAlarm.coAlarmState]];
             }
         }];
 

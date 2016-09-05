@@ -8,6 +8,8 @@
 @interface DevicesViewControllerHelper : NSObject
 #pragma mark Methods
 
++ (void)registerReusableCellsForTableView:(UITableView *)tableView;
+
 + (void)populateCell:(UITableViewCell *)cell withDevice:(id <NestSDKDevice>)device;
 
 + (void)passDevice:(id <NestSDKDevice>)device toViewController:(UIViewController *)controller;

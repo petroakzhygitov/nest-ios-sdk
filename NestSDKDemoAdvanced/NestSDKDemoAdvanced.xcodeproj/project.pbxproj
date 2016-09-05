@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		914B7F5F1D7C624D008FA5B0 /* CameraViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 914B7F5C1D7C624D008FA5B0 /* CameraViewCell.xib */; };
+		914B7F641D7C6BA8008FA5B0 /* SmokeCOAlarmViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 914B7F621D7C6BA8008FA5B0 /* SmokeCOAlarmViewCell.xib */; };
+		914B7F651D7C6BA8008FA5B0 /* ThermostatViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 914B7F631D7C6BA8008FA5B0 /* ThermostatViewCell.xib */; };
 		91C3DA861C47FA6100D656EC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 91C3DA851C47FA6100D656EC /* main.m */; };
 		91C3DA891C47FA6100D656EC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 91C3DA881C47FA6100D656EC /* AppDelegate.m */; };
 		91C3DA8C1C47FA6100D656EC /* DevicesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91C3DA8B1C47FA6100D656EC /* DevicesViewController.m */; };
@@ -47,6 +50,9 @@
 /* Begin PBXFileReference section */
 		612DFCD767A9FDBC5FB56F7B /* Pods-NestSDKDemoAdvanced.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NestSDKDemoAdvanced.release.xcconfig"; path = "Pods/Target Support Files/Pods-NestSDKDemoAdvanced/Pods-NestSDKDemoAdvanced.release.xcconfig"; sourceTree = "<group>"; };
 		7A73B083BA1A5A454BACC899 /* Pods_NestSDKDemoAdvanced.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NestSDKDemoAdvanced.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		914B7F5C1D7C624D008FA5B0 /* CameraViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CameraViewCell.xib; path = Views/CameraViewCell.xib; sourceTree = "<group>"; };
+		914B7F621D7C6BA8008FA5B0 /* SmokeCOAlarmViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SmokeCOAlarmViewCell.xib; path = Views/SmokeCOAlarmViewCell.xib; sourceTree = "<group>"; };
+		914B7F631D7C6BA8008FA5B0 /* ThermostatViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ThermostatViewCell.xib; path = Views/ThermostatViewCell.xib; sourceTree = "<group>"; };
 		91C3DA811C47FA6100D656EC /* NestSDKDemoAdvanced.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NestSDKDemoAdvanced.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		91C3DA851C47FA6100D656EC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		91C3DA871C47FA6100D656EC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -202,6 +208,9 @@
 		91C3DAA91C4820B800D656EC /* View Cells */ = {
 			isa = PBXGroup;
 			children = (
+				914B7F621D7C6BA8008FA5B0 /* SmokeCOAlarmViewCell.xib */,
+				914B7F631D7C6BA8008FA5B0 /* ThermostatViewCell.xib */,
+				914B7F5C1D7C624D008FA5B0 /* CameraViewCell.xib */,
 				D7C0263D2B7241966542DF82 /* CameraViewCell.m */,
 				D7C026CB83E40FF3DEC4E1BD /* CameraViewCell.h */,
 				D7C02FF448463C33E20B84D4 /* SmokeCOAlarmViewCell.m */,
@@ -328,8 +337,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				91C3DA941C47FA6100D656EC /* LaunchScreen.storyboard in Resources */,
+				914B7F641D7C6BA8008FA5B0 /* SmokeCOAlarmViewCell.xib in Resources */,
 				91C3DA911C47FA6100D656EC /* Assets.xcassets in Resources */,
 				91C3DA8F1C47FA6100D656EC /* Main.storyboard in Resources */,
+				914B7F5F1D7C624D008FA5B0 /* CameraViewCell.xib in Resources */,
+				914B7F651D7C6BA8008FA5B0 /* ThermostatViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

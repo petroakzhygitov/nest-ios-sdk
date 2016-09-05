@@ -13,7 +13,7 @@
 
 static const int kHeightForRow = 88;
 static const int kHeightForHeaderInSection = 30;
-
+static const int kHeightForFooterInSection = 20;
 
 @interface DevicesViewController ()
 
@@ -89,9 +89,11 @@ static const int kHeightForHeaderInSection = 30;
 }
 
 - (void)_initTableView {
+    [DevicesViewControllerHelper registerReusableCellsForTableView:self.tableView];
+
     self.tableView.rowHeight = kHeightForRow;
     self.tableView.sectionHeaderHeight = kHeightForHeaderInSection;
-    self.tableView.sectionFooterHeight = 0;
+    self.tableView.sectionFooterHeight = kHeightForFooterInSection;
 }
 
 - (BOOL)_isAuthorized {

@@ -78,6 +78,17 @@ static NSString *const kSegueIdentifierCameraDetails = @"CameraDetailsSegueIdent
 
 #pragma mark Public
 
++ (void)registerReusableCellsForTableView:(UITableView *)tableView {
+    [tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ThermostatViewCell class]) bundle:[NSBundle mainBundle]]
+    forCellReuseIdentifier:kViewCellIdentifierThermostat];
+
+    [tableView registerNib:[UINib nibWithNibName:NSStringFromClass([SmokeCOAlarmViewCell class]) bundle:[NSBundle mainBundle]]
+    forCellReuseIdentifier:kViewCellIdentifierSmokeCOAlarm];
+
+    [tableView registerNib:[UINib nibWithNibName:NSStringFromClass([CameraViewCell class]) bundle:[NSBundle mainBundle]]
+    forCellReuseIdentifier:kViewCellIdentifierCamera];
+}
+
 + (void)populateCell:(UITableViewCell *)cell withDevice:(id <NestSDKDevice>)device {
     if ([cell isKindOfClass:[ThermostatViewCell class]]) {
         [self _populateThermostatCell:(ThermostatViewCell *) cell withThermostat:(id <NestSDKThermostat>) device];

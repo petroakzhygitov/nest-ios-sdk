@@ -140,7 +140,7 @@ SpecBegin(NestSDKIntegration)
                 NestSDKDataManager *dataManager = [[NestSDKDataManager alloc] init];
 
                 waitUntilTimeout(kServiceResponseTimeout, ^(DoneCallback done) {
-                    __block NestSDKObserverHandle handle = [dataManager observeThermostatWithId:@"OL3mkXXPwBo3eOg2StD2FXSa7y9rOYE0" block:^(id <NestSDKThermostat> thermostat, NSError *error) {
+                    __block NestSDKObserverHandle handle = [dataManager observeThermostatWithId:@"CwItoBVYXfm5sPgcEu4xdiGXS0pj7QVm" block:^(id <NestSDKThermostat> thermostat, NSError *error) {
                         expect(error).to.equal(nil);
                         expect(thermostat).to.equal(originalThermostat);
 
@@ -155,7 +155,7 @@ SpecBegin(NestSDKIntegration)
                 NestSDKDataManager *dataManager = [[NestSDKDataManager alloc] init];
 
                 waitUntilTimeout(kServiceResponseTimeout, ^(DoneCallback done) {
-                    [dataManager thermostatWithId:@"OL3mkXXPwBo3eOg2StD2FXSa7y9rOYE0" block:^(id <NestSDKThermostat> thermostat, NSError *error) {
+                    [dataManager thermostatWithId:@"CwItoBVYXfm5sPgcEu4xdiGXS0pj7QVm" block:^(id <NestSDKThermostat> thermostat, NSError *error) {
                         expect(error).to.equal(nil);
                         expect(thermostat).to.equal(originalThermostat);
 
@@ -170,7 +170,7 @@ SpecBegin(NestSDKIntegration)
                 __block NestSDKThermostatDataModel *__thermostat;
 
                 waitUntilTimeout(kServiceResponseTimeout, ^(DoneCallback done) {
-                    [dataManager thermostatWithId:@"OL3mkXXPwBo3eOg2StD2FXSa7y9rOYE0" block:^(id <NestSDKThermostat> thermostat, NSError *error) {
+                    [dataManager thermostatWithId:@"CwItoBVYXfm5sPgcEu4xdiGXS0pj7QVm" block:^(id <NestSDKThermostat> thermostat, NSError *error) {
                         expect(error).to.equal(nil);
                         __thermostat = thermostat;
 
@@ -206,14 +206,9 @@ SpecBegin(NestSDKIntegration)
 
                 waitUntilTimeout(kServiceResponseTimeout, ^(DoneCallback done) {
                     __thermostat.hvacMode = NestSDKThermostatHVACModeHeatCool;
-                    __thermostat.fanTimerActive = true;
 
                     [dataManager setThermostat:__thermostat block:^(id <NestSDKThermostat> thermostat, NSError *error) {
                         expect(error).to.equal(nil);
-
-                        // Turning on fan timer will activate timeout
-                        __thermostat.fanTimerTimeout = thermostat.fanTimerTimeout;
-
                         expect(thermostat).to.equal(__thermostat);
 
                         done();
@@ -257,7 +252,6 @@ SpecBegin(NestSDKIntegration)
                 waitUntilTimeout(kServiceResponseTimeout, ^(DoneCallback done) {
                     __thermostat.hvacMode = NestSDKThermostatHVACModeHeat;
                     __thermostat.fanTimerActive = false;
-                    __thermostat.fanTimerTimeout = nil;
 
                     [dataManager setThermostat:__thermostat block:^(id <NestSDKThermostat> thermostat, NSError *error) {
                         expect(error).to.equal(nil);
@@ -288,7 +282,7 @@ SpecBegin(NestSDKIntegration)
                 NestSDKDataManager *dataManager = [[NestSDKDataManager alloc] init];
 
                 waitUntilTimeout(kServiceResponseTimeout, ^(DoneCallback done) {
-                    __block NestSDKObserverHandle handle = [dataManager observeSmokeCOAlarmWithId:@"CVRjKfVlTrl_4t65kH9CrnSa7y9rOYE0" block:^(id <NestSDKSmokeCOAlarm> smokeCOAlarm, NSError *error) {
+                    __block NestSDKObserverHandle handle = [dataManager observeSmokeCOAlarmWithId:@"CkgAwlous252eHd5Wrxt2SGXS0pj7QVm" block:^(id <NestSDKSmokeCOAlarm> smokeCOAlarm, NSError *error) {
                         expect(error).to.equal(nil);
                         expect(smokeCOAlarm).to.equal(originalSmokeCOAlarm);
 
@@ -303,7 +297,7 @@ SpecBegin(NestSDKIntegration)
                 NestSDKDataManager *dataManager = [[NestSDKDataManager alloc] init];
 
                 waitUntilTimeout(kServiceResponseTimeout, ^(DoneCallback done) {
-                    [dataManager smokeCOAlarmWithId:@"CVRjKfVlTrl_4t65kH9CrnSa7y9rOYE0" block:^(id <NestSDKSmokeCOAlarm> smokeCOAlarm, NSError *error) {
+                    [dataManager smokeCOAlarmWithId:@"CkgAwlous252eHd5Wrxt2SGXS0pj7QVm" block:^(id <NestSDKSmokeCOAlarm> smokeCOAlarm, NSError *error) {
                         expect(error).to.equal(nil);
                         expect(smokeCOAlarm).to.equal(originalSmokeCOAlarm);
 
@@ -317,7 +311,7 @@ SpecBegin(NestSDKIntegration)
                 NestSDKDataManager *dataManager = [[NestSDKDataManager alloc] init];
 
                 waitUntilTimeout(kServiceResponseTimeout, ^(DoneCallback done) {
-                    __block NestSDKObserverHandle handle = [dataManager observeCameraWithId:@"qewrFbhxXs4p54xcKEg-K3VIwrcy-oxcf-3BRxAMJw6Ybv1ll7t4vg" block:^(id <NestSDKCamera> camera, NSError *error) {
+                    __block NestSDKObserverHandle handle = [dataManager observeCameraWithId:@"xdlVeo1EWA9Zlq7Qhe-yAZ82n_5cLLhvvUHERd7UNCpWZgCtI2ib3w" block:^(id <NestSDKCamera> camera, NSError *error) {
                         expect(error).to.equal(nil);
 
                         // The hashes in these URL are random all the time
@@ -337,7 +331,7 @@ SpecBegin(NestSDKIntegration)
                 NestSDKDataManager *dataManager = [[NestSDKDataManager alloc] init];
 
                 waitUntilTimeout(kServiceResponseTimeout, ^(DoneCallback done) {
-                    [dataManager cameraWithId:@"qewrFbhxXs4p54xcKEg-K3VIwrcy-oxcf-3BRxAMJw6Ybv1ll7t4vg" block:^(id <NestSDKCamera> camera, NSError *error) {
+                    [dataManager cameraWithId:@"xdlVeo1EWA9Zlq7Qhe-yAZ82n_5cLLhvvUHERd7UNCpWZgCtI2ib3w" block:^(id <NestSDKCamera> camera, NSError *error) {
                         expect(error).to.equal(nil);
 
                         // The hashes in these URL are random all the time

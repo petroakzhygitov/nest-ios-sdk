@@ -15,3 +15,5 @@ NestSDKDemoAdvanced/.idea
 NestSDKDemoAdvanced/Pods
 NestSDKDemoAdvanced/Podfile.lock
 NestSDKDemoAdvanced/NestSDKDemoAdvanced.xcworkspace
+
+.DS_Store

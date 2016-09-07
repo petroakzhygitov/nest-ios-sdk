@@ -1,9 +1,1 @@
-{
-  "is_online": true,
-  "device_id": "CVRjKfVlTrl_4t65kH9CrnSa7y9rOYE0",
-  "is_manual_test_active": false,
-  "name_long": "Entryway Nest Protect",
-  "where_id": "O7_aj3s0GyQJzpn0Ut920KzR1G9ShFZZanklgAnGSlgkL_Y8gA4L8A",
-  "structure_id": "6JxldfFv1gn9IMBVbYsxAX47pfNDTNtmilAv19OKSnO9-hEGmHqjAg",
-  "name": "Entryway"
-}
+{"co_alarm_state":"warning","smoke_alarm_state":"warning","is_online":true,"where_id":"62czINzR5NUSluKTOAchi05RwLuRS8WSbkIFuIz6AQRPo1nSxmUEbA","is_manual_test_active":false,"battery_health":"ok","name_long":"Basement Nest Protect (Yellow)","device_id":"CkgAwlous252eHd5Wrxt2SGXS0pj7QVm","ui_color_state":"yellow","structure_id":"BA8S5sLaTFnzp9bmRkr4I3hqMJ2OYzNwrzXtJSP_SZD-PSMzYqUT3Q","name":"Basement (Yellow)"}

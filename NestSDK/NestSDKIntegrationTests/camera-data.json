@@ -1,15 +1,1 @@
-{
-  "app_url": "nestmobile://cameras/CjZxZXdyRmJoeFhzNHA1NHhjS0VnLUszVkl3cmN5LW94Y2YtM0JSeEFNSnc2WWJ2MWxsN3Q0dmcSFnhQVjBkRThLNnM5bk5pR055amdRZFEaNmQ4dWVpSmFhUVB0NkQ0OGxINGdZN2g1TGdCdWNkSEpSLV9Ld05YU3pVSGw4bmZGRHJFS2Fjdw?auth=c.sUGq15CLFjqBNSim7e395qyfmdrIQO3PUIXekq373kmdtZ6ZrEgx4cO9Z1LinDHlzP8nBseTjbnB5yBFTicoZdOELIvXaCNaUVhXnHuaXJEqdIs54kT7YQjqGF20puxAuRTPdFG7QFH3nAf4",
-  "is_audio_input_enabled": true,
-  "software_version": "1.0.2",
-  "where_id": "O7_aj3s0GyQJzpn0Ut920KzR1G9ShFZZanklgAnGSlhbnbSA1Nrp7g",
-  "is_streaming": true,
-  "name_long": "Basement Camera (26ca)",
-  "is_online": true,
-  "is_video_history_enabled": true,
-  "structure_id": "uF1xZgyi0Wg3oW8PMpBHLX47pfNDTNtmilAv19OKSnO9-hEGmHqjAg",
-  "last_is_online_change": "2015-08-03T04:05:06.637Z",
-  "device_id": "qewrFbhxXs4p54xcKEg-K3VIwrcy-oxcf-3BRxAMJw6Ybv1ll7t4vg",
-  "name": "Basement (26ca)",
-  "web_url": "https://home.nest.com/cameras/CjZxZXdyRmJoeFhzNHA1NHhjS0VnLUszVkl3cmN5LW94Y2YtM0JSeEFNSnc2WWJ2MWxsN3Q0dmcSFnhQVjBkRThLNnM5bk5pR055amdRZFEaNmQ4dWVpSmFhUVB0NkQ0OGxINGdZN2g1TGdCdWNkSEpSLV9Ld05YU3pVSGw4bmZGRHJFS2Fjdw?auth=c.sUGq15CLFjqBNSim7e395qyfmdrIQO3PUIXekq373kmdtZ6ZrEgx4cO9Z1LinDHlzP8nBseTjbnB5yBFTicoZdOELIvXaCNaUVhXnHuaXJEqdIs54kT7YQjqGF20puxAuRTPdFG7QFH3nAf4"
-}
+{"app_url":"nestmobile:\/\/cameras\/CjZ4ZGxWZW8xRVdBOVpscTdRaGUteUFaODJuXzVjTExodnZVSEVSZDdVTkNwV1pnQ3RJMmliM3cSFjhqbHN2TE1uQzQxM0pVUWpvcWQtbFEaNjdLNTFqczMzenA4VFdRQUNHMHNEd2l5U0R2R3JmaXZxZk0yNTdHREN3d2NBMHcwWV9LclRjUQ?auth=c.3IZ3mB0MkXofcOsg9w46v8a4fssmsJlzNbo79dsBQ51mK3FbauW2KyciGqPSxghdC83WWELbohR9Oo65O5kfsbxUWmyz2LDuxKnmXjA0PrZKwjlqxgtTUSXMRXyaseZTf10BZBPNvwWhdEGm","where_id":"62czINzR5NUSluKTOAchi05RwLuRS8WSbkIFuIz6AQSd4dEma_aKwg","is_audio_input_enabled":true,"software_version":"1.0.2","name_long":"Den Camera (550b)","is_streaming":true,"is_online":true,"structure_id":"BA8S5sLaTFnzp9bmRkr4I3hqMJ2OYzNwrzXtJSP_SZD-PSMzYqUT3Q","is_video_history_enabled":true,"last_is_online_change":"2015-08-03T04:05:06.637Z","device_id":"xdlVeo1EWA9Zlq7Qhe-yAZ82n_5cLLhvvUHERd7UNCpWZgCtI2ib3w","name":"Den (550b)","web_url":"https:\/\/home.nest.com\/cameras\/CjZ4ZGxWZW8xRVdBOVpscTdRaGUteUFaODJuXzVjTExodnZVSEVSZDdVTkNwV1pnQ3RJMmliM3cSFjhqbHN2TE1uQzQxM0pVUWpvcWQtbFEaNjdLNTFqczMzenA4VFdRQUNHMHNEd2l5U0R2R3JmaXZxZk0yNTdHREN3d2NBMHcwWV9LclRjUQ?auth=c.3IZ3mB0MkXofcOsg9w46v8a4fssmsJlzNbo79dsBQ51mK3FbauW2KyciGqPSxghdC83WWELbohR9Oo65O5kfsbxUWmyz2LDuxKnmXjA0PrZKwjlqxgtTUSXMRXyaseZTf10BZBPNvwWhdEGm"}

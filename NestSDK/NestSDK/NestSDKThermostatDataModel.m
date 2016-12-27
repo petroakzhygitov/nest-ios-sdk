@@ -262,9 +262,13 @@ const NSUInteger NestSDKThermostatTemperatureFAllowableMax = 90;
     return nil;
 }
 
-- (NSArray *)writablePropertyNamesArrayWithProtocol:(Protocol *)aProtocol {
-    NSArray *array = [super writablePropertyNamesArrayWithProtocol:aProtocol];
-    array = [self _writablePropertyNamesArraySatisfyingTemperatureScaleWithArray:array];
+- (NSMutableArray *)writablePropertyNamesArrayWithProtocol:(Protocol *)aProtocol {
+    NSMutableArray *array = [super writablePropertyNamesArrayWithProtocol:aProtocol];
+    [self _writablePropertyNamesArraySatisfyingTemperatureScaleWithArray:array];
+    
+    if (!_hasFan) {
+        [array removeObject:@"fanTimerActive"];
+    }
 
     return array;
 }

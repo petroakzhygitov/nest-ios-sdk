@@ -30,7 +30,7 @@
 
 - (void)copyPropertiesToDataModelCopy:(id <NestSDKDataModelProtocol>)copy;
 
-- (NSArray *)writablePropertyNamesArrayWithProtocol:(Protocol *)aProtocol;
+- (NSMutableArray *)writablePropertyNamesArrayWithProtocol:(Protocol *)aProtocol;
 
 - (NSDictionary *)toWritableDataModelDictionary;
 

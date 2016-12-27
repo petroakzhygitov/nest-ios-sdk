@@ -1,5 +1,10 @@
 # NestSDK Changelog
 
+## 0.1.5
+
+- Fixed: swift submiting archived build error
+- Fixed: advanced example run
+
 ## 0.1.4
 
 - Fixed: data manager observers removal for multiple instances

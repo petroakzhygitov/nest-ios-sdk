@@ -73,7 +73,7 @@ static NSString *const kReadOnlyAttributeString = @",R";
 - (void)copyPropertiesToDataModelCopy:(id <NestSDKDataModelProtocol>)copy {
 }
 
-- (NSArray *)writablePropertyNamesArrayWithProtocol:(Protocol *)aProtocol {
+- (NSMutableArray *)writablePropertyNamesArrayWithProtocol:(Protocol *)aProtocol {
     unsigned int propertyCount = 0;
     objc_property_t *properties = protocol_copyPropertyList(aProtocol, &propertyCount);
 

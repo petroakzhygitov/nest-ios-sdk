@@ -39,6 +39,7 @@ typedef NS_ENUM(NSUInteger, NestSDKThermostatTemperatureScale) {
 
 typedef NS_ENUM(NSUInteger, NestSDKThermostatHVACMode) {
     NestSDKThermostatHVACModeUndefined = 0,
+    NestSDKThermostatHVACModeEco,
     NestSDKThermostatHVACModeHeat,
     NestSDKThermostatHVACModeCool,
     NestSDKThermostatHVACModeHeatCool,

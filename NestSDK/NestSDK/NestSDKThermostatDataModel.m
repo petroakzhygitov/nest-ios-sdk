@@ -30,6 +30,7 @@ static NSString *const kHVACStateStringOff = @"off";
 static NSString *const kHVACStateStringCooling = @"cooling";
 static NSString *const kHVACStateStringHeating = @"heating";
 
+static NSString *const kHVACModeStringEco = @"eco";
 static NSString *const kHVACModeStringHeat = @"heat";
 static NSString *const kHVACModeStringCool = @"cool";
 static NSString *const kHVACModeStringHeatCool = @"heat-cool";
@@ -41,6 +42,9 @@ const NSUInteger NestSDKThermostatTemperatureCAllowableMax = 32;
 const NSUInteger NestSDKThermostatTemperatureFAllowableMin = 50;
 const NSUInteger NestSDKThermostatTemperatureFAllowableMax = 90;
 
+@interface NestSDKThermostatDataModel ()
+  @property(nonatomic) NestSDKThermostatHVACMode currentHVACMode;
+@end
 
 @implementation NestSDKThermostatDataModel
 #pragma mark Private
@@ -67,7 +71,7 @@ const NSUInteger NestSDKThermostatTemperatureFAllowableMax = 90;
                                                              allowableMax:NestSDKThermostatTemperatureFAllowableMax];
 }
 
-- (NSArray *)_writablePropertyNamesArraySatisfyingTemperatureScaleWithArray:(NSArray *)array {
+- (void)_writablePropertyNamesArraySatisfyingTemperatureScaleWithArray:(NSMutableArray *)array {
     NSString *suffix;
 
     switch (self.temperatureScale) {
@@ -85,11 +89,7 @@ const NSUInteger NestSDKThermostatTemperatureFAllowableMax = 90;
     }
 
     NSArray *propertyNamesToRemoveArray = [self _writableTemperaturePropertyNameWithSuffix:suffix];
-
-    NSMutableArray *mutableArray = [array mutableCopy];
-    [mutableArray removeObjectsInArray:propertyNamesToRemoveArray];
-
-    return mutableArray;
+    [array removeObjectsInArray:propertyNamesToRemoveArray];
 }
 
 - (NSArray *)_writableTemperaturePropertyNameWithSuffix:(NSString *)suffix {
@@ -133,6 +133,7 @@ const NSUInteger NestSDKThermostatTemperatureFAllowableMax = 90;
 }
 
 - (void)setHvacMode:(NestSDKThermostatHVACMode)hvacMode {
+    _currentHVACMode = self.hvacMode;
     _hvacMode = hvacMode;
 }
 
@@ -229,6 +230,9 @@ const NSUInteger NestSDKThermostatTemperatureFAllowableMax = 90;
     } else if ([hvacModeString isEqualToString:kHVACModeStringOff]) {
         self.hvacMode = NestSDKThermostatHVACModeOff;
 
+    } else if ([hvacModeString isEqualToString:kHVACModeStringEco]) {
+        self.hvacMode = NestSDKThermostatHVACModeEco;
+        
     } else {
         self.hvacMode = NestSDKThermostatHVACModeUndefined;
     }
@@ -250,14 +254,31 @@ const NSUInteger NestSDKThermostatTemperatureFAllowableMax = 90;
 
         case NestSDKThermostatHVACModeOff:
             return kHVACModeStringOff;
+            
+        case NestSDKThermostatHVACModeEco:
+            return kHVACModeStringEco;
     }
 
     return nil;
 }
 
-- (NSArray *)writablePropertyNamesArrayWithProtocol:(Protocol *)aProtocol {
-    NSArray *array = [super writablePropertyNamesArrayWithProtocol:aProtocol];
-    array = [self _writablePropertyNamesArraySatisfyingTemperatureScaleWithArray:array];
+- (NSMutableArray *)writablePropertyNamesArrayWithProtocol:(Protocol *)aProtocol {
+    NSMutableArray *array = [super writablePropertyNamesArrayWithProtocol:aProtocol];
+    [self _writablePropertyNamesArraySatisfyingTemperatureScaleWithArray:array];
+    
+    if (!_hasFan) {
+        [array removeObject:@"fanTimerActive"];
+    }
+    
+    if (self.currentHVACMode == NestSDKThermostatHVACModeEco) {
+        for (NSUInteger i = 0; i < array.count; i++) {
+            NSString *val = array[i];
+            if ([val hasPrefix:@"targetTemperature"]) {
+                [array removeObjectAtIndex:i];
+                i--;
+            }
+        }
+    }
 
     return array;
 }

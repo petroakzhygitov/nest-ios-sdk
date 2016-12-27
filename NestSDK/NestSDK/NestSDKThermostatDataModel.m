@@ -30,6 +30,7 @@ static NSString *const kHVACStateStringOff = @"off";
 static NSString *const kHVACStateStringCooling = @"cooling";
 static NSString *const kHVACStateStringHeating = @"heating";
 
+static NSString *const kHVACModeStringEco = @"eco";
 static NSString *const kHVACModeStringHeat = @"heat";
 static NSString *const kHVACModeStringCool = @"cool";
 static NSString *const kHVACModeStringHeatCool = @"heat-cool";
@@ -229,6 +230,9 @@ const NSUInteger NestSDKThermostatTemperatureFAllowableMax = 90;
     } else if ([hvacModeString isEqualToString:kHVACModeStringOff]) {
         self.hvacMode = NestSDKThermostatHVACModeOff;
 
+    } else if ([hvacModeString isEqualToString:kHVACModeStringEco]) {
+        self.hvacMode = NestSDKThermostatHVACModeEco;
+        
     } else {
         self.hvacMode = NestSDKThermostatHVACModeUndefined;
     }
@@ -250,6 +254,9 @@ const NSUInteger NestSDKThermostatTemperatureFAllowableMax = 90;
 
         case NestSDKThermostatHVACModeOff:
             return kHVACModeStringOff;
+            
+        case NestSDKThermostatHVACModeEco:
+            return kHVACModeStringEco;
     }
 
     return nil;

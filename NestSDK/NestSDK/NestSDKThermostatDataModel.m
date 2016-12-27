@@ -42,6 +42,9 @@ const NSUInteger NestSDKThermostatTemperatureCAllowableMax = 32;
 const NSUInteger NestSDKThermostatTemperatureFAllowableMin = 50;
 const NSUInteger NestSDKThermostatTemperatureFAllowableMax = 90;
 
+@interface NestSDKThermostatDataModel ()
+  @property(nonatomic) NestSDKThermostatHVACMode currentHVACMode;
+@end
 
 @implementation NestSDKThermostatDataModel
 #pragma mark Private
@@ -68,7 +71,7 @@ const NSUInteger NestSDKThermostatTemperatureFAllowableMax = 90;
                                                              allowableMax:NestSDKThermostatTemperatureFAllowableMax];
 }
 
-- (NSArray *)_writablePropertyNamesArraySatisfyingTemperatureScaleWithArray:(NSArray *)array {
+- (void)_writablePropertyNamesArraySatisfyingTemperatureScaleWithArray:(NSMutableArray *)array {
     NSString *suffix;
 
     switch (self.temperatureScale) {
@@ -86,11 +89,7 @@ const NSUInteger NestSDKThermostatTemperatureFAllowableMax = 90;
     }
 
     NSArray *propertyNamesToRemoveArray = [self _writableTemperaturePropertyNameWithSuffix:suffix];
-
-    NSMutableArray *mutableArray = [array mutableCopy];
-    [mutableArray removeObjectsInArray:propertyNamesToRemoveArray];
-
-    return mutableArray;
+    [array removeObjectsInArray:propertyNamesToRemoveArray];
 }
 
 - (NSArray *)_writableTemperaturePropertyNameWithSuffix:(NSString *)suffix {
@@ -134,6 +133,7 @@ const NSUInteger NestSDKThermostatTemperatureFAllowableMax = 90;
 }
 
 - (void)setHvacMode:(NestSDKThermostatHVACMode)hvacMode {
+    _currentHVACMode = self.hvacMode;
     _hvacMode = hvacMode;
 }
 
@@ -268,6 +268,16 @@ const NSUInteger NestSDKThermostatTemperatureFAllowableMax = 90;
     
     if (!_hasFan) {
         [array removeObject:@"fanTimerActive"];
+    }
+    
+    if (self.currentHVACMode == NestSDKThermostatHVACModeEco) {
+        for (NSUInteger i = 0; i < array.count; i++) {
+            NSString *val = array[i];
+            if ([val hasPrefix:@"targetTemperature"]) {
+                [array removeObjectAtIndex:i];
+                i--;
+            }
+        }
     }
 
     return array;

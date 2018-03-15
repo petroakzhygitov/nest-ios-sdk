@@ -192,8 +192,11 @@ static const NSTimeInterval kDefaultTimeoutInterval = 8.0;
     self.authorizationViewController = [[NestSDKAuthorizationViewController alloc] initWithAuthorizationURL:[self _authorizationURL]
                                                                                                 redirectURL:[self _redirectURL]
                                                                                                    delegate:self];
+    
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:self.authorizationViewController];
+    [navController.view setBackgroundColor:[UIColor whiteColor]];
 
-    [viewController presentViewController:_authorizationViewController animated:YES completion:nil];
+    [viewController presentViewController:navController animated:YES completion:nil];
 }
 
 - (void)unauthorize {

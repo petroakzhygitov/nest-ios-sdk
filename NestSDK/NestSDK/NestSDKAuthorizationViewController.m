@@ -82,29 +82,25 @@ static NSString *const kArgumentRedirectURL = @"redirectURL";
 
 - (void)loadView {
     self.view = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    [self.navigationController.view setBackgroundColor:[UIColor whiteColor]];
     [self.view setBackgroundColor:[UIColor whiteColor]];
-
-    // Add a navigation bar to the top
-    CGRect navigationBarFrame = CGRectMake(0, 0, self.view.frame.size.width, kNavigationBarHeight);
-
-    UINavigationBar *navigationBar = [[UINavigationBar alloc] initWithFrame:navigationBarFrame];
-    [self.view addSubview:navigationBar];
 
     // Add some items to the navigation bar
     UIBarButtonItem *cancelBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
                                                                                          target:self
                                                                                          action:@selector(_cancelBarButtonItemPressed:)];
-
-    UINavigationItem *navigationItem = [[UINavigationItem alloc] initWithTitle:kTitleStringConnectWithNest];
-    navigationItem.leftBarButtonItem = cancelBarButtonItem;
     
-    [navigationBar pushNavigationItem:navigationItem animated:YES];
-
+    self.navigationController.title = kTitleStringConnectWithNest;
+    [self.navigationItem setLeftBarButtonItem:cancelBarButtonItem];
+    
     // Add a UIWebView to take up the entire view (beneath the navigation bar)
-    CGRect webViewFrame = CGRectMake(0, kNavigationBarHeight, self.view.frame.size.width, self.view.frame.size.height - kNavigationBarHeight);
+    CGRect webViewFrame = CGRectMake(0,
+                                     self.navigationController.navigationBar.bounds.size.height,
+                                     [[UIScreen mainScreen] bounds].size.width,
+                                     [[UIScreen mainScreen] bounds].size.height - self.navigationController.navigationBar.bounds.size.height);
 
     self.webView = [[UIWebView alloc] initWithFrame:webViewFrame];
-    self.webView.backgroundColor = [UIColor nestBlue];
+    self.webView.backgroundColor = [UIColor whiteColor];
     self.webView.delegate = self;
 
     [self.view addSubview:self.webView];
@@ -112,7 +108,7 @@ static NSString *const kArgumentRedirectURL = @"redirectURL";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     // Set the title
     self.title = kTitleStringConnectWithNest;
 

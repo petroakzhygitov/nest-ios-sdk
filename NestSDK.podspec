@@ -16,8 +16,8 @@ Pod::Spec.new do |s|
   s.license          = 'MIT'
   s.author           = { 'petroakzhygitov' => 'petro.akzhygitov@gmail.com' }
 
-  s.platform     = :ios, '9.0'
-  s.ios.deployment_target = '8.0'
+  s.platform     = :ios, '10.0'
+  s.ios.deployment_target = '10.0'
 
   s.source           = { :git => 'https://github.com/petroakzhygitov/NestSDK.git', :tag => s.version.to_s }
 
